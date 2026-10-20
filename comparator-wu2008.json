@@ -1,0 +1,23 @@
+{
+  "challenge_module": "ChallengeWu2008",
+  "solution_module": "SolutionWu2008",
+  "theorem_names": [
+    "GoldbachLean.Wu2008.WuReal.wu_admissible",
+    "GoldbachLean.Wu2008.WuSum.lemma22_sum",
+    "GoldbachLean.Wu2008.WuSum.lemma22_wuA"
+  ],
+  "definition_names": [
+    "GoldbachLean.Wu2008.WuSieve.Sifted", "GoldbachLean.Wu2008.WuSieve.S", "GoldbachLean.Wu2008.WuSieve.PS",
+    "GoldbachLean.Wu2008.WuReal.wk1", "GoldbachLean.Wu2008.WuReal.wk2", "GoldbachLean.Wu2008.WuReal.em",
+    "GoldbachLean.Wu2008.WuReal.e13", "GoldbachLean.Wu2008.WuReal.Admissible",
+    "GoldbachLean.Wu2008.WuSum.P2", "GoldbachLean.Wu2008.WuSum.P4",
+    "GoldbachLean.Wu2008.WuSum.Y1", "GoldbachLean.Wu2008.WuSum.Y2", "GoldbachLean.Wu2008.WuSum.Y3",
+    "GoldbachLean.Wu2008.WuSum.Y4", "GoldbachLean.Wu2008.WuSum.C5", "GoldbachLean.Wu2008.WuSum.Y5",
+    "GoldbachLean.Wu2008.WuSum.C6", "GoldbachLean.Wu2008.WuSum.Y6", "GoldbachLean.Wu2008.WuSum.C7",
+    "GoldbachLean.Wu2008.WuSum.Y7", "GoldbachLean.Wu2008.WuSum.C8", "GoldbachLean.Wu2008.WuSum.Y8",
+    "GoldbachLean.Wu2008.WuSum.C9", "GoldbachLean.Wu2008.WuSum.Y9", "GoldbachLean.Wu2008.WuSum.C10",
+    "GoldbachLean.Wu2008.WuSum.Y10", "GoldbachLean.Wu2008.WuSum.C11", "GoldbachLean.Wu2008.WuSum.Y11",
+    "GoldbachLean.Wu2008.WuSum.D12", "GoldbachLean.Wu2008.WuSum.Esq", "GoldbachLean.Wu2008.WuSum.wuA"
+  ],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}
