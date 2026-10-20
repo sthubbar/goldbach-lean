@@ -1,22 +1,11 @@
-name = "GoldbachLean"
+name = "GoldbachLeanHeathBrown1985"
 version = "0.1.0"
-defaultTargets = ["GoldbachLean", "ChallengeWu2008", "SolutionWu2008", "ChallengeHeathBrown1985", "SolutionHeathBrown1985"]
+defaultTargets = ["ChallengeHeathBrown1985", "SolutionHeathBrown1985"]
 
 [[require]]
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4"
 rev = "v4.35.0"
-
-[[lean_lib]]
-name = "GoldbachLean"
-
-[[lean_lib]]
-name = "ChallengeWu2008"
-roots = ["ChallengeWu2008"]
-
-[[lean_lib]]
-name = "SolutionWu2008"
-roots = ["SolutionWu2008"]
 
 [[lean_lib]]
 name = "LeanLab"
