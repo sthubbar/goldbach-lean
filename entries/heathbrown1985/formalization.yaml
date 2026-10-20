@@ -1,0 +1,170 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Vinogradov's three primes theorem and almost all binary Goldbach, after Heath-Brown 1985, with the Siegel-Walfisz theorem"
+  description: >-
+    A sorry-free Lean 4 proof of the main results of D. R. Heath-Brown, The ternary Goldbach
+    problem, Rev. Mat. Iberoam. 1 (1985): the Siegel-Walfisz theorem in the form the paper
+    quotes as (1.1), proved from a zero-free region for Dirichlet L-functions and Siegel's
+    theorem; Theorem 1, sum over 2x < m <= 3x of |N2(m) - x S(m)| << x^2 (log x)^{-C}; Corollary 1
+    and the van der Corput, Chudakov, Estermann theorem that at most O(X (log X)^{-A}) even
+    numbers up to X are not sums of two primes, and density zero; Corollary 2, Vinogradov's
+    theorem that every sufficiently large odd number is a sum of three primes; and Corollary 3,
+    infinitely many three-term arithmetic progressions of primes. All constants are ineffective,
+    as in the paper. Binary Goldbach is not claimed. Lean code written by an AI agent; the
+    statements were checked against the paper by AI reviewers and are offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11N13", "11M20", "11P55"]
+
+sources:
+  - title: "The ternary Goldbach problem"
+    authors:
+      - "D. R. Heath-Brown"
+    id: "doi:10.4171/RMI/2"
+    type: "article"
+    location: "Revista Matematica Iberoamericana 1 (1985) 45-59"
+    relationship: "formalizes"
+    note: >-
+      Formalizes (1.1), Theorem 1 and Corollaries 1, 2, 3 as stated on pages 45-46, following
+      the paper's route from (1.1) through Vaughan's identity and the sums Sigma1 to Sigma3.
+      The author has not been contacted about this formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "Representation of an odd number as a sum of three primes"
+    authors:
+      - "I. M. Vinogradov"
+    id: "Dokl. Akad. Nauk SSSR 15 (1937) 291-294"
+    type: "article"
+    location: "Comptes Rendus (Doklady) de l'Academie des Sciences de l'URSS 15 (1937)"
+    relationship: "background"
+    note: "Original source of the three primes theorem, proved here by Heath-Brown's route, not Vinogradov's."
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "On the exceptional set in Goldbach's problem, the classical results of van der Corput, Chudakov and Estermann, 1937-1938"
+    authors:
+      - "J. G. van der Corput"
+      - "N. G. Chudakov"
+      - "T. Estermann"
+    id: "Proc. Akad. Wet. Amsterdam 41 (1938); Izv. Akad. Nauk SSSR (1938); Proc. London Math. Soc. 44 (1938)"
+    type: "articles"
+    location: "as cited by Heath-Brown 1985 and by M. B. Nathanson, arXiv:math/0412220"
+    relationship: "background"
+    note: "Original sources of the almost-all Goldbach theorem E(X) << X (log X)^{-A}, proved here by Heath-Brown's route."
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "PrimeNumberTheoremAnd"
+    authors:
+      - "the PrimeNumberTheoremAnd project contributors"
+    id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    type: "formalization"
+    location: "commit c39a751132c88b6e8080b74c74023fd95b3d8be0"
+    relationship: "other"
+    note: >-
+      Sixteen files under LeanLab/PNTPort/StrongPNT, the zero-free region for zeta and the prime
+      number theorem with classical error term, are ported from this Apache-2.0 project with small
+      fixes for Mathlib v4.35.0, listed in PORTING.md; each file carries a notice.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "https://github.com/kimihiro64/bombieri-vinogradov"
+    relationship: "independent formalization of Siegel-Walfisz in character form and of Bombieri-Vinogradov"
+    note: "Independent work; no code from it is used here."
+  - id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    relationship: "source of the ported StrongPNT files"
+
+status:
+  scope: >-
+    Formalized, with no hypothesis: the Siegel-Walfisz theorem for psi(x; k, l) uniformly in
+    k <= (log x)^A, siegelWalfisz; Heath-Brown's Theorem 1, heathBrown_theorem1; Corollary 1,
+    heathBrown_corollary1; E(X) << X (log X)^{-A} for every A, goldbach_logPowerSaving, and
+    E(X)/X -> 0, goldbach_densityZero; Vinogradov's three primes theorem, vinogradov_three_primes;
+    Corollary 3, three_primes_in_ap. Not formalized: effective constants, Theorem 2 of the paper is
+    in the repository but not part of this entry, and binary Goldbach, which remains open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic"]
+      framework: "Claude Cowork, Claude Agent SDK"
+      tool_setup: >-
+        Autonomous agents wrote every lab Lean file, ran lake build, read the paper and the
+        background sources, and ran separate AI subagents as statement auditors and falsifiers;
+        Lean 4 v4.35.0, Mathlib v4.35.0.
+      cost:
+        wall_time: "agent runs over 2026-10-16 to 2026-10-20, many hours in total"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published Goldbach-related
+        papers and the analytic inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish; AI agents wrote all lab Lean
+    code and the statements. Cited literature results that the lab states with sorry elsewhere
+    were removed from this repository copy, so no file here contains sorry outside the Challenge
+    files. No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    Bounds written with << are read as: for each parameter some constant K, for every x >= 2.
+    N2(m) is sum over primes p <= x with m - p prime of log p log(m - p), as in the paper. The
+    singular series is 2 times the twin prime constant times the product over primes p > 2
+    dividing m of (p-1)/(p-2) for even m, 0 for odd m. Corollary 1 counts even 0 < m <= x,
+    so 2 is counted; E(X) counts even 4 <= n <= X; these differ by O(1). Corollary 3 counts pairs
+    (p, d) with d > 0 and p, p+d, p+2d prime. Vinogradov's theorem is stated as the existence of
+    a real C with every odd n >= C a sum of three primes.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "none"
+  notes: >-
+    Statements audited against the paper, EMS scan pages 45-46, by a separate AI subagent: every
+    definition and theorem faithful, none vacuous. Lean kernel and Comparator checks pass. Not
+    reviewed by a human expert or by the author.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Heath-Brown 1985, (1.1), the Siegel-Walfisz theorem"
+      lean: "LeanLab.PNTPort.PsiChi.siegelWalfisz"
+      module: "ChallengeHeathBrown1985"
+      status: "proved"
+    - source: "Heath-Brown 1985, Theorem 1"
+      lean: "LeanLab.PNTPort.PsiChi.heathBrown_theorem1"
+      module: "ChallengeHeathBrown1985"
+      status: "proved"
+    - source: "Heath-Brown 1985, Corollary 1"
+      lean: "LeanLab.PNTPort.PsiChi.heathBrown_corollary1"
+      module: "ChallengeHeathBrown1985"
+      status: "proved"
+    - source: "van der Corput, Chudakov, Estermann 1937-1938, E(X) << X (log X)^{-A}"
+      lean: "LeanLab.PNTPort.PsiChi.goldbach_logPowerSaving"
+      module: "ChallengeHeathBrown1985"
+      status: "proved"
+    - source: "Almost all even numbers are sums of two primes, density form"
+      lean: "LeanLab.PNTPort.PsiChi.goldbach_densityZero"
+      module: "ChallengeHeathBrown1985"
+      status: "proved"
+    - source: "Heath-Brown 1985, Corollary 2, Vinogradov's three primes theorem"
+      lean: "LeanLab.PNTPort.PsiChi.vinogradov_three_primes"
+      module: "ChallengeHeathBrown1985"
+      status: "proved"
+    - source: "Heath-Brown 1985, Corollary 3"
+      lean: "LeanLab.PNTPort.PsiChi.three_primes_in_ap"
+      module: "ChallengeHeathBrown1985"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; the PrimeNumberTheoremAnd contributors; D. R. Heath-Brown for the paper."
