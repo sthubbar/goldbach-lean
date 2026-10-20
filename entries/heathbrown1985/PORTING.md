@@ -10,16 +10,23 @@ Anthropic, wrote them between 2026-10-16 and 2026-10-20, except as follows.
   c39a751132c88b6e8080b74c74023fd95b3d8be0, Apache-2.0: the zero-free region for ζ and the
   prime number theorem with error `x exp(-c √log x)`. Changes: every `@[blueprint ...]`
   attribute, `blueprint_comment` and `import Architect` removed; import paths renamed to
-  `LeanLab.PNTPort.StrongPNT.*`; and four fixes for Mathlib v4.35.0:
-  1. Mathlib v4.35.0 dropped `Mathlib.Tactic.LinearCombinationPrime`; the v4.34.0 file is copied
-     to `StrongPNT/Tactic/LinearCombinationPrime.lean`.
-  2. MellinCalculus: `Smeas` became `Smeas.nullMeasurableSet` for `Integrable.piecewise`.
+  `LeanLab.PNTPort.StrongPNT.*`; and these fixes, made in the lab for Mathlib v4.35.0:
+  1. `StrongPNT/Tactic/LinearCombinationPrime.lean` re-exports Mathlib's
+     `Mathlib.Tactic.LinearCombinationPrime`, present in Mathlib v4.35.0-rc3, which this
+     repository uses; the lab, on v4.35.0, carries a copy of the v4.34.0 file instead.
+  2. MellinCalculus: the lab's v4.35.0 fix `Smeas.nullMeasurableSet` is reverted to `Smeas`
+     for rc3.
   3. EulerMaclaurin: an explicit `measurable_from_nat.comp Nat.measurable_floor` term replaces a
      `fun_prop` call.
   4. StrongPNT `BorelCaratheodoryDeriv`: the two half-differences rewritten before `field_simp`.
 * `StrongPNT/Bridge.lean` is lab-written.
 
 ## Changes made for this repository
+
+* The repository pins Lean and Mathlib v4.35.0-rc3, not the lab's v4.35.0, because Palomar's
+  Challenge renderer fails on v4.35.0 and later, PalomarRegistry/PalomarSubmission issue 161.
+  The port needed the two changes above and `set_option maxHeartbeats 1000000` on
+  `BV/Hyperbolic.lean`'s `hyperbolic_large_sieve`.
 
 * Every file was converted to the Lean module system: a `module` header, `public import`, and
   `@[expose] public section`, or `public meta section` for tactic files. Four files that needed

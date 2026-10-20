@@ -75,7 +75,7 @@ automation:
       tool_setup: >-
         An autonomous agent wrote every Lean file, ran lake build, read the paper on ar5iv and in
         a browser, and ran separate AI subagents as falsifiers and statement auditors; Lean 4
-        v4.35.0, Mathlib v4.35.0.
+        v4.35.0-rc3, Mathlib v4.35.0-rc3.
       cost:
         wall_time: "about 3 hours of agent time across two sessions on 2026-10-19 and 2026-10-20"
         spend_usd: "subscription-based"

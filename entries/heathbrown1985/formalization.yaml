@@ -70,7 +70,7 @@ sources:
     note: >-
       Sixteen files under LeanLab/PNTPort/StrongPNT, the zero-free region for zeta and the prime
       number theorem with classical error term, are ported from this Apache-2.0 project with small
-      fixes for Mathlib v4.35.0, listed in PORTING.md; each file carries a notice.
+      fixes for Mathlib v4.35.0-rc3, listed in PORTING.md; each file carries a notice.
     license: "Apache-2.0"
     author_endorsement: "not-contacted"
 
@@ -101,7 +101,7 @@ automation:
       tool_setup: >-
         Autonomous agents wrote every lab Lean file, ran lake build, read the paper and the
         background sources, and ran separate AI subagents as statement auditors and falsifiers;
-        Lean 4 v4.35.0, Mathlib v4.35.0.
+        Lean 4 v4.35.0-rc3, Mathlib v4.35.0-rc3.
       cost:
         wall_time: "agent runs over 2026-10-16 to 2026-10-20, many hours in total"
         spend_usd: "subscription-based"

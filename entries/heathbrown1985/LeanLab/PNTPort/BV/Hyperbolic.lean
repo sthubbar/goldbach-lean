@@ -170,6 +170,7 @@ lemma kernel_integrable {β : ℝ} (hβ : 0 < β) (T : ℝ) :
 lemma norm_exp_I_mul (x : ℝ) : ‖Complex.exp (Complex.I * (x : ℂ))‖ = 1 := by
   rw [mul_comm]; exact Complex.norm_exp_ofReal_mul_I x
 
+set_option maxHeartbeats 1000000 in
 /-- **The hyperbolic bilinear large sieve.** -/
 theorem hyperbolic_large_sieve : ∃ C₀ : ℝ, 0 < C₀ ∧ ∀ (X : ℝ), 2 ≤ X → ∀ (Q : ℕ), 1 ≤ Q →
     ∀ (M₁ M₂ : ℤ) (N₁ N₂ : ℕ), 0 ≤ M₁ → 0 ≤ M₂ → ∀ (a b : ℤ → ℂ),

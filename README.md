@@ -20,7 +20,8 @@ Each entry is its own Lake project, the `project_path` of its Palomar submission
 
 ## Build
 
-Lean v4.35.0, Mathlib v4.35.0. In an entry's folder:
+Lean and Mathlib v4.35.0-rc3, the newest version Palomar's Challenge renderer currently
+accepts. In an entry's folder:
 
     lake exe cache get
     lake build
