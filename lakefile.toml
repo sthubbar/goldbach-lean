@@ -1,6 +1,6 @@
 name = "GoldbachLean"
 version = "0.1.0"
-defaultTargets = ["GoldbachLean", "ChallengeWu2008", "SolutionWu2008"]
+defaultTargets = ["GoldbachLean", "ChallengeWu2008", "SolutionWu2008", "ChallengeHeathBrown1985", "SolutionHeathBrown1985"]
 
 [[require]]
 name = "mathlib"
@@ -17,3 +17,14 @@ roots = ["ChallengeWu2008"]
 [[lean_lib]]
 name = "SolutionWu2008"
 roots = ["SolutionWu2008"]
+
+[[lean_lib]]
+name = "LeanLab"
+
+[[lean_lib]]
+name = "ChallengeHeathBrown1985"
+roots = ["ChallengeHeathBrown1985"]
+
+[[lean_lib]]
+name = "SolutionHeathBrown1985"
+roots = ["SolutionHeathBrown1985"]

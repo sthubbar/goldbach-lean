@@ -1,0 +1,11 @@
+GoldbachLean
+Copyright 2026 Steve Hubbard
+
+This repository includes code ported from PrimeNumberTheoremAnd,
+https://github.com/AlexKontorovich/PrimeNumberTheoremAnd, commit
+c39a751132c88b6e8080b74c74023fd95b3d8be0, Copyright the PrimeNumberTheoremAnd project
+contributors, licensed under the Apache License, Version 2.0. The ported files are under
+LeanLab/PNTPort/StrongPNT/ and each carries a notice of the port and of its changes.
+
+LeanLab/PNTPort/StrongPNT/Tactic/LinearCombinationPrime.lean is copied from Mathlib v4.34.0,
+Apache License 2.0, Copyright the Mathlib contributors.
