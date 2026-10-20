@@ -111,8 +111,9 @@ automation:
         papers and the analytic inputs they cite, recording every cited input until proved.
   spend_usd: "subscription-based"
   notes: >-
-    Steve Hubbard directed the project and decided what to publish; AI agents wrote all lab Lean
-    code and the statements. Cited literature results that the lab states with sorry elsewhere
+    Steve Hubbard directed the project and decided what to publish; AI agents wrote the lab's own
+    Lean code and the statements, and ported the 16 StrongPNT files, whose code is by the
+    PrimeNumberTheoremAnd contributors. Cited literature results that the lab states with sorry elsewhere
     were removed from this repository copy, so no file here contains sorry outside the Challenge
     files. No human expert has reviewed the mathematics.
 

@@ -10,5 +10,6 @@ region and Siegel's theorem for real characters; the analytic number theory of Î
 Dirichlet L-functions it uses is ported from PrimeNumberTheoremAnd, Apache 2.0, with changes
 listed in `LeanLab/PNTPort/PLAN.md`. `LeanLab/HeathBrown1985/` follows Heath-Brown's argument
 from 1.1 to Theorem 1 and the corollaries, and `LeanLab/PNTPort/PsiChi/Unconditional.lean`
-combines them. AI wrote the Lean code, Claude, Anthropic; it was checked by the Lean kernel.
+combines them. AI wrote the lab's Lean code and did the port, Claude, Anthropic; it was checked
+by the Lean kernel.
 -/
