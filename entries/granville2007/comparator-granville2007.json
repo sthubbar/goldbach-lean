@@ -1,0 +1,19 @@
+{
+  "challenge_module": "ChallengeGranville2007",
+  "solution_module": "SolutionGranville2007",
+  "theorem_names": [
+    "LeanLab.GoldbachAverage.avgRH_of_RH",
+    "LeanLab.GoldbachAverage.Converse.rh_of_avgRH",
+    "LeanLab.GoldbachAverage.Converse.granville_equiv_proved"
+  ],
+  "definition_names": [
+    "LeanLab.GoldbachAverage.G",
+    "LeanLab.GoldbachAverage.AvgRH",
+    "LeanLab.GoldbachAverage.GranvilleEquiv"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

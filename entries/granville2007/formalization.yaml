@@ -1,0 +1,161 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "The Riemann hypothesis is equivalent to an asymptotic for the average number of Goldbach representations, after Granville 2007"
+  description: >-
+    A sorry-free Lean 4 proof of Theorem 1A of A. Granville, Refinements of Goldbach's conjecture,
+    and the generalized Riemann hypothesis, Funct. Approx. Comment. Math. 37 (2007): with
+    G(n) the sum over m1 + m2 = n of Lambda(m1) Lambda(m2), Mathlib's RiemannHypothesis holds if
+    and only if the sum of G(n) over n <= N is N^2/2 + O(N^{3/2+eps}) for every eps > 0. Both
+    directions are proved with no hypothesis: RH implies the asymptotic through the von Koch
+    bound for psi(x) - x, and the asymptotic implies RH by the route reconstructed in part by
+    Bhowmik, Halupczok, Matsumoto, Suzuki (arXiv 1704.06103) and completed by Bhowmik and Ruzsa
+    (arXiv 1711.06442). Binary Goldbach is not claimed. Lean
+    code written by an AI agent; the statements were checked against the literature by an AI
+    reviewer and are offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11M26", "11N05"]
+
+sources:
+  - title: "Refinements of Goldbach's conjecture, and the generalized Riemann hypothesis"
+    authors:
+      - "A. Granville"
+    id: "doi:10.7169/facm/1229618748"
+    type: "article"
+    location: "Functiones et Approximatio Commentarii Mathematici 37 (2007) 159-173, Theorem 1A; Corrigendum, ibid. 38 (2008) 235-237"
+    relationship: "formalizes"
+    note: >-
+      Formalizes a form equivalent to Theorem 1A. Granville states that RH holds iff the sum of
+      G(n) - J(n) over n <= x is << x^{3/2+o(1)}; since the sum of J(n) over n <= x is
+      x^2/2 + O(x log x) unconditionally, this is equivalent to the form formalized here, the
+      sum of G(n) over n <= N is N^2/2 + O(N^{3/2+eps}) for every eps > 0. The Project Euclid text was not
+      reachable by the agents, which met a bot challenge; the statement was taken from the
+      quotations in arXiv 1704.06103, (1.1), arXiv 1809.06920, Theorem 2 and Section 4, (10) and (11),
+      and arXiv 2405.04315. The author has not been contacted about this formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "Goldbach representations in arithmetic progressions and zeros of Dirichlet L-functions"
+    authors:
+      - "G. Bhowmik"
+      - "K. Halupczok"
+      - "K. Matsumoto"
+      - "Y. Suzuki"
+    id: "arXiv:1704.06103"
+    type: "article"
+    location: "Mathematika 65 (2019) 57-97"
+    relationship: "background"
+    note: "Reconstructs in part Granville's argument for the converse direction, from the average asymptotic to RH."
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "Average Goldbach and the Quasi-Riemann Hypothesis"
+    authors:
+      - "G. Bhowmik"
+      - "I. Z. Ruzsa"
+    id: "arXiv:1711.06442"
+    type: "article"
+    location: "arXiv preprint, 2017"
+    relationship: "background"
+    note: >-
+      Completes the proof of the converse direction of Theorem 1A begun in arXiv 1704.06103. The
+      Lean converse, rh_of_avgRH in LeanLab/GoldbachAverage/Converse.lean, is complete and
+      sorry-free and follows that completed route: the power series identity for G, an Abelian
+      step to the sum of Lambda(n) e^{-nt} = 1/t + O(t^{-1/2-eps}), a Mellin transform holomorphic
+      on Re s > 1/2, and the residue of zeta'/zeta at a zero, with zeros left of 1/2 handled by
+      the functional equation. The Lean argument is written directly, not line by line from the
+      papers.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "PrimeNumberTheoremAnd"
+    authors:
+      - "the PrimeNumberTheoremAnd project contributors"
+    id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    type: "formalization"
+    location: "commit c39a751132c88b6e8080b74c74023fd95b3d8be0"
+    relationship: "other"
+    note: >-
+      Sixteen files under LeanLab/PNTPort/StrongPNT, Mellin and residue calculus, bounds for
+      zeta and the smoothed Chebyshev function, are ported from this Apache-2.0 project with
+      small fixes for Mathlib v4.35.0-rc3, listed in PORTING.md; each file carries a notice.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    relationship: "source of the ported StrongPNT files"
+    note: "No prior Lean formalization of Granville's Theorem 1A was found in a web search and in the Palomar registry recent listing, 2026-10-20."
+
+status:
+  scope: >-
+    Formalized, with no hypothesis: RH implies the average asymptotic, avgRH_of_RH; the average
+    asymptotic implies RH, rh_of_avgRH; and the equivalence, granville_equiv_proved. Not
+    formalized: the G(n) - J(n) form of the statement, the explicit formula with zeros of the
+    Corrigendum, and the generalized Riemann hypothesis parts of the paper; binary Goldbach
+    remains open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic"]
+      framework: "Claude Cowork, Claude Agent SDK"
+      tool_setup: >-
+        Autonomous agents wrote every lab Lean file, ran lake build, read the background
+        sources, and ran separate AI subagents as statement auditors and falsifiers; Lean 4
+        v4.35.0-rc3, Mathlib v4.35.0-rc3.
+      cost:
+        wall_time: "agent runs over 2026-10-16 to 2026-10-20, many hours in total"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published Goldbach-related
+        papers and the analytic inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish; AI agents wrote all lab Lean
+    code and the statements. No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    Granville states the average of G(n) - J(n), with J(n) the singular series prediction; this
+    entry states the equivalent G(n) form, as Bhowmik and Halupczok do in arXiv 1809.06920,
+    Section 4, (10) and (11). The sum runs over
+    integers N >= 1, sum over n in range (N + 1), and O(N^{3/2+eps}) is read as: for each
+    eps > 0 some constant K with the bound for every N >= 1. RH is Mathlib's RiemannHypothesis.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "none"
+  notes: >-
+    Statements audited by two separate AI agents against the quotations of Theorem 1A in
+    arXiv 1704.06103 and arXiv 1809.06920: definitions correct, wording fixes applied.
+    Granville's own text was not reachable. Lean kernel and Comparator
+    checks pass. Not reviewed by a human expert or by the author.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Granville 2007, Theorem 1A, RH implies the average asymptotic"
+      lean: "LeanLab.GoldbachAverage.avgRH_of_RH"
+      module: "ChallengeGranville2007"
+      status: "proved"
+    - source: "Granville 2007, Theorem 1A, the average asymptotic implies RH"
+      lean: "LeanLab.GoldbachAverage.Converse.rh_of_avgRH"
+      module: "ChallengeGranville2007"
+      status: "proved"
+    - source: "Granville 2007, Theorem 1A"
+      lean: "LeanLab.GoldbachAverage.Converse.granville_equiv_proved"
+      module: "ChallengeGranville2007"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; the PrimeNumberTheoremAnd contributors; A. Granville for the paper; G. Bhowmik, K. Halupczok, K. Matsumoto, Y. Suzuki and I. Z. Ruzsa for the completed proof."
