@@ -1,0 +1,133 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Conditional on RH: the Cesàro average of the number of Goldbach representations, after Goldston and Yang"
+  description: >-
+    Conditional on RH: a sorry-free Lean 4 proof of Theorem 2 of D. A. Goldston and L. Yang, The
+    average number of Goldbach representations, arXiv 1601.06902, in Prime numbers and
+    representation theory, Science Press 2017. With G(n) the sum over m1 + m2 = n of
+    Lambda(m1) Lambda(m2), Mathlib's RiemannHypothesis, taken as an explicit hypothesis of the
+    theorem and never as an axiom, implies that the sum over n <= N of 1 - n/N times G(n) equals
+    N^2/6 - 2 times the sum over nontrivial zeros rho of N^{rho+1} divided by rho times rho+1 times rho+2, plus O(N),
+    for N >= 2. The zero sum counts zeros with multiplicity, and its absolute convergence is
+    proved unconditionally. Binary Goldbach is open and is not claimed; this is an average over
+    n. An AI agent wrote the Lean code; the statements were checked against the paper by an AI
+    agent and are offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11M26", "11N05"]
+
+sources:
+  - title: "The average number of Goldbach representations"
+    authors:
+      - "D. A. Goldston"
+      - "L. Yang"
+    id: "arXiv:1601.06902"
+    type: "article"
+    location: "Prime numbers and representation theory, edited by Ye Tian and Yangbo Ye, Science Press, Beijing, 2017, pages 1 to 12, Theorem 2, eq. 2.2"
+    relationship: "formalizes"
+    note: >-
+      Formalizes Theorem 2 as printed in arXiv 1601.06902v1, read 2026-10-16 and checked again
+      2026-10-21. The paper writes r_2 for G and states the theorem under RH with no range for N;
+      here N >= 2 and O(N) is read as one constant K for all such N. The paper says its zero sum
+      is over the zeros of zeta and absolutely convergent; here it runs over the nontrivial zeros,
+      counted with multiplicity, which is the sum of the explicit formula for psi_1 that the paper
+      uses. The publication venue was confirmed from the bibliography of arXiv 2110.14250. The
+      authors have not been contacted about this formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "PrimeNumberTheoremAnd"
+    authors:
+      - "the PrimeNumberTheoremAnd project contributors"
+    id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    type: "formalization"
+    location: "commit c39a751132c88b6e8080b74c74023fd95b3d8be0"
+    relationship: "other"
+    note: >-
+      Sixteen files under LeanLab/PNTPort/StrongPNT, Mellin and residue calculus, bounds for
+      zeta and the smoothed Chebyshev function, are ported from this Apache-2.0 project with
+      small fixes for Mathlib v4.35.0-rc3, listed in PORTING.md; each file carries a notice.
+      They are the same files as in the Granville 2007 entry of this repository.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "PALOMAR-2026-10-21-000011"
+    relationship: "same G, weaker error term, unconditional equivalence"
+    note: >-
+      The Granville 2007 entry of this repository proves, with no hypothesis, that RH is
+      equivalent to the sum of G(n) over n <= N being N^2/2 + O(N^{3/2+eps}). It uses the same
+      definition of G but an unweighted sum, no zero sum, and a weaker error term.
+  - id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    relationship: "source of the ported StrongPNT files"
+
+status:
+  scope: >-
+    Formalized: Goldston-Yang Theorem 2 conditional on RH, gy_theorem2_proved, with
+    RiemannHypothesis as an explicit hypothesis; and unconditionally the summability of the
+    zero sum, gy_zeroSum_summable. Not formalized here: the paper's Theorem 1, which it quotes
+    from Languasco and Zaccagnini, and its lemmas as separate statements. Binary Goldbach remains
+    open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5, claude-opus-5-5, Anthropic"]
+      framework: "Claude Cowork, Claude Agent SDK"
+      tool_setup: >-
+        Autonomous agents wrote every lab Lean file, ran lake build, read the paper, and ran
+        separate AI subagents as statement auditors; Lean 4 v4.35.0-rc3, Mathlib v4.35.0-rc3.
+      cost:
+        wall_time: "agent runs over 2026-10-16 to 2026-10-21, many hours in total"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published Goldbach-related
+        papers and the analytic inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish; AI agents wrote all lab Lean
+    code and the statements. No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    The result is conditional: RH is Mathlib's RiemannHypothesis, an explicit hypothesis of
+    gy_theorem2_proved, not an axiom. The sum over n is over n in range N + 1, that is
+    0 <= n <= N, and G 0 = 0. O(N) is read as one constant K valid for every integer N >= 2. The
+    sum over zeros, zeroSum, is an unordered tsum over the distinct zeros in the open critical
+    strip, each weighted by its multiplicity analyticOrderNatAt; gy_zeroSum_summable proves the
+    family summable, so the tsum is the absolutely convergent sum, independent of ordering, and
+    never the junk value 0. The paper's sum over zeros of zeta is read as the sum over nontrivial
+    zeros of the explicit formula it cites. The statement is in complex numbers with a norm.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "none"
+  notes: >-
+    Statement checked by an AI agent against eq. 2.2 of arXiv 1601.06902. Lean kernel and
+    Comparator checks pass. Not reviewed by a human expert or by the authors.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Goldston and Yang, Theorem 2, conditional on RH"
+      lean: "LeanLab.GoldbachAverage.gy_theorem2_proved"
+      module: "ChallengeGoldstonYang2016"
+      status: "proved"
+    - source: "Goldston and Yang, Section 3, the zero sum is absolutely convergent"
+      lean: "LeanLab.GoldbachAverage.gy_zeroSum_summable"
+      module: "ChallengeGoldstonYang2016"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; the PrimeNumberTheoremAnd contributors; D. A. Goldston and L. Yang for the paper."

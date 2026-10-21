@@ -1,0 +1,21 @@
+{
+  "challenge_module": "ChallengeLanguascoZaccagnini2012",
+  "solution_module": "SolutionLanguascoZaccagnini2012",
+  "theorem_names": [
+    "LeanLab.GoldbachAverage.lz_theorem1_proved",
+    "LeanLab.GoldbachAverage.bsp_upper_proved",
+    "LeanLab.GoldbachAverage.fujii_proved",
+    "LeanLab.GoldbachAverage.lz_zeroSum_summable"
+  ],
+  "definition_names": [
+    "LeanLab.GoldbachAverage.G",
+    "LeanLab.GoldbachAverage.NontrivialZero",
+    "LeanLab.GoldbachAverage.zeroSum",
+    "LeanLab.GoldbachAverage.Z1"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

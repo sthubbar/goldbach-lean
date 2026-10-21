@@ -26,6 +26,9 @@ Each entry is its own Lake project, the `project_path` of its Palomar submission
 | `entries/schnirelmann1933` | `ChallengeSchnirelmann1933.lean` | `comparator-schnirelmann1933.json` | Schnirelmann 1933: every integer n ≥ 2 is a sum of a bounded number of primes, explicitly at most 30772, a Mathlib TODO |
 | `entries/bombierivinogradov1965` | `ChallengeBombieriVinogradov1965.lean` | `comparator-bombierivinogradov1965.json` | Bombieri 1965 and A. I. Vinogradov 1965: the Bombieri-Vinogradov theorem with the maximum over y ≤ x and over reduced residues inside the sum, for ψ, θ and π |
 | `entries/renyi1948` | `ChallengeRenyi1948.lean` | `comparator-renyi1948.json` | Rényi 1948: every large even N is p + m with p prime and m having at most 8 prime factors counted with multiplicity, with the count of such p, and infinitely many primes p with Ω(p + 2) ≤ 13000 |
+| `entries/hardylittlewood1923` | `ChallengeHardyLittlewood1923.lean` | `comparator-hardylittlewood1923.json` | Hardy and Littlewood 1923, Partitio Numerorum III, Theorems B to F without Hypothesis R: asymptotics for sums of r ≥ 3 primes with the singular series, N_r(n) ∼ ν_r(n)/(log n)^r, three and four odd primes with C₃ and C₄, and Theorem F, A = 2C₂ |
+| `entries/goldstonyang2016` | `ChallengeGoldstonYang2016.lean` | `comparator-goldstonyang2016.json` | Conditional on RH: Goldston and Yang 2017, Theorem 2, Σ_{n ≤ N} (1 − n/N) G(n) = N²/6 − 2 Σ_ρ N^{ρ+1}/(ρ(ρ+1)(ρ+2)) + O(N), with RH an explicit hypothesis and the zero sum proved absolutely convergent |
+| `entries/languascozaccagnini2012` | `ChallengeLanguascoZaccagnini2012.lean` | `comparator-languascozaccagnini2012.json` | Conditional on RH: Languasco and Zaccagnini 2012, Theorem 1, Σ_{n ≤ N} G(n) = N²/2 − 2 Σ_ρ N^{ρ+1}/(ρ(ρ+1)) + O(N log³ N), with RH an explicit hypothesis, the earlier bounds of Fujii and of Bhowmik and Schlage-Puchta, and the zero sum proved absolutely convergent |
 
 ## Build
 
@@ -40,10 +43,4 @@ Entries are submitted to the Palomar registry through https://submit.palomar-reg
 
 ## Licence
 
-Apache-2.0, see LICENSE. Files under `entries/heathbrown1985/LeanLab/PNTPort/StrongPNT/`,
-`entries/granville2007/LeanLab/PNTPort/StrongPNT/`,
-`entries/bombierivinogradov1965/LeanLab/PNTPort/StrongPNT/` and
-`entries/renyi1948/LeanLab/PNTPort/StrongPNT/`, and the Selberg sieve files under
-`entries/romanov1934/LeanLab/PNTSieve/`, `entries/brun1919/LeanLab/PNTSieve/`
-and `entries/schnirelmann1933/LeanLab/PNTSieve/`, are ported from PrimeNumberTheoremAnd,
-Apache-2.0; see NOTICE and each entry's PORTING.md.
+Apache-2.0, see LICENSE. Files under `entries/heathbrown1985/LeanLab/PNTPort/StrongPNT/`, `entries/granville2007/LeanLab/PNTPort/StrongPNT/`, `entries/bombierivinogradov1965/LeanLab/PNTPort/StrongPNT/`, `entries/renyi1948/LeanLab/PNTPort/StrongPNT/`, `entries/hardylittlewood1923/LeanLab/PNTPort/StrongPNT/`, `entries/goldstonyang2016/LeanLab/PNTPort/StrongPNT/` and `entries/languascozaccagnini2012/LeanLab/PNTPort/StrongPNT/`, and the Selberg sieve files by Arend Mellendijk under `entries/romanov1934/LeanLab/PNTSieve/`, `entries/brun1919/LeanLab/PNTSieve/`, `entries/schnirelmann1933/LeanLab/PNTSieve/` and `entries/hardylittlewood1923/LeanLab/PNTSieve/`, except the lab-written BrunTitchmarshAP.lean and MertensUpper.lean, are ported from PrimeNumberTheoremAnd, Apache-2.0; see NOTICE and each entry's PORTING.md.

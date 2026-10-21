@@ -1,0 +1,43 @@
+{
+  "challenge_module": "ChallengeHardyLittlewood1923",
+  "solution_module": "SolutionHardyLittlewood1923",
+  "theorem_names": [
+    "LeanLab.HardyLittlewood1923.theoremB",
+    "LeanLab.HardyLittlewood1923.theoremB_unlike",
+    "LeanLab.HardyLittlewood1923.theoremB3",
+    "LeanLab.HardyLittlewood1923.theoremB4",
+    "LeanLab.HardyLittlewood1923.theoremC",
+    "LeanLab.HardyLittlewood1923.theoremD",
+    "LeanLab.HardyLittlewood1923.theoremD_ternary",
+    "LeanLab.HardyLittlewood1923.theoremE",
+    "LeanLab.HardyLittlewood1923.theoremE_four",
+    "LeanLab.HardyLittlewood1923.theoremE_assigned",
+    "LeanLab.HardyLittlewood1923.theoremF",
+    "LeanLab.HardyLittlewood1923.printed_423_false"
+  ],
+  "definition_names": [
+    "LeanLab.HardyLittlewood1923.Nr",
+    "LeanLab.HardyLittlewood1923.nur",
+    "LeanLab.HardyLittlewood1923.theoremC_stmt",
+    "LeanLab.HardyLittlewood1923.N3bar",
+    "LeanLab.HardyLittlewood1923.C3",
+    "LeanLab.HardyLittlewood1923.Pi3",
+    "LeanLab.HardyLittlewood1923.theoremD_stmt",
+    "LeanLab.HardyLittlewood1923.N4bar",
+    "LeanLab.HardyLittlewood1923.C4",
+    "LeanLab.HardyLittlewood1923.Pi4",
+    "LeanLab.HardyLittlewood1923.theoremE_stmt",
+    "LeanLab.HardyLittlewood1923.Br",
+    "LeanLab.HardyLittlewood1923.Cr",
+    "LeanLab.HardyLittlewood1923.Mr",
+    "LeanLab.HardyLittlewood1923.theoremB_stmt",
+    "LeanLab.HardyLittlewood1923.M2",
+    "LeanLab.HardyLittlewood1923.hyp421",
+    "LeanLab.HardyLittlewood1923.hyp422"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

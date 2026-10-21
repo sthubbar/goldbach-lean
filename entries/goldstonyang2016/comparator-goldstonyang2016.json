@@ -1,0 +1,18 @@
+{
+  "challenge_module": "ChallengeGoldstonYang2016",
+  "solution_module": "SolutionGoldstonYang2016",
+  "theorem_names": [
+    "LeanLab.GoldbachAverage.gy_theorem2_proved",
+    "LeanLab.GoldbachAverage.gy_zeroSum_summable"
+  ],
+  "definition_names": [
+    "LeanLab.GoldbachAverage.G",
+    "LeanLab.GoldbachAverage.NontrivialZero",
+    "LeanLab.GoldbachAverage.zeroSum"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

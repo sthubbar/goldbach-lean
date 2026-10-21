@@ -1,0 +1,184 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Conditional on RH: the number of Goldbach representations on average, after Languasco and Zaccagnini"
+  description: >-
+    Conditional on RH: a sorry-free Lean 4 proof of Theorem 1 of A. Languasco and A. Zaccagnini,
+    The number of Goldbach representations of an integer, Proc. Amer. Math. Soc. 140 2012,
+    795 to 804. With G(n) the sum over m1 + m2 = n of Lambda(m1) Lambda(m2), Mathlib's
+    RiemannHypothesis, taken as an explicit hypothesis of the theorem and never as an axiom,
+    implies that the sum over n <= N of G(n) equals N^2/2 - 2 times the sum over nontrivial
+    zeros rho of N^{rho+1} divided by rho times rho+1, plus O(N log^3 N), for N >= 2. The weaker
+    earlier error terms of Fujii, O((N log N)^{4/3}), and of Bhowmik and Schlage-Puchta,
+    O(N log^5 N), follow and are stated too. The zero sum counts zeros with multiplicity, and
+    its absolute convergence is proved unconditionally. Binary Goldbach is open and is not
+    claimed; this is an average over n. An AI agent wrote the Lean code; the statements were
+    checked against the papers by an AI agent and are offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11M26", "11N05"]
+
+sources:
+  - title: "The number of Goldbach representations of an integer"
+    authors:
+      - "A. Languasco"
+      - "A. Zaccagnini"
+    id: "arXiv:1011.3198"
+    type: "article"
+    location: "Proc. Amer. Math. Soc. 140, 2012, no. 3, pages 795 to 804, Theorem 1"
+    relationship: "formalizes"
+    note: >-
+      Formalizes Theorem 1, read in arXiv 1011.3198 and checked 2026-10-21. The paper writes R
+      for G, assumes RH and N >= 2, and sums over the zeros rho = 1/2 + i gamma; here O(N log^3 N)
+      is read as one constant K for all N >= 2 and the zero sum runs over the nontrivial zeros
+      counted with multiplicity, which under RH are the paper's zeros. The proof follows the
+      paper: the unconditional identity of Goldston and Suriajaya, Nagoya Math. J. 2023, arXiv
+      2110.14250, Theorem 1, and a mean square bound under RH for the exponential sum over primes
+      near 0, both proved in the lab code. The publication venue was confirmed on the AMS page of
+      the article. The authors have not been contacted about this formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "An additive problem of prime numbers. II"
+    authors:
+      - "A. Fujii"
+    id: "Proc. Japan Acad. Ser. A Math. Sci. 67, 1991, 248-252"
+    type: "article"
+    location: "Proc. Japan Acad. Ser. A Math. Sci. 67, 1991, pages 248 to 252"
+    relationship: "formalizes"
+    note: >-
+      Fujii's theorem under RH with error O((N log N)^{4/3}). Bhowmik and Schlage-Puchta, arXiv
+      0806.3295, attribute this bound to part II, this paper, after the O(N^{3/2}) of part I, Acta
+      Arith. 58, 1991, 173 to 179; Languasco and Zaccagnini cite parts I to III together. Formalized as fujii_proved and derived from Theorem 1 of Languasco and
+      Zaccagnini, not from Fujii's own argument. The Lean statement was checked against the
+      quoted form, not against the scanned original.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "Mean representation number of integers as the sum of primes"
+    authors:
+      - "G. Bhowmik"
+      - "J.-C. Schlage-Puchta"
+    id: "arXiv:0806.3295"
+    type: "article"
+    location: "Nagoya Math. J. 200, 2010, pages 27 to 33"
+    relationship: "formalizes"
+    note: >-
+      Formalizes the upper bound under RH, error O(N log^5 N), as bsp_upper_proved, derived from
+      Theorem 1 of Languasco and Zaccagnini. Their unconditional Omega(N log log N) result is not
+      formalized. The venue was confirmed from the bibliographies of arXiv 1601.06902 and arXiv
+      2110.14250.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "PrimeNumberTheoremAnd"
+    authors:
+      - "the PrimeNumberTheoremAnd project contributors"
+    id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    type: "formalization"
+    location: "commit c39a751132c88b6e8080b74c74023fd95b3d8be0"
+    relationship: "other"
+    note: >-
+      Sixteen files under LeanLab/PNTPort/StrongPNT, Mellin and residue calculus, bounds for
+      zeta, the zero-free region and the strong prime number theorem, are ported from this
+      Apache-2.0 project with small fixes for Mathlib v4.35.0-rc3, listed in PORTING.md; each
+      file carries a notice. Bridge.lean in that folder is lab-written. They are the same files
+      as in the Heath-Brown 1985 and Granville 2007 entries of this repository.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "PALOMAR-2026-10-21-000011"
+    relationship: "same G, weaker error term, unconditional equivalence"
+    note: >-
+      The Granville 2007 entry of this repository proves, with no hypothesis, that RH is
+      equivalent to the sum of G(n) over n <= N being N^2/2 + O(N^{3/2+eps}). It uses the same
+      definition of G, no zero sum, and a weaker error term.
+  - id: "https://github.com/sthubbar/goldbach-lean/tree/main/entries/goldstonyang2016"
+    relationship: "same G and zero sums, Cesàro weighted average, conditional on RH"
+    note: >-
+      The Goldston-Yang 2016 entry of this repository proves under RH the Cesàro weighted
+      formula with error O(N), from the same lab library; it does not use Theorem 1.
+  - id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    relationship: "source of the ported StrongPNT files"
+
+status:
+  scope: >-
+    Formalized: Languasco-Zaccagnini Theorem 1 conditional on RH, lz_theorem1_proved, with
+    RiemannHypothesis as an explicit hypothesis; the earlier conditional bounds of Bhowmik and
+    Schlage-Puchta, bsp_upper_proved, and of Fujii, fujii_proved; and unconditionally the
+    summability of the zero sum, lz_zeroSum_summable. Not formalized here: the paper's Theorem 2,
+    the exponentially weighted form from which Theorem 1 is derived, its Theorem 3 on sums of k >= 3
+    primes, the Omega result of Bhowmik and Schlage-Puchta, and the paper's lemmas as
+    separate statements. Binary Goldbach remains open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5, claude-opus-5-5, Anthropic"]
+      framework: "Claude Cowork, Claude Agent SDK"
+      tool_setup: >-
+        Autonomous agents wrote every lab Lean file, ran lake build, read the paper, and ran
+        separate AI subagents as statement auditors; Lean 4 v4.35.0-rc3, Mathlib v4.35.0-rc3.
+      cost:
+        wall_time: "agent runs over 2026-10-16 to 2026-10-21, many hours in total"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published Goldbach-related
+        papers and the analytic inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish; AI agents wrote all lab Lean
+    code and the statements. No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    The result is conditional: RH is Mathlib's RiemannHypothesis, an explicit hypothesis of
+    lz_theorem1_proved, bsp_upper_proved and fujii_proved, not an axiom. The sum over n is over n
+    in range N + 1, that is 0 <= n <= N, and G 0 = 0. Each O-term is read as one constant K valid
+    for every integer N >= 2; Fujii and Bhowmik and Schlage-Puchta state their bounds for
+    real x, and only integer N is stated here. The sum over zeros, zeroSum, is an unordered tsum over the distinct
+    zeros in the open critical strip, each weighted by its multiplicity analyticOrderNatAt;
+    lz_zeroSum_summable proves the family summable for every real x > 0, so the tsum is the
+    absolutely convergent sum, independent of ordering, and never the junk value 0. The
+    statement is in complex numbers with a norm. The bounds of Fujii and of Bhowmik and
+    Schlage-Puchta are derived from Theorem 1, not proved by their original methods.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "none"
+  notes: >-
+    Statements checked by an AI agent against Theorem 1 of arXiv 1011.3198 and the quoted forms
+    of the Fujii and Bhowmik-Schlage-Puchta bounds. Lean kernel and Comparator checks pass. Not
+    reviewed by a human expert or by the authors.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Languasco and Zaccagnini, Theorem 1, conditional on RH"
+      lean: "LeanLab.GoldbachAverage.lz_theorem1_proved"
+      module: "ChallengeLanguascoZaccagnini2012"
+      status: "proved"
+    - source: "Bhowmik and Schlage-Puchta 2010, upper bound O(N log^5 N), conditional on RH"
+      lean: "LeanLab.GoldbachAverage.bsp_upper_proved"
+      module: "ChallengeLanguascoZaccagnini2012"
+      status: "proved"
+    - source: "Fujii 1991, error O((N log N)^{4/3}), conditional on RH"
+      lean: "LeanLab.GoldbachAverage.fujii_proved"
+      module: "ChallengeLanguascoZaccagnini2012"
+      status: "proved"
+    - source: "Languasco and Zaccagnini, the zero sum is absolutely convergent"
+      lean: "LeanLab.GoldbachAverage.lz_zeroSum_summable"
+      module: "ChallengeLanguascoZaccagnini2012"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; the PrimeNumberTheoremAnd contributors; A. Languasco and A. Zaccagnini for the paper."

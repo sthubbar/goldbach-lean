@@ -1,0 +1,19 @@
+name = "GoldbachLeanLanguascoZaccagnini2012"
+version = "0.1.0"
+defaultTargets = ["ChallengeLanguascoZaccagnini2012", "SolutionLanguascoZaccagnini2012"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.35.0-rc3"
+
+[[lean_lib]]
+name = "LeanLab"
+
+[[lean_lib]]
+name = "ChallengeLanguascoZaccagnini2012"
+roots = ["ChallengeLanguascoZaccagnini2012"]
+
+[[lean_lib]]
+name = "SolutionLanguascoZaccagnini2012"
+roots = ["SolutionLanguascoZaccagnini2012"]

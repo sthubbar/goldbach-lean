@@ -4,10 +4,4 @@ Copyright 2026 Steve Hubbard
 This repository includes code ported from PrimeNumberTheoremAnd,
 https://github.com/AlexKontorovich/PrimeNumberTheoremAnd, commit
 c39a751132c88b6e8080b74c74023fd95b3d8be0, Copyright the PrimeNumberTheoremAnd project
-contributors, licensed under the Apache License, Version 2.0. The ported files are under
-entries/heathbrown1985/LeanLab/PNTPort/StrongPNT/,
-entries/granville2007/LeanLab/PNTPort/StrongPNT/,
-entries/bombierivinogradov1965/LeanLab/PNTPort/StrongPNT/ and
-entries/renyi1948/LeanLab/PNTPort/StrongPNT/, and the Selberg sieve files by Arend Mellendijk
-under entries/romanov1934/LeanLab/PNTSieve/, entries/brun1919/LeanLab/PNTSieve/ and
-entries/schnirelmann1933/LeanLab/PNTSieve/, and each carries a notice of the port and of its changes.
+contributors, licensed under the Apache License, Version 2.0. The ported files are under entries/heathbrown1985/LeanLab/PNTPort/StrongPNT/, entries/granville2007/LeanLab/PNTPort/StrongPNT/, entries/bombierivinogradov1965/LeanLab/PNTPort/StrongPNT/, entries/renyi1948/LeanLab/PNTPort/StrongPNT/, entries/hardylittlewood1923/LeanLab/PNTPort/StrongPNT/, entries/goldstonyang2016/LeanLab/PNTPort/StrongPNT/ and entries/languascozaccagnini2012/LeanLab/PNTPort/StrongPNT/, and the Selberg sieve files by Arend Mellendijk under entries/romanov1934/LeanLab/PNTSieve/, entries/brun1919/LeanLab/PNTSieve/, entries/schnirelmann1933/LeanLab/PNTSieve/ and entries/hardylittlewood1923/LeanLab/PNTSieve/, except the lab-written BrunTitchmarshAP.lean and MertensUpper.lean there; each carries a notice of the port and of its changes.

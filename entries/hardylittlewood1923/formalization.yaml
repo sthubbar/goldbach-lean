@@ -1,0 +1,219 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Sums of primes, after Hardy and Littlewood 1923, Partitio Numerorum III, Theorems B to F proved without Hypothesis R"
+  description: >-
+    A sorry-free Lean 4 proof, with no hypothesis, of Theorems B, C, D, E and F of G. H. Hardy
+    and J. E. Littlewood, Some problems of Partitio Numerorum III, Acta Math. 44, 1923. Hardy and
+    Littlewood proved these theorems on their Hypothesis R, a form of the generalized Riemann
+    hypothesis for Dirichlet L-functions; here they are proved unconditionally, from Vinogradov's
+    estimate for exponential sums over primes and the Siegel-Walfisz theorem, so the argument is
+    not Hardy and Littlewood's own for Theorems B, D and E. Formalized: Theorem B, the asymptotic
+    for the weighted count nu_r of n as an ordered sum of r primes, for every r at least 3 and n of
+    the parity of r, with the singular series written as the paper's product over the odd primes
+    dividing n, and nu_r of n is o of n^{r-1} for unlike parity; Theorem C, N_r of n is asymptotic
+    to nu_r of n over log^r n; Theorem D, the ternary asymptotic with the constant C_3 and every
+    large odd number a sum of three odd primes; Theorem E, the asymptotic for four odd primes,
+    every large even number a sum of four odd primes, one of which may be assigned; and Theorem F,
+    that an asymptotic of Conjecture A's shape for binary Goldbach can only carry the constant
+    2 C_2, together with a check that the printed formula 4.23 has a misprint. Theorem A of the
+    paper is not formalized. Ternary Goldbach is Helfgott's theorem; binary Goldbach is open and
+    is not claimed. The Lean code was written by an AI agent; the statements were written from the
+    paper's page images by AI agents and are offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11P55", "11N13"]
+
+sources:
+  - title: "Some problems of 'Partitio Numerorum'; III: On the expression of a number as a sum of primes"
+    authors:
+      - "G. H. Hardy"
+      - "J. E. Littlewood"
+    id: "doi:10.1007/BF02403921"
+    type: "article"
+    location: "Acta Mathematica 44 (1923) 1-70"
+    relationship: "adapts"
+    note: >-
+      Formalizes the statements of Theorems B, C, D, E and F, pages 29 to 34, and the remark that
+      one of the four primes in Theorem E may be assigned. Hardy and Littlewood prove Theorems B,
+      D and E on Hypothesis R; the proofs here use no hypothesis and replace their major and
+      minor arc analysis by Vinogradov's method and Siegel-Walfisz, so for those theorems the
+      statements are formalized and the argument is adapted. Theorem C follows the paper's own
+      route on page 30, with the lower bound for N_r of n proved unconditionally, and Theorem F
+      follows the paper's averaging argument with the prime number theorem. Theorem A, 3.113 on
+      page 21, is not formalized: on Hypothesis R, for r at least 3, nu_r of n equals n^{r-1}
+      over the factorial of r minus 1, times the singular series S_r of 3.114, the sum over q of
+      mu of q over phi of q to the power r times the Ramanujan sum c_q of minus n, plus an error
+      O of n^{r-1+Theta-3/4} times a power of log n, where Theta is the exponent in Hypothesis R.
+      Its power saving error term is not available without Hypothesis R; Theorem B is the
+      consequence of Theorem A and Lemma 12, which sums S_r as a product, and theoremB proves
+      that consequence with an error o of n^{r-1}. The authors have died and were not
+      contacted.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "Representation of an odd number as a sum of three primes"
+    authors:
+      - "I. M. Vinogradov"
+    id: "Dokl. Akad. Nauk SSSR 15 (1937) 291-294"
+    type: "article"
+    location: "Comptes Rendus (Doklady) de l'Academie des Sciences de l'URSS 15 (1937)"
+    relationship: "background"
+    note: "Vinogradov's unconditional treatment of the minor arcs, which replaces Hypothesis R in the proofs here."
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "PrimeNumberTheoremAnd"
+    authors:
+      - "the PrimeNumberTheoremAnd project contributors"
+      - "Arend Mellendijk"
+    id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    type: "formalization"
+    location: "commit c39a751132c88b6e8080b74c74023fd95b3d8be0"
+    relationship: "other"
+    note: >-
+      Sixteen files under LeanLab/PNTPort/StrongPNT, the zero-free region for zeta and the prime
+      number theorem with classical error term, by the PrimeNumberTheoremAnd contributors, and
+      five files under LeanLab/PNTSieve, the Selberg sieve and the Brun-Titchmarsh inequality by
+      Arend Mellendijk, are ported from this Apache-2.0 project with small fixes for Mathlib
+      v4.35.0-rc3, listed in PORTING.md; each file carries a notice.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "PALOMAR-2026-10-21-000005"
+    relationship: "earlier entry of this repository sharing most of the Lean library"
+    note: >-
+      The Heath-Brown 1985 entry of this repository proves Vinogradov's three primes theorem, that
+      every sufficiently large odd number is a sum of three primes, by Heath-Brown's route through
+      Siegel-Walfisz and the binary Goldbach mean square. This entry proves more for three primes:
+      the Hardy-Littlewood asymptotic with the constant C_3 for odd primes, Theorem D, by a
+      separate circle method argument in LeanLab/PNTPort/Vinogradov and
+      LeanLab/VanDerCorput1939, and builds Theorems B, C, E and F on it. Both entries share the
+      Siegel-Walfisz theorem and the ported StrongPNT files; the three primes theorem itself
+      also follows from theoremD_ternary here.
+  - id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    relationship: "source of the ported StrongPNT and Selberg sieve files"
+
+status:
+  scope: >-
+    Formalized, with no hypothesis: theoremB, Theorem B 3.32 for every r at least 3;
+    theoremB3 and theoremB4, the cases r equal to 3 and 4 written out; theoremB_unlike, 3.31;
+    theoremC, Theorem C 3.51; theoremD and theoremD_ternary, Theorem D 3.61 and its first
+    sentence; theoremE, theoremE_four and theoremE_assigned, Theorem E 3.63 and its first
+    sentence with one prime assigned; theoremF, Theorem F 4.23 under its own hypotheses 4.21
+    and 4.22; printed_423_false, the misprint in the printed 4.23. Not formalized: Theorem A,
+    3.113, the formula for nu_r of n with the power saving error term that Hypothesis R gives,
+    Hardy and Littlewood's own conditional argument from Hypothesis R, the theorems of Section 5
+    on prime tuples, Conjecture A, which is binary Goldbach with an asymptotic and is open, and
+    any explicit threshold.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5, claude-opus-5-5, Anthropic"]
+      framework: "Claude Cowork, Claude Agent SDK"
+      tool_setup: >-
+        Autonomous agents wrote every lab Lean file, ran lake build, read the paper's page images
+        and wrote the statements from them; Lean 4 v4.35.0-rc3,
+        Mathlib v4.35.0-rc3.
+      cost:
+        wall_time: "agent runs over 2026-10-16 to 2026-10-21, many hours in total"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published Goldbach-related
+        papers and the analytic inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish; an AI agent wrote the lab's own
+    Lean code and the statements, and ported the StrongPNT and Selberg sieve files, whose code is by
+    the PrimeNumberTheoremAnd contributors and Arend Mellendijk. No file here contains sorry
+    outside the Challenge file. No human expert has reviewed the mathematics. Binary Goldbach is
+    open.
+
+fidelity:
+  divergences: >-
+    Every asymptotic relation X of n is asymptotic to Y of n is written as: for every epsilon
+    above 0 there is n0 with the absolute value of X minus Y at most epsilon times Y for all n at
+    least n0 of the stated parity; o is written the same way with the bound epsilon times the
+    comparison function. N_r of n counts ordered r-tuples of primes, repetitions allowed, as on
+    page 6; N3bar and N4bar count ordered tuples of odd primes, as in Theorems D and E. The
+    constants C_r, C_3 and C_4 are infinite products over primes with the factor at 2 set to 1,
+    so they are the paper's products over odd primes. The main term of Theorem B is
+    2 C_r over the factorial of r minus 1, times n^{r-1}, times the product over odd primes
+    dividing n, exactly as printed. Theorem F takes 4.21 and 4.22 as hypotheses, as the paper
+    does; it does not claim that they hold. The paper prints 4.23 as A equal to 2 C_2 equal to
+    the product defining C_2; the second equality is a misprint, and printed_423_false records
+    that 2 C_2 differs from C_2.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "none"
+  notes: >-
+    The lab agents wrote the statements from the page images of the paper, pages 6 and 29 to 34;
+    at packaging an AI agent checked that the Challenge restates the library definitions
+    verbatim. Lean kernel and Comparator checks pass. Not reviewed by a human expert.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Hardy-Littlewood 1923, Theorem B, 3.32, every r at least 3"
+      lean: "LeanLab.HardyLittlewood1923.theoremB"
+      module: "ChallengeHardyLittlewood1923"
+      status: "proved"
+    - source: "Hardy-Littlewood 1923, Theorem B, 3.31, unlike parity"
+      lean: "LeanLab.HardyLittlewood1923.theoremB_unlike"
+      module: "ChallengeHardyLittlewood1923"
+      status: "proved"
+    - source: "Hardy-Littlewood 1923, Theorem B, 3.32, r equal to 3"
+      lean: "LeanLab.HardyLittlewood1923.theoremB3"
+      module: "ChallengeHardyLittlewood1923"
+      status: "proved"
+    - source: "Hardy-Littlewood 1923, Theorem B, 3.32, r equal to 4"
+      lean: "LeanLab.HardyLittlewood1923.theoremB4"
+      module: "ChallengeHardyLittlewood1923"
+      status: "proved"
+    - source: "Hardy-Littlewood 1923, Theorem C, 3.51"
+      lean: "LeanLab.HardyLittlewood1923.theoremC"
+      module: "ChallengeHardyLittlewood1923"
+      status: "proved"
+    - source: "Hardy-Littlewood 1923, Theorem D, 3.61"
+      lean: "LeanLab.HardyLittlewood1923.theoremD"
+      module: "ChallengeHardyLittlewood1923"
+      status: "proved"
+    - source: "Hardy-Littlewood 1923, Theorem D, every large odd number is a sum of three odd primes"
+      lean: "LeanLab.HardyLittlewood1923.theoremD_ternary"
+      module: "ChallengeHardyLittlewood1923"
+      status: "proved"
+    - source: "Hardy-Littlewood 1923, Theorem E, 3.63"
+      lean: "LeanLab.HardyLittlewood1923.theoremE"
+      module: "ChallengeHardyLittlewood1923"
+      status: "proved"
+    - source: "Hardy-Littlewood 1923, Theorem E, every large even number is a sum of four odd primes"
+      lean: "LeanLab.HardyLittlewood1923.theoremE_four"
+      module: "ChallengeHardyLittlewood1923"
+      status: "proved"
+    - source: "Hardy-Littlewood 1923, Theorem E, one of the four primes may be assigned"
+      lean: "LeanLab.HardyLittlewood1923.theoremE_assigned"
+      module: "ChallengeHardyLittlewood1923"
+      status: "proved"
+    - source: "Hardy-Littlewood 1923, Theorem F, 4.23"
+      lean: "LeanLab.HardyLittlewood1923.theoremF"
+      module: "ChallengeHardyLittlewood1923"
+      status: "proved"
+    - source: "Hardy-Littlewood 1923, the misprint in the printed 4.23"
+      lean: "LeanLab.HardyLittlewood1923.printed_423_false"
+      module: "ChallengeHardyLittlewood1923"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; the PrimeNumberTheoremAnd contributors and Arend Mellendijk; G. H. Hardy and J. E. Littlewood for the paper."

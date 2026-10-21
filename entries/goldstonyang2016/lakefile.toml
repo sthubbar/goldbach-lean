@@ -1,0 +1,19 @@
+name = "GoldbachLeanGoldstonYang2016"
+version = "0.1.0"
+defaultTargets = ["ChallengeGoldstonYang2016", "SolutionGoldstonYang2016"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.35.0-rc3"
+
+[[lean_lib]]
+name = "LeanLab"
+
+[[lean_lib]]
+name = "ChallengeGoldstonYang2016"
+roots = ["ChallengeGoldstonYang2016"]
+
+[[lean_lib]]
+name = "SolutionGoldstonYang2016"
+roots = ["SolutionGoldstonYang2016"]

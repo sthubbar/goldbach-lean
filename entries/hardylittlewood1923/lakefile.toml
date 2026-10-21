@@ -1,0 +1,19 @@
+name = "GoldbachLeanHardyLittlewood1923"
+version = "0.1.0"
+defaultTargets = ["ChallengeHardyLittlewood1923", "SolutionHardyLittlewood1923"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.35.0-rc3"
+
+[[lean_lib]]
+name = "LeanLab"
+
+[[lean_lib]]
+name = "ChallengeHardyLittlewood1923"
+roots = ["ChallengeHardyLittlewood1923"]
+
+[[lean_lib]]
+name = "SolutionHardyLittlewood1923"
+roots = ["SolutionHardyLittlewood1923"]
