@@ -1,0 +1,19 @@
+name = "GoldbachLeanSchnirelmann1933"
+version = "0.1.0"
+defaultTargets = ["ChallengeSchnirelmann1933", "SolutionSchnirelmann1933"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.35.0-rc3"
+
+[[lean_lib]]
+name = "LeanLab"
+
+[[lean_lib]]
+name = "ChallengeSchnirelmann1933"
+roots = ["ChallengeSchnirelmann1933"]
+
+[[lean_lib]]
+name = "SolutionSchnirelmann1933"
+roots = ["SolutionSchnirelmann1933"]

@@ -1,0 +1,28 @@
+{
+  "challenge_module": "ChallengeBrun1919",
+  "solution_module": "SolutionBrun1919",
+  "theorem_names": [
+    "LeanLab.Brun1919.brun",
+    "LeanLab.Brun1919.twinUpper",
+    "LeanLab.Brun1919.LeanEvalBridge.brun_constant_converges",
+    "LeanLab.BrunGap.brun_gap",
+    "LeanLab.BrunGap.gapUpper_uniform",
+    "LeanLab.BrunGap.sum_gapCount_le"
+  ],
+  "definition_names": [
+    "LeanLab.Brun1919.IsTwin",
+    "LeanLab.Brun1919.twinCount",
+    "LeanLab.Brun1919.TwinUpper",
+    "LeanLab.Brun1919.BrunTheorem",
+    "LeanLab.SchnirelmannGoldbach.singProd",
+    "LeanLab.BrunGap.gapCount",
+    "LeanLab.BrunGap.C₀",
+    "LeanLab.Brun1919.LeanEvalBridge.IsTwinPrimeStart",
+    "LeanLab.Brun1919.LeanEvalBridge.twinPrimeReciprocalTerm"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

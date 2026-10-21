@@ -1,0 +1,157 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Schnirelmann's theorem: every integer n >= 2 is a sum of at most 30772 primes, after Schnirelmann 1933"
+  description: >-
+    A Lean 4 proof, with no unproved steps, of the theorem of L. Schnirelmann, Über additive
+    Eigenschaften von Zahlen, Math. Ann. 107, 1933: the set of 0, 1 and the sums of two primes
+    has positive Schnirelmann density, and so every integer n >= 2 is a sum of a bounded number
+    of primes. The proof also gives an explicit bound: every n >= 2 is a sum of at most 30772
+    primes. Mathlib's file Mathlib/Combinatorics/Schnirelmann.lean lists the proof of
+    Schnirelmann's theorem as a TODO; this entry gives it, for Mathlib's schnirelmannDensity,
+    with an explicit constant. The constant 30772 is far weaker than the best known ones:
+    Ramaré 1995 showed that every n >= 2 is a sum of at most 7 primes, and Helfgott's ternary
+    Goldbach theorem gives at most 4. The point is a complete formal version of Schnirelmann's
+    argument with every constant explicit. Binary Goldbach is open and is not claimed. The Lean
+    code was written by an AI agent and is offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11B13", "11N36"]
+
+sources:
+  - title: "Über additive Eigenschaften von Zahlen"
+    authors:
+      - "L. Schnirelmann"
+    id: "doi:10.1007/BF01448914"
+    type: "article"
+    location: "Mathematische Annalen 107, 1933, pages 649-690"
+    relationship: "formalizes"
+    note: >-
+      Formalizes the main results: the set of 0, 1 and the sums of two primes has positive
+      Schnirelmann density, and every integer n >= 2 is a sum of at most H primes for an
+      absolute H. The proof follows the textbook route of M. B. Nathanson, Additive Number
+      Theory: The Classical Bases, GTM 164, Chapter 7: a Selberg sieve upper bound for the
+      number of representations as a sum of two primes, a mean square bound for the singular
+      product, Cauchy-Schwarz with Chebyshev's bound, and Schnirelmann's basis theorem. The Lean
+      argument is written directly, not line by line from the paper. The author cannot be
+      contacted.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "Additive Number Theory: The Classical Bases"
+    authors:
+      - "M. B. Nathanson"
+    id: "doi:10.1007/978-1-4757-3845-2"
+    type: "book"
+    location: "Graduate Texts in Mathematics 164, Springer, 1996, Chapter 7"
+    relationship: "adapts"
+    note: >-
+      The Lean proof adapts the structure of Nathanson's account of Schnirelmann's theorem; the
+      explicit constants, sieve constant 33, mean square constant 2.52 and Chebyshev's constant
+      0.92, were derived by the lab and checked by the Lean kernel.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "On Šnirel'man's constant"
+    authors:
+      - "O. Ramaré"
+    id: "https://numdam.org/item/ASNSP_1995_4_22_4_645_0/"
+    type: "article"
+    location: "Annali della Scuola Normale Superiore di Pisa, Classe di Scienze, Serie 4, 22, no. 4, 1995, pages 645-706, Section 9"
+    relationship: "adapts"
+    note: >-
+      The explicit basis step uses the covering case of Dyson's theorem, proved in
+      LeanLab/Ramare1995/Theorem91.lean following Nathanson's exposition, arXiv:2407.12253, as
+      used in Ramaré's Section 9. Ramaré's own much smaller constant is not formalized here.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "PrimeNumberTheoremAnd"
+    authors:
+      - "Arend Mellendijk"
+      - "the PrimeNumberTheoremAnd project contributors"
+    id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    type: "formalization"
+    location: "commit c39a751132c88b6e8080b74c74023fd95b3d8be0, PrimeNumberTheoremAnd/Mathlib/NumberTheory/Sieve"
+    relationship: "other"
+    note: >-
+      Four files under LeanLab/PNTSieve, the Selberg sieve by Arend Mellendijk, are ported from
+      this Apache-2.0 project, with their declarations moved into LeanLab namespaces and small
+      fixes for Mathlib v4.35.0, listed in PORTING.md; each file keeps its copyright line and
+      carries a notice of the port.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+
+related_formalizations: []
+
+status:
+  scope: >-
+    Formalized, with no hypothesis: positive Schnirelmann density of the set of 0, 1 and the
+    sums of two primes, S4_schnirelmann_pos; Schnirelmann's theorem that some H bounds the number
+    of primes needed for every n >= 2, schnirelmann_bounded_primes; and the explicit form with
+    H = 30772, schnirelmann_bounded_primes_H₆. Also proved on the way and not compared:
+    Schnirelmann's inequality and basis theorem, the covering case of Dyson's theorem, and
+    Chebyshev's lower bound for the prime counting function with constant 0.92. Not formalized:
+    the further results of Schnirelmann's paper, and any constant near the best known ones;
+    binary Goldbach remains open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic"]
+      framework: "Claude Cowork, Claude Agent SDK"
+      tool_setup: >-
+        Autonomous agents wrote every lab Lean file, ran lake build, read the background
+        sources, and ran separate AI subagents as statement auditors and falsifiers; Lean 4
+        v4.35.0-rc3, Mathlib v4.35.0-rc3.
+      cost:
+        wall_time: "agent runs over 2026-10-16 to 2026-10-21, many hours in total"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published Goldbach-related
+        papers and the analytic inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish; an AI agent wrote all lab
+    Lean code and the statements. No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    A sum of k primes is a list of k primes, repetitions allowed, with the given sum. The
+    explicit bound is stated through the constant H₆, defined as 2 times 15385 plus 2, which
+    equals 30772. Schnirelmann's paper does not compute an explicit constant; the explicit
+    form is the lab's addition and is far from the best known bounds.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "none"
+  notes: >-
+    Statements checked by AI agents against the standard statement of Schnirelmann's theorem.
+    Lean kernel and Comparator checks pass. Not reviewed by a human expert.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Schnirelmann 1933, positive Schnirelmann density of 0, 1 and the sums of two primes"
+      lean: "LeanLab.SchnirelmannGoldbach.S4_schnirelmann_pos"
+      module: "ChallengeSchnirelmann1933"
+      status: "proved"
+    - source: "Schnirelmann 1933, every n >= 2 is a sum of a bounded number of primes"
+      lean: "LeanLab.SchnirelmannGoldbach.schnirelmann_bounded_primes"
+      module: "ChallengeSchnirelmann1933"
+      status: "proved"
+    - source: "Schnirelmann 1933, explicit form with at most 30772 primes"
+      lean: "LeanLab.SchnirelmannExplicit.Sharper6.schnirelmann_bounded_primes_H₆"
+      module: "ChallengeSchnirelmann1933"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; Arend Mellendijk and the PrimeNumberTheoremAnd contributors for the Selberg sieve; L. Schnirelmann, M. B. Nathanson and O. Ramaré for the mathematics."

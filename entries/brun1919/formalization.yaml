@@ -1,0 +1,153 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Brun's theorem: the sum of the reciprocals of the twin primes converges, after Brun 1919, with the twin prime upper bound and every even gap"
+  description: >-
+    A sorry-free Lean 4 proof of the theorem of V. Brun, La série 1/5 + 1/7 + 1/11 + 1/13 + ...
+    où les dénominateurs sont nombres premiers jumeaux est convergente ou finie, Bull. Sci.
+    Math. 43, 1919: the sum of the reciprocals of p and of p + 2 over the primes p with p + 2 prime converges.
+    This is a sorry-free proof of a statement that lean-eval lists as a challenge,
+    brun_constant_converges, proved here in the exact lean-eval form as well. With it, the twin
+    prime upper bound, at most C N / log^2 N twin primes below N, which is stronger than the bound of Brun's paper;
+    the same convergence for prime pairs p, p + h with any even gap h; a bound for those pairs
+    with one constant for every gap; and its average over gaps. The bounds come from the Selberg
+    sieve, ported from PrimeNumberTheoremAnd, not from Brun's sieve. Binary Goldbach and the twin
+    prime conjecture are open and are not claimed. The Lean code was written by an AI agent and
+    is offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11N36", "11N05", "11A41"]
+
+sources:
+  - title: "La série 1/5 + 1/7 + 1/11 + 1/13 + 1/17 + 1/19 + 1/29 + 1/31 + 1/41 + 1/43 + 1/59 + 1/61 + ... où les dénominateurs sont nombres premiers jumeaux est convergente ou finie"
+    authors:
+      - "V. Brun"
+    id: "Bulletin des Sciences Mathématiques 43, 1919, pages 100-104 and 124-128"
+    type: "article"
+    location: "Bulletin des Sciences Mathématiques 43, 1919, pages 100-104 and 124-128"
+    relationship: "adapts"
+    note: >-
+      Formalizes the main theorem, that the series of the reciprocals of the twin primes
+      converges, stated as summability over the reals of 1/p + 1/[p + 2] on the primes p with
+      p + 2 prime. Brun bounds the number of twin primes below x by x times the square of
+      log log x over log x with his pure sieve; the Lean proof uses the Selberg sieve instead and
+      gets the stronger bound C N over log^2 N, then sums it over dyadic blocks. The Lean argument
+      is written directly, not line by line from the paper. The author cannot be contacted.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "PrimeNumberTheoremAnd"
+    authors:
+      - "Arend Mellendijk"
+      - "the PrimeNumberTheoremAnd project contributors"
+    id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    type: "formalization"
+    location: "commit c39a751132c88b6e8080b74c74023fd95b3d8be0, PrimeNumberTheoremAnd/Mathlib/NumberTheory/Sieve"
+    relationship: "other"
+    note: >-
+      Four files under LeanLab/PNTSieve, the Selberg sieve by Arend Mellendijk, are ported from
+      this Apache-2.0 project, with their declarations moved into LeanLab namespaces and small
+      fixes for Mathlib v4.35.0, listed in PORTING.md; each file keeps its copyright line and
+      carries a notice of the port.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "https://lean-lang.org/eval/problems/brun_constant_converges/"
+    relationship: "lists Brun's theorem as an open challenge problem, brun_constant_converges"
+    note: >-
+      The statement and its two definitions are copied into LeanLab/Brun1919/LeanEvalBridge.lean
+      and proved there from brun. Nothing has been submitted to lean-eval.
+  - id: "https://github.com/amellendijk/selberg-sieve4"
+    relationship: "lists Brun's theorem as a goal; its Applications/TwinPrime.lean is a stub"
+    note: "Arend Mellendijk's sieve project; no code from it is used here beyond the PrimeNumberTheoremAnd port."
+  - id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    relationship: "source of the ported Selberg sieve files"
+    note: "Contains no proof of Brun's theorem."
+
+status:
+  scope: >-
+    Formalized, with no hypothesis: Brun's theorem, brun; the twin prime upper bound, twinUpper;
+    Brun's theorem in the lean-eval form, brun_constant_converges; the convergence of the sum of
+    1/p over the primes p with p + h prime for every even h other than 0, brun_gap; the bound for
+    the number of such p below N with one absolute constant times the product over p dividing h
+    of 1 + 1/p, gapUpper_uniform; and its average over even gaps up to H, sum_gapCount_le. Not
+    formalized: Brun's own sieve and his weaker bound with log log x; the twin prime conjecture
+    and binary Goldbach remain open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5, claude-opus-5-5, Anthropic"]
+      framework: "Claude Cowork, Claude Agent SDK"
+      tool_setup: >-
+        Autonomous agents wrote every lab Lean file, ran lake build, read the background
+        sources, and ran separate AI subagents as statement auditors and falsifiers; Lean 4
+        v4.35.0-rc3, Mathlib v4.35.0-rc3.
+      cost:
+        wall_time: "agent runs over 2026-10-16 to 2026-10-20, many hours in total"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published Goldbach-related
+        papers and the analytic inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish; an AI agent wrote all lab
+    Lean code and the statements. No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    Convergence is stated as Summable over the reals of the twin prime indicator times
+    1/p + 1/[p + 2], as in lean-eval; since the terms are nonnegative this is convergence of the
+    series. The twin prime count bound is C N over log^2 N with an explicit C, stronger than
+    Brun's 1919 bound, and is proved by the Selberg sieve rather than Brun's sieve. The gap
+    results go beyond the paper.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "none"
+  notes: >-
+    Statements checked by AI agents against the standard statement of Brun's theorem and
+    against the lean-eval problem. Lean kernel and Comparator checks pass. Not reviewed by a
+    human expert.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Brun 1919, main theorem"
+      lean: "LeanLab.Brun1919.brun"
+      module: "ChallengeBrun1919"
+      status: "proved"
+    - source: "Brun 1919, upper bound for the number of twin primes, in the stronger form N over log^2 N"
+      lean: "LeanLab.Brun1919.twinUpper"
+      module: "ChallengeBrun1919"
+      status: "proved"
+    - source: "Brun 1919, main theorem, in the lean-eval form brun_constant_converges"
+      lean: "LeanLab.Brun1919.LeanEvalBridge.brun_constant_converges"
+      module: "ChallengeBrun1919"
+      status: "proved"
+    - source: "Brun's theorem for prime pairs with any even gap"
+      lean: "LeanLab.BrunGap.brun_gap"
+      module: "ChallengeBrun1919"
+      status: "proved"
+    - source: "Upper bound for prime pairs with even gap h, uniform in h"
+      lean: "LeanLab.BrunGap.gapUpper_uniform"
+      module: "ChallengeBrun1919"
+      status: "proved"
+    - source: "Upper bound for prime pairs with even gap at most H, summed over the gaps"
+      lean: "LeanLab.BrunGap.sum_gapCount_le"
+      module: "ChallengeBrun1919"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; Arend Mellendijk and the PrimeNumberTheoremAnd contributors for the Selberg sieve; the lean-eval maintainers for the problem statement; V. Brun for the paper."

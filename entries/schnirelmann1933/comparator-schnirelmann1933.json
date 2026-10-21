@@ -1,0 +1,22 @@
+{
+  "challenge_module": "ChallengeSchnirelmann1933",
+  "solution_module": "SolutionSchnirelmann1933",
+  "theorem_names": [
+    "LeanLab.SchnirelmannGoldbach.S4_schnirelmann_pos",
+    "LeanLab.SchnirelmannGoldbach.schnirelmann_bounded_primes",
+    "LeanLab.SchnirelmannExplicit.Sharper6.schnirelmann_bounded_primes_H₆"
+  ],
+  "definition_names": [
+    "LeanLab.IsGoldbachSum",
+    "LeanLab.SchnirelmannGoldbach.G",
+    "LeanLab.SchnirelmannGoldbach.S4_schnirelmann_pos_stmt",
+    "LeanLab.SchnirelmannGoldbach.SumOfPrimes",
+    "LeanLab.SchnirelmannExplicit.Sharper6.K₆",
+    "LeanLab.SchnirelmannExplicit.Sharper6.H₆"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}
