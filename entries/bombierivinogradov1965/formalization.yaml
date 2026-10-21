@@ -1,0 +1,185 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "The Bombieri-Vinogradov theorem, Bombieri 1965 and A. I. Vinogradov 1965, classical form with the maximum over y <= x"
+  description: >-
+    A sorry-free Lean 4 proof of the Bombieri-Vinogradov theorem in its classical form: for every
+    A > 0 there is B > 0 such that the sum over q <= x^{1/2} (log x)^{-B} of the maximum over y <= x
+    and over reduced residues a mod q of |psi(y; q, a) - y/phi(q)| is << x (log x)^{-A}. The same
+    form is proved for theta(y; q, a), for pi(y; q, a) against liD(y)/phi(q) with liD(y) the sum of
+    1/log n over 2 <= n <= y, and for pi(y; q, a) against pi(y)/phi(q), the level of distribution 1/2
+    input of sieve methods. The proof runs from a zero-free region for Dirichlet L-functions and
+    Siegel's theorem through the Siegel-Walfisz theorem, the multiplicative large sieve and
+    Vaughan's identity; all constants are ineffective, as in the papers. Binary Goldbach is open
+    and is not claimed. The Lean code was written by an AI agent; the statements were checked
+    against the literature by AI reviewers and are offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11N13", "11N35", "11M20"]
+
+sources:
+  - title: "On the large sieve"
+    authors:
+      - "E. Bombieri"
+    id: "doi:10.1112/S0025579300005313"
+    type: "article"
+    location: "Mathematika 12, 1965, 201-225"
+    relationship: "formalizes"
+    note: >-
+      Formalizes the main theorem on primes in arithmetic progressions, the mean value
+      estimate with the maximum over y <= x and over reduced residues inside the sum over
+      q <= x^{1/2} (log x)^{-B}. The Lean proof follows the now standard route through Vaughan's
+      identity and the multiplicative large sieve, not Bombieri's original zero density
+      argument. The author has not been contacted about this formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "The density hypothesis for Dirichlet L-series"
+    authors:
+      - "A. I. Vinogradov"
+    id: "Izv. Akad. Nauk SSSR Ser. Mat. 29, 1965, 903-934"
+    type: "article"
+    location: "Izvestiya Akademii Nauk SSSR, Seriya Matematicheskaya 29, 1965, 903-934; Corrigendum, ibid. 30, 1966, 719-720"
+    relationship: "formalizes"
+    note: >-
+      Independent proof of the same mean value theorem, with a slightly weaker range of q. The
+      Lean statement is the form with range x^{1/2} (log x)^{-B} as in Bombieri. The author has
+      not been contacted about this formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "PrimeNumberTheoremAnd"
+    authors:
+      - "the PrimeNumberTheoremAnd project contributors"
+    id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    type: "formalization"
+    location: "commit c39a751132c88b6e8080b74c74023fd95b3d8be0"
+    relationship: "other"
+    note: >-
+      Sixteen files under LeanLab/PNTPort/StrongPNT, the zero-free region for zeta, Mellin and
+      residue calculus, and the prime number theorem with classical error term, are ported from
+      this Apache-2.0 project with small fixes for Mathlib v4.35.0-rc3, listed in PORTING.md; each
+      file carries a notice. The same files are in the Heath-Brown 1985 entry of this repository.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "https://github.com/kimihiro64/bombieri-vinogradov"
+    relationship: "independent formalization of the Bombieri-Vinogradov theorem"
+    note: >-
+      Independent Lean 4 work, read from its README on 2026-10-21. It proves, for every theta below
+      1/2 and every A >= 1, that the sum over q <= x^theta of the maximum over reduced residues a of
+      |pi(x; q, a) - pi(x)/phi(q)| is << x (log x)^{-A}, via a large sieve, Vaughan's identity and a
+      character form of Siegel-Walfisz, and it does not claim the endpoint theta = 1/2. It evaluates
+      at y = x with no maximum over y. The present entry reaches the range x^{1/2} (log x)^{-B} and
+      puts the maximum over y <= x inside the sum, so its bvPiPi implies that statement once constants are adjusted for small x,
+      but the two developments are independent and no code from it is used here.
+  - id: "https://github.com/AxiomMath/PrimeGapsLib"
+    relationship: "states the Bombieri-Vinogradov theorem as a hypothesis"
+    note: >-
+      Axiom Math's library states the Bombieri-Vinogradov theorem as a Prop and proves that it
+      implies that infinitely many gaps between consecutive primes are at most 246; it assumes the
+      theorem as a hypothesis rather than proving it. No code from it
+      is used here.
+  - id: "PALOMAR-2026-10-21-000005"
+    relationship: "earlier entry of this repository sharing most of the Lean library"
+    note: >-
+      The Heath-Brown 1985 entry of this repository uses the same lab library and compares the
+      Siegel-Walfisz theorem, Heath-Brown's Theorem 1 for binary Goldbach and its corollaries. Its
+      library already contains a proof of Bombieri-Vinogradov at y = x, but that entry does not
+      state or compare it. This entry adds five new files under LeanLab/PNTPort/BVMax that move the
+      maximum over y <= x inside the sum and pass to theta and pi, and it compares the
+      Bombieri-Vinogradov statements themselves.
+  - id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    relationship: "source of the ported StrongPNT files"
+
+status:
+  scope: >-
+    Formalized, with no hypothesis: the classical Bombieri-Vinogradov theorem for psi with the
+    maximum over y <= x and over reduced residues inside the sum, bombieriVinogradovMax, and its
+    special case y = x with residue 1, bombieriVinogradovMax_at_x, which shows that the hypotheses
+    on the choice functions can be met; the same form for theta, bvTheta; for pi against liD,
+    bvPi; and for pi against pi(y)/phi(q), bvPiPi. Not formalized: effective constants, which the
+    method cannot give, and the zero density estimates of Bombieri's and Vinogradov's original
+    proofs. Binary Goldbach remains open and is not claimed.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5, claude-opus-5-5, Anthropic"]
+      framework: "Claude Cowork, Claude Agent SDK"
+      tool_setup: >-
+        Autonomous agents wrote every lab Lean file, ran lake build, read the background
+        sources, and ran separate AI subagents as statement auditors and falsifiers; Lean 4
+        v4.35.0-rc3, Mathlib v4.35.0-rc3.
+      cost:
+        wall_time: "agent runs over 2026-10-16 to 2026-10-21, many hours in total"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published Goldbach-related
+        papers and the analytic inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish; AI agents wrote the lab's own
+    Lean code and the statements, and ported the 16 StrongPNT files, whose code is by the
+    PrimeNumberTheoremAnd contributors. Cited literature results that the lab states without
+    proof elsewhere were removed from this repository copy, so no file here contains sorry outside
+    the Challenge file. Binary Goldbach is open. No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    The maximum over y <= x and over reduced residues a mod q is written with choice functions:
+    the bound holds for every y with 0 <= y q <= x and every a with a q coprime to q, which is
+    equivalent to a bound for the sum of the suprema. Bounds written with << are read as: for each
+    A > 0 some B > 0 and some constant K, for every x >= 2. The range q <= x^{1/2} (log x)^{-B} is
+    1 <= q <= floor of sqrt x / (log x)^B. psi(y; q, a) sums the von Mangoldt function over
+    1 <= n <= y with n = a mod q; theta and pi sum log p and 1 over primes p <= y in the class.
+    The logarithmic integral is replaced by liD(y), the sum of 1/log n over 2 <= n <= y, which
+    differs from li(y) by O(1). Residue 1 is coprime to every q, so the hypotheses are satisfiable,
+    as bombieriVinogradovMax_at_x records.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "none"
+  notes: >-
+    Statements checked by the packaging AI agent against the standard statement of the theorem
+    as given in Davenport, Multiplicative Number Theory, chapter 28; the 1965 papers themselves
+    were not read for this check. Every definition was restated in the Challenge and compared by
+    the Comparator, and bombieriVinogradovMax_at_x shows the main statement is not vacuous. Lean kernel and Comparator checks pass. Not reviewed by a human
+    expert or by the authors.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Bombieri 1965 and A. I. Vinogradov 1965, main theorem, for psi"
+      lean: "LeanLab.PNTPort.BVMax.bombieriVinogradovMax"
+      module: "ChallengeBombieriVinogradov1965"
+      status: "proved"
+    - source: "The same at y = x with residue 1, a satisfiability check"
+      lean: "LeanLab.PNTPort.BVMax.bombieriVinogradovMax_at_x"
+      module: "ChallengeBombieriVinogradov1965"
+      status: "proved"
+    - source: "The main theorem for theta"
+      lean: "LeanLab.PNTPort.BVMax.bvTheta"
+      module: "ChallengeBombieriVinogradov1965"
+      status: "proved"
+    - source: "The main theorem for pi against the logarithmic integral"
+      lean: "LeanLab.PNTPort.BVMax.bvPi"
+      module: "ChallengeBombieriVinogradov1965"
+      status: "proved"
+    - source: "The main theorem for pi against pi of y over phi of q, level of distribution 1/2"
+      lean: "LeanLab.PNTPort.BVMax.bvPiPi"
+      module: "ChallengeBombieriVinogradov1965"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; the PrimeNumberTheoremAnd contributors; E. Bombieri and A. I. Vinogradov for the papers."

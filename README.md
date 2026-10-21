@@ -22,6 +22,9 @@ Each entry is its own Lake project, the `project_path` of its Palomar submission
 | `entries/granville2007` | `ChallengeGranville2007.lean` | `comparator-granville2007.json` | Granville 2007: RH is equivalent to a Goldbach average estimate, in an equivalent form |
 | `entries/romanov1934` | `ChallengeRomanov1934.lean` | `comparator-romanov1934.json` | Romanov 1934: the integers p + 2^k have positive lower density; Erdős 1950: so do the odd numbers not of that form |
 | `entries/mann1942` | `ChallengeMann1942.lean` | `comparator-mann1942.json` | Mann 1942: the α + β theorem σ(A + B) ≥ min(1, σA + σB) for Mathlib's Schnirelmann density, a Mathlib TODO |
+| `entries/brun1919` | `ChallengeBrun1919.lean` | `comparator-brun1919.json` | Brun 1919: the sum of the reciprocals of the twin primes converges, with π₂(N) ≪ N / log² N and the same for every even gap |
+| `entries/schnirelmann1933` | `ChallengeSchnirelmann1933.lean` | `comparator-schnirelmann1933.json` | Schnirelmann 1933: every integer n ≥ 2 is a sum of a bounded number of primes, explicitly at most 30772, a Mathlib TODO |
+| `entries/bombierivinogradov1965` | `ChallengeBombieriVinogradov1965.lean` | `comparator-bombierivinogradov1965.json` | Bombieri 1965 and A. I. Vinogradov 1965: the Bombieri-Vinogradov theorem with the maximum over y ≤ x and over reduced residues inside the sum, for ψ, θ and π |
 
 ## Build
 
@@ -36,7 +39,9 @@ Entries are submitted to the Palomar registry through https://submit.palomar-reg
 
 ## Licence
 
-Apache-2.0, see LICENSE. Files under `entries/heathbrown1985/LeanLab/PNTPort/StrongPNT/` and
-`entries/granville2007/LeanLab/PNTPort/StrongPNT/`, and the Selberg sieve files under
-`entries/romanov1934/LeanLab/PNTSieve/`, are ported from PrimeNumberTheoremAnd,
+Apache-2.0, see LICENSE. Files under `entries/heathbrown1985/LeanLab/PNTPort/StrongPNT/`,
+`entries/granville2007/LeanLab/PNTPort/StrongPNT/` and
+`entries/bombierivinogradov1965/LeanLab/PNTPort/StrongPNT/`, and the Selberg sieve files under
+`entries/romanov1934/LeanLab/PNTSieve/`, `entries/brun1919/LeanLab/PNTSieve/`
+and `entries/schnirelmann1933/LeanLab/PNTSieve/`, are ported from PrimeNumberTheoremAnd,
 Apache-2.0; see NOTICE and each entry's PORTING.md.

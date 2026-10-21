@@ -1,0 +1,19 @@
+name = "GoldbachLeanBombieriVinogradov1965"
+version = "0.1.0"
+defaultTargets = ["ChallengeBombieriVinogradov1965", "SolutionBombieriVinogradov1965"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.35.0-rc3"
+
+[[lean_lib]]
+name = "LeanLab"
+
+[[lean_lib]]
+name = "ChallengeBombieriVinogradov1965"
+roots = ["ChallengeBombieriVinogradov1965"]
+
+[[lean_lib]]
+name = "SolutionBombieriVinogradov1965"
+roots = ["SolutionBombieriVinogradov1965"]

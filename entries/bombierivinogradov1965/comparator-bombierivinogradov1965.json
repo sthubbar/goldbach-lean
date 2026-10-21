@@ -1,0 +1,29 @@
+{
+  "challenge_module": "ChallengeBombieriVinogradov1965",
+  "solution_module": "SolutionBombieriVinogradov1965",
+  "theorem_names": [
+    "LeanLab.PNTPort.BVMax.bombieriVinogradovMax",
+    "LeanLab.PNTPort.BVMax.bombieriVinogradovMax_at_x",
+    "LeanLab.PNTPort.BVMax.bvTheta",
+    "LeanLab.PNTPort.BVMax.bvPi",
+    "LeanLab.PNTPort.BVMax.bvPiPi"
+  ],
+  "definition_names": [
+    "LeanLab.HeathBrown1985.psi",
+    "LeanLab.PNTPort.BVMax.BombieriVinogradovMax",
+    "LeanLab.PNTPort.BVMax.thetaN",
+    "LeanLab.PNTPort.BVMax.piN",
+    "LeanLab.PNTPort.BVMax.liN",
+    "LeanLab.PNTPort.BVMax.thetaAP",
+    "LeanLab.PNTPort.BVMax.piAP",
+    "LeanLab.PNTPort.BVMax.liD",
+    "LeanLab.PNTPort.BVMax.BVTheta",
+    "LeanLab.PNTPort.BVMax.BVPi",
+    "LeanLab.PNTPort.BVMax.BVPiPi"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

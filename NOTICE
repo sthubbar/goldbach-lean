@@ -5,6 +5,8 @@ This repository includes code ported from PrimeNumberTheoremAnd,
 https://github.com/AlexKontorovich/PrimeNumberTheoremAnd, commit
 c39a751132c88b6e8080b74c74023fd95b3d8be0, Copyright the PrimeNumberTheoremAnd project
 contributors, licensed under the Apache License, Version 2.0. The ported files are under
-entries/heathbrown1985/LeanLab/PNTPort/StrongPNT/ and
-entries/granville2007/LeanLab/PNTPort/StrongPNT/, and the Selberg sieve files by Arend Mellendijk
-under entries/romanov1934/LeanLab/PNTSieve/, and each carries a notice of the port and of its changes.
+entries/heathbrown1985/LeanLab/PNTPort/StrongPNT/,
+entries/granville2007/LeanLab/PNTPort/StrongPNT/ and
+entries/bombierivinogradov1965/LeanLab/PNTPort/StrongPNT/, and the Selberg sieve files by Arend Mellendijk
+under entries/romanov1934/LeanLab/PNTSieve/, entries/brun1919/LeanLab/PNTSieve/ and
+entries/schnirelmann1933/LeanLab/PNTSieve/, and each carries a notice of the port and of its changes.
