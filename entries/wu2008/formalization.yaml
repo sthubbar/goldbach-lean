@@ -12,7 +12,9 @@ project:
     p4 < N^{1/2-2 kappa1}/p3, is not justified; this formalization proves the inequality with the
     full range N^{kappa2} <= p4 < N^{1/2-3 kappa1}, for every N > 1, every pair kappa1, kappa2
     meeting Wu's hypotheses, any finite A of integers 0 < a < N coprime to N, and with Wu's
-    O(N^{1-kappa1}) made explicit as 4N/(N^{kappa1}-1) for A = {N - p}. Lean code written by an
+    O(N^{1-kappa1}) made explicit as 4N/(N^{kappa1}-1) for A = {N - p}. Version 2 adds Lemma 3.1
+    of R. Li, On Chen's theorem, Goldbach's conjecture and almost prime twins II, which is the same
+    inequality at kappa1 = 1/11.49, kappa2 = 1/6.18 with the same gap, repaired. Lean code written by an
     AI agent; the statement was checked against the paper by AI reviewers and is offered for
     human audit.
   authors:
@@ -51,6 +53,21 @@ sources:
     note: "Source of the switching bounds used in Wu 2008 to evaluate Y9 to Y11; not formalized here."
     license: "unknown"
     author_endorsement: "not-contacted"
+  - title: "On Chen's theorem, Goldbach's conjecture and almost prime twins II"
+    authors:
+      - "Runbo Li"
+    id: "arXiv:2405.05727"
+    type: "article"
+    location: "arXiv 2405.05727 v4; Mathematical Reports 2026"
+    relationship: "adapts"
+    note: >-
+      Formalizes Lemma 3.1, which is Wu's Lemma 2.2 at kappa1 = 1/11.49, kappa2 = 1/6.18, with
+      the same gap in the range of the last sum, Li's S15, Wu's Y11. The range is repaired here
+      to N^{kappa2} <= p4 < N^{1/2-3/11.49}, with the same readings of the sieve sets and the
+      same explicit error as for Wu. The author has not been contacted about this
+      formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
 
 related_formalizations: []
 
@@ -60,9 +77,13 @@ status:
     counts, for every N > 1, with Y11 over the repaired range and an explicit error term,
     lemma22_sum; the same for Wu's sequence A = {N - p : p < N prime, p not dividing N} with the
     error bounded by 4N/(N^{kappa1}-1), lemma22_wuA; and the admissibility of Wu's own
-    kappa1 = 1/13.27, kappa2 = 1/8.24, wu_admissible. Not formalized: the analytic evaluation of
+    kappa1 = 1/13.27, kappa2 = 1/8.24, wu_admissible. Version 2: Li 2024 Lemma 3.1, the same
+    inequality for A = {N - p} at Li's kappa1 = 1/11.49, kappa2 = 1/6.18 with S15 over the
+    repaired range, lemma31_repaired, and the admissibility of Li's parameters, li_admissible.
+    Not formalized: the analytic evaluation of
     the Y_i by the linear sieve and switching, and so not Wu's constant 0.899 or its corrected
-    value; the repaired statement only removes a gap in the combinatorial step.
+    value, nor Li's integral evaluation; the repaired statements only remove a gap in the
+    combinatorial step.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: []
@@ -103,7 +124,9 @@ fidelity:
     all N > 1 rather than for large N. D_{1,2} counts a in A with Omega(a) <= 2.
     A configuration where the printed pointwise form fails, exponents 0.08, 0.09, 0.12, 0.25, is
     proved in the exponent model in the Lean Lab file LeanLab/ChenDoubleSieve/Wu2008Lemma22Gap.lean,
-    not part of this entry.
+    not part of this entry. Li 2024 Lemma 3.1 has the same divergences as Wu's Lemma 2.2: its
+    S15 runs over the repaired range N^{kappa2} <= p4 < N^{1/2-3 kappa1}, kappa1 = 1/11.49,
+    instead of the printed one, and it is stated for Wu's A = {N - p} with the explicit error.
 
 review:
   status: "self-assessed"
@@ -115,7 +138,7 @@ review:
     expert or by the author.
 
 alignment:
-  namespace: "GoldbachLean.Wu2008"
+  namespace: "GoldbachLean"
   statements:
     - source: "Wu 2008, Lemma 2.2, inequality (2.2)"
       lean: "GoldbachLean.Wu2008.WuSum.lemma22_sum"
@@ -132,5 +155,15 @@ alignment:
       module: "ChallengeWu2008"
       status: "proved"
       note: "Wu's kappa1 = 1/13.27, kappa2 = 1/8.24 satisfy the hypotheses."
+    - source: "Li 2024, Lemma 3.1, for A = {N - p}"
+      lean: "GoldbachLean.Li2024.Lemma31.lemma31_repaired"
+      module: "ChallengeWu2008"
+      status: "adapted"
+      note: "Wu's Lemma 2.2 at kappa1 = 1/11.49, kappa2 = 1/6.18, with S15 over the repaired range and error 4N/(N^{kappa1}-1)."
+    - source: "Li 2024, Lemma 3.1, hypotheses on kappa1, kappa2"
+      lean: "GoldbachLean.Li2024.Lemma31.li_admissible"
+      module: "ChallengeWu2008"
+      status: "proved"
+      note: "Li's kappa1 = 1/11.49, kappa2 = 1/6.18 satisfy Wu's hypotheses."
 
-acknowledgements: "Mathlib and the Lean FRO; J. Wu for the paper."
+acknowledgements: "Mathlib and the Lean FRO; J. Wu and R. Li for the papers."

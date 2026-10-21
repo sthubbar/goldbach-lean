@@ -6,6 +6,7 @@ public import GoldbachLean.Wu2008.Int
 public import GoldbachLean.Wu2008.Sum
 public import GoldbachLean.Wu2008.Err
 public import GoldbachLean.Wu2008.Parity
+public import GoldbachLean.Li2024.Lemma31
 
 /-!
 # GoldbachLean

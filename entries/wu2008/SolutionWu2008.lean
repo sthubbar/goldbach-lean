@@ -1,6 +1,7 @@
 module
 
 public import GoldbachLean.Wu2008.Err
+public import GoldbachLean.Li2024.Lemma31
 
 /-!
 # Proof of the Wu 2008 Lemma 2.2 entry
