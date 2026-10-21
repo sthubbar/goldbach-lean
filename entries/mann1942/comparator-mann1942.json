@@ -1,0 +1,17 @@
+{
+  "challenge_module": "ChallengeMann1942",
+  "solution_module": "SolutionMann1942",
+  "theorem_names": [
+    "LeanLab.Schnirelmann.Mann.mann_sum",
+    "LeanLab.Schnirelmann.Mann.mann"
+  ],
+  "definition_names": [
+    "LeanLab.Ramare1995.Theorem91.Rep",
+    "LeanLab.Schnirelmann.Mann.SumSet"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

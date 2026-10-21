@@ -20,6 +20,8 @@ Each entry is its own Lake project, the `project_path` of its Palomar submission
 | `entries/wu2008` | `ChallengeWu2008.lean` | `comparator-wu2008.json` | Wu 2008, Lemma 2.2, with the range of the last sum repaired |
 | `entries/heathbrown1985` | `ChallengeHeathBrown1985.lean` | `comparator-heathbrown1985.json` | Heath-Brown 1985: Siegel-Walfisz, Theorem 1, almost all binary Goldbach, Vinogradov's three primes theorem, three primes in progression |
 | `entries/granville2007` | `ChallengeGranville2007.lean` | `comparator-granville2007.json` | Granville 2007: RH is equivalent to a Goldbach average estimate, in an equivalent form |
+| `entries/romanov1934` | `ChallengeRomanov1934.lean` | `comparator-romanov1934.json` | Romanov 1934: the integers p + 2^k have positive lower density; Erdős 1950: so do the odd numbers not of that form |
+| `entries/mann1942` | `ChallengeMann1942.lean` | `comparator-mann1942.json` | Mann 1942: the α + β theorem σ(A + B) ≥ min(1, σA + σB) for Mathlib's Schnirelmann density, a Mathlib TODO |
 
 ## Build
 
@@ -35,5 +37,6 @@ Entries are submitted to the Palomar registry through https://submit.palomar-reg
 ## Licence
 
 Apache-2.0, see LICENSE. Files under `entries/heathbrown1985/LeanLab/PNTPort/StrongPNT/` and
-`entries/granville2007/LeanLab/PNTPort/StrongPNT/` are ported from PrimeNumberTheoremAnd,
+`entries/granville2007/LeanLab/PNTPort/StrongPNT/`, and the Selberg sieve files under
+`entries/romanov1934/LeanLab/PNTSieve/`, are ported from PrimeNumberTheoremAnd,
 Apache-2.0; see NOTICE and each entry's PORTING.md.

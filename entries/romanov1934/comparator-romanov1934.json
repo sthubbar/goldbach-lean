@@ -1,0 +1,17 @@
+{
+  "challenge_module": "ChallengeRomanov1934",
+  "solution_module": "SolutionRomanov1934",
+  "theorem_names": [
+    "LeanLab.Romanov.romanov",
+    "LeanLab.Romanov.romanov_pos",
+    "LeanLab.Romanov.erdos_odd_not_sum",
+    "LeanLab.Romanov.erdos_density",
+    "LeanLab.Romanov.romanov_erdos"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

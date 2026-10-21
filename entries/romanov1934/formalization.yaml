@@ -1,0 +1,150 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Romanov's theorem: the integers of the form p + 2^k have positive lower density, with Erdős' complement, after Romanov 1934 and Erdős 1950"
+  description: >-
+    A Lean 4 proof, with no unproved steps, of the theorem of N. P. Romanov, Über einige Sätze
+    der additiven Zahlentheorie, Math. Ann. 109, 1934: the integers p + 2^k, p prime, have
+    positive lower density, for k >= 0 and for k >= 1. With it, the result of P. Erdős, On
+    integers of the form 2^k + p and some related problems, Summa Brasil. Math. 2, 1950: by a
+    covering system, every 119477317 + 346729110 t is odd and is not p + 2^k, so the odd numbers
+    that are not of that form also have positive lower density. Binary Goldbach is open and is
+    not claimed. The Lean code was written by an AI agent and is offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11B05", "11N36"]
+
+sources:
+  - title: "Über einige Sätze der additiven Zahlentheorie"
+    authors:
+      - "N. P. Romanov"
+    id: "doi:10.1007/BF01449161"
+    type: "article"
+    location: "Mathematische Annalen 109, 1934, pages 668-678"
+    relationship: "formalizes"
+    note: >-
+      Formalizes the main theorem, that the integers p + 2^k have positive lower density, in the
+      form: an absolute c > 0 such that for all large x at least c x integers below x are of the
+      form p + 2^k with p prime and k >= 1; also with k >= 0 for every x >= 16. The proof follows
+      the standard second moment route, by Cauchy-Schwarz over the pairs p, k and a sieve upper
+      bound for prime pairs with difference 2^k' - 2^k, together with Romanov's bound for the
+      average of the product over p dividing 2^m - 1 of 1 + 1/p. The Lean argument is written
+      directly, not line by line from the paper. The author cannot be contacted.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "On integers of the form 2^k + p and some related problems"
+    authors:
+      - "P. Erdős"
+    id: "Summa Brasiliensis Mathematicae 2, 1950, pages 113-123"
+    type: "article"
+    location: "Summa Brasiliensis Mathematicae 2, 1950, pages 113-123"
+    relationship: "adapts"
+    note: >-
+      Adapts Erdős' covering argument with the covering 0 mod 2, 0 mod 3, 1 mod 4, 3 mod 8,
+      7 mod 12, 23 mod 24 and the primes 3, 7, 5, 17, 13, 241. The extra condition that 31
+      divides n, which keeps n - 2^k away from the covering prime itself, and the residues
+      119477317 mod 346729110 were chosen by the lab and checked by the Lean kernel; Erdős himself
+      printed the progression 7629217 mod 11184810, which the Lean code does not use. The density
+      form is a direct consequence. The author cannot be contacted.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "PrimeNumberTheoremAnd"
+    authors:
+      - "Arend Mellendijk"
+      - "the PrimeNumberTheoremAnd project contributors"
+    id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    type: "formalization"
+    location: "commit c39a751132c88b6e8080b74c74023fd95b3d8be0, PrimeNumberTheoremAnd/Mathlib/NumberTheory/Sieve"
+    relationship: "other"
+    note: >-
+      Four files under LeanLab/PNTSieve, the Selberg sieve by Arend Mellendijk, are ported from
+      this Apache-2.0 project, with their declarations moved into LeanLab namespaces and small
+      fixes for Mathlib v4.35.0, listed in PORTING.md; each file keeps its copyright line and
+      carries a notice of the port.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+
+related_formalizations: []
+
+status:
+  scope: >-
+    Formalized, with no hypothesis: Romanov's theorem with k >= 0, romanov, and with k >= 1,
+    romanov_pos; Erdős' arithmetic progression of odd numbers not of the form p + 2^k,
+    erdos_odd_not_sum; its density form, erdos_density; and both densities together,
+    romanov_erdos. Not formalized: the other results of Romanov's paper, on sums of primes and
+    powers of a general integer a and on the representation counts; binary Goldbach remains
+    open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5, claude-opus-5-5, Anthropic"]
+      framework: "Claude Cowork, Claude Agent SDK"
+      tool_setup: >-
+        Autonomous agents wrote every lab Lean file, ran lake build, read the background
+        sources, and ran separate AI subagents as statement auditors and falsifiers; Lean 4
+        v4.35.0-rc3, Mathlib v4.35.0-rc3.
+      cost:
+        wall_time: "agent runs over 2026-10-16 to 2026-10-20, many hours in total"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published Goldbach-related
+        papers and the analytic inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish; an AI agent wrote all lab
+    Lean code and the statements. No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    Positive lower density is stated in counting form: an absolute c > 0 and, for every x past a
+    threshold, a finite set of at least c x integers below x, each of the required form. Romanov
+    takes k >= 1; romanov also allows k = 0 and romanov_pos is the k >= 1 form. In
+    erdos_odd_not_sum and erdos_density a non-sum excludes every k >= 0, which is the stronger
+    claim. The covering progression, 119477317 mod 346729110, differs from the progression
+    7629217 mod 11184810 printed by Erdős; both rest on the same covering system.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "none"
+  notes: >-
+    Statements checked by AI agents against the standard statements of Romanov's and Erdős'
+    theorems. Lean kernel and Comparator checks pass. Not reviewed by a human expert.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Romanov 1934, main theorem, with k >= 0"
+      lean: "LeanLab.Romanov.romanov"
+      module: "ChallengeRomanov1934"
+      status: "proved"
+    - source: "Romanov 1934, main theorem"
+      lean: "LeanLab.Romanov.romanov_pos"
+      module: "ChallengeRomanov1934"
+      status: "proved"
+    - source: "Erdős 1950, an arithmetic progression of odd numbers not of the form p + 2^k"
+      lean: "LeanLab.Romanov.erdos_odd_not_sum"
+      module: "ChallengeRomanov1934"
+      status: "proved"
+    - source: "Erdős 1950, the odd numbers not of the form p + 2^k have positive lower density"
+      lean: "LeanLab.Romanov.erdos_density"
+      module: "ChallengeRomanov1934"
+      status: "proved"
+    - source: "Romanov 1934 and Erdős 1950 together"
+      lean: "LeanLab.Romanov.romanov_erdos"
+      module: "ChallengeRomanov1934"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; Arend Mellendijk and the PrimeNumberTheoremAnd contributors for the Selberg sieve; N. P. Romanov and P. Erdős for the papers."

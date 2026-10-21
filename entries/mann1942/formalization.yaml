@@ -1,0 +1,120 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Mann's alpha plus beta theorem for Schnirelmann density, after Mann 1942"
+  description: >-
+    A Lean 4 proof, with no unproved steps, of the theorem of H. B. Mann, A proof of the
+    fundamental theorem on the density of sums of sets of positive integers, Ann. of Math. 43,
+    1942: for sets A and B of natural numbers that contain 0, the Schnirelmann density of A + B
+    is at least the minimum of 1 and sigma A + sigma B. It is stated for Mathlib's own
+    schnirelmannDensity and Mathlib's pointwise sum of sets, so the Challenge restates no density
+    definition, and it is also proved for any finite number of sets. This fills a Mathlib TODO:
+    Mathlib/Combinatorics/Schnirelmann.lean lists Mann's theorem as not yet proved. The proof goes
+    through the rank h case of Dyson's theorem, following Nathanson, arXiv 2407.12253. Binary
+    Goldbach is open and is not claimed. The Lean code was written by an AI agent and is offered
+    for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT", "math.CO"]
+  msc2020: ["11B13", "11B05", "11P70"]
+
+sources:
+  - title: "A proof of the fundamental theorem on the density of sums of sets of positive integers"
+    authors:
+      - "H. B. Mann"
+    id: "doi:10.2307/1968807"
+    type: "article"
+    location: "Annals of Mathematics, Second Series 43, 1942, pages 523-527"
+    relationship: "formalizes"
+    note: >-
+      Formalizes the main theorem, the alpha plus beta theorem: sigma of A + B is at least the
+      minimum of 1 and sigma A + sigma B, for sets of natural numbers containing 0. The Lean proof
+      does not follow Mann's argument; it derives the theorem from the rank h case of Dyson's
+      theorem with a real delta at most 1, by the Dyson transform. The author cannot be contacted.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "Additive number theory and the Dyson transform"
+    authors:
+      - "M. B. Nathanson"
+    id: "arXiv:2407.12253"
+    type: "article"
+    location: "arXiv preprint, version 4, Sections 3 to 5"
+    relationship: "adapts"
+    note: >-
+      The Lean proof adapts Nathanson's exposition of Dyson's 1945 theorem and its use to deduce
+      Mann's theorem: the Dyson transform, the minimal triple, and induction on the size of the
+      last set. The Lean argument is written directly, not line by line from the paper.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+
+related_formalizations: []
+
+status:
+  scope: >-
+    Formalized, with no assumption beyond those in the statements: Mann's theorem for two sets containing 0, mann, and its
+    form for h + 1 sets, mann_sum, where each summand may also be 0, both for Mathlib's
+    schnirelmannDensity. Also proved on the way and not compared: Dyson's theorem of rank h with
+    a real delta at most 1. Not formalized: Schnirelmann's earlier weaker inequality as a
+    separate statement, and the further results of Mann's paper. Binary Goldbach remains open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic"]
+      framework: "Claude Cowork, Claude Agent SDK"
+      tool_setup: >-
+        Autonomous agents wrote every lab Lean file, ran lake build, read the sources, and ran
+        separate AI subagents as statement auditors; Lean 4 v4.35.0-rc3, Mathlib v4.35.0-rc3.
+      cost:
+        wall_time: "agent runs over 2026-10-16 to 2026-10-21, several hours in total"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published Goldbach-related
+        papers and the additive number theory they rely on, recording every cited input until
+        proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish; AI agents wrote all lab Lean
+    code and the statements. No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    Mann works with sets of positive integers and sums a + b with a in A or 0 and b in B or 0;
+    here A and B are sets of natural numbers required to contain 0, and A + B is Mathlib's
+    pointwise sum, which is the same sumset. The density is Mathlib's schnirelmannDensity, the
+    infimum over n >= 1 of the count of A in 1 to n divided by n, which does not depend on
+    whether 0 is in A. The finite form uses a sumset SumSet defined through Rep, sums of one
+    element of each set or 0.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "none"
+  notes: >-
+    The statements use Mathlib's own Schnirelmann density, so only the finite sumset needed a
+    definition in the Challenge. Lean kernel and Comparator checks pass. Not reviewed by a human
+    expert.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Mann 1942, main theorem, the alpha plus beta theorem"
+      lean: "LeanLab.Schnirelmann.Mann.mann"
+      module: "ChallengeMann1942"
+      status: "proved"
+    - source: "Mann 1942, main theorem extended to h + 1 sets by induction"
+      lean: "LeanLab.Schnirelmann.Mann.mann_sum"
+      module: "ChallengeMann1942"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO, including the authors of Mathlib's Schnirelmann density; H. B. Mann for the theorem; F. J. Dyson and M. B. Nathanson for the proof route."

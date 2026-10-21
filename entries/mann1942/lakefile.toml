@@ -1,0 +1,19 @@
+name = "GoldbachLeanMann1942"
+version = "0.1.0"
+defaultTargets = ["ChallengeMann1942", "SolutionMann1942"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.35.0-rc3"
+
+[[lean_lib]]
+name = "LeanLab"
+
+[[lean_lib]]
+name = "ChallengeMann1942"
+roots = ["ChallengeMann1942"]
+
+[[lean_lib]]
+name = "SolutionMann1942"
+roots = ["SolutionMann1942"]
