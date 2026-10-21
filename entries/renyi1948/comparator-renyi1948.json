@@ -1,0 +1,18 @@
+{
+  "challenge_module": "ChallengeRenyi1948",
+  "solution_module": "SolutionRenyi1948",
+  "theorem_names": [
+    "LeanLab.PNTPort.BVMax.renyi8_fixedK",
+    "LeanLab.PNTPort.BVMax.renyi8_fixedK_count",
+    "LeanLab.PNTPort.BVMax.renyi_fixedK",
+    "LeanLab.PNTPort.BVMax.renyi_fixedK_count",
+    "LeanLab.PNTPort.BVMax.twin_renyi_count",
+    "LeanLab.PNTPort.BVMax.renyi8_isAtMostAlmostPrime"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

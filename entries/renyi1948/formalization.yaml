@@ -1,0 +1,175 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Renyi's theorem, Renyi 1948: every large even number is a prime plus a number with at most 8 prime factors"
+  description: >-
+    A sorry-free Lean 4 proof of Renyi's theorem: there is N0 such that every even N >= N0 is p + m
+    with p prime, m >= 1 and Omega of m at most 8, where Omega counts prime factors with
+    multiplicity, as Mathlib's ArithmeticFunction.cardFactors does. So the theorem is proved with
+    the explicit constant K = 8. Also proved: a lower bound e^{-36} N / 2 log^2 N for the number
+    of primes p < N with Omega of N - p at most 8; the same two statements with the weaker
+    K = 13000; the twin prime companion, at least 1000 e^{-36} N / log^2 N primes p <= N with
+    Omega of p + 2 at most 13000, so infinitely many such p; and the K = 8 statement written with
+    Mathlib's Nat.IsAtMostAlmostPrime. The proof is a Brun type block sieve with Bonferroni
+    levels whose remainders are bounded by the Bombieri-Vinogradov theorem proved in the same
+    library; all thresholds are ineffective through Siegel's theorem. Nothing here is new
+    mathematics: Pan has K = 4 and Chen 1973 has K = 2. Binary Goldbach is Omega of m equal to 1;
+    it is open and is not claimed. The Lean code was written by an AI agent; the statements were
+    checked against the literature by AI reviewers and are offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11N35", "11N36"]
+
+sources:
+  - title: "On the representation of an even number as the sum of a single prime and a single almost-prime number"
+    authors:
+      - "A. Renyi"
+    id: "https://www.mathnet.ru/eng/im3018"
+    type: "article"
+    location: "Izvestiya Akademii Nauk SSSR, Seriya Matematicheskaya 12, no. 1, 1948, 57-78, received 31 March 1947, MR 23863, Zbl 0038.18601"
+    relationship: "adapts"
+    note: >-
+      Formalizes the main theorem, that every sufficiently large even number is a prime plus a
+      number with at most K prime factors for some fixed K, with the explicit value K = 8, and
+      the twin companion that the same method gives, for p + 2 with K = 13000. The Lean proof does not follow Renyi's
+      large sieve argument: it uses a Brun type block sieve with Bonferroni levels and the
+      Bombieri-Vinogradov theorem, which postdates the paper. The author is deceased and was not
+      contacted.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "PrimeNumberTheoremAnd"
+    authors:
+      - "the PrimeNumberTheoremAnd project contributors"
+    id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    type: "formalization"
+    location: "commit c39a751132c88b6e8080b74c74023fd95b3d8be0"
+    relationship: "other"
+    note: >-
+      Sixteen files under LeanLab/PNTPort/StrongPNT, the zero-free region for zeta, Mellin and
+      residue calculus, and the prime number theorem with classical error term, are ported from
+      this Apache-2.0 project with small fixes for Mathlib v4.35.0-rc3, listed in PORTING.md; each
+      file carries a notice. The same files are in the Heath-Brown 1985 and Bombieri-Vinogradov
+      1965 entries of this repository.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/NumberTheory/AlmostPrime.lean"
+    relationship: "Mathlib definition of almost primes"
+    note: >-
+      Mathlib defines Nat.IsAtMostAlmostPrime k n as n not zero and Omega of n at most k, counted
+      with multiplicity. It is equivalent to the condition of the lab's statement, and the entry
+      compares renyi8_isAtMostAlmostPrime, the K = 8 theorem written with it. Mathlib has no
+      Renyi type theorem. No prior Lean formalization of Renyi's theorem is known to us.
+  - id: "https://lean-lang.org/eval/problems/chen_theorem/"
+    relationship: "lean-eval problem for the twin form of Chen's theorem"
+    note: >-
+      The lean-eval benchmark lists Chen's theorem in its twin form, infinitely many primes p
+      with p + 2 a prime or a product of two primes, as problem chen_theorem, read on 2026-10-21.
+      This entry's twin statement has 13000 in place of 2 and does not address that problem.
+  - id: "https://github.com/sthubbar/goldbach-lean/tree/main/entries/bombierivinogradov1965"
+    relationship: "entry of this repository sharing most of the Lean library"
+    note: >-
+      The Bombieri-Vinogradov 1965 entry of this repository uses the same lab library and compares
+      the Bombieri-Vinogradov theorem, which this entry uses for the sieve remainders. This entry
+      adds 31 lab files for the sieve and the Renyi argument.
+  - id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    relationship: "source of the ported StrongPNT files"
+
+status:
+  scope: >-
+    Formalized, with no hypothesis: Renyi's theorem with K = 8, renyi8_fixedK, and with Mathlib's
+    Nat.IsAtMostAlmostPrime, renyi8_isAtMostAlmostPrime; its counting form, renyi8_fixedK_count;
+    the first lab versions with K = 13000, renyi_fixedK and renyi_fixedK_count; and the twin form
+    with K = 13000, twin_renyi_count. Omega counts prime factors with multiplicity. Not
+    formalized: an effective threshold N0, which the method cannot give; Renyi's own large sieve
+    argument; any K below 8. Binary Goldbach and the twin prime conjecture remain open and are
+    not claimed.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5, claude-opus-5-5, Anthropic"]
+      framework: "Claude Cowork, Claude Agent SDK"
+      tool_setup: >-
+        Autonomous agents wrote every lab Lean file, ran lake build, read the background
+        sources, and ran separate AI subagents as statement auditors and falsifiers; Lean 4
+        v4.35.0-rc3, Mathlib v4.35.0-rc3.
+      cost:
+        wall_time: "agent runs over 2026-10-16 to 2026-10-21, many hours in total"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published Goldbach-related
+        papers and the analytic inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish; AI agents wrote the lab's own
+    Lean code and the statements, and ported the 16 StrongPNT files, whose code is by the
+    PrimeNumberTheoremAnd contributors. Cited literature results that the lab states without
+    proof elsewhere were removed from this repository copy, so no file here contains sorry outside
+    the Challenge file. Binary Goldbach is open. No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    Renyi proves the existence of some K; the Lean statements fix K = 8, or K = 13000 for the
+    twin form and the first versions, which implies the existence statement. Omega of m is
+    Mathlib's ArithmeticFunction.cardFactors, the number of prime factors with multiplicity, so
+    the condition is at least as strong as one counting distinct prime factors. m >= 1 is
+    required, which excludes the trivial case N prime with m = 0. Sufficiently large is read as:
+    there is N0 such that the statement holds for every even N >= N0. The counting forms count
+    primes p < N with Omega of N - p at most K, and for the twin form primes p <= N with Omega of
+    p + 2 at most 13000, with explicit constants e^{-36} / 2 and 1000 e^{-36} before
+    N / log^2 N.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "none"
+  notes: >-
+    A fresh AI auditor checked each compared statement against Renyi's theorem as stated in
+    the literature, Theorem 1 of the 1948 paper as quoted in arXiv 2208.01229: some fixed K
+    with every even N a prime plus a number with at most K prime factors. The citation data was
+    checked on Math-Net.Ru, record im3018. Renyi's paper itself was not read, so the attribution
+    of the p + 2 companion to the paper is not confirmed. The statements use only Mathlib definitions, so the Challenge restates no
+    definition. Lean kernel and Comparator checks pass. Not reviewed by a human expert.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Renyi 1948, main theorem, with K = 8"
+      lean: "LeanLab.PNTPort.BVMax.renyi8_fixedK"
+      module: "ChallengeRenyi1948"
+      status: "proved"
+    - source: "The same, written with Mathlib's Nat.IsAtMostAlmostPrime"
+      lean: "LeanLab.PNTPort.BVMax.renyi8_isAtMostAlmostPrime"
+      module: "ChallengeRenyi1948"
+      status: "proved"
+    - source: "Counting form with K = 8"
+      lean: "LeanLab.PNTPort.BVMax.renyi8_fixedK_count"
+      module: "ChallengeRenyi1948"
+      status: "proved"
+    - source: "Main theorem with K = 13000"
+      lean: "LeanLab.PNTPort.BVMax.renyi_fixedK"
+      module: "ChallengeRenyi1948"
+      status: "proved"
+    - source: "Counting form with K = 13000"
+      lean: "LeanLab.PNTPort.BVMax.renyi_fixedK_count"
+      module: "ChallengeRenyi1948"
+      status: "proved"
+    - source: "Twin form: many primes p with p + 2 having at most 13000 prime factors"
+      lean: "LeanLab.PNTPort.BVMax.twin_renyi_count"
+      module: "ChallengeRenyi1948"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; the PrimeNumberTheoremAnd contributors; A. Renyi for the paper."
