@@ -1,0 +1,222 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "An exact average Goldbach representation formula, after Goldston and Suriajaya"
+  description: >-
+    A sorry-free Lean 4 proof, with no hypothesis, of Theorem 1, equation 11, of D. A. Goldston
+    and A. I. Suriajaya, On an average Goldbach representation formula of Fujii, Nagoya Math. J.
+    250, 2023, 511 to 532, arXiv 2110.14250v2. With psi_2(n) the sum over m + m' = n of
+    Lambda(m) Lambda(m'), for every integer N >= 2 the sum over n <= N of psi_2(n) equals
+    N^2/2 - 2 times the sum over nontrivial zeros rho of N^{rho+1} divided by rho times rho+1,
+    minus 2 log 2pi - 1/2 times N, plus 2 zeta'/zeta at -1, minus the sum over k >= 1 of
+    N^{1-2k} divided by k times 2k-1, plus E(N), an exact identity with E(N) the integral of
+    equation 12. The zero sum counts zeros with multiplicity. Derived results of this entry, not
+    statements of the paper, show that E(N) does not depend on the radius r, that every term is
+    real, that the zero sum converges absolutely, and the case N = 2. Binary Goldbach is open
+    and is not claimed; this is an average over n. An AI agent wrote the Lean code; the
+    statements were checked against the paper by an AI agent and are offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11M26", "11N05"]
+
+sources:
+  - title: "On an average Goldbach representation formula of Fujii"
+    authors:
+      - "D. A. Goldston"
+      - "A. I. Suriajaya"
+    id: "arXiv:2110.14250"
+    type: "article"
+    location: "Nagoya Math. J. 250, 2023, pages 511 to 532, doi 10.1017/nmj.2022.44, Theorem 1, equations 11 and 12"
+    relationship: "formalizes"
+    note: >-
+      Formalizes Theorem 1, equation 11, with E(N) defined by equation 12, read in arXiv
+      2110.14250v2 and checked 2026-10-21 and 2026-10-22. The paper writes psi_2 for G and states
+      the theorem for N >= 2; here N is an integer, as in the paper. Equation 13, the in particular
+      form with O(N), is also stated, as gs_theorem1_of_full, and is derived from equation 11. The
+      proof follows the paper: orthogonality gives the sum of psi_2 in terms of E(N) and
+      psi_1(N), and the explicit formula for psi_1 with the trivial zeros, Davenport chapter 17,
+      is proved in the lab code. The venue was confirmed on the Cambridge Core page of the article.
+      The authors have not been contacted about this formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "PrimeNumberTheoremAnd"
+    authors:
+      - "the PrimeNumberTheoremAnd project contributors"
+    id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    type: "formalization"
+    location: "commit c39a751132c88b6e8080b74c74023fd95b3d8be0"
+    relationship: "other"
+    note: >-
+      Sixteen files under LeanLab/PNTPort/StrongPNT, Mellin and residue calculus, bounds for
+      zeta, the conjugation symmetry of zeta'/zeta, the zero-free region and the strong prime
+      number theorem, are ported from this Apache-2.0 project, written by its contributors, with
+      small fixes for Mathlib v4.35.0-rc3, listed in PORTING.md; each file carries a notice.
+      Bridge.lean in that folder is lab-written. They are the same files as in the
+      Languasco-Zaccagnini 2012 and Heath-Brown 1985 entries of this repository.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "https://github.com/sthubbar/goldbach-lean/tree/main/entries/languascozaccagnini2012"
+    relationship: "same G and zero sum, contains the form equation 13, conditional on RH"
+    note: >-
+      The Languasco-Zaccagnini 2012 entry of this repository proves under RH an asymptotic for
+      the same sum with error O(N log^3 N). Its proof contains, as gs_theorem1_proved, the in
+      particular form equation 13 of Goldston and Suriajaya, with the three lower terms in O(N),
+      but not the exact identity equation 11, which is new here. Its lz_zeroSum_summable is the
+      summability proved here as zeroSum_summable.
+  - id: "https://github.com/sthubbar/goldbach-lean/tree/main/entries/goldstonyang2016"
+    relationship: "same G and zero sums, Cesàro weighted average, conditional on RH"
+    note: >-
+      The Goldston-Yang 2016 entry of this repository proves under RH the Cesàro weighted
+      formula with error O(N), from the same lab library.
+  - id: "PALOMAR-2026-10-21-000011"
+    relationship: "same G, unconditional equivalence with RH"
+    note: >-
+      The Granville 2007 entry of this repository proves that RH is equivalent to the sum of
+      G(n) over n <= N being N^2/2 + O(N^{3/2+eps}). It uses the same definition of G and no zero
+      sum.
+  - id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    relationship: "source of the ported StrongPNT files"
+    note: >-
+      A search on 2026-10-22 of Mathlib, of PrimeNumberTheoremAnd at commit
+      127b50e33f6033e2147921167a117af96d9ba4ea, of google-deepmind/formal-conjectures and of
+      the web found no earlier Lean formalization of Theorem 1 of Goldston and Suriajaya or of an
+      explicit formula for the sum of psi_2. PrimeNumberTheoremAnd has a Weil type explicit
+      formula in IEANTN/Kadiri.lean, for a different purpose, and a numerical Goldbach file.
+
+status:
+  scope: >-
+    Formalized, with no hypothesis: Goldston-Suriajaya Theorem 1, equation 11, as
+    gs_theorem1_full in complex numbers and as gs_theorem1_full_real in real numbers, for every
+    integer N >= 2 and every radius 0 < r < 1; and equation 13, gs_theorem1_of_full. Derived
+    results of this entry, not statements of the paper: EGS_indep_r, E(N) does not depend on r;
+    EGS_im_eq_zero, logDeriv_zeta_neg_one_im and Z1_im_eq_zero, E(N), zeta'/zeta at -1 and the
+    zero sum are real; zeroSum_summable, the zero sum converges absolutely; trivSum_bounds, the
+    trivial zero sum lies between 0 and pi^2/3; and gs_theorem1_full_at_two, the identity at
+    N = 2 and r = 1/2, a non-vacuity check. Not formalized here: the paper's Theorems 2 to 7,
+    its Corollary 2 and its lemmas as separate statements. Binary Goldbach remains open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic"]
+      framework: "Claude Cowork"
+      tool_setup: >-
+        Autonomous agents wrote every lab Lean file, ran lake build, read the paper, and ran
+        separate AI subagents as statement auditors; Lean 4 v4.35.0-rc3, Mathlib v4.35.0-rc3.
+      cost:
+        wall_time: "agent runs over 2026-10-16 to 2026-10-22, many hours in total"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published Goldbach-related
+        papers and the analytic inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish; AI agents wrote all lab Lean
+    code and the statements. No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    Two points of presentation, both raised by the AI statement audit. First, the paper writes
+    E(N), and notes that equation 12 holds for any 0 < r < 1; the Lean EGS N r takes the radius
+    r as an argument, and gs_theorem1_full holds for every such r. The derived result EGS_indep_r
+    proves that EGS N r takes the same value for every 0 < r < 1, so EGS N r is a function of N
+    alone, as the notation E(N) presumes. Second, the paper's identity is between real numbers,
+    while gs_theorem1_full is stated in complex numbers, where the zero sum Z1 N and the integral
+    EGS N r live, with the real left side cast to the complex numbers. The derived results
+    EGS_im_eq_zero, logDeriv_zeta_neg_one_im and Z1_im_eq_zero prove that each term is real, the
+    last one read off the imaginary part of gs_theorem1_full, and gs_theorem1_full_real states
+    the identity in real numbers with the real parts of those three terms. Other choices: the
+    sum over n is over n in range N + 1, that is 0 <= n <= N, and G 0 = 0; I(r, alpha) and
+    I_N(r, alpha) start at n = 1, as in the paper; the trivial zero sum over k >= 1 is written
+    with k + 1 for k >= 0. The sum over zeros, zeroSum, is an unordered tsum over the distinct
+    zeros in the open critical strip, each weighted by its multiplicity analyticOrderNatAt;
+    zeroSum_summable proves the family summable for every real x > 0, so the tsum is the
+    absolutely convergent sum, independent of ordering, and never the junk value 0. In equation
+    13, gs_theorem1_of_full, the O(N) is read as one constant K for all integers N >= 2 and all
+    0 < r < 1. The compared theorems other than gs_theorem1_full, gs_theorem1_full_real and
+    gs_theorem1_of_full are derived results of this entry, not results of the paper.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "AI statement auditor: a separate instance of Claude Opus 5.5 (claude-opus-5-5), Anthropic; not a human reviewer"
+  notes: >-
+    Status is self-assessed: every check below was done by AI agents of the same model that
+    wrote the Lean code, so it is not an independent review and not a human expert review. Three
+    separate checks were made, the third described at the end. First, the packaging agent built the entry, ran the Lean kernel
+    and the Comparator, and the lab build printed the axioms of the headline theorems, propext,
+    Classical.choice and Quot.sound only. Second, a distinct AI statement audit, run
+    20261021T1603Z-28836: a fresh agent instance, with no part in writing the proof, read the
+    paper independently from arXiv 2110.14250v2 and compared gs_theorem1_full with Theorem 1
+    equation 11 and equation 12 term by term, checking the definition of psi_2, the range of the
+    sum, the main term, the sign and form of the zero sum and its meaning with multiplicity, the
+    linear term, the constant 2 zeta'/zeta at -1, the trivial zero sum and its index shift, the
+    definitions of E(N), Psi, I and I_N, the range of r, that the hypotheses are satisfiable at
+    N = 2, and that no term is defined as a residual of the others. Its verdict was a match with
+    two nits, that r is an argument of EGS and that the identity is stated in complex numbers;
+    the packaging agent addressed both by adding the derived results EGS_indep_r,
+    EGS_im_eq_zero, logDeriv_zeta_neg_one_im, Z1_im_eq_zero and gs_theorem1_full_real, and
+    described them in the docstrings and the fidelity section. Those added theorems were not
+    reviewed by that first audit; a second fresh AI statement audit, Claude, on 2026-10-22, read the
+    paper's Theorem 1, equations 11 to 13, independently and checked every Challenge definition and
+    compared theorem including the added ones, verdict a match, and its labelling fixes were applied. No human expert and no author of the source has reviewed
+    the entry.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Goldston and Suriajaya, Theorem 1, equation 11, in complex numbers"
+      lean: "LeanLab.GoldbachAverage.U1440.gs_theorem1_full"
+      module: "ChallengeGoldstonSuriajaya2021"
+      status: "proved"
+    - source: "Goldston and Suriajaya, Theorem 1, equation 11, in real numbers"
+      lean: "LeanLab.GoldbachAverage.U1440.gs_theorem1_full_real"
+      module: "ChallengeGoldstonSuriajaya2021"
+      status: "proved"
+    - source: "Goldston and Suriajaya, Theorem 1, equation 13, derived from equation 11"
+      lean: "LeanLab.GoldbachAverage.U1440.gs_theorem1_of_full"
+      module: "ChallengeGoldstonSuriajaya2021"
+      status: "proved"
+    - source: "Derived result of this entry: E(N) does not depend on r"
+      lean: "LeanLab.GoldbachAverage.U1440.EGS_indep_r"
+      module: "ChallengeGoldstonSuriajaya2021"
+      status: "proved"
+    - source: "Derived result of this entry: E(N) is real"
+      lean: "LeanLab.GoldbachAverage.U1440.EGS_im_eq_zero"
+      module: "ChallengeGoldstonSuriajaya2021"
+      status: "proved"
+    - source: "Derived result of this entry: zeta'/zeta at -1 is real"
+      lean: "LeanLab.GoldbachAverage.U1440.logDeriv_zeta_neg_one_im"
+      module: "ChallengeGoldstonSuriajaya2021"
+      status: "proved"
+    - source: "Derived result of this entry: the zero sum is real"
+      lean: "LeanLab.GoldbachAverage.U1440.Z1_im_eq_zero"
+      module: "ChallengeGoldstonSuriajaya2021"
+      status: "proved"
+    - source: "Derived result of this entry: the zero sum converges absolutely"
+      lean: "LeanLab.GoldbachAverage.U1440.zeroSum_summable"
+      module: "ChallengeGoldstonSuriajaya2021"
+      status: "proved"
+    - source: "Derived result of this entry: the trivial zero sum lies in 0 to pi^2/3"
+      lean: "LeanLab.GoldbachAverage.U1440.trivSum_bounds"
+      module: "ChallengeGoldstonSuriajaya2021"
+      status: "proved"
+    - source: "Derived result of this entry: the identity at N = 2, a non-vacuity check"
+      lean: "LeanLab.GoldbachAverage.U1440.gs_theorem1_full_at_two"
+      module: "ChallengeGoldstonSuriajaya2021"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; the PrimeNumberTheoremAnd contributors; D. A. Goldston and A. I. Suriajaya for the paper."

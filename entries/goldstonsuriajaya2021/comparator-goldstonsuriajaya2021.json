@@ -1,0 +1,33 @@
+{
+  "challenge_module": "ChallengeGoldstonSuriajaya2021",
+  "solution_module": "SolutionGoldstonSuriajaya2021",
+  "theorem_names": [
+    "LeanLab.GoldbachAverage.U1440.gs_theorem1_full",
+    "LeanLab.GoldbachAverage.U1440.gs_theorem1_full_real",
+    "LeanLab.GoldbachAverage.U1440.EGS_indep_r",
+    "LeanLab.GoldbachAverage.U1440.EGS_im_eq_zero",
+    "LeanLab.GoldbachAverage.U1440.logDeriv_zeta_neg_one_im",
+    "LeanLab.GoldbachAverage.U1440.Z1_im_eq_zero",
+    "LeanLab.GoldbachAverage.U1440.zeroSum_summable",
+    "LeanLab.GoldbachAverage.U1440.trivSum_bounds",
+    "LeanLab.GoldbachAverage.U1440.gs_theorem1_of_full",
+    "LeanLab.GoldbachAverage.U1440.gs_theorem1_full_at_two"
+  ],
+  "definition_names": [
+    "LeanLab.GoldbachAverage.G",
+    "LeanLab.GoldbachAverage.NontrivialZero",
+    "LeanLab.GoldbachAverage.zeroSum",
+    "LeanLab.GoldbachAverage.Z1",
+    "LeanLab.GoldbachAverage.eAdd",
+    "LeanLab.GoldbachAverage.PsiGen",
+    "LeanLab.GoldbachAverage.IGen",
+    "LeanLab.GoldbachAverage.IGenN",
+    "LeanLab.GoldbachAverage.EGS",
+    "LeanLab.GoldbachAverage.U1440.trivSum"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}
