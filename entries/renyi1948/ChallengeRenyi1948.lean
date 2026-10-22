@@ -22,7 +22,8 @@ The target theorems, each proved in the solution with no hypothesis, are:
   `#{p < N prime : Ω(N - p) ≤ 8} ≥ e^{-36} N / (2 log² N)` for every even `N ≥ N₀`;
 * `renyi_fixedK` and `renyi_fixedK_count`: the same two statements with the weaker `K = 13000`,
   the first version proved in the lab, the count `≥ 1000 e^{-36} N / log² N`;
-* `twin_renyi_count`: the twin prime companion that Rényi's method also gives, with `K = 13000`:
+* `twin_renyi_count`: a derived analogue proved in this entry by the same sieve method, a
+  twin-prime analogue of Rényi's theorem with `K = 13000`, not a result of Rényi 1948:
   `#{p ≤ N prime : Ω(p + 2) ≤ 13000} ≥ 1000 e^{-36} N / log² N` for every `N ≥ N₀`, so there are
   infinitely many primes `p` with `Ω(p + 2) ≤ 13000`;
 * `renyi8_isAtMostAlmostPrime`: `renyi8_fixedK` phrased with Mathlib's
@@ -69,7 +70,8 @@ theorem renyi_fixedK_count : ∃ N₀ : ℕ, ∀ N : ℕ, N₀ ≤ N → Even N 
   sorry
 
 open Filter in
-/-- Rényi's twin theorem with the count and `K = 13000`. -/
+/-- A derived analogue proved in this entry by the same sieve method, a twin-prime analogue of
+Rényi's theorem with the count and `K = 13000`; not a result of Rényi 1948. -/
 theorem twin_renyi_count : ∃ N₀ : ℕ, ∀ N : ℕ, N₀ ≤ N →
     1000 * Real.exp (-36) * N / Real.log N ^ 2 ≤
       ((((Icc 1 N).filter Nat.Prime).filter

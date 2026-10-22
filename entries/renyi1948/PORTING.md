@@ -45,5 +45,6 @@ compared theorems.
 
 The Bonferroni inequalities and Brun's pure and block sieve, `PNTSieve/`; Mertens' estimates;
 Rényi's block sieve with Bonferroni levels and its sharpening to `K = 8`, `PNTPort/BVMax/Renyi*`;
-the twin form, `TwinRenyi`; and below them the Bombieri-Vinogradov theorem for `π(y; q, a)` and
+`TwinRenyi`, which proves `twin_renyi_count`, a derived analogue proved in this entry by the same
+sieve method, a twin-prime analogue of Rényi's theorem and not a result of Rényi 1948; and below them the Bombieri-Vinogradov theorem for `π(y; q, a)` and
 everything it rests on, as listed in the Bombieri-Vinogradov 1965 entry's PORTING.md.

@@ -10,7 +10,9 @@ public import LeanLab.PNTPort.BVMax.TwinRenyi
 block sieve on `{N - p : p < N}`: blocks of primes `p ∤ N` in `(2^{2^j}, 2^{2^{j+1}}]` with
 Bonferroni levels rising block by block, `LeanLab/PNTSieve/`, the sieve remainders controlled by
 the lab's Bombieri-Vinogradov theorem for `π(y; q, a)`, `LeanLab/PNTPort/BVMax/PrimesUncond.lean`,
-and Mertens' estimates. `TwinRenyi.lean` runs the same sieve on `{p + 2}`. `RenyiAssembly`,
+and Mertens' estimates. `TwinRenyi.lean` runs the same sieve on `{p + 2}` to prove `twin_renyi_count`, a derived
+analogue proved in this entry by the same sieve method, a twin-prime analogue of Rényi's theorem,
+not a result of Rényi 1948. `RenyiAssembly`,
 `RenyiPaired`, `RenyiWeighted`, `RenyiRealBase`, `RenyiSmallK` and `Renyi20`, `Renyi14`,
 `Renyi10`, `Renyi9`, `Renyi8` sharpen the sieve step by step down to `K = 8`, and `Renyi8Main.lean`
 proves `renyi8_fixedK`. The Bombieri-Vinogradov theorem rests on the large sieve, Vaughan's

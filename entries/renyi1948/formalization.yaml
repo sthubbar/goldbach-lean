@@ -9,9 +9,10 @@ project:
     multiplicity, as Mathlib's ArithmeticFunction.cardFactors does. So the theorem is proved with
     the explicit constant K = 8. Also proved: a lower bound e^{-36} N / 2 log^2 N for the number
     of primes p < N with Omega of N - p at most 8; the same two statements with the weaker
-    K = 13000; the twin prime companion, at least 1000 e^{-36} N / log^2 N primes p <= N with
-    Omega of p + 2 at most 13000, so infinitely many such p; and the K = 8 statement written with
-    Mathlib's Nat.IsAtMostAlmostPrime. The proof is a Brun type block sieve with Bonferroni
+    K = 13000; and the K = 8 statement written with
+    Mathlib's Nat.IsAtMostAlmostPrime. The entry also proves twin_renyi_count, a derived analogue
+    proved in this entry by the same sieve method, a twin-prime analogue of Renyi's theorem, not a
+    result of Renyi 1948. The proof is a Brun type block sieve with Bonferroni
     levels whose remainders are bounded by the Bombieri-Vinogradov theorem proved in the same
     library; all thresholds are ineffective through Siegel's theorem. Nothing here is new
     mathematics: Pan has K = 4 and Chen 1973 has K = 2. Binary Goldbach is Omega of m equal to 1;
@@ -37,8 +38,9 @@ sources:
     relationship: "adapts"
     note: >-
       Formalizes the main theorem, that every sufficiently large even number is a prime plus a
-      number with at most K prime factors for some fixed K, with the explicit value K = 8, and
-      the twin companion that the same method gives, for p + 2 with K = 13000. The Lean proof does not follow Renyi's
+      number with at most K prime factors for some fixed K, with the explicit value K = 8. The
+      twin statement twin_renyi_count is not taken from this paper: it is a derived analogue
+      proved in this entry by the same sieve method. The Lean proof does not follow Renyi's
       large sieve argument: it uses a Brun type block sieve with Bonferroni levels and the
       Bombieri-Vinogradov theorem, which postdates the paper. The author is deceased and was not
       contacted.
@@ -87,8 +89,9 @@ status:
   scope: >-
     Formalized, with no hypothesis: Renyi's theorem with K = 8, renyi8_fixedK, and with Mathlib's
     Nat.IsAtMostAlmostPrime, renyi8_isAtMostAlmostPrime; its counting form, renyi8_fixedK_count;
-    the first lab versions with K = 13000, renyi_fixedK and renyi_fixedK_count; and the twin form
-    with K = 13000, twin_renyi_count. Omega counts prime factors with multiplicity. Not
+    the first lab versions with K = 13000, renyi_fixedK and renyi_fixedK_count; and, as a derived analogue
+    proved in this entry by the same sieve method and not a result of Renyi 1948, the twin-prime
+    analogue with K = 13000, twin_renyi_count. Omega counts prime factors with multiplicity. Not
     formalized: an effective threshold N0, which the method cannot give; Renyi's own large sieve
     argument; any K below 8. Binary Goldbach and the twin prime conjecture remain open and are
     not claimed.
@@ -122,13 +125,15 @@ automation:
 
 fidelity:
   divergences: >-
-    Renyi proves the existence of some K; the Lean statements fix K = 8, or K = 13000 for the
-    twin form and the first versions, which implies the existence statement. Omega of m is
+    twin_renyi_count is a derived analogue proved in this entry by the same sieve method, a
+    twin-prime analogue of Renyi's theorem. It is not a result of Renyi 1948, is not claimed to
+    appear in the paper, and is compared only as an extra theorem of this entry. Renyi proves the existence of some K; the Lean statements fix K = 8, or K = 13000 for the
+    twin analogue and the first versions, which implies the existence statement. Omega of m is
     Mathlib's ArithmeticFunction.cardFactors, the number of prime factors with multiplicity, so
     the condition is at least as strong as one counting distinct prime factors. m >= 1 is
     required, which excludes the trivial case N prime with m = 0. Sufficiently large is read as:
     there is N0 such that the statement holds for every even N >= N0. The counting forms count
-    primes p < N with Omega of N - p at most K, and for the twin form primes p <= N with Omega of
+    primes p < N with Omega of N - p at most K, and for the twin analogue primes p <= N with Omega of
     p + 2 at most 13000, with explicit constants e^{-36} / 2 and 1000 e^{-36} before
     N / log^2 N.
 
@@ -145,15 +150,15 @@ review:
     given only the entry files and the sources, compared each compared statement with Renyi's
     theorem as quoted in arXiv 2208.01229, checking evenness, the ranges of p and m, natural
     subtraction, Omega with multiplicity and the shape of the counts, and checked the citation
-    on Math-Net.Ru, record im3018. Renyi's paper itself was not read, so the attribution of the
-    p + 2 companion to the paper is not confirmed. Its findings and any wording fixes it made
+    on Math-Net.Ru, record im3018. Renyi's paper itself was not read, so the p + 2 statement is
+    not attributed to the paper and is presented as a derived analogue proved in this entry. Its findings and any wording fixes it made
     are reflected in the docstrings and in the fidelity section. No human expert and no author
     of the sources has reviewed the entry.
     Earlier note: A fresh AI auditor checked each compared statement against Renyi's theorem as
     stated in the literature, Theorem 1 of the 1948 paper as quoted in arXiv 2208.01229: some
     fixed K with every even N a prime plus a number with at most K prime factors. The citation
     data was checked on Math-Net.Ru, record im3018. Renyi's paper itself was not read, so the
-    attribution of the p + 2 companion to the paper is not confirmed. The statements use only
+    p + 2 statement is not attributed to the paper. The statements use only
     Mathlib definitions, so the Challenge restates no definition. Lean kernel and Comparator
     checks pass. Not reviewed by a human expert.
 
@@ -180,7 +185,7 @@ alignment:
       lean: "LeanLab.PNTPort.BVMax.renyi_fixedK_count"
       module: "ChallengeRenyi1948"
       status: "proved"
-    - source: "Twin form: many primes p with p + 2 having at most 13000 prime factors"
+    - source: "Not from Renyi 1948: derived twin-prime analogue proved in this entry by the same sieve method, many primes p with p + 2 having at most 13000 prime factors"
       lean: "LeanLab.PNTPort.BVMax.twin_renyi_count"
       module: "ChallengeRenyi1948"
       status: "proved"
