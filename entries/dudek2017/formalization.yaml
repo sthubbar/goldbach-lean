@@ -1,0 +1,111 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Dudek 2017, even case only: every even N >= 4 is a prime plus a square-free number; the odd case is not covered, binary Goldbach is open, and AI wrote the Lean code"
+  description: >-
+    A Lean 4 proof, with no unproved steps, of the even case of Theorem 1 of A. W. Dudek, On the
+    sum of a prime and a square-free number, The Ramanujan Journal 42, 2017: every even N >= 4
+    is p + m with p prime and m >= 1 square-free. Dudek's theorem covers every integer N > 2;
+    the odd case is not covered by this entry. Binary Goldbach is open and is not claimed. The
+    Lean code was written by an AI agent and is offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11N36", "11Y16"]
+
+sources:
+  - title: "On the sum of a prime and a square-free number"
+    authors:
+      - "Adrian W. Dudek"
+    id: "doi:10.1007/s11139-015-9736-2"
+    type: "article"
+    location: "The Ramanujan Journal 42, issue 1, 2017, pages 233-240; arXiv 1410.7459"
+    relationship: "formalizes"
+    note: >-
+      Formalizes the even case of Theorem 1 only: every even N >= 4 is p + m with p prime and
+      m >= 1 square-free. The odd case of Theorem 1 is not formalized. The Lean proof uses the
+      same kind of counting as the paper, bounding the primes p <= N for which some odd prime r
+      has r^2 dividing N - p, but with the lab's own explicit inputs, so it is not a line by
+      line formalization of the paper. The author was not contacted.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+
+related_formalizations: []
+
+status:
+  scope: >-
+    Formalized, with no hypothesis: dudek_even, every even N >= 4 is a prime plus a positive
+    square-free number. Not formalized: the odd case of Dudek's Theorem 1, every odd N > 2,
+    which needs an explicit lower bound for primes in a class mod 4 that the lab does not have.
+    Binary Goldbach remains open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic"]
+      framework: "Claude Cowork"
+      tool_setup: >-
+        Autonomous agents wrote every lab Lean file, ran lake build and kernel checks, and read
+        the paper; Lean 4 v4.35.0-rc3, Mathlib v4.35.0-rc3.
+      cost:
+        wall_time: "agent runs over 2026-10-18 to 2026-10-22, many hours in total"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published Goldbach-related
+        papers and the analytic inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish; an AI agent wrote all lab
+    Lean code and the statement. No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    Only even N is covered: the compared theorem dudek_even assumes Even N and 4 <= N, while
+    Dudek's Theorem 1 covers every N > 2. The statement uses Mathlib's Nat.Prime, Squarefree and
+    Even only, with m >= 1 written as 0 < m, so no definition of the entry enters it. The proof
+    splits the range. For N >= 10^9 it counts, for each odd prime r <= 80 times the ceiling of
+    log N, the primes in the class N mod r^2 by a Brun-Titchmarsh bound proved in the lab from
+    Montgomery's large sieve, bounds the rest by the sum of N/n^2, and compares the total, at
+    most 0.906 N / log N, with an explicit Chebyshev lower bound for the number of primes up to
+    N. For 4 <= N <= 10^9 the finite range is certified by the Lean kernel: 102 windows, each a
+    decide +kernel check on bit vectors that every N in the window is q + m with q among the
+    primes up to 53 and m square-free, chained into one statement for all N up to 10^9. No
+    native code evaluation and no unproved numerical input is used. These are not the explicit
+    inputs of the paper, which the Lean proof does not follow line by line.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "AI packaging agent: an instance of Claude Opus 5.5, claude-opus-5-5, Anthropic; not a human reviewer"
+  notes: >-
+    Status is self-assessed: the checks below were done by an AI agent of the same model that
+    wrote the Lean code, so this is not an independent review and not a human expert review.
+    The packaging agent compared the Challenge statement with Theorem 1 of the paper as stated
+    in its abstract, every integer greater than two is the sum of a prime and a square-free
+    number, and confirmed that the statement is the even case, with m positive, using only
+    Mathlib notions. It removed from the lab files every theorem that carries a hypothesis for
+    the odd case and every declaration whose proof was a placeholder, built the entry, checked
+    that no file contains a placeholder proof or native code evaluation, and ran the Lean kernel
+    and the Comparator, which permits only propext, Quot.sound and Classical.choice. No
+    separate AI statement audit was run for this entry. No human expert and no author of the
+    source has reviewed the entry.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Dudek 2017, Theorem 1, even case"
+      lean: "LeanLab.Dudek2017.dudek_even"
+      module: "ChallengeDudek2017"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; A. W. Dudek for the paper."

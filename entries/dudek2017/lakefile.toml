@@ -1,0 +1,19 @@
+name = "GoldbachLeanDudek2017"
+version = "0.1.0"
+defaultTargets = ["ChallengeDudek2017", "SolutionDudek2017"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.35.0-rc3"
+
+[[lean_lib]]
+name = "LeanLab"
+
+[[lean_lib]]
+name = "ChallengeDudek2017"
+roots = ["ChallengeDudek2017"]
+
+[[lean_lib]]
+name = "SolutionDudek2017"
+roots = ["SolutionDudek2017"]

@@ -1,0 +1,13 @@
+{
+  "challenge_module": "ChallengeDudek2017",
+  "solution_module": "SolutionDudek2017",
+  "theorem_names": [
+    "LeanLab.Dudek2017.dudek_even"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

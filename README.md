@@ -30,6 +30,7 @@ Each entry is its own Lake project, the `project_path` of its Palomar submission
 | `entries/goldstonyang2016` | `ChallengeGoldstonYang2016.lean` | `comparator-goldstonyang2016.json` | Conditional on RH: Goldston and Yang 2017, Theorem 2, Σ_{n ≤ N} (1 − n/N) G(n) = N²/6 − 2 Σ_ρ N^{ρ+1}/(ρ(ρ+1)(ρ+2)) + O(N), with RH an explicit hypothesis and the zero sum proved absolutely convergent |
 | `entries/languascozaccagnini2012` | `ChallengeLanguascoZaccagnini2012.lean` | `comparator-languascozaccagnini2012.json` | Conditional on RH: Languasco and Zaccagnini 2012, Theorem 1, Σ_{n ≤ N} G(n) = N²/2 − 2 Σ_ρ N^{ρ+1}/(ρ(ρ+1)) + O(N log³ N), with RH an explicit hypothesis, the earlier bounds of Fujii and of Bhowmik and Schlage-Puchta, and the zero sum proved absolutely convergent |
 | `entries/goldstonsuriajaya2021` | `ChallengeGoldstonSuriajaya2021.lean` | `comparator-goldstonsuriajaya2021.json` | Goldston and Suriajaya 2021, Theorem 1, the exact unconditional identity Σ_{n ≤ N} G(n) = N²/2 − 2 Σ_ρ N^{ρ+1}/(ρ(ρ+1)) − (2 log 2π − 1/2) N + 2 (ζ'/ζ)(−1) − Σ_{k ≥ 1} N^{1−2k}/(k(2k−1)) + E(N), in ℂ and in ℝ, and eq. (13), the form with O(N); the entry also proves derived results, not statements of the paper: E(N) does not depend on r, every term is real, and the zero sum converges absolutely |
+| `entries/dudek2017` | `ChallengeDudek2017.lean` | `comparator-dudek2017.json` | Dudek 2017, Theorem 1, the even case only: every even N ≥ 4 is a prime plus a positive square-free number; the odd case of the theorem is not covered |
 
 ## Build
 
