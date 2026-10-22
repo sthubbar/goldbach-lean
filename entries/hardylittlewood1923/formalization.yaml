@@ -158,11 +158,22 @@ fidelity:
 review:
   status: "self-assessed"
   reviewers:
-    - "none"
+    - "AI statement auditor: a separate instance of Claude Opus 5.5, claude-opus-5-5, Anthropic; not a human reviewer"
   notes: >-
-    The lab agents wrote the statements from the page images of the paper, pages 6 and 29 to 34;
-    at packaging an AI agent checked that the Challenge restates the library definitions
-    verbatim. Lean kernel and Comparator checks pass. Not reviewed by a human expert.
+    Status is self-assessed: every check below was done by AI agents of the same model that
+    wrote the Lean code, so it is not an independent review and not a human expert review. Two
+    separate checks were made. First, the packaging agent built the entry, ran the Lean kernel
+    and the Comparator, and printed the axioms of every compared theorem. Second, a distinct AI
+    statement audit: a fresh agent instance, with no part in writing or packaging the code,
+    given only the entry files and the sources, compared each of the 18 restated definitions and
+    12 compared theorems with a scan of the paper, pages 6, 21, 22, 29 and 31 to 34, including
+    the formulas 3.31 to 3.64 and 4.12 to 4.23, and checked the DOI on Crossref. Its findings
+    and any wording fixes it made are reflected in the docstrings and in the fidelity section.
+    No human expert and no author of the sources has reviewed the entry.
+    Earlier note: The lab agents wrote the statements from the page images of the paper, pages 6
+    and 29 to 34; at packaging an AI agent checked that the Challenge restates the library
+    definitions verbatim. Lean kernel and Comparator checks pass. Not reviewed by a human
+    expert.
 
 alignment:
   namespace: "LeanLab"

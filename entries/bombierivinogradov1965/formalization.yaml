@@ -150,13 +150,26 @@ fidelity:
 review:
   status: "self-assessed"
   reviewers:
-    - "none"
+    - "AI statement auditor: a separate instance of Claude Opus 5.5, claude-opus-5-5, Anthropic; not a human reviewer"
   notes: >-
-    Statements checked by the packaging AI agent against the standard statement of the theorem
-    as given in Davenport, Multiplicative Number Theory, chapter 28; the 1965 papers themselves
-    were not read for this check. Every definition was restated in the Challenge and compared by
-    the Comparator, and bombieriVinogradovMax_at_x shows the main statement is not vacuous. Lean kernel and Comparator checks pass. Not reviewed by a human
-    expert or by the authors.
+    Status is self-assessed: every check below was done by AI agents of the same model that
+    wrote the Lean code, so it is not an independent review and not a human expert review. Two
+    separate checks were made. First, the packaging agent built the entry, ran the Lean kernel
+    and the Comparator, and printed the axioms of every compared theorem. Second, a distinct AI
+    statement audit: a fresh agent instance, with no part in writing or packaging the code,
+    given only the entry files and the sources, compared each of the restated definitions and
+    compared theorems with the standard form of the Bombieri-Vinogradov theorem in Davenport,
+    Multiplicative Number Theory, chapter 28, checking the ranges of y, q and a, the exponent of
+    Q, the order of the constants and junk values at small x, and checked the citations on
+    Crossref and Math-Net.Ru and the related formalizations. The 1965 papers themselves were not
+    read. Its findings and any wording fixes it made are reflected in the docstrings and in the
+    fidelity section. No human expert and no author of the sources has reviewed the entry.
+    Earlier note: Statements checked by the packaging AI agent against the standard statement of
+    the theorem as given in Davenport, Multiplicative Number Theory, chapter 28; the 1965 papers
+    themselves were not read for this check. Every definition was restated in the Challenge and
+    compared by the Comparator, and bombieriVinogradovMax_at_x shows the main statement is not
+    vacuous. Lean kernel and Comparator checks pass. Not reviewed by a human expert or by the
+    authors.
 
 alignment:
   namespace: "LeanLab"

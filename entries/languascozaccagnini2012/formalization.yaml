@@ -155,11 +155,23 @@ fidelity:
 review:
   status: "self-assessed"
   reviewers:
-    - "none"
+    - "AI statement auditor: a separate instance of Claude Opus 5.5, claude-opus-5-5, Anthropic; not a human reviewer"
   notes: >-
-    Statements checked by an AI agent against Theorem 1 of arXiv 1011.3198 and the quoted forms
-    of the Fujii and Bhowmik-Schlage-Puchta bounds. Lean kernel and Comparator checks pass. Not
-    reviewed by a human expert or by the authors.
+    Status is self-assessed: every check below was done by AI agents of the same model that
+    wrote the Lean code, so it is not an independent review and not a human expert review. Two
+    separate checks were made. First, the packaging agent built the entry, ran the Lean kernel
+    and the Comparator, and printed the axioms of every compared theorem. Second, a distinct AI
+    statement audit: a fresh agent instance, with no part in writing or packaging the code,
+    given only the entry files and the sources, compared the statements with Theorem 1 of arXiv
+    1011.3198, with Fujii 1991 part II as cited by Bhowmik and Schlage-Puchta, and with Bhowmik
+    and Schlage-Puchta, arXiv 0806.3295, checking main terms, signs, error terms, the zero sum
+    and its summability, and that no compared theorem depends on the kernel computation in
+    Zinoviev1997/Arith.lean. Its findings and any wording fixes it made are reflected in the
+    docstrings and in the fidelity section. No human expert and no author of the sources has
+    reviewed the entry.
+    Earlier note: Statements checked by an AI agent against Theorem 1 of arXiv 1011.3198 and the
+    quoted forms of the Fujii and Bhowmik-Schlage-Puchta bounds. Lean kernel and Comparator
+    checks pass. Not reviewed by a human expert or by the authors.
 
 alignment:
   namespace: "LeanLab"

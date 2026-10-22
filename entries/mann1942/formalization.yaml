@@ -69,7 +69,7 @@ status:
 automation:
   methods:
     - method: "agent"
-      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic"]
+      models: ["Claude Opus 5.5, claude-opus-5-5, Anthropic"]
       framework: "Claude Cowork, Claude Agent SDK"
       tool_setup: >-
         Autonomous agents wrote every lab Lean file, ran lake build, read the sources, and ran
@@ -99,11 +99,22 @@ fidelity:
 review:
   status: "self-assessed"
   reviewers:
-    - "none"
+    - "AI statement auditor: a separate instance of Claude Opus 5.5, claude-opus-5-5, Anthropic; not a human reviewer"
   notes: >-
-    The statements use Mathlib's own Schnirelmann density, so only the finite sumset needed a
-    definition in the Challenge. Lean kernel and Comparator checks pass. Not reviewed by a human
-    expert.
+    Status is self-assessed: every check below was done by AI agents of the same model that
+    wrote the Lean code, so it is not an independent review and not a human expert review. Two
+    separate checks were made. First, the packaging agent built the entry, ran the Lean kernel
+    and the Comparator, and printed the axioms of every compared theorem. Second, a distinct AI
+    statement audit: a fresh agent instance, with no part in writing or packaging the code,
+    given only the entry files and the sources, compared each Challenge definition and theorem
+    with Mann 1942 and with Mathlib's definition of Schnirelmann density, checking hypotheses,
+    quantifier order, vacuity and junk values, and checked the citation data on Crossref and the
+    Mathlib TODO in Mathlib/Combinatorics/Schnirelmann.lean. Its findings and any wording fixes
+    it made are reflected in the docstrings and in the fidelity section. No human expert and no
+    author of the sources has reviewed the entry.
+    Earlier note: The statements use Mathlib's own Schnirelmann density, so only the finite
+    sumset needed a definition in the Challenge. Lean kernel and Comparator checks pass. Not
+    reviewed by a human expert.
 
 alignment:
   namespace: "LeanLab"

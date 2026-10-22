@@ -135,14 +135,27 @@ fidelity:
 review:
   status: "self-assessed"
   reviewers:
-    - "none"
+    - "AI statement auditor: a separate instance of Claude Opus 5.5, claude-opus-5-5, Anthropic; not a human reviewer"
   notes: >-
-    A fresh AI auditor checked each compared statement against Renyi's theorem as stated in
-    the literature, Theorem 1 of the 1948 paper as quoted in arXiv 2208.01229: some fixed K
-    with every even N a prime plus a number with at most K prime factors. The citation data was
-    checked on Math-Net.Ru, record im3018. Renyi's paper itself was not read, so the attribution
-    of the p + 2 companion to the paper is not confirmed. The statements use only Mathlib definitions, so the Challenge restates no
-    definition. Lean kernel and Comparator checks pass. Not reviewed by a human expert.
+    Status is self-assessed: every check below was done by AI agents of the same model that
+    wrote the Lean code, so it is not an independent review and not a human expert review. Two
+    separate checks were made. First, the packaging agent built the entry, ran the Lean kernel
+    and the Comparator, and printed the axioms of every compared theorem. Second, a distinct AI
+    statement audit: a fresh agent instance, with no part in writing or packaging the code,
+    given only the entry files and the sources, compared each compared statement with Renyi's
+    theorem as quoted in arXiv 2208.01229, checking evenness, the ranges of p and m, natural
+    subtraction, Omega with multiplicity and the shape of the counts, and checked the citation
+    on Math-Net.Ru, record im3018. Renyi's paper itself was not read, so the attribution of the
+    p + 2 companion to the paper is not confirmed. Its findings and any wording fixes it made
+    are reflected in the docstrings and in the fidelity section. No human expert and no author
+    of the sources has reviewed the entry.
+    Earlier note: A fresh AI auditor checked each compared statement against Renyi's theorem as
+    stated in the literature, Theorem 1 of the 1948 paper as quoted in arXiv 2208.01229: some
+    fixed K with every even N a prime plus a number with at most K prime factors. The citation
+    data was checked on Math-Net.Ru, record im3018. Renyi's paper itself was not read, so the
+    attribution of the p + 2 companion to the paper is not confirmed. The statements use only
+    Mathlib definitions, so the Challenge restates no definition. Lean kernel and Comparator
+    checks pass. Not reviewed by a human expert.
 
 alignment:
   namespace: "LeanLab"

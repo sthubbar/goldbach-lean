@@ -113,10 +113,21 @@ fidelity:
 review:
   status: "self-assessed"
   reviewers:
-    - "none"
+    - "AI statement auditor: a separate instance of Claude Opus 5.5, claude-opus-5-5, Anthropic; not a human reviewer"
   notes: >-
-    Statement checked by an AI agent against eq. 2.2 of arXiv 1601.06902. Lean kernel and
-    Comparator checks pass. Not reviewed by a human expert or by the authors.
+    Status is self-assessed: every check below was done by AI agents of the same model that
+    wrote the Lean code, so it is not an independent review and not a human expert review. Two
+    separate checks were made. First, the packaging agent built the entry, ran the Lean kernel
+    and the Comparator, and printed the axioms of every compared theorem. Second, a distinct AI
+    statement audit: a fresh agent instance, with no part in writing or packaging the code,
+    given only the entry files and the sources, compared the statement with Theorem 2, equation
+    2.2, of arXiv 1601.06902, checking G, the weight, the main term, the sign and factor of the
+    zero sum, the multiplicity convention and that the zero sum is summable, and checked the
+    venue in the bibliography of arXiv 2110.14250. Its findings and any wording fixes it made
+    are reflected in the docstrings and in the fidelity section. No human expert and no author
+    of the sources has reviewed the entry.
+    Earlier note: Statement checked by an AI agent against eq. 2.2 of arXiv 1601.06902. Lean
+    kernel and Comparator checks pass. Not reviewed by a human expert or by the authors.
 
 alignment:
   namespace: "LeanLab"
