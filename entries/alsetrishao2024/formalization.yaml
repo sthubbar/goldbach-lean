@@ -1,0 +1,210 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "A density version of the binary Goldbach problem, after Alsetri and Shao"
+  description: >-
+    A sorry-free Lean 4 proof, with no cited hypothesis, of Theorem 1.2 of A. Alsetri and X. Shao,
+    Density versions of the binary Goldbach problem, arXiv 2405.18576v2, Acta Arith. 218, 2025,
+    285 to 295: if A is a set of primes whose relative lower density in every reduced residue
+    class b mod W is at least some eta > 1/2, then almost all even positive integers are a sum of
+    two primes from A. The entry also proves the paper's Theorem 1.1, that relative density
+    1 - epsilon in the primes alone does not suffice, and the sharpness of the constant 1/2
+    stated in its Remark 1.3. A derived result of this entry, not a result of the paper, shows
+    that the hypothesis of Theorem 1.2 holds for the set of all primes, so the theorem is not
+    vacuous. Binary Goldbach is open
+    and is not claimed; Theorem 1.2 concerns almost all even numbers. An AI agent wrote the Lean
+    code, except the ported PrimeNumberTheoremAnd code credited to its authors; the statements
+    were checked against the paper by an AI agent and are offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11B30", "11N13"]
+
+sources:
+  - title: "Density versions of the binary Goldbach problem"
+    authors:
+      - "Ali Alsetri"
+      - "Xuancheng Shao"
+    id: "arXiv:2405.18576"
+    type: "article"
+    location: "Acta Arith. 218, no. 3, 2025, pages 285 to 295, doi 10.4064/aa240615-19-9, Theorems 1.1 and 1.2 and Remark 1.3"
+    relationship: "formalizes"
+    note: >-
+      Formalizes Theorem 1.2, read in arXiv 2405.18576v2, checked 2026-10-21 and 2026-10-25, with
+      the relative lower density delta of A in b mod W defined as in the paper before Theorem
+      1.2. The hypothesis, the infimum over all reduced classes is above 1/2, is written as one
+      eta > 1/2 below every class density; almost all even integers is read as the count of
+      exceptional even n <= X over X tends to 0. Theorem 1.1 and the sharpness claim of Remark
+      1.3 are also formalized, in the forms described under fidelity. The proof of Theorem 1.2
+      follows the paper's Sections 3 and 4, the transference principle Proposition 3.1 and the
+      W-trick; the two lemmas of Green 2005 the paper cites are proved in the lab code, the
+      restriction estimate in the form of a large spectrum bound. The venue was confirmed on the
+      journal page of the article. The authors have not been contacted about this formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "PrimeNumberTheoremAnd"
+    authors:
+      - "the PrimeNumberTheoremAnd project contributors"
+      - "Arend Mellendijk"
+    id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    type: "formalization"
+    location: "commit c39a751132c88b6e8080b74c74023fd95b3d8be0"
+    relationship: "other"
+    note: >-
+      Sixteen files under LeanLab/PNTPort/StrongPNT, Mellin and residue calculus, bounds for
+      zeta, the zero-free region and the strong prime number theorem, written by the
+      PrimeNumberTheoremAnd contributors, and five files under LeanLab/PNTSieve, the Selberg sieve
+      and the Brun-Titchmarsh inequality, written by Arend Mellendijk, are ported from this
+      Apache-2.0 project with small fixes for Mathlib v4.35.0-rc3, listed in PORTING.md; each
+      file carries a notice. Bridge.lean, BrunTitchmarshAP.lean and MertensUpper.lean in those
+      folders are lab-written. They are the same files as in the Hardy-Littlewood 1923 entry of
+      this repository.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "PALOMAR-2026-10-21-000005"
+    relationship: "earlier entry of this repository sharing most of the Lean library, almost all binary Goldbach"
+    note: >-
+      The Heath-Brown 1985 entry of this repository proves, among other results, that the even
+      numbers that are not a sum of two primes have density zero. That classical statement is the
+      case A = all primes of Theorem 1.2; this entry does not register it again as a compared
+      theorem. Both entries use the lab's Siegel-Walfisz theorem.
+  - id: "https://github.com/sthubbar/goldbach-lean/tree/main/entries/hardylittlewood1923"
+    relationship: "earlier entry of this repository sharing the circle method library"
+    note: >-
+      The Hardy-Littlewood 1923 entry of this repository contains 88 of the 127 files used here,
+      among them the unconditional circle method of LeanLab/PNTPort/Vinogradov and the ported
+      files.
+  - id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    relationship: "source of the ported StrongPNT and PNTSieve files"
+    note: >-
+      A search on 2026-10-25 of Mathlib v4.35.0-rc3, of PrimeNumberTheoremAnd at commit
+      127b50e33f6033e2147921167a117af96d9ba4ea, of google-deepmind/formal-conjectures at commit
+      37f0808b83c56c8cef4ea5816b8329c09b8905a8 and of the web found no earlier Lean formalization
+      of any result of Alsetri and Shao 2024, and no Lean formalization of the transference
+      principle for dense subsets of the primes.
+
+status:
+  scope: >-
+    Formalized, with no hypothesis: Alsetri-Shao Theorem 1.2, alsetriShao_1_2; Theorem 1.1,
+    theorem1_1; and the sharpness of the constant 1/2 claimed in Remark 1.3, remark1_3. Derived
+    result of this entry, not a result of the paper: hyp_satisfiable, the hypothesis of Theorem
+    1.2 holds for A = all primes with eta = 3/4, a non-vacuity check. Not formalized here as separate compared statements: the paper's Theorem 2.1 and
+    Proposition 3.1, which are proved in the library but not compared, and the exact value 1/alpha
+    of the class densities in Remark 1.3. Binary Goldbach remains open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic"]
+      framework: "Claude Cowork"
+      tool_setup: >-
+        Autonomous agents wrote every lab Lean file, ran lake build, read the paper, and ran
+        separate AI subagents as statement auditors; Lean 4 v4.35.0-rc3, Mathlib v4.35.0-rc3.
+      cost:
+        wall_time: "agent runs over 2026-10-16 to 2026-10-25, many hours in total"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published Goldbach-related
+        papers and the analytic inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish; AI agents wrote all lab Lean
+    code and the statements, except the ported PrimeNumberTheoremAnd code, written by its
+    authors. No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    Theorem 1.2: the paper's hypothesis inf over W, b of delta(A; W, b) > 1/2 is stated as the
+    existence of eta > 1/2 with eta <= delta(A; W, b) for every W > 0 and every natural b coprime
+    to W, which is equivalent. The density lowerDensityRes is a liminf over N of a ratio of
+    counts in [1, N], as in the paper; where the denominator is 0, Lean's division gives 0, which
+    happens only for finitely many N since every reduced class contains primes. The class is
+    tested by n % W = b % W, so b need not be reduced below W. The conclusion, almost all even
+    positive integers are in A + A, is that the number of even n in [1, X] not of the form a + b
+    with a, b in A, divided by X, tends to 0. Theorem 1.1: relative lower density above 1 - epsilon
+    is written as a constant delta > 1 - epsilon with delta pi(N) <= |A cap [0, N]| for all large
+    N, which implies the liminf form; a positive proportion of even integers is written as a
+    constant c > 0 with at least c N even n <= N outside A + A for all large N, a lower density
+    form. Remark 1.3: the paper says that for its construction delta(A; W, b) = 1/alpha in every
+    class and that A + A misses a positive proportion of even integers; remark1_3 proves, for
+    every c < 1/2, a set A of primes with class densities above c in every reduced class, in the
+    same lower bound form, that misses at least kappa N even n <= N for infinitely many N, an
+    upper density form, which is the negation of the conclusion of Theorem 1.2. The constant
+    delta may depend on the class, so one application gives an infimum of at least c; since c
+    is arbitrary below 1/2, applying it to a larger c gives an infimum above c, which is what
+    sharpness of 1/2 in Theorem 1.2 requires. It does not prove the exact value 1/alpha. The
+    compared theorem hyp_satisfiable is a derived result of this entry, not a result of the
+    paper. The classical consequence of Theorem 1.2 at A = all primes, that almost all even
+    numbers are sums of two primes, is proved in the lab file U1506Vacuity as instance_P but is
+    not a compared theorem, since it follows at once from alsetriShao_1_2 and hyp_satisfiable
+    and is already registered in the Heath-Brown 1985 entry.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "AI statement auditor: a separate instance of Claude Opus 5.5 (claude-opus-5-5), Anthropic; not a human reviewer"
+  notes: >-
+    Status is self-assessed: every check below was done by AI agents of the same model that
+    wrote the Lean code, so it is not an independent review and not a human expert review. Two
+    separate checks were made. First, the packaging agent built the entry, ran the Lean kernel
+    and the Comparator, which printed Your solution is okay, and printed the axioms of every
+    compared theorem, propext, Classical.choice and Quot.sound only. Second, a distinct AI
+    statement audit, Claude Opus 5.5, on 2026-10-25: a fresh agent instance, with no part in
+    writing the proof, read the statements of Theorems 1.1 and 1.2, Remark 1.3 and the
+    definitions of relative lower density, in P and in a reduced residue class, independently
+    from the arXiv 2405.18576v2 text, and compared every Challenge definition and compared
+    theorem with them. It checked that P is the set of primes; that lowerDensityRes is the
+    paper's liminf over N of the ratio of counts in [1, N] in the class b mod W, that its values
+    lie in [0, 1] so the real liminf is not a junk value, and that a zero denominator occurs for
+    only finitely many N in a reduced class; that W ranges over all positive integers and b over
+    all residues coprime to W, so every reduced class is tested; that one eta > 1/2 below every
+    class density is equivalent to the paper's infimum above 1/2; that almost all even positive
+    integers is read as the exceptional count up to X over X tending to 0, with the division by
+    X = 0 harmless; that the sets in theorem1_1 and remark1_3 are sets of primes; that the lower
+    bound forms of the densities are equivalent to liminf statements; that a positive proportion
+    is read in theorem1_1 as a lower density bound, the stronger reading, and in remark1_3 as an
+    upper density bound, the negation of almost all; that the class dependent delta in remark1_3
+    still gives sharpness, as c is arbitrary below 1/2; that the counts over [0, N] that include
+    0 change nothing asymptotically; and that the Challenge definitions are the Solution
+    definitions verbatim. It found alsetriShao_1_2 equivalent to Theorem 1.2, theorem1_1 a match
+    to Theorem 1.1 under its stronger reading, and remark1_3 equivalent to the sharpness claim of
+    Remark 1.3 but weaker than the Remark as written, since it omits the exact value 1/alpha, as
+    the fidelity section says. It checked that hyp_satisfiable shows the hypothesis of Theorem
+    1.2 can be met and is labelled a derived result of this entry. On its advice the derived
+    corollary instance_P, which restates content registered in the Heath-Brown 1985 entry, was
+    removed from the compared theorems and the labelling in the docstrings and this file was
+    updated. No human expert and no author of the source has reviewed the entry.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Alsetri and Shao, Theorem 1.2"
+      lean: "LeanLab.DensityGoldbach.U1502.alsetriShao_1_2"
+      module: "ChallengeAlsetriShao2024"
+      status: "proved"
+    - source: "Alsetri and Shao, Theorem 1.1"
+      lean: "LeanLab.DensityGoldbach.AlsetriShaoThm11.theorem1_1"
+      module: "ChallengeAlsetriShao2024"
+      status: "proved"
+    - source: "Alsetri and Shao, Remark 1.3, sharpness of the constant 1/2"
+      lean: "LeanLab.DensityGoldbach.AlsetriShaoSharp.remark1_3"
+      module: "ChallengeAlsetriShao2024"
+      status: "proved"
+    - source: "Derived result of this entry: the hypothesis of Theorem 1.2 holds for all primes, a non-vacuity check"
+      lean: "LeanLab.DensityGoldbach.U1506.hyp_satisfiable"
+      module: "ChallengeAlsetriShao2024"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; the PrimeNumberTheoremAnd contributors and Arend Mellendijk; A. Alsetri and X. Shao for the paper."

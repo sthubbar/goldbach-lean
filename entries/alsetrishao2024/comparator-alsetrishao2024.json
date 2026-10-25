@@ -1,0 +1,20 @@
+{
+  "challenge_module": "ChallengeAlsetriShao2024",
+  "solution_module": "SolutionAlsetriShao2024",
+  "theorem_names": [
+    "LeanLab.DensityGoldbach.U1502.alsetriShao_1_2",
+    "LeanLab.DensityGoldbach.AlsetriShaoThm11.theorem1_1",
+    "LeanLab.DensityGoldbach.AlsetriShaoSharp.remark1_3",
+    "LeanLab.DensityGoldbach.U1506.hyp_satisfiable"
+  ],
+  "definition_names": [
+    "LeanLab.DensityGoldbach.P",
+    "LeanLab.DensityGoldbach.lowerDensityRes",
+    "LeanLab.DensityGoldbach.AlsetriShao12"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}
