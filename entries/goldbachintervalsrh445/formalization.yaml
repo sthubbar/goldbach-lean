@@ -1,0 +1,181 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "CONDITIONAL on RH and cited zero counts: Goldbach numbers in intervals of length 4.45 log^2 x"
+  description: >-
+    CONDITIONAL. A Lean 4 proof that, under the Riemann Hypothesis, for every real x at least
+    3 there is a Goldbach number n, a sum of two odd primes, with x < n < x + 4.45 (log x)^2.
+    This improves the constant 123 of A. Chirre and M. V. Hagen, On Goldbach numbers in short
+    intervals, arXiv 2512.23534, by their method. RH is the paper's own hypothesis. The theorem
+    is CONDITIONAL ON seven cited inputs taken as explicit hypotheses, never as axioms, all
+    stated for gZ, the ordinates of the nontrivial zeros of the Riemann zeta function counted
+    with multiplicity: ExplicitA, the truncated explicit formula of Montgomery and Vaughan,
+    Multiplicative Number Theory I, display 12.1, under RH; HadamardK, the bound
+    sum over gamma' of 4/(4 + (gamma - gamma')^2) at most log |gamma|, a consequence of the
+    Hadamard product, under RH; Ordinates14, every ordinate at least 14 in absolute value;
+    BPTN, the zero count of Brent, Platt and Trudgian, J. Number Theory 238, 2022, Lemma 1, for
+    T at least 10^13; HSWN70 and HSWHead14, the zero count of Hasanalizade, Shen and Wong,
+    arXiv 2107.06506, Corollary 1.2, for T at least 70 and T at least 14; and
+    EvenGoldbachUpTo 4*10^18, the verification of the even Goldbach conjecture to 4*10^18 by
+    Oliveira e Silva, Herzog and Pardi, Math. Comp. 83, 2014. These are the Lean Lab's
+    transcriptions, not Mathlib results. Everything else in the argument is proved: Theorem 2
+    of Chirre and Hagen with the diagonal constant lowered to 1.0068, the passage from psi to
+    theta, and their Section 5. Binary Goldbach is open and is not claimed. An AI agent,
+    Claude, wrote the Lean code, with the ported PrimeNumberTheoremAnd files credited to their
+    authors in PORTING.md; the statements were checked against the papers by AI agents and are
+    offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11M26", "11N05"]
+
+sources:
+  - title: "Goldbach numbers in intervals of length 4.45 log^2 x under the Riemann Hypothesis"
+    authors:
+      - "Steve Hubbard"
+    id: "aiXiv.online 2610.02672"
+    type: "preprint"
+    location: "aiXiv.online 2610.02672; also aiXiv.science aixiv.261025.000001 and Hexagon 2610.00542; main theorem"
+    relationship: "formalizes"
+    note: >-
+      The preprint proves the interval length 4.45 log^2 x under RH and the cited inputs named
+      in the description; this entry formalizes its main theorem with those inputs as explicit
+      hypotheses. The preprint is not refereed.
+    license: "unknown"
+    author_endorsement: "participated"
+  - title: "On Goldbach numbers in short intervals"
+    authors:
+      - "A. Chirre"
+      - "M. V. Hagen"
+    id: "arXiv:2512.23534"
+    type: "preprint"
+    location: "arXiv 2512.23534v1: Theorem 1, Theorem 2, Lemmas 2.1 to 2.6, Section 5"
+    relationship: "adapts"
+    note: >-
+      Chirre and Hagen prove, under RH, a Goldbach number in (x, x + 123 log^2 x) for x at
+      least 2. The entry follows their method with a sharper diagonal bound in their Theorem 2
+      and a different zero count input, which gives the constant 4.45. Their explicit formula
+      and zero count inputs are the cited hypotheses named in the description. The authors
+      have not been contacted about this formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "PrimeNumberTheoremAnd"
+    authors:
+      - "the PrimeNumberTheoremAnd project contributors"
+    id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    type: "formalization"
+    location: "commit c39a751132c88b6e8080b74c74023fd95b3d8be0, files under LeanLab/PNTPort/StrongPNT/"
+    relationship: "other"
+    note: >-
+      Sixteen files under LeanLab/PNTPort/StrongPNT, Mellin and residue calculus, bounds for
+      zeta, the conjugation symmetry of zeta'/zeta, the zero-free region and the strong prime
+      number theorem, are ported from this Apache-2.0 project, written by its contributors, with
+      small fixes for Mathlib v4.35.0-rc3, listed in PORTING.md; each file carries a notice.
+      They are the same files as in the Goldston-Suriajaya 2021 entry of this repository.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+
+related_formalizations: []
+
+status:
+  scope: >-
+    Formalized: goldbach_445_hsw_gZ, the main theorem of the preprint, under RH, CONDITIONAL ON
+    ExplicitA, HadamardK, Ordinates14, BPTN, HSWN70, HSWHead14 and EvenGoldbachUpTo 4*10^18 as
+    explicit hypotheses. Not formalized: the explicit formula, the Hadamard product bound, the
+    location of the first zero, the published zero counts of Brent-Platt-Trudgian and of
+    Hasanalizade-Shen-Wong, and the even Goldbach verification to 4*10^18. Binary Goldbach
+    remains open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic"]
+      framework: "Claude Cowork"
+      tool_setup: >-
+        Autonomous agents wrote the lab-written Lean files, ran lake build, read the papers and
+        wrote the statements from them; the interval majorants in the ChirreHagen2025 files were
+        generated by scripts and checked by norm_num and linarith; small kernel checks use
+        decide +kernel, no native_decide; Lean 4 v4.35.0-rc3, Mathlib v4.35.0-rc3.
+      cost:
+        wall_time: "agent runs over 2026-10-16 to 2026-10-25, many hours in total"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published Goldbach-related
+        papers and the analytic inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish; an AI agent, Claude, wrote
+    the lab Lean code and the statements; the files under LeanLab/PNTPort/StrongPNT/ are ported
+    from PrimeNumberTheoremAnd and credited to its contributors. No file here contains sorry
+    outside the Challenge file. No human expert has reviewed the mathematics. Binary Goldbach is
+    open.
+
+fidelity:
+  divergences: >-
+    The result is CONDITIONAL. RH is Mathlib's RiemannHypothesis, the premise of the conclusion.
+    Seven cited inputs are explicit hypotheses of the theorem, never axioms, each stated for gZ,
+    the imaginary parts of the zeros of riemannZeta with real part at least -1/2, which are the
+    nontrivial zeros, indexed with multiplicity analyticOrderNatAt. ExplicitA gZ Z delta, assumed
+    under RH for every 0 < delta at most 10^-13: for almost every y at least 2 the finite sums
+    over Z n of c_rho y^rho, c_rho = ((1+delta)^rho - 1)/rho, rho = 1/2 + i gamma, tend to
+    -(V(delta, y) - B(delta, y)), V = psi((1+delta)y) - psi(y) - delta y, B the trivial zero
+    term; Z is an arbitrary sequence of finite sets of zeros, universally quantified in the
+    theorem, so the hypothesis asks that this sequence of truncations converges, as the
+    Montgomery-Vaughan formula 12.1 at y and (1+delta)y gives for truncation at heights T_n.
+    HadamardK gZ, assumed under RH: for every finite set s and ordinate gamma, the sum over
+    gamma' in s of 4/(4 + (gamma - gamma')^2) is at most log |gamma|. Ordinates14 gZ: every
+    |gamma| at least 14. BPTN gZ, assumed under RH: Brent-Platt-Trudgian Lemma 1,
+    N(T) = (T/2pi) log(T/(2pi e)) + 7/8 + Q(T), |Q(T)| at most 0.137 log T + 0.443 log log T +
+    1.588 + 0.2/T, read as counts of ordinates of both signs over any finite set, for T at least
+    10^13. HSWN70 gZ and HSWHead14 gZ: Hasanalizade-Shen-Wong Corollary 1.2,
+    |N(T) - (T/2pi) log(T/(2pi e))| at most 0.1038 log T + 0.2573 log log T + 9.3675, with the
+    7/8 moved into the error, so 10.2425, as the same two-sided counts for T at least 70 and as
+    the upper count for T at least 14. EvenGoldbachUpTo 4*10^18: every even n with
+    4 <= n <= 4*10^18 is a sum of two primes. A Goldbach number is a natural number that is the
+    sum of two odd primes, as in Chirre and Hagen. The interval is open on both sides,
+    x < n < x + 4.45 (log x)^2, for real x at least 3. The Lean code was written by AI. Binary
+    Goldbach is open.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "AI packaging agent: an instance of Claude Opus 5.5, claude-opus-5-5, Anthropic; not a human reviewer"
+  notes: >-
+    Status is self-assessed: every check was done by AI agents of the same model that wrote
+    the Lean code, so it is not an independent review and not a human expert review. The
+    packaging agent built the entry, ran the Lean kernel and the Comparator, and printed the
+    axioms of the compared theorem. A separate AI faithfulness and vacuity audit, by another
+    instance of the same model that did not write the entry, compared the Challenge with the
+    preprint and found each hypothesis true of the actual zeros under RH, so the theorem is
+    not vacuous. Zall excludes the trivial zeros and s = 1, where Mathlib's riemannZeta is
+    nonzero, so gZ is the nontrivial ordinates with multiplicity and Ordinates14 holds. Z is
+    universally quantified, and ExplicitA fails for a bad Z, for instance Z n empty, but it
+    holds for the height truncations Z n = {|gamma| <= n} for every delta > 0 by
+    Montgomery-Vaughan 12.1 at y and (1+delta)y. HadamardK holds for the full sum with
+    multiplicity, with margin 1.19 (preprint Lemma 2.2). BPTN for T >= 10^13 also follows from
+    Trudgian's 2014 bound. HSWN70 and HSWHead14 follow from Hasanalizade-Shen-Wong Corollary
+    1.2 for T >= e, with the 7/8 moved into the error. Both-sign counts equal 2 N(T), so they
+    are correct. EvenGoldbachUpTo 4*10^18 is the Oliveira e Silva-Herzog-Pardi range. The
+    conclusion is nontrivial: it requires a sum of two odd primes in the open interval
+    (x, x + 4.45 log^2 x) for every real x >= 3. No human expert and no author of Chirre and
+    Hagen's paper has reviewed the entry.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Hubbard, main theorem: under RH a Goldbach number in (x, x + 4.45 log^2 x) for x >= 3, conditional on the cited inputs"
+      lean: "LeanLab.Routes.U1508.goldbach_445_hsw_gZ"
+      module: "ChallengeGoldbachIntervalsRH445"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; the PrimeNumberTheoremAnd project; A. Chirre and M. V. Hagen for the method."

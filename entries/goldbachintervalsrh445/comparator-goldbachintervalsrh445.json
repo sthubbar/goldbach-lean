@@ -1,0 +1,36 @@
+{
+  "challenge_module": "ChallengeGoldbachIntervalsRH445",
+  "solution_module": "SolutionGoldbachIntervalsRH445",
+  "theorem_names": [
+    "LeanLab.Routes.U1508.goldbach_445_hsw_gZ"
+  ],
+  "definition_names": [
+    "LeanLab.IsGoldbachSum",
+    "LeanLab.EvenGoldbachUpTo",
+    "LeanLab.ChirreHagen2025.IsGoldbachNumber",
+    "LeanLab.PNTPort.ExplicitPsi1.Zall",
+    "LeanLab.PNTPort.ExplicitPsi1.Trivial.ZIdx",
+    "LeanLab.PNTPort.ExplicitPsi1.Trivial.gZ",
+    "LeanLab.ChirreHagen2025.SmoothKernel.K",
+    "LeanLab.ChirreHagen2025.SmoothKernel.P",
+    "LeanLab.ChirreHagen2025.Local36.V",
+    "LeanLab.ChirreHagen2025.SmoothT2.Bf",
+    "LeanLab.ChirreHagen2025.SmoothT2.rho",
+    "LeanLab.ChirreHagen2025.SmoothT2.cδ",
+    "LeanLab.ChirreHagen2025.SmoothT2.ExplicitA",
+    "LeanLab.ChirreHagen2025.SmoothT2.HadamardK",
+    "LeanLab.ChirreHagen2025.SmoothT2.Ordinates14",
+    "LeanLab.ChirreHagen2025.Lemma26B.Mt",
+    "LeanLab.ChirreHagen2025.Lemma26B.Rt",
+    "LeanLab.ChirreHagen2025.Lemma26B.BPTN",
+    "LeanLab.ChirreHagen2025.Lemma26H.Mt",
+    "LeanLab.ChirreHagen2025.Lemma26H.Rt",
+    "LeanLab.Dudek2014.SigmaH.HSWN70",
+    "LeanLab.PNTPort.ExplicitPsi1.FirstDiff.HSWHead14"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}
