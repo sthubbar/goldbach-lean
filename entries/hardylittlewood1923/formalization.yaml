@@ -2,7 +2,7 @@
 version: "v0.4"
 
 project:
-  name: "Sums of primes, after Hardy and Littlewood 1923, Partitio Numerorum III, Theorems B to F proved without Hypothesis R"
+  name: "Sums of primes, after Hardy and Littlewood 1923, Partitio Numerorum III, Theorems B to F proved without Hypothesis R, and Theorem A on Hypothesis R for 47/64 at most Theta below 3/4"
   description: >-
     A sorry-free Lean 4 proof, with no hypothesis, of Theorems B, C, D, E and F of G. H. Hardy
     and J. E. Littlewood, Some problems of Partitio Numerorum III, Acta Math. 44, 1923. Hardy and
@@ -17,10 +17,19 @@ project:
     large odd number a sum of three odd primes; Theorem E, the asymptotic for four odd primes,
     every large even number a sum of four odd primes, one of which may be assigned; and Theorem F,
     that an asymptotic of Conjecture A's shape for binary Goldbach can only carry the constant
-    2 C_2, together with a check that the printed formula 4.23 has a misprint. Theorem A of the
-    paper is not formalized. Ternary Goldbach is Helfgott's theorem; binary Goldbach is open and
-    is not claimed. The Lean code was written by an AI agent; the statements were written from the
-    paper's page images by AI agents and are offered for human audit.
+    2 C_2, together with a check that the printed formula 4.23 has a misprint. Version 2 adds
+    Theorem A, eq 3.113: for every r at least 3 and every Theta with 47/64 at most Theta below
+    3/4, on the paper's own Hypothesis R at level Theta, that no Dirichlet L-function has a zero
+    with real part above Theta, nu_r of n equals the singular series S_r of n of 3.114 times
+    n^{r-1} over the factorial of r minus 1, plus O of n^{r-1+Theta-3/4} times a power of log n,
+    for all n from some n0. The paper allows every Theta below 3/4; the Lean statement covers
+    only 47/64 at most Theta below 3/4. The entry also proves derived results on Theorem A that
+    are not statements of the paper: its hypotheses other than the zero-free one hold together,
+    GRH gives the zero-free hypothesis for every Theta at least 1/2, Theorem A at Theta equal to
+    47/64 on GRH, and S_r of n is positive with a summable series in like parity. Ternary
+    Goldbach is Helfgott's theorem; binary Goldbach is open and is not claimed. The Lean code
+    was written by an AI agent; the statements were written from the paper's page images by AI
+    agents and are offered for human audit.
   authors:
     - "Steve Hubbard"
   license: "Apache-2.0"
@@ -41,21 +50,26 @@ sources:
     location: "Acta Mathematica 44 (1923) 1-70"
     relationship: "adapts"
     note: >-
-      Formalizes the statements of Theorems B, C, D, E and F, pages 29 to 34, and the remark that
-      one of the four primes in Theorem E may be assigned. Hardy and Littlewood prove Theorems B,
+      Formalizes the statements of Theorems B, C, D, E and F, pages 29 to 34, the remark that
+      one of the four primes in Theorem E may be assigned, and, in version 2, Theorem A for part
+      of the range of Theta. Hardy and Littlewood prove Theorems B,
       D and E on Hypothesis R; the proofs here use no hypothesis and replace their major and
       minor arc analysis by Vinogradov's method and Siegel-Walfisz, so for those theorems the
       statements are formalized and the argument is adapted. Theorem C follows the paper's own
       route on page 30, with the lower bound for N_r of n proved unconditionally, and Theorem F
-      follows the paper's averaging argument with the prime number theorem. Theorem A, 3.113 on
-      page 21, is not formalized: on Hypothesis R, for r at least 3, nu_r of n equals n^{r-1}
+      follows the paper's averaging argument with the prime number theorem. Version 1 did not
+      formalize Theorem A, 3.113 on page 21: on Hypothesis R, for r at least 3, nu_r of n equals n^{r-1}
       over the factorial of r minus 1, times the singular series S_r of 3.114, the sum over q of
       mu of q over phi of q to the power r times the Ramanujan sum c_q of minus n, plus an error
       O of n^{r-1+Theta-3/4} times a power of log n, where Theta is the exponent in Hypothesis R.
       Its power saving error term is not available without Hypothesis R; Theorem B is the
       consequence of Theorem A and Lemma 12, which sums S_r as a product, and theoremB proves
-      that consequence with an error o of n^{r-1}. The authors have died and were not
-      contacted.
+      that consequence with an error o of n^{r-1}. Version 2 formalizes Theorem A, 3.113 on
+      page 21, with the singular series S_r of 3.114 and Hypothesis R of page 4, on Hypothesis
+      R at level Theta for 47/64 at most Theta below 3/4 only; its proof is the lab's own, an
+      explicit formula for psi of x and chi from the zero-free half plane fed into the major arcs
+      of the circle method, and not Hardy and Littlewood's argument. The authors have died and
+      were not contacted.
     license: "unknown"
     author_endorsement: "not-contacted"
   - title: "Representation of an odd number as a sum of three primes"
@@ -81,7 +95,9 @@ sources:
       number theorem with classical error term, by the PrimeNumberTheoremAnd contributors, and
       five files under LeanLab/PNTSieve, the Selberg sieve and the Brun-Titchmarsh inequality by
       Arend Mellendijk, are ported from this Apache-2.0 project with small fixes for Mathlib
-      v4.35.0-rc3, listed in PORTING.md; each file carries a notice.
+      v4.35.0-rc3, listed in PORTING.md; each file carries a notice. The lab-written Theorem A
+      files U1503Contour, U1503LogDeriv and U1503Mellin build on these ported StrongPNT files
+      by import.
     license: "Apache-2.0"
     author_endorsement: "not-contacted"
 
@@ -107,9 +123,13 @@ status:
     theoremC, Theorem C 3.51; theoremD and theoremD_ternary, Theorem D 3.61 and its first
     sentence; theoremE, theoremE_four and theoremE_assigned, Theorem E 3.63 and its first
     sentence with one prime assigned; theoremF, Theorem F 4.23 under its own hypotheses 4.21
-    and 4.22; printed_423_false, the misprint in the printed 4.23. Not formalized: Theorem A,
-    3.113, the formula for nu_r of n with the power saving error term that Hypothesis R gives,
-    Hardy and Littlewood's own conditional argument from Hypothesis R, the theorems of Section 5
+    and 4.22; printed_423_false, the misprint in the printed 4.23. Formalized in version 2, on
+    the paper's Hypothesis R at level Theta: printedA_form_all_U1503_closed, Theorem A 3.113 for
+    every r at least 3 and 47/64 at most Theta below 3/4. Derived results of the entry, not
+    statements of the paper: hyps_satisfiable, noZerosRight_of_GRH, printedA_form_all_of_GRH,
+    singR_pos and singR_summable. Not formalized: Theorem A for Theta below 47/64, the
+    asymptotic tail clause of 3.113, Hardy and Littlewood's own conditional argument from
+    Hypothesis R, the theorems of Section 5
     on prime tuples, Conjecture A, which is binary Goldbach with an asymptotic and is open, and
     any explicit threshold.
   sorry_count: 0
@@ -119,14 +139,14 @@ status:
 automation:
   methods:
     - method: "agent"
-      models: ["Claude Opus 5.5, claude-opus-5-5, Anthropic"]
-      framework: "Claude Cowork, Claude Agent SDK"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic"]
+      framework: "Claude Cowork"
       tool_setup: >-
         Autonomous agents wrote every lab Lean file, ran lake build, read the paper's page images
         and wrote the statements from them; Lean 4 v4.35.0-rc3,
         Mathlib v4.35.0-rc3.
       cost:
-        wall_time: "agent runs over 2026-10-16 to 2026-10-21, many hours in total"
+        wall_time: "agent runs over 2026-10-16 to 2026-10-27, many hours in total"
         spend_usd: "subscription-based"
         hardware: "API-only, cloud sandbox and a desktop workstation"
       prompting_notes: >-
@@ -138,7 +158,7 @@ automation:
     Lean code and the statements, and ported the StrongPNT and Selberg sieve files, whose code is by
     the PrimeNumberTheoremAnd contributors and Arend Mellendijk. No file here contains sorry
     outside the Challenge file. No human expert has reviewed the mathematics. Binary Goldbach is
-    open.
+    open. AI wrote all the Lean code of version 2 as well.
 
 fidelity:
   divergences: >-
@@ -153,12 +173,33 @@ fidelity:
     dividing n, exactly as printed. Theorem F takes 4.21 and 4.22 as hypotheses, as the paper
     does; it does not claim that they hold. The paper prints 4.23 as A equal to 2 C_2 equal to
     the product defining C_2; the second equality is a misprint, and printed_423_false records
-    that 2 C_2 differs from C_2.
+    that 2 C_2 differs from C_2. Theorem A, version 2, differs from the print as follows. First,
+    the Lean statement covers only Theta with 47/64 at most Theta below 3/4, while the print
+    allows every Theta below 3/4; it is narrower in Theta, and on GRH it gives the exponent
+    r minus 1 minus 1/64, not the r minus 5/4 that the print gives. Second, the print takes
+    Theta to be the smallest admissible value, the least upper bound of the real parts of the
+    zeros, page 4; the Lean statement takes any admissible Theta in the slice. Third, the
+    asymptotic tail clause of 3.113, that nu_r of n is asymptotic to the main term, is omitted
+    from the headline; in like parity it follows from theoremB and the product formula for S_r
+    of n proved in the library, and singR_pos shows the main term is not zero. Fourth, the
+    constants B, K and n0 depend on r and Theta in the Lean statement, while the print says they
+    depend on r alone, with Theta a fixed number. Hypothesis R at level Theta is NoZerosRight
+    Theta: no L of s and chi, for any modulus, primitive or not, vanishes with real part above
+    Theta, s not 1; for Theta at least 0 this is the print's condition on the nontrivial zeros,
+    since the trivial zeros have real part at most 0. S_r of n is the sum over q of mu of q over
+    phi of q, to the power r, times the Ramanujan sum c_q of n, with c_q of minus n equal to
+    c_q of n and c_q given by its divisor formula; the main term is the printed one for every n,
+    of either parity. GRH in the derived results is stated as every zero in the open strip 0 below
+    Re s below 1 having real part 1/2; Hypothesis R star of page 4 says every nontrivial zero has
+    real part at most 1/2, and the two are equivalent by the functional equation.
+    The Lean code was written by AI. Goldbach's binary conjecture is open.
 
 review:
   status: "self-assessed"
   reviewers:
     - "AI statement auditor: a separate instance of Claude Opus 5.5, claude-opus-5-5, Anthropic; not a human reviewer"
+    - "AI statement auditor for version 2, Theorem A: a separate verification run of Claude Opus 5.5, claude-opus-5-5, Anthropic, that did not write the Theorem A code; not a human reviewer"
+    - "AI faithfulness auditor for version 2 at packaging: a further separate instance of Claude Opus 5.5, claude-opus-5-5, Anthropic, that wrote none of the entry; not a human reviewer"
   notes: >-
     Status is self-assessed: every check below was done by AI agents of the same model that
     wrote the Lean code, so it is not an independent review and not a human expert review. Two
@@ -170,6 +211,24 @@ review:
     the formulas 3.31 to 3.64 and 4.12 to 4.23, and checked the DOI on Crossref. Its findings
     and any wording fixes it made are reflected in the docstrings and in the fidelity section.
     No human expert and no author of the sources has reviewed the entry.
+    Version 2, Theorem A: a separate AI verification run, an instance of the same model that did
+    not write the Theorem A files, rebuilt the closure from a clean lab build, printed the axioms
+    of every headline, all exactly propext, Classical.choice and Quot.sound, searched the 135 lab
+    files of the closure for sorry, admit, native_decide, implemented_by, extern and unsafe, and
+    compared nur, singR, NoZerosRight and the statement of Theorem A with the page images of the
+    paper, pages 4, 21 and 22, eq 3.112 to 3.114 and the definition of Hypothesis R with its
+    footnote on imprimitive characters. It found the four differences listed under fidelity and
+    no other, and ran a falsifier search for an off by one in r, a changed constant 3/4, a zero
+    singular series and a vacuous hypothesis, which found none; its basis was the page images
+    and, for the explicit formula steps, Davenport's Multiplicative Number Theory from the
+    model's knowledge, not a reading of that book. The packaging agent then checked that the
+    Challenge restates the four new definitions as in the library, built the entry and ran the
+    Comparator. At packaging a further separate AI instance of the same model, which wrote none
+    of the entry, compared ramanujan, NoZerosRight, singR, GRH and the six new theorems with the
+    page images of pages 4, 21 and 22, built the entry and printed the axioms of the new
+    theorems; it found no difference beyond the four listed under fidelity, and reworded the GRH
+    docstring to say it is equivalent to, not identical with, Hypothesis R star.
+    Not reviewed by a human expert.
     Earlier note: The lab agents wrote the statements from the page images of the paper, pages 6
     and 29 to 34; at packaging an AI agent checked that the Challenge restates the library
     definitions verbatim. Lean kernel and Comparator checks pass. Not reviewed by a human
@@ -224,6 +283,31 @@ alignment:
       status: "proved"
     - source: "Hardy-Littlewood 1923, the misprint in the printed 4.23"
       lean: "LeanLab.HardyLittlewood1923.printed_423_false"
+      module: "ChallengeHardyLittlewood1923"
+      status: "proved"
+
+    - source: "Hardy-Littlewood 1923, Theorem A, 3.113, every r at least 3, on Hypothesis R at level Theta, for 47/64 at most Theta below 3/4 only"
+      lean: "LeanLab.HardyLittlewood1923.U1503.printedA_form_all_U1503_closed"
+      module: "ChallengeHardyLittlewood1923"
+      status: "proved"
+    - source: "Derived result of the entry, not in the paper: the hypotheses of Theorem A other than the zero-free one hold together"
+      lean: "LeanLab.HardyLittlewood1923.U1574.hyps_satisfiable"
+      module: "ChallengeHardyLittlewood1923"
+      status: "proved"
+    - source: "Derived result of the entry, not in the paper: GRH gives the zero-free hypothesis of Theorem A for every Theta at least 1/2"
+      lean: "LeanLab.HardyLittlewood1923.U1574.noZerosRight_of_GRH"
+      module: "ChallengeHardyLittlewood1923"
+      status: "proved"
+    - source: "Derived result of the entry, not in the paper: Theorem A at Theta equal to 47/64 on GRH"
+      lean: "LeanLab.HardyLittlewood1923.U1574.printedA_form_all_of_GRH"
+      module: "ChallengeHardyLittlewood1923"
+      status: "proved"
+    - source: "Derived result of the entry, not in the paper: the singular series S_r of n of 3.114 is positive in like parity"
+      lean: "LeanLab.HardyLittlewood1923.U1574.singR_pos"
+      module: "ChallengeHardyLittlewood1923"
+      status: "proved"
+    - source: "Derived result of the entry, not in the paper: the series defining S_r of n is summable in like parity"
+      lean: "LeanLab.HardyLittlewood1923.U1574.singR_summable"
       module: "ChallengeHardyLittlewood1923"
       status: "proved"
 

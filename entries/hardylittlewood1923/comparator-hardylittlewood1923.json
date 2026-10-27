@@ -13,7 +13,13 @@
     "LeanLab.HardyLittlewood1923.theoremE_four",
     "LeanLab.HardyLittlewood1923.theoremE_assigned",
     "LeanLab.HardyLittlewood1923.theoremF",
-    "LeanLab.HardyLittlewood1923.printed_423_false"
+    "LeanLab.HardyLittlewood1923.printed_423_false",
+    "LeanLab.HardyLittlewood1923.U1503.printedA_form_all_U1503_closed",
+    "LeanLab.HardyLittlewood1923.U1574.hyps_satisfiable",
+    "LeanLab.HardyLittlewood1923.U1574.noZerosRight_of_GRH",
+    "LeanLab.HardyLittlewood1923.U1574.printedA_form_all_of_GRH",
+    "LeanLab.HardyLittlewood1923.U1574.singR_pos",
+    "LeanLab.HardyLittlewood1923.U1574.singR_summable"
   ],
   "definition_names": [
     "LeanLab.HardyLittlewood1923.Nr",
@@ -33,7 +39,11 @@
     "LeanLab.HardyLittlewood1923.theoremB_stmt",
     "LeanLab.HardyLittlewood1923.M2",
     "LeanLab.HardyLittlewood1923.hyp421",
-    "LeanLab.HardyLittlewood1923.hyp422"
+    "LeanLab.HardyLittlewood1923.hyp422",
+    "LeanLab.HeathBrown1985.ramanujan",
+    "LeanLab.HardyLittlewood1923.U1438.NoZerosRight",
+    "LeanLab.HardyLittlewood1923.U1444.singR",
+    "LeanLab.HardyLittlewood1923.U1574.GRH"
   ],
   "permitted_axioms": [
     "propext",

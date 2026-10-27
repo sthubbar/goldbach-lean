@@ -3,16 +3,18 @@ module
 public import Mathlib
 
 /-!
-# Sums of primes, Hardy and Littlewood 1923, Theorems B to F, unconditionally
+# Sums of primes, Hardy and Littlewood 1923, Theorems B to F unconditionally, and Theorem A
 
 G. H. Hardy and J. E. Littlewood, *Some problems of 'Partitio Numerorum'; III: On the expression
 of a number as a sum of primes*, Acta Math. 44 (1923) 1-70. Hardy and Littlewood proved their
 Theorems under Hypothesis R, a form of the generalized Riemann hypothesis for Dirichlet
-L-functions. Every theorem below is stated, and proved in the solution, with NO hypothesis:
+L-functions. Theorems B to F below are stated, and proved in the solution, with NO hypothesis:
 the unconditional input is Vinogradov's estimate for exponential sums over primes and the
-Siegel-Walfisz theorem. Theorem A of the paper, (3.113), is not formalized here: on Hypothesis R
-it gives `ν_r(n) = n^{r-1} 𝔖_r/(r-1)! + O(n^{r-1+Θ-3/4} (log n)^B)` with the singular series
-`𝔖_r` of (3.114); Theorem B is its consequence with `𝔖_r` summed as a product, Lemma 12.
+Siegel-Walfisz theorem. Theorem A of the paper, (3.113), is stated on the paper's own Hypothesis R
+at level `Θ`, `NoZerosRight Θ`: `ν_r(n) = n^{r-1} 𝔖_r(n)/(r-1)! + O(n^{r-1+Θ-3/4} (log n)^B)`
+with the singular series `𝔖_r` of (3.114), for every `r ≥ 3`, but only for `47/64 ≤ Θ < 3/4`,
+while the paper allows every `Θ < 3/4`; the asymptotic tail clause of (3.113) is not part of it.
+Theorem B is the consequence of Theorem A with `𝔖_r` summed as a product, Lemma 12.
 
 Notation, page 6 of the paper. `Nr r n` is `N_r(n)`, the number of ordered `r`-tuples of primes
 with sum `n`, (1.45); `nur r n` is `ν_r(n) = Σ log ϖ₁ ⋯ log ϖ_r` over the same tuples, (1.46).
@@ -34,6 +36,12 @@ The compared theorems are:
 * `theoremF`, (4.21) to (4.23): if `N₂(n) ∼ A n/(log n)² Br 2 n` for even `n` and
   `N₂(n) = o(n/(log n)²)` for odd `n`, then `A = 2 C₂`; `printed_423_false`: the printed (4.23),
   which also equates `2 C₂` with the product `C₂`, contains a misprint, since `2 C₂ ≠ C₂`.
+* `U1503.printedA_form_all_U1503_closed`, (3.113): Theorem A as above, `singR r n` the printed
+  `𝔖_r(n)`. Derived results of the entry, not statements of the paper: `U1574.hyps_satisfiable`,
+  the hypotheses other than `NoZerosRight Θ` hold together; `U1574.noZerosRight_of_GRH`, GRH gives
+  `NoZerosRight Θ` for `Θ ≥ 1/2`; `U1574.printedA_form_all_of_GRH`, Theorem A at `Θ = 47/64` on
+  GRH; `U1574.singR_pos` and `U1574.singR_summable`, `𝔖_r(n) > 0` with a summable series in like
+  parity.
 
 Every `∼` is written in the `ε` form: for every `ε > 0`, eventually `|X - Y| ≤ ε Y`. Ternary
 Goldbach is Helfgott's theorem; binary Goldbach is open, and nothing here claims it. Lean names
@@ -253,3 +261,124 @@ theorem printed_423_false : 2 * Cr 2 ≠ Cr 2 := by
   sorry
 
 end LeanLab.HardyLittlewood1923
+
+/-! ### Theorem A, (3.113), version 2 of the entry
+
+The notation of Theorem A: the Ramanujan sum, `LeanLab/HeathBrown1985/Statements.lean`; the
+zero-free hypothesis, `LeanLab/HardyLittlewood1923/U1438TheoremA.lean`; the printed singular
+series (3.114), `LeanLab/HardyLittlewood1923/U1444PrintedA.lean`. -/
+
+noncomputable section
+
+namespace LeanLab.HeathBrown1985
+
+open Real Finset
+open scoped ArithmeticFunction.vonMangoldt ArithmeticFunction.Moebius
+
+attribute [local instance] Classical.propDecidable
+
+/-- The Ramanujan sum `c_q(n)`, by its classical divisor formula
+`c_q(n) = Σ_{d ∣ (n, q)} d μ(q/d)`; the paper names `c_q(n)` without a formula. -/
+def ramanujan (q n : ℕ) : ℝ := ∑ d ∈ (n.gcd q).divisors, (d : ℝ) * (μ (q / d) : ℝ)
+
+end LeanLab.HeathBrown1985
+
+end
+
+namespace LeanLab.HardyLittlewood1923.U1438
+
+open Real Finset Filter
+open scoped ArithmeticFunction.vonMangoldt
+
+/-- No Dirichlet `L`-function vanishes in the half plane `Re s > Θ`; the point `s = 1`, the pole
+of the principal `L`-functions, is excluded. -/
+def NoZerosRight (Θ : ℝ) : Prop :=
+  ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (s : ℂ), Θ < s.re → s ≠ 1 →
+    DirichletCharacter.LFunction χ s ≠ 0
+
+end LeanLab.HardyLittlewood1923.U1438
+
+namespace LeanLab.HardyLittlewood1923.U1444
+
+open Real Filter Asymptotics
+open scoped ArithmeticFunction.Moebius
+open LeanLab.HardyLittlewood1923
+open LeanLab.HardyLittlewood1923.U1438
+
+/-- The printed singular series (3.114), `S_r = Σ_q (μ(q)/φ(q))^r c_q(n)`. -/
+noncomputable def singR (r n : ℕ) : ℝ :=
+  ∑' q : ℕ, ((μ q : ℝ) / (q.totient : ℝ)) ^ r * LeanLab.HeathBrown1985.ramanujan q n
+
+end LeanLab.HardyLittlewood1923.U1444
+
+/-! ### Theorem A, `LeanLab/HardyLittlewood1923/U1503Endpoint.lean` -/
+
+namespace LeanLab.HardyLittlewood1923.U1503
+
+open Real Finset Filter
+open scoped ArithmeticFunction.Moebius
+open LeanLab.HardyLittlewood1923
+open LeanLab.HardyLittlewood1923.U1438
+open LeanLab.HardyLittlewood1923.U1444
+
+/-- **Hardy-Littlewood 1923, Theorem A, (3.113), p. 21, for every `r ≥ 3` and every
+`Θ` with `47/64 ≤ Θ < 3/4`**, on the paper's Hypothesis R at level `Θ`, written `NoZerosRight Θ`:
+`ν_r(n) = n^{r-1}/(r-1)! S_r(n) + O(n^{r-1+Θ-3/4} (log n)^B)` for all `n ≥ n₀`, with `B`, `K`, `n₀`
+depending on `r` and `Θ`. The paper allows every `Θ < 3/4`; this covers only `47/64 ≤ Θ < 3/4`. -/
+theorem printedA_form_all_U1503_closed :
+    ∀ r : ℕ, 3 ≤ r → ∀ Θ : ℝ, 47 / 64 ≤ Θ → Θ < 3 / 4 → NoZerosRight Θ →
+      ∃ B : ℕ, ∃ K : ℝ, ∃ n₀ : ℕ, ∀ n : ℕ, n₀ ≤ n →
+        |nur r n - (n : ℝ) ^ (r - 1) / ((r - 1).factorial : ℝ) * singR r n| ≤
+          K * (n : ℝ) ^ ((r : ℝ) - 1 + (Θ - 3 / 4)) * Real.log n ^ B := by
+  sorry
+
+end LeanLab.HardyLittlewood1923.U1503
+
+/-! ### Derived results of the entry on Theorem A, not statements of the paper,
+`LeanLab/Verifications/U1574HLVerify.lean` -/
+
+namespace LeanLab.HardyLittlewood1923.U1574
+
+open Real
+open scoped ArithmeticFunction.Moebius
+open LeanLab.HardyLittlewood1923
+open LeanLab.HardyLittlewood1923.U1438 (NoZerosRight)
+open LeanLab.HardyLittlewood1923.U1444 (singR)
+
+/-- Derived result: the hypotheses of Theorem A other than `NoZerosRight Θ` hold together. -/
+theorem hyps_satisfiable : ∃ r : ℕ, ∃ Θ : ℝ, 3 ≤ r ∧ 47 / 64 ≤ Θ ∧ Θ < 3 / 4 := by
+  sorry
+
+/-- **GRH** for every Dirichlet `L`: every zero in the open strip `0 < Re s < 1` has
+`Re s = 1/2`. Hardy and Littlewood's Hypothesis R* of p. 4 says every nontrivial zero has real part
+at most `1/2`; the two are equivalent, by the reflection `ρ ↦ 1 - ρ̄` of the functional equation
+and the known absence of zeros on `Re s ≥ 1`. -/
+def GRH : Prop :=
+  ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (s : ℂ),
+    DirichletCharacter.LFunction χ s = 0 → 0 < s.re → s.re < 1 → s.re = 1 / 2
+
+/-- Derived result: GRH gives the zero-free hypothesis of Theorem A at every level `Θ ≥ 1/2`. -/
+theorem noZerosRight_of_GRH (h : GRH) {Θ : ℝ} (hΘ : 1 / 2 ≤ Θ) : NoZerosRight Θ := by
+  sorry
+
+/-- Derived result: on GRH, Theorem A at `Θ = 47/64`, every `r ≥ 3`, with no further hypothesis. -/
+theorem printedA_form_all_of_GRH (h : GRH) :
+    ∀ r : ℕ, 3 ≤ r → ∃ B : ℕ, ∃ K : ℝ, ∃ n₀ : ℕ, ∀ n : ℕ, n₀ ≤ n →
+      |nur r n - (n : ℝ) ^ (r - 1) / ((r - 1).factorial : ℝ) * singR r n| ≤
+        K * (n : ℝ) ^ ((r : ℝ) - 1 + ((47 / 64 : ℝ) - 3 / 4)) * Real.log n ^ B := by
+  sorry
+
+/-- Derived result: the printed singular series is positive in like parity, so the main term of
+Theorem A is not zero. -/
+theorem singR_pos {r n : ℕ} (hr : 3 ≤ r) (hn : 0 < n) (h : n % 2 = r % 2) :
+    0 < singR r n := by
+  sorry
+
+/-- Derived result: the series defining `singR r n` is summable in like parity, so the `tsum` is
+the true sum. -/
+theorem singR_summable {r n : ℕ} (hr : 3 ≤ r) (hn : 0 < n) (h : n % 2 = r % 2) :
+    Summable (fun q : ℕ => ((μ q : ℝ) / (q.totient : ℝ)) ^ r *
+      LeanLab.HeathBrown1985.ramanujan q n) := by
+  sorry
+
+end LeanLab.HardyLittlewood1923.U1574

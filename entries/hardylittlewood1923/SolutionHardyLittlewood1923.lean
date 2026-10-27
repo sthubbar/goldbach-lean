@@ -8,6 +8,8 @@ public import LeanLab.HardyLittlewood1923.TheoremD
 public import LeanLab.HardyLittlewood1923.TheoremE
 public import LeanLab.HardyLittlewood1923.TheoremEAssigned
 public import LeanLab.HardyLittlewood1923.TheoremF
+public import LeanLab.HardyLittlewood1923.U1503Endpoint
+public import LeanLab.Verifications.U1574HLVerify
 
 /-!
 # Proof of the Hardy-Littlewood 1923 entry
@@ -22,6 +24,13 @@ the prime number theorem in progressions and a divisor expansion of the singular
 for every `r ≥ 3` is an induction on `r` from the case `r = 3`, with Siegel-Walfisz for each fixed
 modulus and a Brun-Titchmarsh bound for the tail. Theorem F is Hardy and Littlewood's averaging
 argument, with the prime number theorem. Parts of the analytic number theory of ζ(s) are ported
-from PrimeNumberTheoremAnd, Apache 2.0, see `PORTING.md`. An AI agent, Claude by Anthropic, wrote
+from PrimeNumberTheoremAnd, Apache 2.0, see `PORTING.md`. Theorem A, (3.113), is
+`LeanLab.HardyLittlewood1923.U1503.printedA_form_all_U1503_closed`, on the paper's Hypothesis R at
+level `Θ` for `47/64 ≤ Θ < 3/4`: from the zero-free half plane the lab proves a bound for
+`ψ(x, χ)` by a smoothed explicit formula, `U1503Explicit` with `U1503Contour`, `U1503LogDeriv`
+and `U1503Mellin`, feeds it into the major arcs of the circle method for `r = 3`, `U1453PrintedA3`
+and `U1503Endpoint`, and lifts to every `r ≥ 3` by the recursion of Theorem B with the singular
+series identities of `U1463ThmA` and `U1468SingR`. The derived results on Theorem A are in
+`LeanLab/Verifications/U1574HLVerify.lean`. An AI agent, Claude by Anthropic, wrote
 the Lean code; it was checked by the Lean kernel. Binary Goldbach is open.
 -/
