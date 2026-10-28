@@ -1,0 +1,238 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "CONDITIONAL on Perelli-Pintz-Salerno 1984 and Perelli-Pintz 1993: Halupczok's ternary Goldbach mean value theorem with primes in progressions and short intervals, repaired"
+  description: >-
+    CONDITIONAL on two cited results, both taken as explicit hypotheses of the theorems and never
+    as axioms: PPS1984Remark, the printed Remark on p. 530 of A. Perelli, J. Pintz and S.
+    Salerno, Bombieri's theorem in short intervals, 1984, and PP1993Goldbach, the Goldbach
+    analogue of Theorem 3 of A. Perelli and J. Pintz, On the exceptional set for Goldbach's
+    problem in short intervals, 1993, established in its sections 3 to 5 but not printed as a
+    numbered theorem. These are the inputs that the paper's own proof quotes as its Theorems 2.1
+    and 2.3. PP1993Goldbach is therefore a weaker citation than a numbered theorem: it is the
+    unnumbered Goldbach analogue that Halupczok says the proof of Perelli and Pintz can be
+    adapted to give, stated here in the general form that argument yields. Under the two hypotheses, a complete Lean 4 proof of a repaired form of Theorem 1.2 of K.
+    Halupczok, Goldbach's problem with primes in arithmetic progressions and in short intervals,
+    J. Theor. Nombres Bordeaux 25, 2013, 331 to 351: summed over moduli q <= Q, the weighted
+    count of p1 + p2 + p3 = n with p1 = a mod q and p1, p2 in short intervals differs from its
+    singular series main term T(n, q, a) Y1 Y2 by << Y1 Y2 L^-A. As printed, the theorem sums
+    over all q <= Q with the printed T, which does not vanish when a and q have a common factor,
+    while the prime sum then is empty, so the printed statement fails, for example at a = 3,
+    q = 3. The repair takes the main term to be 0 for such q, or equivalently restricts to q
+    coprime to a. The entry also proves that the two hypotheses imply the paper's Theorems 2.1
+    and 2.3, as derived results of this entry. Binary Goldbach is open and is not claimed; ternary Goldbach is a theorem of
+    Helfgott. An AI agent wrote the Lean code; the statements were checked against the sources
+    by an AI agent and are offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11N13", "11P55"]
+
+sources:
+  - title: "Goldbach's problem with primes in arithmetic progressions and in short intervals"
+    authors:
+      - "Karin Halupczok"
+    id: "arXiv:1212.4406"
+    type: "article"
+    location: "J. Theor. Nombres Bordeaux 25, 2013, no. 2, pages 331 to 351, doi 10.5802/jtnb.839, Theorem 1.2, pages 333 to 334, Theorem 2 of the arXiv version; Theorems 2.1 and 2.3, pages 338 and 339"
+    relationship: "adapts"
+    note: >-
+      Adapts Theorem 1.2, read from page images of the open journal pdf on 2026-10-25 and from
+      arXiv 1212.4406v1, with the repair described under fidelity. The hypotheses, the ternary
+      sum and the main term T are as printed. The proof follows the paper's: the substitution
+      through the binary sum, a binary part bounded from its Theorem 2.3 and a main term part
+      bounded from its Theorem 2.1 and the singular series computation. The paper's Lemma 1 is
+      not needed. The paper's quoted Theorems 2.1 and 2.3 are stated as Theorem3 and Theorem5
+      and derived from the two cited results below. The author was informed by email of the
+      defect described under fidelity. No endorsement of this formalization by the author is
+      claimed.
+    license: "unknown"
+    author_endorsement: "other"
+  - title: "Bombieri's theorem in short intervals"
+    authors:
+      - "A. Perelli"
+      - "J. Pintz"
+      - "S. Salerno"
+    id: "https://www.numdam.org/item/ASNSP_1984_4_11_4_529_0/"
+    type: "article"
+    location: "Ann. Scuola Norm. Sup. Pisa Cl. Sci. 4, 11, 1984, no. 4, pages 529 to 539, the Remark on page 530 with display 2 of page 529"
+    relationship: "background"
+    note: >-
+      Cited hypothesis, not formalized: PPS1984Remark is the printed Remark on p. 530, that
+      display 2, a Bombieri-Vinogradov bound for psi in intervals of length y with a maximum over
+      residues, over h <= y and over x/2 < z <= x, holds for Q <= y x^-1/2 log^-B x whenever
+      y >= x^3/5 log^C x with C = C(A). It is read with one implied constant for all such y <= x;
+      a reading of the proof on pp. 531 to 538 found that the only dependence on the exponent is
+      delta = delta(theta) in display 5, p. 531, from Huxley and Iwaniec 1975, which can be taken
+      absolute by a covering at one fixed exponent. That check is an argument by an AI agent,
+      not checked in Lean, and Huxley and Iwaniec was not read. The Lean file also states the
+      printed fixed exponent Theorem of p. 530 as PPS1984Printed and proves that the uniform
+      reading implies it. Halupczok quotes this result as her Theorem 2.1. The authors have not
+      been contacted.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "On the exceptional set for Goldbach's problem in short intervals"
+    authors:
+      - "A. Perelli"
+      - "J. Pintz"
+    id: "doi:10.1112/jlms/s2-47.1.41"
+    type: "article"
+    location: "J. London Math. Soc. 2, 47, 1993, pages 41 to 49, sections 3 to 5, displays 1, 3, 4 and 5, pages 43 to 46"
+    relationship: "background"
+    note: >-
+      Cited hypothesis, not formalized: PP1993Goldbach is the mean square bound for R*(2n, N, Y)
+      against M*(2n, N, Y) S(2n) over N < 2n <= N + H, H = Y^1/3+eps, N^7/12+eps <= Y <= N,
+      with R* and M* as defined on p. 43. The paper does not print it as a numbered theorem: its
+      Theorem 3, p. 44, is the analogous result for 2k twin primes, derived from the twin
+      analogues of displays 4 and 5 by one sentence, while displays 1 and 3 on p. 44, 4 on p. 45
+      and 5 on p. 46 give the Goldbach form. Halupczok cites Theorem 3 and states the result she
+      needs as her Theorem 2.3, saying the proof in that reference can be adapted; the entry
+      derives her Theorem 2.3 from PP1993Goldbach by an elementary difference of two such sums.
+      The printed Theorem 3 is stated in the lab file as PP1993Thm3Printed and not used. The
+      authors have not been contacted.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "https://github.com/sthubbar/goldbach-lean/tree/main/entries/bombierivinogradov1965"
+    relationship: "earlier entry of this repository, unconditional Bombieri-Vinogradov over the full range"
+    note: >-
+      The Bombieri-Vinogradov 1965 entry of this repository proves the classical theorem for psi
+      over 1 to x. It does not give intervals of length x^3/5+eps and is not used here; this
+      entry shares no Lean file with it. A search on 2026-10-25 of Mathlib v4.35.0-rc3 and of the
+      web found no earlier Lean formalization of any result of Halupczok 2012, of Bombieri's
+      theorem in short intervals, or of a short interval Goldbach mean square.
+
+status:
+  scope: >-
+    Formalized, CONDITIONAL on PPS1984Remark and PP1993Goldbach as explicit hypotheses: Halupczok
+    Theorem 1.2 repaired, theorem2Zeroed_U1510, the sum over all q <= Q with the main term T0,
+    which is 0 when a and q are not coprime; and Theorem 1.2 restricted to q coprime to a with
+    the printed T, theorem2_U1510. Derived results of this entry, not theorems of the paper:
+    theorem3_of_remark, PPS1984Remark implies the paper's quoted Theorem 2.1, and
+    theorem5_of_PP1993, PP1993Goldbach implies the paper's quoted Theorem 2.3. Not formalized: the two cited results themselves; the paper's Theorem 1.1, Theorems 6 and 7
+    of the arXiv version, and its corollaries; and a Lean proof that the
+    hypotheses of Theorem 1.2 can be met. Binary Goldbach remains open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic"]
+      framework: "Claude Cowork"
+      tool_setup: >-
+        Autonomous agents wrote every lab Lean file, ran lake build, read the paper and the two
+        cited sources from page images, and ran separate AI subagents as statement checkers;
+        Lean 4 v4.35.0-rc3, Mathlib v4.35.0-rc3.
+      cost:
+        wall_time: "agent runs over 2026-10-17 to 2026-10-25, many hours in total"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published Goldbach-related
+        papers, check their statements and proofs, report gaps, and reduce every cited input to a
+        printed published statement where possible; the defect was found while encoding the
+        statement.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish; AI agents found the defect
+    and wrote all Lean code and the statements. No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    The defect: Theorem 1.2 as printed sums over all q <= Q with no condition that a and q are
+    coprime, its right side is << Y1 Y2 L^-A with no factor Q, and the printed T(n, q, a) is
+    not 0 when a and q have a common prime factor d. For such q <= X1 a prime p1 = a mod q must
+    equal d, which is below X1, so the prime sum is empty, while the term T(n, q, a) Y1 Y2
+    remains; at a = 3, q = 3 it is about 0.767 Y1 Y2, larger than the claimed bound, so the
+    printed statement is false. The proof says it assumes q and a coprime without loss of
+    generality. The repair: theorem2Zeroed_U1510 keeps the sum over all q <= Q and replaces T by
+    T0, equal to T when gcd(a, q) = 1 and to 0 otherwise, as the paper's binary singular series
+    S(r, q, a) in display 1 already is, and adds the hypothesis Q <= X1, which follows from
+    Q << Y1 X1^-1/2 L^-B once X1 is at least c6 squared, so it can be absorbed into the
+    threshold Y0 and does not weaken the theorem; theorem2_U1510 keeps T and restricts the sum to q coprime
+    to a. The lab lemma theorem2Zeroed_of_theorem2 derives the first form from the second, by
+    ternSum_noncoprime. Both are
+    conditional: PPS1984Remark and PP1993Goldbach are hypotheses of the theorems, not axioms,
+    and are described under sources; PP1993Goldbach is not a numbered printed theorem, and
+    PPS1984Remark is used in a reading uniform in the interval length. Encoding: every <<, >>
+    and asymp sign in a hypothesis is a universally quantified constant, every << in a
+    conclusion an existential constant C, sufficiently large an existential threshold Y0, and
+    B is existential after A and the epsilons, so it may depend on the epsilons, while the paper
+    says B = B(A); C and Y0 may depend on the fixed a and on the constants of the hypotheses. L is
+    log Y2, as the proof sets Y = Y2, and log Y1 is comparable to it;
+    the hypothesis 1 <= Q only excludes an empty sum. T is written as phi(q)^-1 times a tprod
+    over all primes of the printed local factor, which converges absolutely, as the proof
+    shows. The maxima over residues in Theorem 2.1 and in the Remark are encoded as arbitrary
+    choice functions of q. PPS1984Remark adds y <= x, which only narrows its hypothesis.
+    PP1993Goldbach is stated with von Mangoldt weights and the pair count M* as main term, the
+    form of R* and M* on p. 43 of Perelli and Pintz, and with H exactly Y^1/3+eps; it is the
+    natural general Y form of the Perelli and Pintz argument and is at least as strong as the
+    paper's Theorem 2.3, which the entry derives from it. The compared theorems
+    theorem3_of_remark and theorem5_of_PP1993 are derived results of this entry, not theorems of
+    the paper.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "AI statement auditor: a separate instance of Claude Opus 5.5 (claude-opus-5-5), Anthropic; not a human reviewer"
+  notes: >-
+    Status is self-assessed: every check below was done by AI agents of the same model that
+    wrote the Lean code, so it is not an independent review and not a human expert review. Two
+    separate checks were made. First, the packaging agent built the entry, ran the Lean kernel
+    and the Comparator, which printed Your solution is okay, and printed the axioms of every
+    compared theorem, propext, Classical.choice and Quot.sound only. Second, a distinct AI
+    statement audit, Claude Opus 5.5, on 2026-10-25: a fresh agent instance, with no part in
+    writing the proof, read Theorem 1.2, the notation section and the proof in Section 4 from
+    the JTNB pdf and arXiv 1212.4406v1, with page 333 checked as a page image, Theorems 2.1 and
+    2.3 on pages 338 and 339, and the Theorem and Remark on page 530 of Perelli, Pintz and
+    Salerno 1984 as a page image. It compared Thm2Hyp, ternSum, T, S, T0, Theorem2,
+    Theorem2Zeroed, Theorem3, Theorem5, PPS1984Remark and PP1993Goldbach with them. It checked
+    the ranges of q and a, the exponents, the windows for p1 and p2, the error term L^-A with L
+    equal to log Y2, the order of the quantifiers over A, B, the hypothesis constants, C and
+    Y0, and that every power and logarithm has a positive base under the hypotheses. It
+    confirmed the defect: the printed T(n, 3, 3) lies between 0.66 and 0.767 for every odd n
+    prime to 3, while the prime sum for a = 3, q = 3 is empty
+    once X1 exceeds 3, and the proof assumes q and a coprime without loss of generality. It
+    found the added hypothesis Q <= X1 implied by the others for large Y0, so harmless. It
+    found PPS1984Remark a match to the printed Remark in its reading with one implied constant
+    for all y, a reading the Remark's form y >= x^3/5 (log x)^C invites, and judged it
+    plausibly true; it found PP1993Goldbach at least as strong as the paper's Theorem 2.3, with
+    no junk value that would make it false, and judged it plausibly true, but it could not read
+    Perelli and Pintz 1993, which is paywalled, and judged that hypothesis against the paper's
+    statement of Theorem 2.3 only. On its advice the two implications were labelled derived
+    results of this entry in the docstrings and this file, the lab module holding
+    ternSum_noncoprime was renamed NonCoprime with one docstring made neutral, the fidelity
+    section was extended, and the author endorsement was set to other with a neutral note. The
+    auditor then rebuilt the entry and reran the Comparator, which again printed Your solution
+    is okay. No human expert and no author of the sources has reviewed the entry.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Halupczok 2012, Theorem 1.2, repaired: all q with the main term set to 0 off the coprime q; conditional on PPS1984Remark and PP1993Goldbach"
+      lean: "LeanLab.Halupczok2012.theorem2Zeroed_U1510"
+      module: "ChallengeHalupczok2012"
+      status: "adapted"
+    - source: "Halupczok 2012, Theorem 1.2, restricted to q coprime to a; conditional on PPS1984Remark and PP1993Goldbach"
+      lean: "LeanLab.Halupczok2012.theorem2_U1510"
+      module: "ChallengeHalupczok2012"
+      status: "adapted"
+    - source: "Derived result of this entry: PPS1984Remark implies Halupczok 2012, Theorem 2.1"
+      lean: "LeanLab.Halupczok2012.theorem3_of_remark"
+      module: "ChallengeHalupczok2012"
+      status: "proved"
+    - source: "Derived result of this entry: PP1993Goldbach implies Halupczok 2012, Theorem 2.3"
+      lean: "LeanLab.Halupczok2012.theorem5_of_PP1993"
+      module: "ChallengeHalupczok2012"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; K. Halupczok for the paper; A. Perelli, J. Pintz and S. Salerno for the cited results."

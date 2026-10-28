@@ -1,0 +1,38 @@
+{
+  "challenge_module": "ChallengeHalupczok2012",
+  "solution_module": "SolutionHalupczok2012",
+  "theorem_names": [
+    "LeanLab.Halupczok2012.theorem2Zeroed_U1510",
+    "LeanLab.Halupczok2012.theorem2_U1510",
+    "LeanLab.Halupczok2012.theorem3_of_remark",
+    "LeanLab.Halupczok2012.theorem5_of_PP1993"
+  ],
+  "definition_names": [
+    "LeanLab.Halupczok2012.kRange",
+    "LeanLab.Halupczok2012.binSumAP",
+    "LeanLab.Halupczok2012.binSum",
+    "LeanLab.Halupczok2012.twinC",
+    "LeanLab.Halupczok2012.S",
+    "LeanLab.Halupczok2012.T",
+    "LeanLab.Halupczok2012.ternSum",
+    "LeanLab.Halupczok2012.Thm2Hyp",
+    "LeanLab.Halupczok2012.Theorem2",
+    "LeanLab.Halupczok2012.T0",
+    "LeanLab.Halupczok2012.Theorem2Zeroed",
+    "LeanLab.Halupczok2012.Theorem5",
+    "LeanLab.Halupczok2012.thetaAP",
+    "LeanLab.Halupczok2012.Theorem3",
+    "LeanLab.Halupczok2012.psiAP",
+    "LeanLab.Halupczok2012.ppsTerm",
+    "LeanLab.Halupczok2012.PPS1984Remark",
+    "LeanLab.Halupczok2012.ppCond",
+    "LeanLab.Halupczok2012.ppR",
+    "LeanLab.Halupczok2012.ppM",
+    "LeanLab.Halupczok2012.PP1993Goldbach"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

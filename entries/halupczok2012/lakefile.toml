@@ -1,0 +1,19 @@
+name = "GoldbachLeanHalupczok2012"
+version = "0.1.0"
+defaultTargets = ["ChallengeHalupczok2012", "SolutionHalupczok2012"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.35.0-rc3"
+
+[[lean_lib]]
+name = "LeanLab"
+
+[[lean_lib]]
+name = "ChallengeHalupczok2012"
+roots = ["ChallengeHalupczok2012"]
+
+[[lean_lib]]
+name = "SolutionHalupczok2012"
+roots = ["SolutionHalupczok2012"]
