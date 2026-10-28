@@ -26,7 +26,7 @@ The target theorems:
   They are transcriptions by the Lean Lab, not Mathlib results.
 * `Cert1575.eps1500`, PROVED: ε(1500) < 1/8349 for the ε(u₀) of display (6), p. 1221.
 * `Cert1567.bracket13375_holds`, PROVED: the Section 5.4 combination of the three brackets at
-  the new parameters stays within 10⁻⁵ of the main-term constant `Journal.K3J`.
+  the new parameters is at least `Journal.K3J` − 10⁻⁵, a one-sided lower bound.
 * `ChenThresholdGRH.lemma9J_holds`, PROVED and unconditional: the journal's Lemma 9, Chen's
   weighted inequality, for every n ≥ 2²⁴.
 

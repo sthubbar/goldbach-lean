@@ -26,7 +26,7 @@ Leaves, with GRH as an explicit argument where the paper assumes it:
 * `Lemma9J`, Lemma 9 p. 1227, Chen's weighted inequality: PROVED, from `U7153.lemma10`.
 * `Thm5J`, `Thm6J`, `Thm7J`, Theorems 5, 6, 7, pp. 1228, 1231, 1234-1235.
 * `Bracket13375`, the Section 5.4 combination of the three exact brackets at the new parameters
-  is within 10⁻⁵ of `Journal.K3J`; numeric certificate, Python only so far.
+  is at least `Journal.K3J` − 10⁻⁵, a one-sided lower bound; PROVED in Cert1567.
 * `section55_step`, Section 5.5 p. 1241, π₂'(N) ≥ π₂(N) − √N − 1: PROVED.
 
 `chenThreshold13375_of_leaves`: the threshold, CONDITIONAL ON `Thm5J`, `Thm6J`, `Thm7J`,

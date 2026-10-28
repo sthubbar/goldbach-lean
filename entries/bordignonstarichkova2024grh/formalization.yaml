@@ -21,7 +21,8 @@ project:
     parameters inside the authors' method, alpha = 0.00256, A = 10, u = 1500,
     epsilon = 1/8349, epsilon1 = 10^-20. The numeric inputs are PROVED here: epsilon(1500) is
     below 1/8349 by a kernel certificate, decide +kernel in eleven window modules, and the
-    Section 5.4 bracket combination is within 10^-5 of the main-term constant. Chen's
+    Section 5.4 bracket combination is at least the main-term constant minus 10^-5, a
+    one-sided lower bound. Chen's
     weighted inequality, the journal's Lemma 9, is PROVED unconditionally. Binary Goldbach is
     open and is not claimed. An AI agent, Claude, wrote all the Lean code; the statements were
     checked against the paper by AI agents and are offered for human audit.
@@ -76,8 +77,8 @@ status:
     Formalized: chenThreshold13375_of_deep_closed, the threshold exp(exp 13.375) under GRH,
     CONDITIONAL ON Thm5J, Thm6J, Thm7J and LinearSieveT4 1/8349 112 114 as explicit
     hypotheses; eps1500, epsilon(1500) below 1/8349 for the epsilon of display 6, proved;
-    bracket13375_holds, the Section 5.4 bracket combination at the new parameters within
-    10^-5 of K3J, proved; lemma9J_holds, Chen's weighted inequality, the journal's Lemma 9,
+    bracket13375_holds, the Section 5.4 bracket combination at the new parameters is at
+    least K3J minus 10^-5, a lower bound only, proved; lemma9J_holds, Chen's weighted inequality, the journal's Lemma 9,
     for every n at least 2^24, proved and unconditional. Not formalized: the paper's
     Theorems 4 to 7 and the analytic lemmas behind them, Sections 2 to 5.3, and the
     Ernvall-Hytonen and Palojarvi GRH bound for primes in progressions. Binary Goldbach
