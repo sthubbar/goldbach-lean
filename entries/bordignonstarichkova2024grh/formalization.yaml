@@ -2,11 +2,11 @@
 version: "v0.4"
 
 project:
-  name: "A lower explicit threshold for Chen's theorem under GRH"
+  name: "CONDITIONAL on GRH and four cited theorems: an explicit Chen threshold exp(exp 13.375), after Bordignon and Starichkova"
   description: >-
-    A Lean 4 proof that, under the Generalized Riemann Hypothesis, every even
+    CONDITIONAL. A Lean 4 proof that, under the Generalized Riemann Hypothesis, every even
     integer N at least exp(exp 13.375) is the sum of a prime and a square-free number greater
-    than 1 with at most two prime factors, conditional on four cited results taken as explicit
+    than 1 with at most two prime factors, CONDITIONAL ON four cited results taken as explicit
     hypotheses of the theorem, never as axioms: Thm5J, Thm6J and Thm7J, the Lean Lab's
     transcriptions of Theorems 5, 6 and 7 of M. Bordignon and V. Starichkova, An explicit
     version of Chen's theorem assuming the Generalized Riemann Hypothesis, Ramanujan J. 64,
@@ -75,7 +75,7 @@ related_formalizations: []
 status:
   scope: >-
     Formalized: chenThreshold13375_of_deep_closed, the threshold exp(exp 13.375) under GRH,
-    conditional on Thm5J, Thm6J, Thm7J and LinearSieveT4 1/8349 112 114 as explicit
+    CONDITIONAL ON Thm5J, Thm6J, Thm7J and LinearSieveT4 1/8349 112 114 as explicit
     hypotheses; eps1500, epsilon(1500) below 1/8349 for the epsilon of display 6, proved;
     bracket13375_holds, the Section 5.4 bracket combination at the new parameters is at
     least K3J minus 10^-5, a lower bound only, proved; lemma9J_holds, Chen's weighted inequality, the journal's Lemma 9,
@@ -112,7 +112,7 @@ automation:
 
 fidelity:
   divergences: >-
-    The result is conditional. GRH is LeanLab.DERZ1997.GRH: every zero of every Dirichlet
+    The result is CONDITIONAL. GRH is LeanLab.DERZ1997.GRH: every zero of every Dirichlet
     L-function, for every modulus q at least 1, primitive or not, in the open strip
     0 < Re s < 1 has real part 1/2; it is the premise inside ChenThreshold13375. Four cited
     inputs are explicit hypotheses of the headline theorem, never axioms. Thm5J, Thm6J and

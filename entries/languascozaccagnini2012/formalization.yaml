@@ -2,9 +2,9 @@
 version: "v0.4"
 
 project:
-  name: "The number of Goldbach representations of an integer"
+  name: "Conditional on RH: the number of Goldbach representations on average, after Languasco and Zaccagnini"
   description: >-
-    A Lean 4 proof, conditional on RH, of Theorem 1 of A. Languasco and A. Zaccagnini,
+    Conditional on RH: a sorry-free Lean 4 proof of Theorem 1 of A. Languasco and A. Zaccagnini,
     The number of Goldbach representations of an integer, Proc. Amer. Math. Soc. 140 2012,
     795 to 804. With G(n) the sum over m1 + m2 = n of Lambda(m1) Lambda(m2), Mathlib's
     RiemannHypothesis, taken as an explicit hypothesis of the theorem and never as an axiom,
