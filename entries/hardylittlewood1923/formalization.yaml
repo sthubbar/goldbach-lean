@@ -2,7 +2,7 @@
 version: "v0.4"
 
 project:
-  name: "Sums of primes, after Hardy and Littlewood 1923, Partitio Numerorum III, Theorems B to F proved without Hypothesis R, and Theorem A on Hypothesis R for 47/64 at most Theta below 3/4"
+  name: "Some problems of 'Partitio Numerorum'; III: On the expression of a number as a sum of primes"
   description: >-
     A sorry-free Lean 4 proof, with no hypothesis, of Theorems B, C, D, E and F of G. H. Hardy
     and J. E. Littlewood, Some problems of Partitio Numerorum III, Acta Math. 44, 1923. Hardy and

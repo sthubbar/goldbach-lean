@@ -2,9 +2,9 @@
 version: "v0.4"
 
 project:
-  name: "CONDITIONAL on Perelli-Pintz-Salerno 1984 and Perelli-Pintz 1993: Halupczok's ternary Goldbach mean value theorem with primes in progressions and short intervals, repaired"
+  name: "Goldbach's problem with primes in arithmetic progressions and in short intervals"
   description: >-
-    CONDITIONAL on two cited results, both taken as explicit hypotheses of the theorems and never
+    The theorems are conditional on two cited results, both taken as explicit hypotheses of the theorems and never
     as axioms: PPS1984Remark, the printed Remark on p. 530 of A. Perelli, J. Pintz and S.
     Salerno, Bombieri's theorem in short intervals, 1984, and PP1993Goldbach, the Goldbach
     analogue of Theorem 3 of A. Perelli and J. Pintz, On the exceptional set for Goldbach's
@@ -111,7 +111,7 @@ related_formalizations:
 
 status:
   scope: >-
-    Formalized, CONDITIONAL on PPS1984Remark and PP1993Goldbach as explicit hypotheses: Halupczok
+    Formalized, conditional on PPS1984Remark and PP1993Goldbach as explicit hypotheses: Halupczok
     Theorem 1.2 repaired, theorem2Zeroed_U1510, the sum over all q <= Q with the main term T0,
     which is 0 when a and q are not coprime; and Theorem 1.2 restricted to q coprime to a with
     the printed T, theorem2_U1510. Derived results of this entry, not theorems of the paper:

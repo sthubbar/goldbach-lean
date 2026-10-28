@@ -2,13 +2,13 @@
 version: "v0.4"
 
 project:
-  name: "CONDITIONAL on RH and cited zero counts: Goldbach numbers in intervals of length 4.45 log^2 x"
+  name: "Goldbach numbers in intervals of length 4.45 log² x under the Riemann Hypothesis"
   description: >-
-    CONDITIONAL. A Lean 4 proof that, under the Riemann Hypothesis, for every real x at least
+    A Lean 4 proof that, under the Riemann Hypothesis, for every real x at least
     3 there is a Goldbach number n, a sum of two odd primes, with x < n < x + 4.45 (log x)^2.
     This improves the constant 123 of A. Chirre and M. V. Hagen, On Goldbach numbers in short
     intervals, arXiv 2512.23534, by their method. RH is the paper's own hypothesis. The theorem
-    is CONDITIONAL ON seven cited inputs taken as explicit hypotheses, never as axioms, all
+    is conditional on seven cited inputs taken as explicit hypotheses, never as axioms, all
     stated for gZ, the ordinates of the nontrivial zeros of the Riemann zeta function counted
     with multiplicity: ExplicitA, the truncated explicit formula of Montgomery and Vaughan,
     Multiplicative Number Theory I, display 12.1, under RH; HadamardK, the bound
@@ -85,7 +85,7 @@ related_formalizations: []
 
 status:
   scope: >-
-    Formalized: goldbach_445_hsw_gZ, the main theorem of the preprint, under RH, CONDITIONAL ON
+    Formalized: goldbach_445_hsw_gZ, the main theorem of the preprint, under RH, conditional on
     ExplicitA, HadamardK, Ordinates14, BPTN, HSWN70, HSWHead14 and EvenGoldbachUpTo 4*10^18 as
     explicit hypotheses. Not formalized: the explicit formula, the Hadamard product bound, the
     location of the first zero, the published zero counts of Brent-Platt-Trudgian and of
@@ -122,7 +122,7 @@ automation:
 
 fidelity:
   divergences: >-
-    The result is CONDITIONAL. RH is Mathlib's RiemannHypothesis, the premise of the conclusion.
+    The result is conditional. RH is Mathlib's RiemannHypothesis, the premise of the conclusion.
     Seven cited inputs are explicit hypotheses of the theorem, never axioms, each stated for gZ,
     the imaginary parts of the zeros of riemannZeta with real part at least -1/2, which are the
     nontrivial zeros, indexed with multiplicity analyticOrderNatAt. ExplicitA gZ Z delta, assumed
