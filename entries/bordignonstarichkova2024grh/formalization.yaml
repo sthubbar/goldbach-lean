@@ -1,0 +1,199 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "CONDITIONAL on GRH and four cited theorems: an explicit Chen threshold exp(exp 13.375), after Bordignon and Starichkova"
+  description: >-
+    CONDITIONAL. A Lean 4 proof that, under the Generalized Riemann Hypothesis, every even
+    integer N at least exp(exp 13.375) is the sum of a prime and a square-free number greater
+    than 1 with at most two prime factors, CONDITIONAL ON four cited results taken as explicit
+    hypotheses of the theorem, never as axioms: Thm5J, Thm6J and Thm7J, the Lean Lab's
+    transcriptions of Theorems 5, 6 and 7 of M. Bordignon and V. Starichkova, An explicit
+    version of Chen's theorem assuming the Generalized Riemann Hypothesis, Ramanujan J. 64,
+    2024, 1213 to 1242; and LinearSieveT4 1/8349 112 114, the transcription of their
+    Theorem 4, the explicit linear sieve of Bordignon, Johnston and Starichkova with the
+    Table 1 row epsilon inverse 6100, C1 = 112, C2 = 114. These transcriptions use the Lean
+    normalisation U_N = 2 e^{-gamma} times the product over p > 2 of 1 - 1/(p-1)^2 times the
+    product over p > 2 dividing N of (p-1)/(p-2), while the journal prints U_N without the
+    factor 2; see the fidelity section. GRH for Dirichlet L-functions is the premise inside the
+    conclusion ChenThreshold13375. The journal's own Corollary 1 has the threshold
+    exp(exp 14); the threshold exp(exp 13.375) comes from re-choosing the Section 5.4
+    parameters inside the authors' method, alpha = 0.00256, A = 10, u = 1500,
+    epsilon = 1/8349, epsilon1 = 10^-20. The numeric inputs are PROVED here: epsilon(1500) is
+    below 1/8349 by a kernel certificate, decide +kernel in eleven window modules, and the
+    Section 5.4 bracket combination is within 10^-5 of the main-term constant. Chen's
+    weighted inequality, the journal's Lemma 9, is PROVED unconditionally. Binary Goldbach is
+    open and is not claimed. An AI agent, Claude, wrote all the Lean code; the statements were
+    checked against the paper by AI agents and are offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11N36", "11M26", "11Y35"]
+
+sources:
+  - title: "An explicit version of Chen's theorem assuming the Generalized Riemann Hypothesis"
+    authors:
+      - "M. Bordignon"
+      - "V. Starichkova"
+    id: "doi:10.1007/s11139-024-00866-x"
+    type: "article"
+    location: "The Ramanujan Journal 64, 2024, pages 1213 to 1242: Corollary 1 p. 1214, Theorem 4 p. 1218 with Table 1, display 6 and Lemma 7 p. 1221, Lemma 9 p. 1227, Theorems 5, 6, 7 pp. 1228 to 1235, Sections 5.4 and 5.5 pp. 1239 to 1241"
+    relationship: "adapts"
+    note: >-
+      The entry follows the paper's method and its Section 5.4 combination at new parameters,
+      which lowers the printed threshold exp(exp 14) of Corollary 1 to exp(exp 13.375). The
+      paper's Theorems 4, 5, 6 and 7 are not proved here; they are transcribed as the Lean
+      propositions LinearSieveT4, Thm5J, Thm6J and Thm7J and taken as explicit hypotheses.
+      The paper's Lemma 9, display 6 at u0 = 1500, the Section 5.4 arithmetic and the Section
+      5.5 square-free step are proved. The arXiv version is 2211.08844. The authors have not
+      been contacted about this formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "A lower explicit threshold for Chen's theorem under GRH"
+    authors:
+      - "Steve Hubbard"
+    id: "aiXiv.online 2610.02760"
+    type: "preprint"
+    location: "aiXiv.online 2610.02760; also aiXiv.science aixiv.261026.000001 and Hexagon 2610.00560"
+    relationship: "formalizes"
+    note: >-
+      The preprint states the threshold exp(exp 13.375) under GRH with the parameters above,
+      by the method of Bordignon and Starichkova; this entry formalizes its main theorem
+      conditional on the four cited inputs named in the description. The preprint is not
+      refereed.
+    license: "unknown"
+    author_endorsement: "participated"
+
+related_formalizations: []
+
+status:
+  scope: >-
+    Formalized: chenThreshold13375_of_deep_closed, the threshold exp(exp 13.375) under GRH,
+    CONDITIONAL ON Thm5J, Thm6J, Thm7J and LinearSieveT4 1/8349 112 114 as explicit
+    hypotheses; eps1500, epsilon(1500) below 1/8349 for the epsilon of display 6, proved;
+    bracket13375_holds, the Section 5.4 bracket combination at the new parameters within
+    10^-5 of K3J, proved; lemma9J_holds, Chen's weighted inequality, the journal's Lemma 9,
+    for every n at least 2^24, proved and unconditional. Not formalized: the paper's
+    Theorems 4 to 7 and the analytic lemmas behind them, Sections 2 to 5.3, and the
+    Ernvall-Hytonen and Palojarvi GRH bound for primes in progressions. Binary Goldbach
+    remains open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic"]
+      framework: "Claude Cowork"
+      tool_setup: >-
+        Autonomous agents wrote every lab Lean file, ran lake build, read the journal's text
+        layer and page images and wrote the statements from them; the eleven certificate
+        windows use decide +kernel, no native_decide; Lean 4 v4.35.0-rc3, Mathlib
+        v4.35.0-rc3.
+      cost:
+        wall_time: "agent runs over 2026-10-18 to 2026-10-27, many hours in total"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published Goldbach-related
+        papers and the analytic inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish; an AI agent, Claude, wrote
+    all the Lean code and the statements. No file here contains sorry outside the Challenge
+    file. No human expert has reviewed the mathematics. Binary Goldbach is open.
+
+fidelity:
+  divergences: >-
+    The result is CONDITIONAL. GRH is LeanLab.DERZ1997.GRH: every zero of every Dirichlet
+    L-function, for every modulus q at least 1, primitive or not, in the open strip
+    0 < Re s < 1 has real part 1/2; it is the premise inside ChenThreshold13375. Four cited
+    inputs are explicit hypotheses of the headline theorem, never axioms. Thm5J, Thm6J and
+    Thm7J transcribe the journal's Theorems 5, 6 and 7 with all their parameters universally
+    quantified, each with GRH, LinearSieveT4 epsilon C1 C2, epsilon(u) at most epsilon and
+    0 < epsilon < 1/63 as premises, the range Theorem 4 of the paper requires, and with
+    Even n as a premise, as the paper assumes N even throughout Section 5 (see review notes);
+    the brackets B5J, B6J and B7J are the printed brackets, with q_G of Lemma 3,
+    p_G and c_G of Lemmas 12 and 13, M_phi of Lemma 5, M_phi0 of Lemma 8 and mbar of display
+    31. LinearSieveT4 transcribes Theorem 4 only in the ranges the paper uses, F(s) = 2e^gamma/s
+    for 1 <= s <= 3 and f(s) = 2e^gamma log(s-1)/s for 2 <= s <= 4, for finitely supported
+    nonnegative weights, multiplicative densities g_n and an exceptional finite set Q, with
+    non-strict inequalities in place of the printed strict ones. Normalisation: the journal
+    prints U_N = e^{-gamma} times the product over p > 2 of 1 - 1/(p-1)^2 times the product
+    over p > 2 dividing N of (p-1)/(p-2), pp. 1214 and 1227, without a factor 2, while
+    Mertens' theorem gives V(x) = product over p < x, p not dividing N, of 1 - 1/(p-1)
+    asymptotic to 2e^{-gamma} C2 Pi_N / log x. The journal's Lemma 10, p. 1227, states
+    V(x) = (U_N / log x)(1 + O(...)) with the printed U_N, which by Mertens' theorem holds only
+    with the factor 2. The Lean U_N, UNfull = ChenExplicit.U, is 2e^{-gamma} C2 Pi_N, the
+    normalisation in which Lemma 10 is correct, and Thm5J, Thm6J and Thm7J are stated with it;
+    this differs from the printed definition by a factor 2, so their main terms are twice the
+    printed ones, while the printed factor (e^{-gamma} C2)^{-1} in their negligible error terms
+    is kept as printed.
+    The threshold is stated for natural N, even, with exp(exp 13.375) <= N, and the
+    conclusion N = p + m with p prime, m > 1, m square-free and Omega(m) <= 2. epsJ is display
+    6 with the sum over primes p >= u0 as a tsum of a summable nonnegative family. The Lean code
+    was written by AI. Binary Goldbach is open.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "AI packaging agent: an instance of Claude Opus 5.5, claude-opus-5-5, Anthropic; not a human reviewer"
+  notes: >-
+    Status is self-assessed: every check was done by AI agents of the same model that wrote
+    the Lean code, so it is not an independent review and not a human expert review. The
+    packaging agent built the entry, ran the Lean kernel and the Comparator, and printed the
+    axioms of every compared theorem. A first AI statement audit against the journal, on
+    2026-10-27, found GRH, ChenSqfreeRep, ChenThreshold13375, epsJ, Lemma9J, the brackets
+    B5J, B6J, B7J and conditions (19), (21), (25) match the paper; the U_N factor 2 and the
+    restricted, non-strict LinearSieveT4 are disclosed variants, and the Table 1 row 6100 is
+    admissible at epsilon = 1/8349. FIRST VACUITY: LinearSieveT4 has 0 < eps < 1/63 as
+    internal premises, so it held for every C1, C2 at eps = 1, and Thm5J then implied not
+    GRH, checked in Lean. FIX: Thm5J, Thm6J and Thm7J now take 0 < eps and eps < 1/63 as
+    premises, as Theorem 4 of the paper does. A second AI audit on 2026-10-28 found a SECOND
+    VACUITY: Thm5J did not assume N even; for odd n, 2 is a sifting prime and every N - p
+    with p odd is even, so S(A, P, z) <= 1 while the bound is huge, and Thm5J with
+    LinearSieveT4 1/8349 112 114 implied not GRH, checked in Lean. FIX: Thm5J, Thm6J and
+    Thm7J now take Even n as a premise, as the paper assumes N even throughout Section 5. A
+    third, independent AI vacuity and faithfulness audit on 2026-10-28 re-ran both old
+    refutation files against the current entry: neither typechecks (the epsilon premises
+    and the Even n premise block them). It then checked every universally quantified
+    parameter: alpha near 0 or near its upper limit, A below 2, 3 or 4 (the error terms
+    then grow with N, which only weakens the bounds), u, X2, epsilon1, epsilon and C1, C2
+    (LinearSieveT4 applied to the single element 1 with g = 0 forces f(s) - eps C2 e^2 h(s)
+    <= 1 and F(s) + eps C1 e^2 h(s) >= 1, so small or negative C give no escape), the sets
+    SA, SAq, SB, Qset, Bset against the journal's A, A_q, B with z = N^(1/8), y = N^(1/3),
+    and the junk-value risks: twinC is proved multipliable with bounds 0.65 to 0.6614, liPV
+    is proved to converge for x > 1, the log inside mbar has argument at least 400 under
+    (25), and every bracket factor is positive in range. Under GRH the sieve upper bounds
+    of Theorems 6 and 7 exceed the expected counts by factors about 2.4 and 2.7, and
+    Theorem 5's lower bound is below the expected count, so no further refutation was
+    found. Verdict: no remaining vacuity found; the headline is a genuine conditional
+    result. No human expert and no author of the journal paper has reviewed the entry.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Threshold exp(exp 13.375) under GRH, by the method of Bordignon and Starichkova, conditional on their Theorems 4 to 7"
+      lean: "LeanLab.BS2022GRH.Cert1575.chenThreshold13375_of_deep_closed"
+      module: "ChallengeBordignonStarichkova2024GRH"
+      status: "proved"
+    - source: "Bordignon and Starichkova, display 6 p. 1221: epsilon(1500) < 1/8349"
+      lean: "LeanLab.BS2022GRH.Cert1575.eps1500"
+      module: "ChallengeBordignonStarichkova2024GRH"
+      status: "proved"
+    - source: "Bordignon and Starichkova, Section 5.4 at the new parameters: the bracket combination"
+      lean: "LeanLab.BS2022GRH.Cert1567.bracket13375_holds"
+      module: "ChallengeBordignonStarichkova2024GRH"
+      status: "proved"
+    - source: "Bordignon and Starichkova, Lemma 9 p. 1227, Chen's weighted inequality"
+      lean: "LeanLab.BS2022GRH.ChenThresholdGRH.lemma9J_holds"
+      module: "ChallengeBordignonStarichkova2024GRH"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; M. Bordignon and V. Starichkova for the paper."
