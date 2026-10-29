@@ -90,7 +90,7 @@ def Lemma7J : Prop :=
     (∏ p ∈ (range ⌈z⌉₊).filter (fun p : ℕ => p.Prime ∧ u ≤ (p : ℝ) ∧ (p : ℝ) < z),
         (1 - 1 / ((p : ℝ) - 1))⁻¹ < (1 + epsJ u₀) * (log z / log u)) ∧ epsJ u₀ < 1 / 63
 
-/-- **ε(1500) < 1/8349**, numeric certificate, OPEN in Lean; value 1/8349.32 by U-1172. -/
+/-- **ε(1500) < 1/8349**, numeric certificate, proved in this entry; value 1/8349.32 by U-1172. -/
 def Eps1500 : Prop := epsJ 1500 < 1 / 8349
 
 /-! ### Lemma 3, p. 1215 -/
@@ -206,22 +206,28 @@ def Cond25 (α A u X₂ : ℝ) : Prop :=
 
 /-! ### Theorems 5, 6, 7, CITED, with GRH and the linear sieve as arguments -/
 
+/-! Version 2 change, decided 2026-10-28 with Steve Hubbard: each of `Thm5J`, `Thm6J`, `Thm7J`
+now also takes `0 ≤ C₁ → 0 ≤ C₂ →` right after the sieve hypothesis. Table 1 of the paper gives
+positive C₁, C₂ only, so this is faithful; it costs the instance at C₁ = 112, C₂ = 114 nothing, and
+it closes any route where a sieve witness with a negative constant would make B5J or B6J
+degenerate. -/
+
 /-- **Theorem 5**, p. 1228: S(A, ℙ, z) > 8 U_N N/log² N · B5. -/
 def Thm5J : Prop :=
-  ∀ (α A u ε C₁ C₂ X₂ : ℝ) (n : ℕ), GRH → LinearSieveT4 ε C₁ C₂ → epsJ u ≤ ε → 0 < ε → ε < 1 / 63 →
+  ∀ (α A u ε C₁ C₂ X₂ : ℝ) (n : ℕ), GRH → LinearSieveT4 ε C₁ C₂ → 0 ≤ C₁ → 0 ≤ C₂ → epsJ u ≤ ε → 0 < ε → ε < 1 / 63 →
     0 < α → α < 1 / 8 → 0 < A → Cond19 α A u X₂ → 4e18 ≤ X₂ → X₂ ≤ (n : ℝ) → Even n →
     8 * (UNfull n * n / log n ^ 2) * B5J α A ε C₂ X₂ n < (U7153.SA n : ℝ)
 
 /-- **Theorem 6**, pp. 1231-1232: Σ_{z ≤ q < y, q ∤ N} S(A_q, ℙ, z) ≤ 8 U_N N/log² N · B6. -/
 def Thm6J : Prop :=
-  ∀ (α A u ε C₁ C₂ X₂ : ℝ) (n : ℕ), GRH → LinearSieveT4 ε C₁ C₂ → epsJ u ≤ ε → 0 < ε → ε < 1 / 63 →
+  ∀ (α A u ε C₁ C₂ X₂ : ℝ) (n : ℕ), GRH → LinearSieveT4 ε C₁ C₂ → 0 ≤ C₁ → 0 ≤ C₂ → epsJ u ≤ ε → 0 < ε → ε < 1 / 63 →
     0 < α → α < 1 / 24 → 0 < A → Cond19 α A u X₂ → exp (exp 10) ≤ X₂ → X₂ ≤ (n : ℝ) → Even n →
     ∑ q ∈ (U7153.Qset n).filter (fun q => ¬ q ∣ n), (U7153.SAq n q : ℝ)
       ≤ 8 * (UNfull n * n / log n ^ 2) * B6J α A ε C₁ X₂ n
 
 /-- **Theorem 7**, pp. 1234-1235: S(B, ℙ, y) ≤ U_N N/log² N · B7. -/
 def Thm7J : Prop :=
-  ∀ (α A u ε C₁ C₂ X₂ ε₁ : ℝ) (n : ℕ), GRH → LinearSieveT4 ε C₁ C₂ → epsJ u ≤ ε → 0 < ε → ε < 1 / 63 →
+  ∀ (α A u ε C₁ C₂ X₂ ε₁ : ℝ) (n : ℕ), GRH → LinearSieveT4 ε C₁ C₂ → 0 ≤ C₁ → 0 ≤ C₂ → epsJ u ≤ ε → 0 < ε → ε < 1 / 63 →
     0 < ε₁ → ε₁ < 1 → 0 < α → α < 1 / 16 → 0 < A → Cond25 α A u X₂ → exp (exp 10) ≤ X₂ →
     X₂ ≤ (n : ℝ) → Even n →
     (U7153.SB n : ℝ) ≤ UNfull n * n / log n ^ 2 * B7J α A ε C₁ X₂ ε₁
@@ -238,7 +244,7 @@ theorem lemma9J_holds : Lemma9J := fun n hn => U7153.lemma10 n hn
 
 /-! ### Section 5.4 combination at the new parameters, numeric certificate -/
 
-/-- **The bracket certificate**, OPEN: at α = 0.00256, A = 10, ε = 1/8349, C₁ = 112,
+/-- **The bracket certificate**, proved in this entry: at α = 0.00256, A = 10, ε = 1/8349, C₁ = 112,
 C₂ = 114, ε₁ = 10⁻²⁰, X₂ = exp(exp 13.375), the combination 8·B5 − ½·8·B6 − ½·B7 of the exact
 brackets is at least K3J − 10⁻⁵ for every N ≥ X₂. Python total 1.535·10⁻⁴ against K3J 1.596·10⁻⁴. -/
 def Bracket13375 : Prop :=
@@ -437,11 +443,11 @@ theorem chenThreshold13375_of_leaves (h5 : Thm5J) (h6 : Thm6J) (h7 : Thm7J)
   have hL : exp 13.375 ≤ log (n : ℝ) := by
     rw [← log_exp (exp 13.375)]; exact log_le_log (exp_pos _) hn
   have h24 : (2 : ℝ) ^ 24 ≤ n := by linarith
-  have H5 := h5 0.00256 10 1500 (1 / 8349) 112 114 (exp (exp 13.375)) n hG hT4 hε.le (by norm_num) (by norm_num)
+  have H5 := h5 0.00256 10 1500 (1 / 8349) 112 114 (exp (exp 13.375)) n hG hT4 (by norm_num) (by norm_num) hε.le (by norm_num) (by norm_num)
     (by norm_num) (by norm_num) (by norm_num) c19 hX18 hn hev
-  have H6 := h6 0.00256 10 1500 (1 / 8349) 112 114 (exp (exp 13.375)) n hG hT4 hε.le (by norm_num) (by norm_num)
+  have H6 := h6 0.00256 10 1500 (1 / 8349) 112 114 (exp (exp 13.375)) n hG hT4 (by norm_num) (by norm_num) hε.le (by norm_num) (by norm_num)
     (by norm_num) (by norm_num) (by norm_num) c19 hX10 hn hev
-  have H7 := h7 0.00256 10 1500 (1 / 8349) 112 114 (exp (exp 13.375)) 1e-20 n hG hT4 hε.le (by norm_num) (by norm_num)
+  have H7 := h7 0.00256 10 1500 (1 / 8349) 112 114 (exp (exp 13.375)) 1e-20 n hG hT4 (by norm_num) (by norm_num) hε.le (by norm_num) (by norm_num)
     (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) c25 hX10 hn hev
   rw [sum_Qset_filter] at H6
   have H9 := U7153.lemma10 n h24

@@ -359,22 +359,28 @@ def Cond25 (α A u X₂ : ℝ) : Prop :=
   max ((A + 1) / α) (48 * (A + 4 / 3)) ≤ log X₂ ∧ exp u ≤ X₂ ^ α / log X₂ ^ (A + 1) ∧
     0.44 ≤ X₂ ^ (1 / 48 : ℝ) / log X₂ ^ (A + 4 / 3) ∧ 400 ≤ u ∧ u ≤ 1e8
 
+/-! Version 2 change, decided 2026-10-28 with Steve Hubbard: each of `Thm5J`, `Thm6J`, `Thm7J`
+now also takes `0 ≤ C₁ → 0 ≤ C₂ →` right after the sieve hypothesis. Table 1 of the paper gives
+positive C₁, C₂ only, so this is faithful; it costs the instance at C₁ = 112, C₂ = 114 nothing, and
+it closes any route where a sieve witness with a negative constant would make B5J or B6J
+degenerate. -/
+
 /-- **Theorem 5**, p. 1228: S(A, ℙ, z) > 8 U_N N/log² N · B5. -/
 def Thm5J : Prop :=
-  ∀ (α A u ε C₁ C₂ X₂ : ℝ) (n : ℕ), GRH → LinearSieveT4 ε C₁ C₂ → epsJ u ≤ ε → 0 < ε → ε < 1 / 63 →
+  ∀ (α A u ε C₁ C₂ X₂ : ℝ) (n : ℕ), GRH → LinearSieveT4 ε C₁ C₂ → 0 ≤ C₁ → 0 ≤ C₂ → epsJ u ≤ ε → 0 < ε → ε < 1 / 63 →
     0 < α → α < 1 / 8 → 0 < A → Cond19 α A u X₂ → 4e18 ≤ X₂ → X₂ ≤ (n : ℝ) → Even n →
     8 * (UNfull n * n / log n ^ 2) * B5J α A ε C₂ X₂ n < (U7153.SA n : ℝ)
 
 /-- **Theorem 6**, pp. 1231-1232: Σ_{z ≤ q < y, q ∤ N} S(A_q, ℙ, z) ≤ 8 U_N N/log² N · B6. -/
 def Thm6J : Prop :=
-  ∀ (α A u ε C₁ C₂ X₂ : ℝ) (n : ℕ), GRH → LinearSieveT4 ε C₁ C₂ → epsJ u ≤ ε → 0 < ε → ε < 1 / 63 →
+  ∀ (α A u ε C₁ C₂ X₂ : ℝ) (n : ℕ), GRH → LinearSieveT4 ε C₁ C₂ → 0 ≤ C₁ → 0 ≤ C₂ → epsJ u ≤ ε → 0 < ε → ε < 1 / 63 →
     0 < α → α < 1 / 24 → 0 < A → Cond19 α A u X₂ → exp (exp 10) ≤ X₂ → X₂ ≤ (n : ℝ) → Even n →
     ∑ q ∈ (U7153.Qset n).filter (fun q => ¬ q ∣ n), (U7153.SAq n q : ℝ)
       ≤ 8 * (UNfull n * n / log n ^ 2) * B6J α A ε C₁ X₂ n
 
 /-- **Theorem 7**, pp. 1234-1235: S(B, ℙ, y) ≤ U_N N/log² N · B7. -/
 def Thm7J : Prop :=
-  ∀ (α A u ε C₁ C₂ X₂ ε₁ : ℝ) (n : ℕ), GRH → LinearSieveT4 ε C₁ C₂ → epsJ u ≤ ε → 0 < ε → ε < 1 / 63 →
+  ∀ (α A u ε C₁ C₂ X₂ ε₁ : ℝ) (n : ℕ), GRH → LinearSieveT4 ε C₁ C₂ → 0 ≤ C₁ → 0 ≤ C₂ → epsJ u ≤ ε → 0 < ε → ε < 1 / 63 →
     0 < ε₁ → ε₁ < 1 → 0 < α → α < 1 / 16 → 0 < A → Cond25 α A u X₂ → exp (exp 10) ≤ X₂ →
     X₂ ≤ (n : ℝ) → Even n →
     (U7153.SB n : ℝ) ≤ UNfull n * n / log n ^ 2 * B7J α A ε C₁ X₂ ε₁
@@ -385,7 +391,7 @@ def Lemma9J : Prop :=
     (U7153.SA n : ℝ) - 1 / 2 * ∑ q ∈ U7153.Qset n, (U7153.SAq n q : ℝ) - 1 / 2 * (U7153.SB n : ℝ)
       - 2 * (n : ℝ) ^ (7 / 8 : ℝ) - (n : ℝ) ^ (1 / 3 : ℝ) < U7153.pi2 n
 
-/-- **The bracket certificate**, OPEN: at α = 0.00256, A = 10, ε = 1/8349, C₁ = 112,
+/-- **The bracket certificate**, proved in this entry: at α = 0.00256, A = 10, ε = 1/8349, C₁ = 112,
 C₂ = 114, ε₁ = 10⁻²⁰, X₂ = exp(exp 13.375), the combination 8·B5 − ½·8·B6 − ½·B7 of the exact
 brackets is at least K3J − 10⁻⁵ for every N ≥ X₂. Python total 1.535·10⁻⁴ against K3J 1.596·10⁻⁴. -/
 def Bracket13375 : Prop :=
