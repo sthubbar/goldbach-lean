@@ -1,14 +1,18 @@
 # Provenance of the LeanLab files
 
-`LeanLab/` is the part of Steve Hubbard's Lean Lab that the Dudek 2017 entry needs: 36 modules,
-the import closure of `LeanLab.AlmostPrimes.U1437DudekAll`, after the removals below. AI agents,
-Claude by Anthropic, wrote all of them between 2026-10-16 and 2026-10-21. No file is ported from
+`LeanLab/` is the part of Steve Hubbard's Lean Lab that the Dudek 2017 entry needs: 144 modules,
+the import closure of `LeanLab.AlmostPrimes.U1504DudekAll`, after the removals below. AI agents,
+Claude by Anthropic, wrote all of them between 2026-10-16 and 2026-10-23. No file is ported from
 another project.
 
 ## Scope
 
-The entry proves the even case of Dudek's Theorem 1 only. The odd case is not covered, and
-binary Goldbach is open.
+The headline theorem `U1504DudekAll.dudek_all_ap12` is Dudek's Theorem 1 for every N > 2,
+conditional on the hypothesis `AP12Lower 0.21`, a lower bound for primes in each reduced class
+mod 12 for x at least 10^9. The hypothesis is not proved here; `U1504DudekOdd12.ap12Lower_of_bmor`
+derives it from `U1445DudekOdd.BMORCor16`, Corollary 1.6 of Bennett, Martin, O'Bryant and
+Rechnitzer 2018, itself stated as a hypothesis. The even case, `U1497DudekAll.dudek_even_split`,
+has no hypothesis. Binary Goldbach is open.
 
 ## Changes made for this repository
 
@@ -18,40 +22,50 @@ binary Goldbach is open.
   imports do not bring the `interval_cases` tactic on rc3.
 * Every file was converted to the Lean module system: a `module` header, `public import`, and
   `@[expose] public section`. `#print axioms` lines were dropped.
-* Removed because the compared theorem does not use them, and because some of them rest on
-  placeholder proofs or carry hypotheses: the lab theorems for the odd case, which assume
-  Dudek's statement for odd N above 10^9, and its vacuity check; the theorems that assume an
-  even Goldbach check; the Selberg sieve route of `DudekLarge.lean` for N above exp 12000; and
-  the cited records of Oliveira e Silva, Herzog and Pardi in `Verifications/OeSHPTables.lean`,
-  of which only the compositeness checkers `certOK` and `hasDiv` are kept. The lab modules
-  `AlmostPrimes/Statements`, `AlmostPrimes/BJSThm5At3273`, `Common/ThetaWindow`,
-  `Common/ThetaWindowDusart`, the minimal partition scaffolding, `PNTPort/BVMax/CoprimeHarm`,
-  `PNTSieve/`, `SchnirelmannConstant/Defs`, `Tao2012/`, `Verifications/Statements` and
-  `Verifications/Pratt` were imported by the lab files but not used by this proof, so their
-  imports were removed and the files left out. Module docstrings that described removed
-  theorems were rewritten.
+* Removed because the compared theorems do not use them, and because some of them rest on
+  placeholder proofs or carry other hypotheses: the lab theorems that assume an even Goldbach
+  check; the Selberg sieve route of `DudekLarge.lean` for N above exp 12000; the vacuity check
+  at 10^9 + 1 in `U1437DudekFast.lean`; and the cited records of Oliveira e Silva, Herzog and
+  Pardi in `Verifications/OeSHPTables.lean`, of which only the compositeness checkers `certOK`
+  and `hasDiv` are kept. The lab modules `AlmostPrimes/Statements`,
+  `AlmostPrimes/BJSThm5At3273`, `Common/ThetaWindow`, `Common/ThetaWindowDusart`, the minimal
+  partition scaffolding, `PNTPort/BVMax/CoprimeHarm`, `PNTSieve/`, `SchnirelmannConstant/Defs`,
+  `Tao2012/`, `Verifications/Statements`, `Verifications/Pratt` and
+  `Verifications/PrattCertificates` were imported by the lab files but not used by this proof,
+  so their imports were removed and the files left out. Module docstrings that described
+  removed theorems were rewritten.
+* The lab's older window chain `Verifications/U1437Fast/G1` to `G11` and its `Chain.lean`, 102
+  windows in 11 modules that import Mathlib, are not used: the entry uses the split chain
+  `Verifications/U1497Split/`, which proves the same `SqfUpTo (10^9)`.
 * No file in the entry contains a placeholder proof, and no proof uses native code evaluation.
 
 ## Lab-written mathematics in the closure
 
-For even N at least 10^9, `AlmostPrimes/DudekFrom1e9.lean`, with the counting of
-`DudekLarge.lean`, `DudekFrom4e18.lean`, `DudekGroups.lean`, `DudekCount.lean` and
-`DDLemma22.lean`; the Brun-Titchmarsh bound in progressions comes from Montgomery's large sieve,
-`PNTPort/LargeSieve/`, and the lower bound for the number of primes from
-`ChebyshevExplicit/Psi30.lean`.
+Odd N above 10^9: `AlmostPrimes/U1504DudekOdd12.lean`, with the counting of
+`U1445DudekOdd.lean` for primes r at least 19. Even N at least 10^9:
+`AlmostPrimes/DudekFrom1e9.lean`, with `DudekLarge.lean`, `DudekFrom4e18.lean`,
+`DudekGroups.lean`, `DudekCount.lean` and `DDLemma22.lean`. The Brun-Titchmarsh bound in
+progressions comes from Montgomery's large sieve, `PNTPort/LargeSieve/`, and the lower bound for
+the number of primes from `ChebyshevExplicit/Psi30.lean`.
 
-For 4 <= N <= 10^9, `Verifications/U1437Fast/`: the checker `Sieve.lean`, 102 kernel windows in
-`G1.lean` to `G11.lean`, and their chain, `Chain.lean`. The windows were generated by
-`gen_u1437.py`, kept beside them; the module headers were added afterwards. The primes up to
-31700 used by the window sieve are the literal lists of `Verifications/Top50/Base.lean` and
-`P32.lean`, proved complete by a kernel walk; `Verifications/Top50/BitSieve.lean` holds the bit
-vector machinery.
+3 <= N <= 10^9: `Verifications/U1497Split/`. `Core.lean` holds core only copies of the bit
+vector checker of `Verifications/Top50/BitSieve.lean`, `P32.lean` and `U1437Fast/Sieve.lean`,
+with no Mathlib import. `W1` to `W102` hold 1011 windows of 990000 numbers each, every one a
+`decide +kernel` check, and import only `Core`. `Bridge.lean` proves the core definitions equal
+to the Mathlib ones, and `C1` to `C11` and `Chain.lean` join the windows to `SqfUpTo (10^9)`.
+The modules were generated by `U1497_gen.py`, kept beside them; the module headers were added
+afterwards.
 
 ## Kernel cost
 
-Each of the 11 window modules takes about 50 to 210 seconds to build and about 5.4 GB of memory
-on the lab machine, most of it in the kernel evaluation of `decide +kernel`. A full kernel replay
-of the entry repeats that work. On a 2 core cloud sandbox with 8 GB of memory, on 2026-10-22, a
-clean build of the LeanLab files over the prebuilt Mathlib cache took 1347 seconds, each window
-module 32 to 69 seconds, and the Comparator's kernel replay was stopped by the sandbox's memory
-limit at about 5.6 GB, so the replay needs a machine with more memory.
+The window chain was split so that no window module imports Mathlib. On the lab machine each
+window module `W1` to `W102` peaked at 0.55 to 0.79 GB, and the modules that import Mathlib,
+`Bridge`, `C1` to `C11` and `Chain`, at about 4.9 GB, most of it mapped Mathlib files, in place
+of about 5.4 GB for each of the 11 window modules of the earlier chain.
+
+On a 2 core cloud sandbox with 8 GB of memory, on 2026-10-29, a clean `lake build` of the entry
+over the prebuilt Mathlib cache took 1289 seconds. Peak resident memory, sampled every 2 seconds,
+was 0.47 to 0.61 GB for each window module, 2.5 to 2.8 GB for `Bridge`, `C1` to `C11` and
+`Chain`, and at most 4.3 GB for any module, `Verifications/Top50/P32.lean`. The Comparator run
+took 1625 seconds and completed in the same sandbox: export peaked at 4.75 GB and the kernel
+replay at 3.2 GB.

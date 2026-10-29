@@ -2,9 +2,15 @@
   "challenge_module": "ChallengeDudek2017",
   "solution_module": "SolutionDudek2017",
   "theorem_names": [
-    "LeanLab.Dudek2017.dudek_even"
+    "LeanLab.AlmostPrimes.U1504DudekAll.dudek_all_ap12",
+    "LeanLab.AlmostPrimes.U1497DudekAll.dudek_even_split",
+    "LeanLab.AlmostPrimes.U1504DudekOdd12.ap12Lower_of_bmor"
   ],
-  "definition_names": [],
+  "definition_names": [
+    "LeanLab.AlmostPrimes.U1445DudekOdd.primesAP",
+    "LeanLab.AlmostPrimes.U1445DudekOdd.BMORCor16",
+    "LeanLab.AlmostPrimes.U1504DudekOdd12.AP12Lower"
+  ],
   "permitted_axioms": [
     "propext",
     "Quot.sound",
