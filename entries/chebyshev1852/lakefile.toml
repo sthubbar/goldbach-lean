@@ -1,0 +1,19 @@
+name = "GoldbachLeanChebyshev1852"
+version = "0.1.0"
+defaultTargets = ["GoldbachLean", "ChallengeChebyshev1852", "SolutionChebyshev1852"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.35.0-rc3"
+
+[[lean_lib]]
+name = "GoldbachLean"
+
+[[lean_lib]]
+name = "ChallengeChebyshev1852"
+roots = ["ChallengeChebyshev1852"]
+
+[[lean_lib]]
+name = "SolutionChebyshev1852"
+roots = ["SolutionChebyshev1852"]

@@ -1,0 +1,16 @@
+{
+  "challenge_module": "ChallengeChebyshev1852",
+  "solution_module": "SolutionChebyshev1852",
+  "theorem_names": [
+    "GoldbachLean.Chebyshev1852.Explicit.psi_ge_chebyshev30",
+    "GoldbachLean.Chebyshev1852.Explicit.psi_le_chebyshev30"
+  ],
+  "definition_names": [
+    "GoldbachLean.Chebyshev1852.Explicit.A"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

@@ -1,0 +1,170 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "On the Riemann hypothesis and the difference between primes"
+  description: >-
+    A Lean 4 proof of Theorems 1, 2 and 3 of A. W. Dudek, On the Riemann hypothesis and the
+    difference between primes, Int. J. Number Theory 11, 2015, arXiv 1402.6417. Each theorem is
+    conditional on the Riemann hypothesis, the paper's own hypothesis, stated with Mathlib's
+    RiemannHypothesis. Theorem 2: for every real x at least 2 there is a prime in the interval
+    from x - (4/pi) sqrt(x) log x to x. Theorem 1: there is c > 0 such that the interval from x
+    to x + c sqrt(x) log x holds more than sqrt(x) primes for every real x at least 2. Theorem
+    3: for every epsilon > 0 and all large x there is a prime in the interval from
+    x - (1 + epsilon) sqrt(x) log x to x. Each theorem also takes one cited input as an explicit
+    hypothesis, never as an axiom: HSWN70 gZ, the zero count of Hasanalizade, Shen and Wong,
+    arXiv 2107.06506, Corollary 1.2, for T at least 70, stated for gZ, the ordinates of the
+    nontrivial zeros of the Riemann zeta function counted with multiplicity. The paper cites
+    the zero count of Trudgian 2014 at this point, whose constant Hasanalizade, Shen and Wong
+    report to be in error; the corrected count is used instead. The bounds of Schoenfeld 1976
+    for psi - theta, which the paper also cites, are not an input here: the needed estimate is
+    proved. Dudek's Lemma 4 and the explicit formula for psi_1 are proved as well. An AI agent,
+    Claude, wrote the Lean code, with the ported PrimeNumberTheoremAnd files credited to their
+    authors in PORTING.md; the statements were checked against the paper by AI agents and are
+    offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11N05", "11M26"]
+
+sources:
+  - title: "On the Riemann hypothesis and the difference between primes"
+    authors:
+      - "Adrian W. Dudek"
+    id: "arXiv:1402.6417"
+    type: "article"
+    location: "Int. J. Number Theory 11, 2015; arXiv 1402.6417: Theorems 1, 2 and 3, Lemma 4, Section 2"
+    relationship: "formalizes"
+    note: >-
+      The entry formalizes Theorems 1, 2 and 3 under RH. The paper's zero count input, from
+      Trudgian 2014, is replaced by the corrected count of Hasanalizade, Shen and Wong, taken as
+      an explicit hypothesis; its use of Schoenfeld's psi - theta bounds is replaced by a proof.
+      The author has not been contacted about this formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "Counting zeros of the Riemann zeta function"
+    authors:
+      - "Elchin Hasanalizade"
+      - "Quanli Shen"
+      - "Peng-Jie Wong"
+    id: "arXiv:2107.06506"
+    type: "article"
+    location: "arXiv 2107.06506, Corollary 1.2"
+    relationship: "cited input, taken as an explicit hypothesis"
+    note: >-
+      Cited input. Corollary 1.2, the bound for N(T), is taken as the explicit hypothesis
+      HSWN70 gZ of each compared theorem, for T at least 70; it is not proved here. The authors
+      have not been contacted about this formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "PrimeNumberTheoremAnd"
+    authors:
+      - "the PrimeNumberTheoremAnd project contributors"
+    id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    type: "formalization"
+    location: "commit c39a751132c88b6e8080b74c74023fd95b3d8be0, files under LeanLab/PNTPort/StrongPNT/"
+    relationship: "other"
+    note: >-
+      Sixteen files under LeanLab/PNTPort/StrongPNT, Mellin and residue calculus, bounds for
+      zeta, the conjugation symmetry of zeta'/zeta, the zero-free region and the strong prime
+      number theorem, are ported from this Apache-2.0 project, written by its contributors, with
+      small fixes for Mathlib v4.35.0-rc3, listed in PORTING.md; each file carries a notice.
+      They are the same files as in the Goldston-Suriajaya 2021 entry of this repository.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+
+related_formalizations: []
+
+status:
+  scope: >-
+    Formalized: Theorems 1, 2 and 3 of the paper, theorem1_of_RH_hsw, theorem2_of_RH_hsw and
+    theorem3_of_RH_hsw, each under RH and with HSWN70 gZ as an explicit hypothesis. Proved
+    along the way: Dudek's Lemma 4, the explicit formula for psi_1 with its error bound, the
+    bound for the zero sum on page 5, the prime power window that replaces Schoenfeld's
+    psi - theta bounds, and a kernel checked scan of prime gaps up to 67000 for the small range
+    of Theorem 2. Not formalized: the zero count of Hasanalizade, Shen and Wong.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic"]
+      framework: "Claude Cowork"
+      tool_setup: >-
+        Autonomous agents wrote the lab-written Lean files, ran lake build, read the papers and
+        wrote the statements from them; small kernel checks use decide +kernel, no
+        native_decide; Lean 4 v4.35.0-rc3, Mathlib v4.35.0-rc3.
+      cost:
+        wall_time: "agent runs over 2026-10-16 to 2026-11-01, many hours in total"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published papers on primes
+        in short intervals and the analytic inputs they cite, recording every cited input until
+        proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish; an AI agent, Claude, wrote
+    the lab Lean code and the statements; the files under LeanLab/PNTPort/StrongPNT/ are ported
+    from PrimeNumberTheoremAnd and credited to its contributors. No file here contains a
+    placeholder proof outside the Challenge file. No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    Each theorem is conditional. RH is Mathlib's RiemannHypothesis, taken as the hypothesis
+    hRH. The cited input HSWN70 gZ is the hypothesis hN, never an axiom. gZ is the family of
+    imaginary parts of the zeros of riemannZeta with real part at least -1/2, which are the
+    nontrivial zeros, indexed with multiplicity analyticOrderNatAt. HSWN70 gZ states
+    Hasanalizade-Shen-Wong Corollary 1.2, |N(T) - (T/2pi) log(T/(2pi e))| at most
+    0.1038 log T + 0.2573 log log T + 9.3675, with the 7/8 moved into the error, so 10.2425, as
+    counts of ordinates of both signs over any finite set, at most 2(M(T) + R(T)) for T at least
+    70 and at most 2((M(t) + R(t)) - (M(T) - R(T))) for T at most t. The paper uses Trudgian
+    2014 here, whose constant is reported to be in error, and Schoenfeld 1976 for psi - theta;
+    the Schoenfeld input is proved in the entry. Theorem 1 is stated with the counting function
+    primesIn x h, the number of primes p with x < p at most x + h, and the strict inequality
+    sqrt(x) < primesIn x (c sqrt(x) log x) for every real x at least 2; the proof gives
+    c = 10^8, and the paper only asserts existence of c; its remark that c = 3 + epsilon works
+    for large x is not formalized. Corollary 1.2 is printed for T at least e and is used here
+    only for T at least 70, with N(T) counted with multiplicity as usual. Theorem 2 uses the half open interval
+    x - (4/pi) sqrt(x) log x < p at most x for every real x at least 2. Theorem 3 says that for
+    every epsilon > 0 there is X with a prime in x - (1 + epsilon) sqrt(x) log x < p at most x
+    for all real x at least X. The Lean code was written by AI.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "AI packaging agent: an instance of Claude Opus 5.5, claude-opus-5-5, Anthropic; not a human reviewer"
+  notes: >-
+    Status is self-assessed: every check was done by AI agents of the same model that wrote
+    the Lean code, so it is not an independent review and not a human expert review. The
+    packaging agent built the entry, ran the Lean kernel and the Comparator, and checked that
+    the axioms of the compared theorems are propext, Quot.sound and Classical.choice. HSWN70 gZ
+    follows from Hasanalizade-Shen-Wong Corollary 1.2 for T at least e, with the 7/8 moved into
+    the error, and two-sided counts equal 2 N(T), so the hypothesis holds for the actual zeros
+    and the theorems are not vacuous. No human expert and not the paper's author has reviewed
+    the entry.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Dudek 2015, Theorem 2: under RH, a prime in (x - (4/pi) sqrt(x) log x, x] for every x >= 2"
+      lean: "LeanLab.PNTPort.ExplicitPsi1.Trivial.theorem2_of_RH_hsw"
+      module: "ChallengeDudek2014"
+      status: "proved"
+    - source: "Dudek 2015, Theorem 1: under RH, there is c > 0 with pi(x + c sqrt(x) log x) - pi(x) > sqrt(x) for x >= 2"
+      lean: "LeanLab.Dudek2014.Theorem1H.theorem1_of_RH_hsw"
+      module: "ChallengeDudek2014"
+      status: "proved"
+    - source: "Dudek 2015, Theorem 3: under RH, for every epsilon > 0, a prime in (x - (1 + epsilon) sqrt(x) log x, x] for all large x"
+      lean: "LeanLab.Dudek2014.AbstractC3.theorem3_of_RH_hsw"
+      module: "ChallengeDudek2014"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; the PrimeNumberTheoremAnd project; A. W. Dudek; E. Hasanalizade, Q. Shen and P.-J. Wong."

@@ -1,0 +1,25 @@
+{
+  "challenge_module": "ChallengeDudek2014",
+  "solution_module": "SolutionDudek2014",
+  "theorem_names": [
+    "LeanLab.PNTPort.ExplicitPsi1.Trivial.theorem2_of_RH_hsw",
+    "LeanLab.Dudek2014.Theorem1H.theorem1_of_RH_hsw",
+    "LeanLab.Dudek2014.AbstractC3.theorem3_of_RH_hsw"
+  ],
+  "definition_names": [
+    "LeanLab.Dudek2014.dudekH",
+    "LeanLab.Dudek2014.PrimeInDudekInterval",
+    "LeanLab.Dudek2014.primesIn",
+    "LeanLab.PNTPort.ExplicitPsi1.Zall",
+    "LeanLab.PNTPort.ExplicitPsi1.Trivial.ZIdx",
+    "LeanLab.PNTPort.ExplicitPsi1.Trivial.gZ",
+    "LeanLab.ChirreHagen2025.Lemma26H.Mt",
+    "LeanLab.ChirreHagen2025.Lemma26H.Rt",
+    "LeanLab.Dudek2014.SigmaH.HSWN70"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}
