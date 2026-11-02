@@ -1,0 +1,19 @@
+name = "GoldbachLeanSaouter1998"
+version = "0.1.0"
+defaultTargets = ["GoldbachLean", "ChallengeSaouter1998", "SolutionSaouter1998"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.35.0-rc3"
+
+[[lean_lib]]
+name = "GoldbachLean"
+
+[[lean_lib]]
+name = "ChallengeSaouter1998"
+roots = ["ChallengeSaouter1998"]
+
+[[lean_lib]]
+name = "SolutionSaouter1998"
+roots = ["SolutionSaouter1998"]

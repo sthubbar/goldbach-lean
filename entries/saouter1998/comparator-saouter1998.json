@@ -1,0 +1,41 @@
+{
+  "challenge_module": "ChallengeSaouter1998",
+  "solution_module": "SolutionSaouter1998",
+  "theorem_names": [
+    "GoldbachLean.Saouter1998.Paper.N_form",
+    "GoldbachLean.Saouter1998.Paper.N_three",
+    "GoldbachLean.Saouter1998.Paper.printed_three_ne",
+    "GoldbachLean.Saouter1998.Paper.printed_not_form",
+    "GoldbachLean.Saouter1998.Paper.printed_gap",
+    "GoldbachLean.Saouter1998.Paper.last_prime_form",
+    "GoldbachLean.Saouter1998.Paper.lemma2",
+    "GoldbachLean.Saouter1998.BLS.lemma1",
+    "GoldbachLean.Saouter1998.Thm2.theorem2",
+    "GoldbachLean.Saouter1998.Thm2.last_prime",
+    "GoldbachLean.Saouter1998.Thm2.first_prime",
+    "GoldbachLean.Saouter1998.Thm1.theorem1",
+    "GoldbachLean.Saouter1998.Thm1.theorem1_int",
+    "GoldbachLean.Saouter1998.Table1.table1_head",
+    "GoldbachLean.Saouter1998.Table1.table1_gaps",
+    "GoldbachLean.Saouter1998.Table1.printed_three_composite",
+    "GoldbachLean.Saouter1998.Table1Thm2.table1_prime_thm2",
+    "GoldbachLean.Saouter1998.ProthLadder.ternaryGoldbachUpTo_1e20_of_even",
+    "GoldbachLean.Saouter1998.ProthLadder.ternaryGoldbachUpTo_293_vacuity"
+  ],
+  "definition_names": [
+    "GoldbachLean.IsGoldbachSum",
+    "GoldbachLean.IsTernarySum",
+    "GoldbachLean.EvenGoldbachUpTo",
+    "GoldbachLean.TernaryGoldbachUpTo",
+    "GoldbachLean.Saouter1998.Paper.N",
+    "GoldbachLean.Saouter1998.Paper.Nprinted",
+    "GoldbachLean.Saouter1998.Paper.Theorem2",
+    "GoldbachLean.Saouter1998.BLS.Lemma1",
+    "GoldbachLean.Saouter1998.Table1.T1"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

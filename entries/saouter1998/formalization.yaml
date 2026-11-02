@@ -1,0 +1,236 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Checking the odd Goldbach conjecture up to 10^20"
+  description: >-
+    A Lean 4 formalization of the mathematics of Y. Saouter, Checking the odd Goldbach conjecture up
+    to 10^20, Math. Comp. 67, 1998, 863 to 866. Proved with no hypothesis: Lemma 1, the paper's form
+    of Theorem 5 of Brillhart, Lehmer and Selfridge 1975, for every even F; Theorem 1, the primality
+    criterion for N = 2^22 R + 1 below 10^20 with R odd and any base a with a^((N-1)/2) = -1 modulo N;
+    Lemma 2 by quadratic reciprocity; Theorem 2, the case of base 5; the primality of the 100 rungs
+    of Table 1 and of the first and last primes printed in the paper. The printed ladder constant
+    1258213 is a misprint for 12582913, and this repair is proved. The entry does not reverify
+    Saouter's computation: his ladder of about 250 million rungs is checked only through its first
+    100 rungs. As a derived result, not a theorem of the paper, every odd number from 7 to 10^20 is a
+    sum of three primes, conditional on one cited input taken as an explicit hypothesis, never as an
+    axiom: EvenGoldbachUpTo of 4 * 10^18, the published computation of T. Oliveira e Silva, S. Herzog
+    and S. Pardi, Math. Comp. 83, 2014, not proved here. That proof uses Saouter's prime ladder with 25 Proth rungs as in Helfgott and Platt, so the paper's range is reproduced by a different ladder
+    on a much larger even input than Saouter's 4 * 10^11. Ternary Goldbach for all odd numbers is
+    Helfgott's theorem, from his 2013 preprint, and is not formalized here. Binary Goldbach is open
+    and is not claimed. AI agents wrote the Lean code, which is offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11Y11", "11A51"]
+
+sources:
+  - title: "Checking the odd Goldbach conjecture up to 10^20"
+    authors:
+      - "Yannick Saouter"
+    id: "doi:10.1090/S0025-5718-98-00928-4"
+    type: "article"
+    location: "Math. Comp. 67, 1998, 863-866: Lemma 1, Theorem 1, Lemma 2, Theorem 2 on page 864, the formula and Table 1 on page 865"
+    relationship: "formalizes"
+    note: >-
+      The entry formalizes Lemma 1, Theorem 1, Lemma 2, Theorem 2 and the primality of Table 1 and
+      of the first and last primes. It repairs the printed constant of page 865. The paper's 40
+      machine computation is not reverified. The author has not been contacted about this
+      formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "Empirical verification of the even Goldbach conjecture and computation of prime gaps up to 4·10^18"
+    authors:
+      - "Tomás Oliveira e Silva"
+      - "Siegfried Herzog"
+      - "Silvio Pardi"
+    id: "doi:10.1090/S0025-5718-2013-02787-1"
+    type: "article"
+    location: "Math. Comp. 83, 2014, 2033-2060"
+    relationship: "cited input, taken as an explicit hypothesis"
+    note: >-
+      Cited input. The result of this computation, EvenGoldbachUpTo of 4 * 10^18, is the hypothesis
+      h of ternaryGoldbachUpTo_1e20_of_even. It is not proved here and is not an axiom. The authors
+      have not been contacted about this formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "Numerical verification of the ternary Goldbach conjecture up to 8.875·10^30"
+    authors:
+      - "H. A. Helfgott"
+      - "David J. Platt"
+    id: "arXiv:1305.3062"
+    type: "article"
+    location: "Experimental Mathematics 22, 2013, 406-409: Theorem 2.3, Proth's theorem, and Section 3, the prime ladder algorithm"
+    relationship: "adapts"
+    note: >-
+      The ladder of Proth primes of Section 3 is the method of ternaryGoldbachUpTo_1e20_of_even,
+      applied at Saouter's range with 25 rungs that are not taken from this paper. Proth's theorem
+      in the sufficient direction is proved here. The authors have not been contacted about this
+      formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "New primality criteria and factorizations of 2^m ± 1"
+    authors:
+      - "John Brillhart"
+      - "D. H. Lehmer"
+      - "J. L. Selfridge"
+    id: "doi:10.1090/S0025-5718-1975-0384673-1"
+    type: "article"
+    location: "Math. Comp. 29, 1975, 620-647, Theorem 5"
+    relationship: "background"
+    note: >-
+      Saouter's Lemma 1 is his statement of this theorem. The entry states and proves his Lemma 1.
+      It is the case m = 1 of Theorem 5, with one base and the weaker bound N < 2 F^3, and nothing
+      rests on that citation since the lemma has a full proof here.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "https://github.com/leanprover-community/mathlib4/blob/v4.35.0-rc3/Mathlib/NumberTheory/LucasPrimality.lean"
+    relationship: "Lucas test in Mathlib"
+    note: >-
+      Mathlib has lucas_primality and, in NumberTheory/Fermat.lean, pepin_primality for Fermat
+      numbers. A search of Mathlib v4.35.0-rc3 found no statement of Proth's theorem, Pocklington's
+      criterion or Brillhart, Lehmer and Selfridge's theorems, and nothing on the Goldbach
+      conjecture. A web search of Mathlib pull requests on 2026-11-02 found
+      none on these criteria; that search is not exhaustive. The proofs here do not use lucas_primality.
+  - id: "https://github.com/b-mehta/PrimeCert"
+    relationship: "independent formalization of a Brillhart, Lehmer and Selfridge cube root criterion"
+    note: >-
+      PrimeCert by Bhavik Mehta and Kenny Lau proves Pocklington's test and pocklington3_test, the
+      sufficient direction of a cube root variant with the same test on r^2 - 8s, with an extra
+      parameter m and a primality certificate tactic. It proves primality only, so it does not give
+      the if and only if of Saouter's Lemma 1, and it has no Proth test or Goldbach content. It was
+      found after the code here was written; no code of it is used.
+  - id: "https://lean-lang.org/eval/problems/weak_goldbach/"
+    relationship: "lean-eval problem stating weak Goldbach"
+    note: >-
+      States Helfgott's theorem as an open formalization challenge, with no proof in Lean. No Lean
+      formalization of ternary Goldbach or of a numerical check of it was found. Palomar searches
+      on 2026-11-02 for Saouter, Proth, Pocklington, Lucas and Brillhart returned no entries.
+  - id: "https://github.com/sthubbar/goldbach-lean/tree/main/entries/heathbrown1985"
+    relationship: "earlier entry of this repository on the ternary problem"
+    note: >-
+      Proves Vinogradov's three primes theorem for large odd numbers, ineffectively, so it does not
+      overlap this numerical range. No code is shared.
+
+status:
+  scope: >-
+    Formalized with no hypothesis: lemma1, theorem1, theorem1_int, lemma2, theorem2,
+    table1_prime_thm2, table1_head, table1_gaps, first_prime, last_prime, and the repair of the
+    printed constant, N_form, N_three, last_prime_form, printed_three_ne, printed_not_form,
+    printed_gap, printed_three_composite. A derived result, not a theorem of the paper:
+    ternaryGoldbachUpTo_1e20_of_even, conditional on EvenGoldbachUpTo of 4 * 10^18, with the vacuity
+    instance ternaryGoldbachUpTo_293_vacuity, which runs the same ladder lemma at bound 293 with
+    every input checked by the kernel. Not formalized: Saouter's algorithm and his computed ladder
+    beyond 100 rungs, Sinisalo's even check to 4 * 10^11, the even computation to 4 * 10^18, and
+    ternary Goldbach beyond 10^20.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic", "Codex, OpenAI", "Gemini, Google", "Antigravity agents, Google"]
+      framework: "Claude Cowork"
+      tool_setup: >-
+        Autonomous agents wrote the Lean files, ran lake build and read the paper; other agents of
+        the lab, listed in PORTING.md, contributed Theorem 1 and parts of the Lemma 1 proof. Small
+        kernel checks use decide +kernel, no native_decide; a packaging agent ported the files to
+        Lean 4 v4.35.0-rc3, Mathlib v4.35.0-rc3, and ran the Lean kernel and the Comparator.
+      cost:
+        wall_time: "agent runs over 2026-10-16 to 2026-11-01, and packaging on 2026-11-02"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published results related to
+        Goldbach's problem and the inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish; AI agents wrote all Lean code
+    and the statements. No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    Printed constant: page 865 prints N = 5 * 2^23 * k + 1258213; the entry uses 12582913, a dropped
+    digit 9, since the printed formula misses the paper's first prime at k = 3 and never has the
+    form 2^22 R + 1, while the corrected one gives Table 1 and the last prime. Lemma 1: the phrase
+    that the factorization of F is known is about building the certificate and is not a hypothesis;
+    the integer a is one base for all primes dividing F, as in the paper. It is stated as printed
+    in Saouter's paper. It is the case m = 1 of Theorem 5 of Brillhart, Lehmer and Selfridge, with
+    one base and the weaker bound N < 2 F^3. Theorem 1: the existence of a becomes a universally quantified base, natural in theorem1
+    and integer in theorem1_int; r and s are R % (2 * 2^22) and R / (2 * 2^22). Theorem 2 keeps the
+    paper's hypothesis N = 3 modulo 10, which the proof does not use. last_prime lies above 10^20,
+    outside Theorem 2, and rests on the wider size bound N < 2 F^3 of Lemma 1. Main result: the
+    paper's claim that odd Goldbach holds up to 10^20 is its computation on Sinisalo's even range
+    4 * 10^11. This entry does not reverify that computation. ternaryGoldbachUpTo_1e20_of_even is a
+    derived result of the entry, with cited input EvenGoldbachUpTo of 4 * 10^18 from Oliveira e
+    Silva, Herzog and Pardi as the explicit hypothesis h, never an axiom. It uses 25 Proth primes
+    k 2^34 + 1 from the lab rising from 3 with gaps at most 4 * 10^18 - 2, the method of Helfgott
+    and Platt, in place of Saouter's ladder from 138412033 with gaps below 4 * 10^11. The range
+    includes n = 10^20 only vacuously, as that number is even. Goldbach up to 4 * 10^18 is not
+    stated unconditionally anywhere. Ternary Goldbach is Helfgott's theorem; binary Goldbach is
+    open. The Lean code was written by AI.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "AI packaging agent: an instance of Claude Opus 5.5, claude-opus-5-5, Anthropic; not a human reviewer"
+    - "AI faithfulness auditor: a fresh instance of Claude Opus 5.5, claude-opus-5-5, Anthropic; not a human reviewer"
+  notes: >-
+    Status is self-assessed: every check was done by AI agents of the families that wrote the
+    Lean code, so it is not an independent review and not a human expert review. The packaging
+    agent read Lemma 1, Theorem 1, Lemma 2, Theorem 2, Table 1 and the page 865 formula in a text
+    copy of the paper, built the entry, ran the Lean kernel and the Comparator, and checked that
+    the axioms of the compared theorems are propext, Quot.sound and Classical.choice. The hypothesis
+    of ternaryGoldbachUpTo_1e20_of_even is the published result of Oliveira e Silva, Herzog and
+    Pardi, a satisfiable input as far as that computation stands, and the vacuity instance shows
+    the same ladder lemma working at a small bound with every input checked. A second fresh AI agent, the same model, audited every Challenge statement against page images of
+    the print and rechecked the printed constant and the 25 rungs independently in Python: all match,
+    with no mathematical problem. No human expert and not the paper's author has reviewed the entry.
+
+alignment:
+  namespace: "GoldbachLean"
+  statements:
+    - source: "Saouter 1998, Lemma 1, page 864, his form of Brillhart, Lehmer and Selfridge 1975, Theorem 5"
+      lean: "GoldbachLean.Saouter1998.BLS.lemma1"
+      module: "ChallengeSaouter1998"
+      status: "proved"
+    - source: "Saouter 1998, Theorem 1, page 864, natural base"
+      lean: "GoldbachLean.Saouter1998.Thm1.theorem1"
+      module: "ChallengeSaouter1998"
+      status: "proved"
+    - source: "Saouter 1998, Theorem 1, page 864, integer base"
+      lean: "GoldbachLean.Saouter1998.Thm1.theorem1_int"
+      module: "ChallengeSaouter1998"
+      status: "proved"
+    - source: "Saouter 1998, Lemma 2, page 864"
+      lean: "GoldbachLean.Saouter1998.Paper.lemma2"
+      module: "ChallengeSaouter1998"
+      status: "proved"
+    - source: "Saouter 1998, Theorem 2, page 864"
+      lean: "GoldbachLean.Saouter1998.Thm2.theorem2"
+      module: "ChallengeSaouter1998"
+      status: "proved"
+    - source: "Saouter 1998, Table 1, page 865: the 100 rungs are prime with the corrected constant"
+      lean: "GoldbachLean.Saouter1998.Table1Thm2.table1_prime_thm2"
+      module: "ChallengeSaouter1998"
+      status: "adapted"
+      note: "With 12582913 in place of the printed 1258213."
+    - source: "Saouter 1998, page 865: the last prime 100000000209366024193"
+      lean: "GoldbachLean.Saouter1998.Thm2.last_prime"
+      module: "ChallengeSaouter1998"
+      status: "proved"
+    - source: "Derived result of this entry, not in the paper: odd numbers from 7 to 10^20, conditional on EvenGoldbachUpTo of 4 * 10^18"
+      lean: "GoldbachLean.Saouter1998.ProthLadder.ternaryGoldbachUpTo_1e20_of_even"
+      module: "ChallengeSaouter1998"
+      status: "adapted"
+      note: "Same range as the paper's abstract, by a different ladder and a much larger cited even input."
+
+acknowledgements: "Mathlib and the Lean FRO; Y. Saouter; J. Brillhart, D. H. Lehmer and J. L. Selfridge; T. Oliveira e Silva, S. Herzog and S. Pardi; H. A. Helfgott and D. J. Platt."
