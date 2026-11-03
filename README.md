@@ -5,8 +5,9 @@ Goldbach conjecture. The conjecture is still open, and nothing here claims to pr
 The project formalizes published results about Goldbach's problem and its relatives,
 checks their proofs and constants, and records the gaps it finds.
 
-The new Lean code here was written by an AI agent, Claude by Anthropic, under Steve Hubbard's
-direction; the agent also did the port of the files under
+The new Lean code here was written by AI agents under Steve Hubbard's direction: mainly Claude
+by Anthropic, with Codex by OpenAI, Gemini by Google and other lab prover agents on some entries;
+each entry's formalization.yaml and PORTING.md say which. Claude also did the port of the files under
 `entries/heathbrown1985/LeanLab/PNTPort/StrongPNT/`, whose code was written by the
 PrimeNumberTheoremAnd contributors, see NOTICE and `entries/heathbrown1985/PORTING.md`. It is checked by the Lean kernel and by Lean's Comparator. No human expert has
 reviewed the mathematics.
