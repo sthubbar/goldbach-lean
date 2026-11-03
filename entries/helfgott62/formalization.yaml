@@ -1,0 +1,149 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Helfgott's Proposition 6.2 on the ternary Goldbach minor arcs"
+  description: >-
+    A Lean 4 proof of Lemma 6.1 and Proposition 6.2 of H. A. Helfgott, The ternary Goldbach
+    conjecture is true, arXiv 1312.7748v2, Section 6.1, pages 46 to 48. Lemma 6.1 is a summation
+    by parts bound. Proposition 6.2 turns l2 bounds on S1 over the major arcs and l-infinity
+    bounds on S2 off them into a bound for the integral of |S1|^2 |S2| over the minor arcs,
+    without the factor log x that a plain product of norms would lose. Lemma 6.1 is stated as in
+    the paper. Proposition 6.2 is given in three forms: an abstract measure form with a natural
+    upper endpoint; the arcs of display 3.5 for a finite exponential polynomial S1 and a natural
+    upper endpoint; and absolutely summable coefficients with a real upper endpoint, over any
+    increasing measurable family of sets. The hypotheses 6.4 and 6.5 of the Proposition stay
+    hypotheses, as in the paper, and are not proved for any exponential sum. This is one step of
+    Helfgott's proof. The ternary Goldbach theorem itself is not formalized here, nor is Theorem
+    6.3 of the paper. Binary Goldbach is open and is not claimed. AI agents wrote the Lean code,
+    Claude, Codex and other lab agents, as listed in PORTING.md, and it is offered for human
+    audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11P55"]
+
+sources:
+  - title: "The ternary Goldbach conjecture is true"
+    authors:
+      - "Harald A. Helfgott"
+    id: "arXiv:1312.7748"
+    type: "preprint"
+    location: "arXiv 1312.7748v2, Section 6.1: Lemma 6.1 on page 46, Proposition 6.2 on page 47, proofs on pages 46 to 48; display 3.5 on page 10"
+    relationship: "formalizes"
+    note: >-
+      The entry formalizes Lemma 6.1 and Proposition 6.2 of version 2, with the narrowings in the
+      fidelity block. Statements were read against that version only; the later book form of
+      the proof, arXiv 1501.05438, was not compared. The author has not been contacted about
+      this entry.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+
+related_formalizations: []
+
+status:
+  scope: >-
+    Formalized: Lemma 6.1, lemma61_paper; Proposition 6.2 as prop62, prop62_arcs and
+    prop62_series_real, with hypotheses 6.4 and 6.5 explicit, as in the paper. Proved along the
+    way: Parseval for finite exponential polynomials and for absolutely summable exponential
+    series, monotonicity of the arcs of display 3.5 at natural r and their measurability, and
+    the extension of the proposition to a real upper endpoint. Not formalized: any instance of
+    6.4 or 6.5 for actual exponential sums, Sections 4 and 5 of the paper, Theorem 6.3, and the
+    ternary Goldbach theorem.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic", "Codex, OpenAI"]
+      framework: "Claude Cowork"
+      tool_setup: >-
+        Autonomous agents wrote the Lean files, ran lake build, read the paper and wrote the
+        statements from it; no native_decide; Lean 4 v4.35.0-rc3, Mathlib v4.35.0-rc3. Other lab
+        prover agents, among them OMOS, closed leaves; PORTING.md says which credits the lab
+        notes support.
+      cost:
+        wall_time: "agent runs over 2026-10-26 to 2026-11-03"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published work on the
+        Goldbach problems, decompose each proof into leaf lemmas, and record every cited input.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish. Claude wrote the statements
+    and the decomposition in lab unit U-1538; Codex and other lab prover agents proved leaves,
+    as listed in PORTING.md. No file here contains a placeholder proof outside the Challenge
+    file. No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    No single theorem joins the arcs of display 3.5, general L1 coefficients and a real upper
+    endpoint r1: prop62_arcs has the arcs with finite S1 and natural r1, and prop62_series_real
+    has summable coefficients and real r1 for an abstract family. The paper's Proposition is
+    thus covered in parts, not in one statement. Common to all forms: the conditions on F and H,
+    continuous, piecewise differentiable and non-decreasing, are encoded by NondecFTC, a
+    nonnegative integrable density with the fundamental theorem of calculus, which covers the
+    paper's functions; the maxima in Lemma 6.1 are hmax, floored at 0, equal to the plain maximum
+    for g at least 0; the sums in Lemma 6.1 run over natural a at most b, and 0 is allowed for a
+    and for r0; H is not required to be nonnegative. lemma61_paper asks f at least 0 on all
+    naturals, which loses nothing. prop62 is for any measure, a weight w of total mass 1 in
+    place of |S1|^2 over the sum of |a_n|^2, a function s bounded almost everywhere in place of
+    |S2|, and any increasing measurable family of sets indexed by naturals, with r1 natural and
+    6.4 and 6.5 asked only at integers r, which is a weaker hypothesis than the paper's. The
+    paper takes r1 real. prop62_arcs narrows S1 to a finite exponential polynomial over a finite
+    set of integers, where the paper has general coefficients in L1, and takes r1 natural, with
+    6.4 and 6.5 at integers r. R/Z is modelled as the half open unit interval that contains 0
+    and omits 1: the arcs majorArcs are periodic closed subsets of the reals intersected with
+    that interval. The paper's arcs are open and the Lean arcs are closed; the boundaries are null for the integrals, and 6.5 off the closed arcs is a weaker hypothesis than off the open arcs, so the Lean form implies the paper's. The paper asks delta0 > 0 and a positive integer r0; delta0 = 0 and r0 = 0 are allowed here. It assumes delta0 at least 0 and x > 0 and
+    drops the paper's condition delta0 at most x / 2 r1^2, which the proof does not use. S2 is
+    any continuous function on the reals, not assumed periodic. prop62_series_real takes c
+    indexed by the integers with the sum of |c_n| finite and with the sum of |c_n|^2 positive,
+    which is the paper's L1 condition, and a real upper endpoint R at least the natural r0. Its
+    family M is any increasing measurable family of subsets of the reals, indexed by all reals,
+    not specialised to display 3.5: this entry proves monotonicity of the arcs only at natural
+    r. R/Z is modelled there as the half open unit interval that omits 0 and contains 1. Displays 6.4 and 6.6 appear multiplied by the sum of
+    |c_n|^2 instead of divided by it, an equivalent form. I0 of display 6.7 is written out. The
+    Lean code was written by AI.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "AI packaging agent: an instance of Claude Opus 5.5, claude-opus-5-5, Anthropic; not a human reviewer"
+  notes: >-
+    Status is self-assessed: every check was done by AI agents, so it is not an independent
+    review and not a human expert review. The packaging agent read pages 46 to 48 and display
+    3.5 of arXiv 1312.7748v2, built the entry, ran the Lean kernel and the Comparator, and
+    checked that the axioms of the four compared theorems are propext, Quot.sound and
+    Classical.choice. A lab run compiled a concrete instance of prop62_series_real at R = 3/2,
+    so its hypotheses are satisfiable. No human expert and not the paper's author has reviewed
+    the entry.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Helfgott v2, Lemma 6.1: summation by parts bound, page 46"
+      lean: "LeanLab.Helfgott2013.U1538.lemma61_paper"
+      module: "ChallengeHelfgott62"
+      status: "proved"
+    - source: "Helfgott v2, Proposition 6.2, abstract measure form with natural r1"
+      lean: "LeanLab.Helfgott2013.U1538.prop62"
+      module: "ChallengeHelfgott62"
+      status: "proved"
+    - source: "Helfgott v2, Proposition 6.2 for the arcs of display 3.5, finite S1, natural r1"
+      lean: "LeanLab.Helfgott2013.U1538.prop62_arcs"
+      module: "ChallengeHelfgott62"
+      status: "proved"
+    - source: "Helfgott v2, Proposition 6.2 for absolutely summable coefficients, real r1, abstract increasing family"
+      lean: "LeanLab.Helfgott2013.U1538.prop62_series_real"
+      module: "ChallengeHelfgott62"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; H. A. Helfgott."

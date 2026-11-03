@@ -1,0 +1,26 @@
+{
+  "challenge_module": "ChallengeGoldbachShort1075",
+  "solution_module": "SolutionGoldbachShort1075",
+  "theorem_names": [
+    "LeanLab.GoldbachShort78.goldbach_short_1075",
+    "LeanLab.GoldbachShort78.windowCount_of_backward",
+    "LeanLab.GoldbachShort78.goldbach_of_counts",
+    "LeanLab.GoldbachShort78.exponent_1075"
+  ],
+  "definition_names": [
+    "LeanLab.IsGoldbachSum",
+    "LeanLab.GoldbachShort78.IsGoldbachNumber",
+    "LeanLab.GoldbachShort78.primeWindow",
+    "LeanLab.GoldbachShort78.badSet",
+    "LeanLab.GoldbachShort78.WindowCount",
+    "LeanLab.GoldbachShort78.primeInterval",
+    "LeanLab.GoldbachShort78.powerBadSet",
+    "LeanLab.GoldbachShort78.LiPrintedExceptionalCount",
+    "LeanLab.GoldbachShort78.LiRow052"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

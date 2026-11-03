@@ -1,0 +1,22 @@
+{
+  "challenge_module": "ChallengeHelfgott62",
+  "solution_module": "SolutionHelfgott62",
+  "theorem_names": [
+    "LeanLab.Helfgott2013.U1538.lemma61_paper",
+    "LeanLab.Helfgott2013.U1538.prop62",
+    "LeanLab.Helfgott2013.U1538.prop62_arcs",
+    "LeanLab.Helfgott2013.U1538.prop62_series_real"
+  ],
+  "definition_names": [
+    "LeanLab.Helfgott2013.U1538.hmax",
+    "LeanLab.Helfgott2013.U1538.NondecFTC",
+    "LeanLab.Helfgott2013.U1538.eC",
+    "LeanLab.Helfgott2013.U1538.trig",
+    "LeanLab.Helfgott2013.U1538.majorArcs"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}
