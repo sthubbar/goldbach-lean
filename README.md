@@ -42,6 +42,8 @@ Each entry is its own Lake project, the `project_path` of its Palomar submission
 | `entries/goldbachshort1075` | `ChallengeGoldbachShort1075.lean` | `comparator-goldbachshort1075.json` | Goldbach numbers in short intervals of length x^(26/1075+ε), with two theorems of R. Li as explicit hypotheses |
 | `entries/helfgott62` | `ChallengeHelfgott62.lean` | `comparator-helfgott62.json` | Helfgott 2013, Lemma 6.1 and Proposition 6.2, one step of the ternary Goldbach proof; the ternary theorem itself is not formalized here |
 
+Note on `entries/bordignonstarichkova2024grh`, PALOMAR-2026-10-28-000016 version 2: see its `NOTE-sieve-input.md` on the level of the sieve input.
+
 ## Build
 
 Lean and Mathlib v4.35.0-rc3, the newest version Palomar's Challenge renderer currently
