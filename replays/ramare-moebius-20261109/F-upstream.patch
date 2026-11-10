@@ -1,0 +1,275 @@
+diff --git a/README.md b/README.md
+index 8eeb240..a7a6366 100644
+--- a/README.md
++++ b/README.md
+@@ -40,6 +40,20 @@ The bounds for `ψ`, `θ` and Mertens' product (Lemma C.2.2) that replace [H]'s
+ [RS62], [RS75] and [RR96] (`Prelim.theta_explicit`, `Prelim.psi_two_sided`) use RH up to `10⁸`,
+ which `PlattGRH` gives at `q = 1` (`Explicit.rh_upto_1e8`).
+ 
++**Two hypotheses.** `RamareMoebius` follows from `PlattGRH`: Helfgott's RSBounds project proves it
++from RH up to `1894438.5122`, which `Explicit.rh_upto_1e8` gives. The separate package
++[`TwoHypotheses/`](TwoHypotheses/README.md) uses this to prove
++
++```lean
++theorem TernaryGoldbach.ternary_goldbach_of_two_hypotheses (hGRH : PlattGRH)
++    (hBG : BinaryGoldbachInput) : Statement
++theorem TernaryGoldbach.ternary_goldbach_large_of_plattGRH (hGRH : PlattGRH) :
++    TernaryGoldbachFrom (10 ^ 27)
++```
++
++with its own Comparator challenge. RSBounds depends on this repository, so the root package does
++not depend on `TwoHypotheses/`, and `lake build` here is unchanged.
++
+ Ramaré's asymptotic for `∑_{r≤R, (r,d)=1} μ²(r)/φ(r)` ([H, (12.12)], [Ram95, Lemma 3.4]) is proved,
+ including the value of `c_E` (`Prelim/Ramare.lean`). One step of [Ram95]'s proof, (3.9), is false;
+ our proof avoids it (`HYPOTHESES.md`, Finding 5).
+@@ -264,6 +278,7 @@ The final margin is `0.0114 x²/κ`, against [H]'s `0.04877 x²/κ`.
+ | `Explicit/` | explicit formulas for `L(s, χ)` and `ζ`; growth, Jensen and Landau bounds; the zero-free region; the explicit prime number theorem for `ψ` |
+ | `Prelim/` | [H, §2]: `ψ`, `θ`, Mertens products, sums of `μ` and Liouville's function; the large sieves of [MV73]; Hilbert inequalities; Plancherel; Gauss sums |
+ | `scripts/` | generators of the numeric Lean files (`gen_*.py`); independent float and interval-arithmetic checks of numerical claims of [H] and of quantities in the proof (`scripts/rigorous/`); models behind the errata |
++| `TwoHypotheses/` | separate Lake package: the main theorems without `RamareMoebius`, from Helfgott's RSBounds |
+ | `HYPOTHESES.md` | the hypotheses, checked against their sources; errors found in the sources |
+ | `BLUEPRINT.md`, `NOTES.md` | map from [H] to Lean; working notes |
+ 
+diff --git a/TwoHypotheses/.gitignore b/TwoHypotheses/.gitignore
+new file mode 100644
+index 0000000..bfb30ec
+--- /dev/null
++++ b/TwoHypotheses/.gitignore
+@@ -0,0 +1 @@
++/.lake
+diff --git a/TwoHypotheses/README.md b/TwoHypotheses/README.md
+new file mode 100644
+index 0000000..c06c491
+--- /dev/null
++++ b/TwoHypotheses/README.md
+@@ -0,0 +1,54 @@
++# The main theorems with two hypotheses
++
++`RamareMoebius` is a consequence of `PlattGRH`. H. A. Helfgott's RSBounds project proves
++
++```lean
++theorem TernaryGoldbach.RSBounds.Moebius003.ramareMoebius_of_plattGRH
++    (h : TernaryGoldbach.PlattGRH) : TernaryGoldbach.RamareMoebius
++```
++
++from this repository's `Explicit.rh_upto_1e8` (RH up to `10⁸` from `PlattGRH` at `q = 1`) and a
++kernel-checked proof of `|∑_{n≤x} μ(n)/n| ≤ 0.03/log x` for `x ≥ 11815` from RH up to
++`1894438.5122`. This package uses it to state the main theorems without `hμ`:
++
++```lean
++theorem TernaryGoldbach.ternary_goldbach_of_two_hypotheses (hGRH : PlattGRH)
++    (hBG : BinaryGoldbachInput) : Statement
++theorem TernaryGoldbach.ternary_goldbach_large_of_plattGRH (hGRH : PlattGRH) :
++    TernaryGoldbachFrom (10 ^ 27)
++theorem TernaryGoldbach.ramareMoebius_of_plattGRH (hGRH : PlattGRH) : RamareMoebius
++```
++
++## Why a separate package
++
++RSBounds requires this repository, so the root package cannot require RSBounds without a
++dependency cycle. Copying RSBounds in would add about 2,400 modules and 40 MB of source, most of
++it generated certificates, and about ten hours of build. Instead this directory is its own Lake
++package. It requires the root package from `..` and RSBounds from git. The root package does not
++know about it: `lake build` and `comparator/config.json` at the root are unchanged, and the
++three-hypothesis theorems stay as they are.
++
++`lakefile.lean` requires `TernaryGoldbach` before RSBounds. Lake resolves a package name to the
++root's own requirement, so RSBounds is compiled against this checkout, not against the commit it
++pins. If a change here breaks RSBounds, this package stops building and the root does not.
++
++## Checking it
++
++From this directory:
++
++```sh
++lake update
++lake exe cache get
++lake build TwoHypotheses TwoHypothesesChallenge
++lake comparator --config comparator.json
++```
++
++`lake build` builds all of the root package's development that `MainTheorems` needs and RSBounds's
++proof of `RamareMoebius`. Comparator checks the three theorems against `TwoHypothesesChallenge.lean`,
++whose definitions are those of `../Challenge.lean` unchanged, and permits only `propext`,
++`Quot.sound` and `Classical.choice`. Success ends with
++
++```
++Lean default kernel accepts the solution
++Your solution is okay!
++```
+diff --git a/TwoHypotheses/TwoHypotheses.lean b/TwoHypotheses/TwoHypotheses.lean
+new file mode 100644
+index 0000000..a6c0d27
+--- /dev/null
++++ b/TwoHypotheses/TwoHypotheses.lean
+@@ -0,0 +1,29 @@
++import TernaryGoldbach.MainTheorems
++import RSBounds.Moebius003.Upstream
++
++/-!
++# The main theorems with two hypotheses
++
++`RamareMoebius` follows from `PlattGRH`: `PlattGRH` at `q = 1` gives RH up to `10⁸`
++(`Explicit.rh_upto_1e8`), and Helfgott's RSBounds project proves `RamareMoebius` from RH up to
++`1894438.5122` (`TernaryGoldbach.RSBounds.Moebius003.ramareMoebius_of_plattGRH`). So the main
++theorems of `TernaryGoldbach/MainTheorems.lean` hold without the hypothesis `hμ`.
++-/
++
++namespace TernaryGoldbach
++
++/-- Ramaré's bound for `∑ μ(n)/n`, from Platt's GRH verification (Helfgott, RSBounds). -/
++theorem ramareMoebius_of_plattGRH (hGRH : PlattGRH) : RamareMoebius :=
++  TernaryGoldbach.RSBounds.Moebius003.ramareMoebius_of_plattGRH hGRH
++
++/-- Every odd `n ≥ 10²⁷` is a sum of three primes, given Platt's GRH verification. -/
++theorem ternary_goldbach_large_of_plattGRH (hGRH : PlattGRH) : TernaryGoldbachFrom (10 ^ 27) :=
++  ternary_goldbach_large_of_hypotheses hGRH (ramareMoebius_of_plattGRH hGRH)
++
++/-- **The ternary Goldbach conjecture**, given Platt's GRH verification and binary Goldbach up to
++`4·10¹⁸`. -/
++theorem ternary_goldbach_of_two_hypotheses (hGRH : PlattGRH) (hBG : BinaryGoldbachInput) :
++    Statement :=
++  ternary_goldbach_of_hypotheses hGRH hBG (ramareMoebius_of_plattGRH hGRH)
++
++end TernaryGoldbach
+diff --git a/TwoHypotheses/TwoHypothesesChallenge.lean b/TwoHypotheses/TwoHypothesesChallenge.lean
+new file mode 100644
+index 0000000..c1014c7
+--- /dev/null
++++ b/TwoHypotheses/TwoHypothesesChallenge.lean
+@@ -0,0 +1,78 @@
++import Mathlib
++
++/-!
++# Challenge for leanprover/comparator: the main theorems with two hypotheses
++
++The definitions are those of `../Challenge.lean`, unchanged. The theorems are the main theorems of
++`../Challenge.lean` without the hypothesis `hμ : RamareMoebius`, and `RamareMoebius` from
++`PlattGRH`. The proofs are in `TwoHypotheses.lean`.
++-/
++
++namespace TernaryGoldbach
++
++/-- `n` is a sum of three primes. -/
++def IsSumOfThreePrimes (n : ℕ) : Prop :=
++  ∃ p q r : ℕ, p.Prime ∧ q.Prime ∧ r.Prime ∧ p + q + r = n
++
++/-- `n` is a sum of two primes. -/
++def IsSumOfTwoPrimes (n : ℕ) : Prop :=
++  ∃ p q : ℕ, p.Prime ∧ q.Prime ∧ p + q = n
++
++/-- The ternary Goldbach conjecture: every odd `n > 5` is a sum of three primes. -/
++def Statement : Prop :=
++  ∀ n : ℕ, Odd n → 5 < n → IsSumOfThreePrimes n
++
++/-- Binary Goldbach verified up to `N`: every even `n` with `4 ≤ n ≤ N` is a sum of two primes. -/
++def BinaryGoldbachUpTo (N : ℕ) : Prop :=
++  ∀ n : ℕ, Even n → 4 ≤ n → n ≤ N → IsSumOfTwoPrimes n
++
++/-- Ternary Goldbach for odd `n` with `5 < n ≤ N`. -/
++def TernaryGoldbachUpTo (N : ℕ) : Prop :=
++  ∀ n : ℕ, Odd n → 5 < n → n ≤ N → IsSumOfThreePrimes n
++
++/-- Ternary Goldbach for odd `n ≥ C`. -/
++def TernaryGoldbachFrom (C : ℕ) : Prop :=
++  ∀ n : ℕ, Odd n → C ≤ n → IsSumOfThreePrimes n
++
++/-! ## Hypotheses
++
++The proof rests on three published numerical results, stated here as `Prop`s and passed to the
++theorems that need them as `Fact` instances. Each is a large computation, and none
++is formalized. -/
++
++/-- D. Platt [Plab, Thm 7.1], [H, §9.6]: for every primitive character `χ` of conductor `q`, GRH
++holds for `L(s, χ)` up to height `10⁸/q` if `q ≤ 3·10⁵` is odd, and up to height
++`max(10⁸/q, 200 + 7.5·10⁷/q)` if `q ≤ 4·10⁵` is even. -/
++def PlattGRH : Prop :=
++  ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q), χ.IsPrimitive →
++    (Odd q → q ≤ 300000 → ∀ ρ : ℂ, χ.LFunction ρ = 0 → 0 < ρ.re → ρ.re < 1 →
++      |ρ.im| ≤ 1e8 / q → ρ.re = 1 / 2) ∧
++    (Even q → q ≤ 400000 → ∀ ρ : ℂ, χ.LFunction ρ = 0 → 0 < ρ.re → ρ.re < 1 →
++      |ρ.im| ≤ max (1e8 / q : ℝ) (200 + 7.5e7 / q) → ρ.re = 1 / 2)
++
++/-- [OeSHP] Oliveira e Silva, Herzog, Pardi, Math. Comp. 83 (2014): every even `4 ≤ n ≤ 4·10¹⁸` is
++a sum of two primes. -/
++def BinaryGoldbachInput : Prop := BinaryGoldbachUpTo (4 * 10 ^ 18)
++
++/-- O. Ramaré, Acta Arith. 157 (2013), Cor. 1.4, as cited in [H, (2.21)]:
++`|∑_{n ≤ x} μ(n)/n| ≤ 0.03/log x` for `x ≥ 11815`. -/
++def RamareMoebius : Prop :=
++  ∀ x : ℝ, 11815 ≤ x →
++    |∑ n ∈ Finset.Icc 1 ⌊x⌋₊, (ArithmeticFunction.moebius n : ℝ) / n| ≤ 0.03 / Real.log x
++
++/-! ## Main theorems -/
++
++/-- Ramaré's bound for `∑ μ(n)/n`, from Platt's GRH verification. -/
++theorem ramareMoebius_of_plattGRH (hGRH : PlattGRH) : RamareMoebius := by
++  sorry
++
++/-- Every odd `n ≥ 10²⁷` is a sum of three primes, given Platt's GRH verification. -/
++theorem ternary_goldbach_large_of_plattGRH (hGRH : PlattGRH) : TernaryGoldbachFrom (10 ^ 27) := by
++  sorry
++
++/-- The ternary Goldbach conjecture, given the two hypotheses. -/
++theorem ternary_goldbach_of_two_hypotheses (hGRH : PlattGRH) (hBG : BinaryGoldbachInput) :
++    Statement := by
++  sorry
++
++end TernaryGoldbach
+diff --git a/TwoHypotheses/comparator.json b/TwoHypotheses/comparator.json
+new file mode 100644
+index 0000000..d3e9412
+--- /dev/null
++++ b/TwoHypotheses/comparator.json
+@@ -0,0 +1,11 @@
++{
++  "challenge_module": "TwoHypothesesChallenge",
++  "solution_module": "TwoHypotheses",
++  "theorem_names": [
++    "TernaryGoldbach.ramareMoebius_of_plattGRH",
++    "TernaryGoldbach.ternary_goldbach_large_of_plattGRH",
++    "TernaryGoldbach.ternary_goldbach_of_two_hypotheses"
++  ],
++  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
++  "enable_nanoda": false
++}
+diff --git a/TwoHypotheses/lakefile.lean b/TwoHypotheses/lakefile.lean
+new file mode 100644
+index 0000000..2585d03
+--- /dev/null
++++ b/TwoHypotheses/lakefile.lean
+@@ -0,0 +1,26 @@
++import Lake
++open Lake DSL
++
++/-
++The main theorems with two hypotheses: `RamareMoebius` is proved from `PlattGRH` in Helfgott's
++RSBounds project, which itself depends on this repository. To avoid a dependency cycle this is a
++separate Lake package. The root package (`..`) does not depend on it, and `lake build` at the root
++is unchanged.
++
++`TernaryGoldbach` is required from this checkout. Lake resolves a package name to the root's own
++requirement, so RSBounds is built against this tree, not against the upstream commit it pins.
++-/
++
++package TwoHypotheses
++
++require TernaryGoldbach from ".."
++
++-- RSBOUNDS_URL and RSBOUNDS_REV: Helfgott's RSBounds repository and the commit to pin. To be filled
++-- in when RSBounds is published.
++require RSBounds from git "RSBOUNDS_URL" @ "RSBOUNDS_REV"
++
++@[default_target] lean_lib TwoHypotheses
++
++-- leanprover/comparator: `TwoHypothesesChallenge` states the theorems of `TwoHypotheses` with
++-- `sorry`; see `README.md`.
++lean_lib TwoHypothesesChallenge
+diff --git a/TwoHypotheses/lean-toolchain b/TwoHypotheses/lean-toolchain
+new file mode 100644
+index 0000000..a6aff06
+--- /dev/null
++++ b/TwoHypotheses/lean-toolchain
+@@ -0,0 +1 @@
++leanprover/lean4:v4.35.0
