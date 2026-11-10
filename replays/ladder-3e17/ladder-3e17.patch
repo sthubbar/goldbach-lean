@@ -1,0 +1,796 @@
+diff --git a/BLUEPRINT.md b/BLUEPRINT.md
+index 3d52dfd..e9377f8 100644
+--- a/BLUEPRINT.md
++++ b/BLUEPRINT.md
+@@ -20,7 +20,7 @@ differences from [H]; `NOTES.md` has the details.
+ | (14.49) minor arcs `≤ 1.00948 x²/κ` | `minor_arcs_input` (`MinorArcs/MinorTotal.lean`) | ✅ with `1.0376`, via repair 3 of Thm 13.2.1 |
+ | (14.51) non-prime terms | `nonprime_input` | ✅ with `6.7·10⁶` for `7.3306` |
+ | final inequality | `final_inequality_crude` (`Helfgott/Numerics.lean`) | ✅ margin `0.0114 x²/κ` |
+-| `N < 10²⁷`: [HP13] | `ternaryGoldbachUpTo_1e27` (`Helfgott/SmallCases.lean`) | ✅ binary Goldbach up to `4·10¹⁸` (`binary_goldbach_input`) and a prime in `[n − 4·10¹⁸, n − 4]` from a prime ladder up to `10²⁷` (`Ladder.ladder_prime`, `Ladder/`), checked by the kernel, in place of [HP13]'s |
++| `N < 10²⁷`: [HP13] | `ternaryGoldbachUpTo_1e27` (`Helfgott/SmallCases.lean`) | ✅ binary Goldbach up to `3·10¹⁷` (`binary_goldbach_input`) and a prime in `[n − 3·10¹⁷, n − 4]` from a prime ladder up to `10²⁷` (`Ladder.ladder_prime`, `Ladder/`), checked by the kernel, in place of [HP13]'s |
+ 
+ ## Minor arcs: (14.49) ⟸ Thm 13.2.1
+ 
+diff --git a/Challenge.lean b/Challenge.lean
+index 7869032..d94b11b 100644
+--- a/Challenge.lean
++++ b/Challenge.lean
+@@ -56,9 +56,9 @@ def PlattGRH : Prop :=
+     (Even q → q ≤ 400000 → ∀ ρ : ℂ, χ.LFunction ρ = 0 → 0 < ρ.re → ρ.re < 1 →
+       |ρ.im| ≤ max (1e8 / q : ℝ) (200 + 7.5e7 / q) → ρ.re = 1 / 2)
+ 
+-/-- [OeSHP] Oliveira e Silva, Herzog, Pardi, Math. Comp. 83 (2014): every even `4 ≤ n ≤ 4·10¹⁸` is
+-a sum of two primes. -/
+-def BinaryGoldbachInput : Prop := BinaryGoldbachUpTo (4 * 10 ^ 18)
++/-- [OeSHP] Oliveira e Silva, Herzog, Pardi, Math. Comp. 83 (2014): every even `4 ≤ n ≤ 3·10¹⁷` is
++a sum of two primes (the range their search double-checked, [OeSHP, Table 1 and §1.3]). -/
++def BinaryGoldbachInput : Prop := BinaryGoldbachUpTo (3 * 10 ^ 17)
+ 
+ /-- O. Ramaré, Acta Arith. 157 (2013), Cor. 1.4, as cited in [H, (2.21)]:
+ `|∑_{n ≤ x} μ(n)/n| ≤ 0.03/log x` for `x ≥ 11815`. -/
+diff --git a/HYPOTHESES.md b/HYPOTHESES.md
+index d712e46..b05a243 100644
+--- a/HYPOTHESES.md
++++ b/HYPOTHESES.md
+@@ -17,7 +17,7 @@ later papers and the float check below stand in.
+ | Theorem (hypothesis) | Statement | Source | Check |
+ |---|---|---|---|
+ | `MajorArcs.platt_verification` | primitive `χ` of conductor `q`: GRH up to `10⁸/q` for odd `q ≤ 3·10⁵`, and up to `max(10⁸/q, 200 + 7.5·10⁷/q)` for even `q ≤ 4·10⁵` (`platt_odd`, `platt_even` are its two halves) | Platt, arXiv:1305.3087 | Thm 7.1 and abstract: all primitive `χ`, `q ≤ 4·10⁵`; odd `q` to `max(10⁸/q, 3.75·10⁷/q + 200)`; Thm 3.2 counts zeros with `\|ℑs\| ≤ t₀`, `ℜs ∈ (0,1)`; see Finding 2 |
+-| `Helfgott.binary_goldbach_input` | every even `4 ≤ n ≤ 4·10¹⁸` is a sum of two primes | [OeSHP14], Math. Comp. 83 (2014) | abstract: "confirmed to be true for all even numbers not larger than `4·10¹⁸`"; Table 1 and §1.3: "the entire interval up to `3·10¹⁷` was double-checked". `SmallCases.lean` uses the whole range: the ladder rungs are up to `(111616 + 2047)·2⁴⁵ ≈ 3.9992·10¹⁸` apart |
++| `Helfgott.binary_goldbach_input` | every even `4 ≤ n ≤ 3·10¹⁷` is a sum of two primes | [OeSHP14], Math. Comp. 83 (2014) | abstract: "confirmed to be true for all even numbers not larger than `4·10¹⁸`"; Table 1 and §1.3: "the entire interval up to `3·10¹⁷` was double-checked". `SmallCases.lean` uses only the double-checked range: the ladder rungs are less than `(6478 + 2047)·2⁴⁵ ≈ 2.9995·10¹⁷` apart |
+ | `Prelim.ramare_moebius` | `\|∑_{n≤x} μ(n)/n\| ≤ 0.03/log x` for real `x ≥ 11815` | Ramaré, Acta Arith. 157 (2013) 365–379, Cor. 1.4: for `x ≥ 11815` ([H, (2.21)]) | implied for `X ≥ 463 421` by Ramaré, Math. Comp. 84 (2015), Thm 1.2 (`≤ (0.0144 log X − 0.1)/(log X)²`), which Ramaré and Zuniga-Alterman re-derive in arXiv:2408.05969 (that paper also proves `≤ (0.010032 log X − 0.0568)/(log X)²` for `X ≥ 617 990`, Cor. 1.2). A float check (`scripts/moebius_ramare_check.py`) gives `max \|m(k)\| log(k+1) = 0.029496` over `11815 ≤ k < 10⁸`, at `k = 11820` |
+ 
+ The hypotheses are stated as in the papers or weaker. Where they are used:
+@@ -26,7 +26,7 @@ The hypotheses are stated as in the papers or weaker. Where they are used:
+   the explicit formulas for `ψ` (`Explicit/`: the Weil-window formula on `[10⁶, 10¹⁷]` and the
+   Gaussian-smoothed formula above `10¹⁷`), hence every bound of [H, §2] for `ψ` and `θ`;
+ * `binary_goldbach_input`: the small cases `n ≤ 10²⁷` (`Helfgott/SmallCases.lean`), together with a
+-  prime in `[n − 4·10¹⁸, n − 4]` for `4·10¹⁸ + 3 < n ≤ 10²⁷` from a prime ladder of Proth primes up
++  prime in `[n − 3·10¹⁷, n − 4]` for `3·10¹⁷ + 3 < n ≤ 10²⁷` from a prime ladder of Proth primes up
+   to `10²⁷` that the kernel checks (`Ladder/`). [H, §1.6] takes the ladder from Helfgott–Platt
+   (arXiv:1305.3062);
+ * `ramare_moebius`: the Liouville bound behind [H, (2.22)] (`Prelim/LiouvilleBound.lean`,
+@@ -131,7 +131,7 @@ The kernel evaluates these finite checks (`decide +kernel`, no `native_decide`):
+ | `MinorArcs/LSQuotRed.lean` | `H_n ≤ G(n)` for `n ≤ 199` (so `G(x) ≥ log x`) | seconds |
+ | `MinorArcs/LSQuot8.lean`, `LSQuot8g.lean` | Prop 12.2.4: Ramaré's tail for the divisors of `30030`; for each divisor `A`, a walk over `r < 2600` (`φ` by trial division) with 82 block checks | about 90 s |
+ | `MinorArcs/LSQuot9.lean` | Prop 12.2.4 for `n ≤ 3`: 72 rational checks | seconds |
+-| `Ladder/Data/L000–L127.lean` | the prime ladder up to `10²⁷`: `254640128` Proth primes `(111616 i − t)·2⁴⁵ + 1` with `3^((c−1)/2) ≡ −1 (mod c)`, in 62168 chunks of 4096 (hints from `LadderHints.lean`, `Ladder.run_spec`, `Ladder.prime_of_cert`) | about 5 h of one core in all, 140 s per file |
++| `Ladder/Data/L0000–L2204.lean` | the prime ladder up to `10²⁷`: `4387422208` Proth primes `(6478 i − t)·2⁴⁵ + 1` with `3^((c−1)/2) ≡ −1 (mod c)`, in 1071148 chunks of 4096 (hints from `LadderHints.lean`, `Ladder.run_spec`, `Ladder.prime_of_cert`) | about 470 s per file on one core of an i7-9750H, about 290 core-hours in all |
+ 
+ ## Outlook
+ 
+diff --git a/LadderHints.lean b/LadderHints.lean
+index f0f410c..09a1745 100644
+--- a/LadderHints.lean
++++ b/LadderHints.lean
+@@ -5,7 +5,7 @@ import Lean
+ 
+ `ladder_hints% i₀` elaborates to a natural number literal that packs, in 11-bit fields, one offset
+ `tᵢ < 2048` for each `i ∈ [i₀, i₀ + 4096)`: the least `t` such that
+-`c = (111616·i − t)·2⁴⁵ + 1` satisfies `c ≡ 2 (mod 3)` and `3^((c−1)/2) ≡ −1 (mod c)`.
++`c = (6478·i − t)·2⁴⁵ + 1` satisfies `c ≡ 2 (mod 3)` and `3^((c−1)/2) ≡ −1 (mod c)`.
+ Candidates with a prime factor in `[5, 2000)` are skipped first.
+ 
+ `ladder_chunks a n` declares the chunk theorems of one data file (`Ladder/Data/L*.lean`).
+@@ -35,7 +35,7 @@ def passes (iS t : Nat) : Bool :=
+ 
+ /-- The least valid offset `t < 2048` for rung `i`, if any. -/
+ def hintFor (i : Nat) : Option Nat := Id.run do
+-  let iS := i * 111616
++  let iS := i * 6478
+   -- `p ∣ c ⟺ t ≡ iS + 2⁻⁴⁵ (mod p)`
+   let mut bad := Array.replicate 512 false
+   for (p, inv) in smallPrimes do
+diff --git a/README.md b/README.md
+index 8eeb240..d1c79d3 100644
+--- a/README.md
++++ b/README.md
+@@ -12,7 +12,7 @@ axioms. They take 3 published numerical results as explicit hypotheses, stated i
+ `TernaryGoldbach/Statement.lean`:
+ 
+ * `PlattGRH`: Platt's GRH verification (at `q = 1`, RH up to `10⁸`);
+-* `BinaryGoldbachInput`: binary Goldbach up to `4·10¹⁸`;
++* `BinaryGoldbachInput`: binary Goldbach up to `3·10¹⁷` (the range [OeSHP14] double-checked);
+ * `RamareMoebius`: Ramaré's `|∑_{n≤x} μ(n)/n| ≤ 0.03/log x` for `x ≥ 11815` ([H, (2.21)]). This
+   is checked against a later published bound (see `HYPOTHESES.md`).
+ 
+@@ -85,19 +85,20 @@ Beyond these hypotheses, the trust base is the Lean kernel and Mathlib. The deve
+ * the Riemann sums of the Weil-window bound (`Explicit/WeilNumC.lean`) and the constants of the
+   `ψ` ranges (`Explicit/PsiRanges1e8.lean`);
+ * the reduction of [H, Prop 12.2.4] to the divisors of `30030` (`MinorArcs/LSQuot8g.lean`);
+-* the prime ladder up to `10²⁷`: `2.5·10⁸` Proth primes (`Ladder/`, below).
++* the prime ladder up to `10²⁷`: `4.4·10⁹` Proth primes (`Ladder/`, below).
+ 
+-**The prime ladder.** Rung `i` (`1 ≤ i ≤ 254638308`) is `c = (111616 i − t)·2⁴⁵ + 1` with
++**The prime ladder.** Rung `i` (`1 ≤ i ≤ 4387420412`) is `c = (6478 i − t)·2⁴⁵ + 1` with
+ `0 ≤ t < 2048`, and its certificate is `3^((c−1)/2) ≡ −1 (mod c)`: every prime factor of `c` is then
+ `≡ 1 (mod 2⁴⁵)` (Mathlib's `Nat.pow_pow_add_primeFactors_one_lt`), and `c < (2⁴⁵ + 1)²`
+ (`Ladder/Spec.lean`). The offsets `t` are not in the repository. `ladder_hints%`
+ (`LadderHints.lean`, compiled to native code with `precompileModules`) finds them during
+ elaboration, about `1.5·10⁻⁵` s per rung, and packs each chunk of 4096 into one literal. The kernel
+ then checks the chunk by evaluation (`decide +kernel`). It checks 32 rungs at a time modulo the
+-product `M` of their candidates: one exponentiation `3^(2⁴⁴·111616·i₀) mod M` per block, then a few
++product `M` of their candidates: one exponentiation `3^(2⁴⁴·6478·i₀) mod M` per block, then a few
+ operations on 3000-bit numbers per rung (`Ladder/Check.lean`). This is about `5.5·10⁻⁵` s per rung.
+-The 128 files `Ladder/Data/L*.lean` (`scripts/gen_ladder.py`) take about 5 hours of one core (about
+-140 s per file of 486 chunks, 1.7 GB each), of which about 4 hours are kernel checking.
++The 2205 files `Ladder/Data/L*.lean` (`scripts/gen_ladder.py`, about 486 chunks each) take about
++470 s each on one core of an i7-9750H (1.7 GB peak RSS, most of it shared `.olean` pages), about
++80% of it kernel checking.
+ 
+ [H, Prop 12.2.4] is proved with `c₊ = 2` in place of [H]'s `1.36`. [H]'s argument covers
+ `q ≥ 2.2·10¹⁰`; for smaller `q`, [H] needs a computation over all `q < 2.2·10¹⁰`. With `c₊ = 2` there
+@@ -130,12 +131,12 @@ also proved (`MinorArcs/G2Bound.lean`), but the main theorems do not use it.
+ The top level is [H, §14.4] (`Helfgott/Main.lean`).
+ 
+ * **Small cases.** Odd `5 < n ≤ 10²⁷` (`Helfgott/SmallCases.lean`):
+-  * binary Goldbach up to `4·10¹⁸` ([OeSHP14]; they double-checked `3·10¹⁷`);
+-  * for `n > 4·10¹⁸ + 3`, a prime `p` with `n − 4·10¹⁸ ≤ p ≤ n − 4` from a prime ladder
+-    (`Ladder/`): for each `1 ≤ i ≤ 254638308`, a Proth prime `(111616 i − t)·2⁴⁵ + 1`, `0 ≤ t < 2048`,
+-    certified by `3^((c−1)/2) ≡ −1 (mod c)`. Consecutive rungs are less than `4·10¹⁸ − 4` apart. The
+-    Lean kernel checks all `2.5·10⁸` rungs (see "The prime ladder" below). Then `n − p` is even and
+-    at most `4·10¹⁸`.
++  * binary Goldbach up to `3·10¹⁷` (the range [OeSHP14] double-checked);
++  * for `n > 3·10¹⁷ + 3`, a prime `p` with `n − 3·10¹⁷ ≤ p ≤ n − 4` from a prime ladder
++    (`Ladder/`): for each `1 ≤ i ≤ 4387420412`, a Proth prime `(6478 i − t)·2⁴⁵ + 1`, `0 ≤ t < 2048`,
++    certified by `3^((c−1)/2) ≡ −1 (mod c)`. Consecutive rungs are less than `3·10¹⁷ − 4` apart. The
++    Lean kernel checks all `4.4·10⁹` rungs (see "The prime ladder" below). Then `n − p` is even and
++    at most `3·10¹⁷`.
+ * **Large cases.** Odd `n ≥ 10²⁷`, by the circle method with Helfgott's smoothings `η₊` and `η_*`
+   (`CircleMethod.lean`, `Helfgott/`):
+   * **major arcs**, [H, (14.27)] with constant `1.049` (`MajorArcs/MajorTotal.lean`). This needs:
+diff --git a/TernaryGoldbach/Helfgott/Inputs.lean b/TernaryGoldbach/Helfgott/Inputs.lean
+index 0f63d6d..b963759 100644
+--- a/TernaryGoldbach/Helfgott/Inputs.lean
++++ b/TernaryGoldbach/Helfgott/Inputs.lean
+@@ -150,12 +150,12 @@ theorem nonprime_input (N : ℕ) (hN27 : 10 ^ 27 ≤ N) :
+ 
+ /-! ## Computational inputs (for the small cases) -/
+ 
+-/-- **Numerical hypothesis: binary Goldbach up to `4 · 10¹⁸`** [OeSHP]. An exhaustive computer
++/-- **Numerical hypothesis: binary Goldbach up to `3 · 10¹⁷`** [OeSHP]. An exhaustive computer
+ search (Oliveira e Silva, Herzog, Pardi, Math. Comp. 83 (2014)) shows that every even
+ `4 ≤ n ≤ 4·10¹⁸` is a sum of two primes; the range up to `3·10¹⁷` was double-checked
+-([OeSHP, Table 1 and §1.3]). `SmallCases.lean` uses the whole range. -/
++([OeSHP, Table 1 and §1.3]). `SmallCases.lean` uses only that double-checked range. -/
+ theorem binary_goldbach_input [h : Fact BinaryGoldbachInput] :
+-    BinaryGoldbachUpTo (4 * 10 ^ 18) :=
++    BinaryGoldbachUpTo (3 * 10 ^ 17) :=
+   h.out
+ 
+ variable [Fact TernaryGoldbach.BinaryGoldbachInput]
+diff --git a/TernaryGoldbach/Helfgott/Main.lean b/TernaryGoldbach/Helfgott/Main.lean
+index e635b2c..9cbbb44 100644
+--- a/TernaryGoldbach/Helfgott/Main.lean
++++ b/TernaryGoldbach/Helfgott/Main.lean
+@@ -18,7 +18,7 @@ The argument follows [H, §14.4]:
+ 2. `Re ∫_𝔐 ≥ 1.049 x²/κ` and `|∫_𝔪| ≤ ∫_𝔪 |S_{η_*}||S_{η₊}|² ≤ 1.0376 x²/κ`;
+ 3. so the count restricted to odd primes is `≥ 0.0114 x²/κ - 6.7·10⁶ N^{3/2} log N > 0`;
+ 4. a positive count over primes gives a representation;
+-5. the cases `N < 10²⁷` follow from binary Goldbach up to `4·10¹⁸` and a prime ladder
++5. the cases `N < 10²⁷` follow from binary Goldbach up to `3·10¹⁷` and a prime ladder
+    (`ternaryGoldbachUpTo_1e27`, `SmallCases.lean`).
+ -/
+ 
+diff --git a/TernaryGoldbach/Helfgott/SmallCases.lean b/TernaryGoldbach/Helfgott/SmallCases.lean
+index 092a9da..b3dfa8c 100644
+--- a/TernaryGoldbach/Helfgott/SmallCases.lean
++++ b/TernaryGoldbach/Helfgott/SmallCases.lean
+@@ -4,11 +4,11 @@ import TernaryGoldbach.Ladder.Main
+ /-!
+ # The small cases `5 < n ≤ 10²⁷` from binary Goldbach and a prime ladder
+ 
+-For odd `n ≤ 4·10¹⁸ + 3`, `n = 3 + (n − 3)` and binary Goldbach up to `4·10¹⁸` (`binary_goldbach_input`,
+-[OeSHP14]) applies. For odd `4·10¹⁸ + 3 < n ≤ 10²⁷` the prime ladder (`Ladder.ladder_prime`,
+-`TernaryGoldbach/Ladder/`) gives a prime `p` with `n − 4·10¹⁸ ≤ p ≤ n − 4`: rung
+-`i = ⌊(n − 5)/(111616·2⁴⁵)⌋` has a prime in `[(111616 i − 2047)·2⁴⁵ + 1, 111616 i·2⁴⁵ + 1]`. Then
+-`n − p` is even, at least `4` and at most `4·10¹⁸`.
++For odd `n ≤ 3·10¹⁷ + 3`, `n = 3 + (n − 3)` and binary Goldbach up to `3·10¹⁷` (`binary_goldbach_input`,
++[OeSHP14]) applies. For odd `3·10¹⁷ + 3 < n ≤ 10²⁷` the prime ladder (`Ladder.ladder_prime`,
++`TernaryGoldbach/Ladder/`) gives a prime `p` with `n − 3·10¹⁷ ≤ p ≤ n − 4`: rung
++`i = ⌊(n − 5)/(6478·2⁴⁵)⌋` has a prime in `[(6478 i − 2047)·2⁴⁵ + 1, 6478 i·2⁴⁵ + 1]`. Then
++`n − p` is even, at least `4` and at most `3·10¹⁷`.
+ 
+ This is the argument of [H, §1.6], with a ladder of Proth primes up to `10²⁷` that the Lean kernel
+ checks in place of the Helfgott–Platt ladder [HP13].
+@@ -21,18 +21,18 @@ variable [Fact TernaryGoldbach.BinaryGoldbachInput] in
+ theorem ternaryGoldbachUpTo_1e27 : TernaryGoldbachUpTo (10 ^ 27) := by
+   intro n hn h5 hle
+   have hBG := binary_goldbach_input
+-  by_cases hsmall : n ≤ 4 * 10 ^ 18 + 3
++  by_cases hsmall : n ≤ 3 * 10 ^ 17 + 3
+   · -- `n = 3 + (n − 3)`
+     have hev : Even (n - 3) := Nat.Odd.sub_odd hn (by decide)
+     obtain ⟨p, q, hp, hq, hpq⟩ := hBG (n - 3) hev (by obtain ⟨k, hk⟩ := hn; omega) (by omega)
+     exact ⟨3, p, q, Nat.prime_three, hp, hq, by omega⟩
+-  · -- a prime `p ∈ [n − 4·10¹⁸, n − 4]` from rung `i` of the ladder
++  · -- a prime `p ∈ [n − 3·10¹⁷, n − 4]` from rung `i` of the ladder
+     push Not at hsmall
+-    have hi1 : 1 ≤ (n - 5) / 3927138875067072512 := by omega
+-    have hi2 : (n - 5) / 3927138875067072512 ≤ 254638308 := by omega
++    have hi1 : 1 ≤ (n - 5) / 227924362391453696 := by omega
++    have hi2 : (n - 5) / 227924362391453696 ≤ 4387420412 := by omega
+     obtain ⟨p, hp, hp1, hp2⟩ := Ladder.ladder_prime hi1 hi2
+     have hpb : p ≤ n - 4 := by omega
+-    have hpa : n - 4 * 10 ^ 18 ≤ p := by omega
++    have hpa : n - 3 * 10 ^ 17 ≤ p := by omega
+     have hp2' : p ≠ 2 := by omega
+     have hpo : Odd p := hp.odd_of_ne_two hp2'
+     have hev : Even (n - p) := Nat.Odd.sub_odd hn hpo
+diff --git a/TernaryGoldbach/Ladder/Check.lean b/TernaryGoldbach/Ladder/Check.lean
+index 35a6f51..65fcceb 100644
+--- a/TernaryGoldbach/Ladder/Check.lean
++++ b/TernaryGoldbach/Ladder/Check.lean
+@@ -1,9 +1,9 @@
+ /-!
+ # The prime ladder: the kernel check
+ 
+-Rung `i ≥ 1` of the ladder is a prime `c = (iS − t)·2⁴⁵ + 1` with `S = 111616` and `0 ≤ t < 2048`.
++Rung `i ≥ 1` of the ladder is a prime `c = (iS − t)·2⁴⁵ + 1` with `S = 6478` and `0 ≤ t < 2048`.
+ Its certificate is Proth's: `3^((c−1)/2) ≡ −1 (mod c)`. Consecutive rungs are less than
+-`(S + 2047)·2⁴⁵ < 4·10¹⁸ − 4` apart (`TernaryGoldbach/Ladder/Spec.lean`).
++`(S + 2047)·2⁴⁵ < 3·10¹⁷ − 4` apart (`TernaryGoldbach/Ladder/Spec.lean`).
+ 
+ The offsets `t` are not stored in the repository: `ladder_hints% i₀` (`LadderHints.lean`) computes
+ them for a chunk of 4096 rungs during elaboration and packs them into one literal. The kernel then
+@@ -29,7 +29,7 @@ def cand (iS t : Nat) : Nat := Nat.add (Nat.mul (Nat.sub iS t) 35184372088832) 1
+ /-- `acc · ∏_{j<n} cand (iS + jS) tⱼ` with `tⱼ = (h >>> 11j) &&& 2047`. -/
+ noncomputable def prodC (n : Nat) : Nat → Nat → Nat → Nat :=
+   Nat.rec (motive := fun _ => Nat → Nat → Nat → Nat) (fun _ _ acc => acc)
+-    (fun _ ih iS h acc => ih (Nat.add iS 111616) (Nat.shiftRight h 11)
++    (fun _ ih iS h acc => ih (Nat.add iS 6478) (Nat.shiftRight h 11)
+       (Nat.mul acc (cand iS (Nat.land h 2047)))) n
+ 
+ /-- `x^(2^f) mod m`, by repeated squaring. -/
+@@ -52,7 +52,7 @@ noncomputable def chk (M B A n : Nat) : Nat → Nat → Nat → Bool :=
+     (fun _ ih iS U h =>
+       let t := Nat.land h 2047
+       let c := cand iS t
+-      Bool.rec false (ih (Nat.add iS 111616) (Nat.mod (Nat.mul U A) M) (Nat.shiftRight h 11))
++      Bool.rec false (ih (Nat.add iS 6478) (Nat.mod (Nat.mul U A) M) (Nat.shiftRight h 11))
+         (Nat.beq (Nat.mod (Nat.add U (Nat.mod (Nat.pow (Nat.mod B c) t) c)) c) 0)) n
+ 
+ /-- The check of the 32 rungs `[i₀, i₀ + 32)` with offsets packed in `h`, written for loop functions
+@@ -61,11 +61,11 @@ noncomputable def chk (M B A n : Nat) : Nat → Nat → Nat → Bool :=
+ noncomputable def blkWith (P : Nat → Nat → Nat → Nat → Nat) (Q : Nat → Nat → Nat → Nat)
+     (W : Nat → Nat → Nat → Nat → Nat → Nat) (C : Nat → Nat → Nat → Nat → Nat → Nat → Nat → Bool)
+     (i0 h : Nat) : Bool :=
+-  let iS := i0 * 111616
++  let iS := i0 * 6478
+   let M := P 32 iS h 1
+   let B := Q M 44 3
+-  let A := W M 17 B 111616 1
+-  let U := W M 28 A i0 1
++  let A := W M 17 B 6478 1
++  let U := W M 33 A i0 1
+   Bool.rec (C M B A 32 iS U h) false (Nat.beq (M % 3) 0)
+ 
+ /-- The check of the 32 rungs `[i₀, i₀ + 32)`. -/
+diff --git a/TernaryGoldbach/Ladder/Main.lean b/TernaryGoldbach/Ladder/Main.lean
+index f2e9de1..839e357 100644
+--- a/TernaryGoldbach/Ladder/Main.lean
++++ b/TernaryGoldbach/Ladder/Main.lean
+@@ -4,21 +4,21 @@ import TernaryGoldbach.Ladder.Data
+ /-!
+ # A prime ladder up to `10²⁷`
+ 
+-`ladder_prime`: for `1 ≤ i ≤ 254638308` there is a prime in `[(S·i − 2047)·2⁴⁵ + 1, S·i·2⁴⁵ + 1]`,
+-`S = 111616`. The primes are Proth primes `(S·i − t)·2⁴⁵ + 1` with `0 ≤ t < 2048`, certified by
++`ladder_prime`: for `1 ≤ i ≤ 4387420412` there is a prime in `[(S·i − 2047)·2⁴⁵ + 1, S·i·2⁴⁵ + 1]`,
++`S = 6478`. The primes are Proth primes `(S·i − t)·2⁴⁵ + 1` with `0 ≤ t < 2048`, certified by
+ `3^((c−1)/2) ≡ −1 (mod c)`; the Lean kernel checks all of them (`Ladder/Check.lean`,
+-`Ladder/Data/`). Consecutive windows give primes less than `(S + 2047)·2⁴⁵ < 4·10¹⁸ − 4` apart, and
+-rung `254638308` lies above `10²⁷`. This is the prime ladder of [H, §1.6] (there [HP13], up to
++`Ladder/Data/`). Consecutive windows give primes less than `(S + 2047)·2⁴⁵ < 3·10¹⁷ − 4` apart, and
++rung `4387420412` lies above `10²⁷`. This is the prime ladder of [H, §1.6] (there [HP13], up to
+ `8.875·10³⁰`) for the range `n ≤ 10²⁷` that the small cases need.
+ -/
+ 
+ namespace TernaryGoldbach.Ladder
+ 
+-/-- **The prime ladder**: a prime in `[(111616 i − 2047)·2⁴⁵ + 1, 111616 i·2⁴⁵ + 1]` for
+-`1 ≤ i ≤ 254638308`. -/
+-theorem ladder_prime {i : ℕ} (h1 : 1 ≤ i) (h2 : i ≤ 254638308) :
+-    ∃ p, p.Prime ∧ (111616 * i - 2047) * 35184372088832 + 1 ≤ p ∧
+-      p ≤ 111616 * i * 35184372088832 + 1 := by
++/-- **The prime ladder**: a prime in `[(6478 i − 2047)·2⁴⁵ + 1, 6478 i·2⁴⁵ + 1]` for
++`1 ≤ i ≤ 4387420412`. -/
++theorem ladder_prime {i : ℕ} (h1 : 1 ≤ i) (h2 : i ≤ 4387420412) :
++    ∃ p, p.Prime ∧ (6478 * i - 2047) * 35184372088832 + 1 ≤ p ∧
++      p ≤ 6478 * i * 35184372088832 + 1 := by
+   obtain ⟨p, hp, h3, h4⟩ :=
+     prime_of_runsOK runsOK_all (le_refl 1) (by norm_num) (by norm_num) h1 (by omega)
+   rw [show (2 : ℕ) ^ 45 = 35184372088832 by norm_num] at h3 h4
+diff --git a/TernaryGoldbach/Ladder/Spec.lean b/TernaryGoldbach/Ladder/Spec.lean
+index 880e2bd..b22d695 100644
+--- a/TernaryGoldbach/Ladder/Spec.lean
++++ b/TernaryGoldbach/Ladder/Spec.lean
+@@ -20,7 +20,7 @@ def tOf (h j : ℕ) : ℕ := (h >>> (11 * j)) &&& 2047
+ 
+ /-- The certificate checked for rung `i` with offset `t`. -/
+ def Cert (i t : ℕ) : Prop :=
+-  ¬ 3 ∣ cand (111616 * i) t ∧ cand (111616 * i) t ∣ 3 ^ (2 ^ 44 * (111616 * i)) + 3 ^ (2 ^ 44 * t)
++  ¬ 3 ∣ cand (6478 * i) t ∧ cand (6478 * i) t ∣ 3 ^ (2 ^ 44 * (6478 * i)) + 3 ^ (2 ^ 44 * t)
+ 
+ theorem cand_eq (iS t : ℕ) : cand iS t = (iS - t) * 2 ^ 45 + 1 := rfl
+ 
+@@ -55,11 +55,11 @@ theorem prime_of_dvd_pow_add_one {c x : ℕ} (hodd : Odd c) (h1 : 1 < c)
+   omega
+ 
+ /-- A certified rung is prime. -/
+-theorem prime_of_cert {i t : ℕ} (hi : 1 ≤ i) (hiS : 111616 * i < 2 ^ 45) (ht : t < 2048)
+-    (h : Cert i t) : (cand (111616 * i) t).Prime := by
++theorem prime_of_cert {i t : ℕ} (hi : 1 ≤ i) (hiS : 6478 * i < 2 ^ 45) (ht : t < 2048)
++    (h : Cert i t) : (cand (6478 * i) t).Prime := by
+   obtain ⟨h3, hd⟩ := h
+-  set k := 111616 * i - t with hk
+-  have hkt : 111616 * i = k + t := by omega
++  set k := 6478 * i - t with hk
++  have hkt : 6478 * i = k + t := by omega
+   have hk1 : 1 ≤ k := by omega
+   have hk45 : k < 2 ^ 45 := by omega
+   rw [cand_eq] at h3 hd ⊢
+@@ -81,26 +81,26 @@ theorem prime_of_cert {i t : ℕ} (hi : 1 ≤ i) (hiS : 111616 * i < 2 ^ 45) (ht
+ /-! ### The loops -/
+ 
+ -- The loop equations are used with `rw`. A `simp` proof, or a direct definitional unfolding, can
+--- make the kernel compare `Nat.add iS 111616` with `iS + 111616` by unfolding `Nat.add` on the
+--- literal, which recurses `111616` levels deep.
++-- make the kernel compare `Nat.add iS 6478` with `iS + 6478` by unfolding `Nat.add` on the
++-- literal, which recurses `6478` levels deep.
+ theorem prodC_succ (n : ℕ) : prodC (n + 1) =
+-    fun iS h acc => prodC n (iS + 111616) (h >>> 11) (acc * cand iS (h &&& 2047)) := rfl
++    fun iS h acc => prodC n (iS + 6478) (h >>> 11) (acc * cand iS (h &&& 2047)) := rfl
+ 
+ theorem prodC_dvd : ∀ (n iS h acc : ℕ), acc ∣ prodC n iS h acc ∧
+-    ∀ j < n, cand (iS + 111616 * j) (tOf h j) ∣ prodC n iS h acc := by
++    ∀ j < n, cand (iS + 6478 * j) (tOf h j) ∣ prodC n iS h acc := by
+   intro n
+   induction n with
+   | zero => intro iS h acc; exact ⟨dvd_rfl, fun j hj => absurd hj (Nat.not_lt_zero _)⟩
+   | succ n ih =>
+     intro iS h acc
+     rw [prodC_succ]
+-    obtain ⟨h1, h2⟩ := ih (iS + 111616) (h >>> 11) (acc * cand iS (h &&& 2047))
++    obtain ⟨h1, h2⟩ := ih (iS + 6478) (h >>> 11) (acc * cand iS (h &&& 2047))
+     refine ⟨(dvd_mul_right acc _).trans h1, fun j hj => ?_⟩
+     rcases j with _ | j
+     · simpa [tOf_zero] using (dvd_mul_left _ acc).trans h1
+     · have := h2 j (by omega)
+       rw [show h >>> 11 = h >>> (11 * 1) by rfl, tOf_shift] at this
+-      rwa [show iS + 111616 + 111616 * j = iS + 111616 * (j + 1) by ring, add_comm 1 j] at this
++      rwa [show iS + 6478 + 6478 * j = iS + 6478 * (j + 1) by ring, add_comm 1 j] at this
+ 
+ theorem sqPow_zero (m x : ℕ) : sqPow m 0 x = x := rfl
+ 
+@@ -149,15 +149,15 @@ theorem powM_modEq (m : ℕ) : ∀ f b e r, e < 2 ^ f → powM m f b e r ≡ r *
+         _ = r * b ^ e := by rw [mul_assoc, ← pow_succ', show 2 * (e / 2) + 1 = e by omega]
+ 
+ theorem chk_succ (M B A n iS U h : ℕ) : chk M B A (n + 1) iS U h =
+-    Bool.rec false (chk M B A n (iS + 111616) (U * A % M) (h >>> 11))
++    Bool.rec false (chk M B A n (iS + 6478) (U * A % M) (h >>> 11))
+       (Nat.beq ((U + (B % cand iS (h &&& 2047)) ^ (h &&& 2047) % cand iS (h &&& 2047)) %
+         cand iS (h &&& 2047)) 0) := rfl
+ 
+-theorem chk_spec {M B A : ℕ} (hB : B ≡ 3 ^ 2 ^ 44 [MOD M]) (hA : A ≡ 3 ^ (2 ^ 44 * 111616) [MOD M]) :
++theorem chk_spec {M B A : ℕ} (hB : B ≡ 3 ^ 2 ^ 44 [MOD M]) (hA : A ≡ 3 ^ (2 ^ 44 * 6478) [MOD M]) :
+     ∀ n iS U h, U ≡ 3 ^ (2 ^ 44 * iS) [MOD M] →
+-      (∀ j < n, cand (iS + 111616 * j) (tOf h j) ∣ M) → chk M B A n iS U h = true →
+-      ∀ j < n, cand (iS + 111616 * j) (tOf h j) ∣
+-        3 ^ (2 ^ 44 * (iS + 111616 * j)) + 3 ^ (2 ^ 44 * tOf h j) := by
++      (∀ j < n, cand (iS + 6478 * j) (tOf h j) ∣ M) → chk M B A n iS U h = true →
++      ∀ j < n, cand (iS + 6478 * j) (tOf h j) ∣
++        3 ^ (2 ^ 44 * (iS + 6478 * j)) + 3 ^ (2 ^ 44 * tOf h j) := by
+   intro n
+   induction n with
+   | zero => intro iS U h _ _ _ j hj; exact absurd hj (Nat.not_lt_zero _)
+@@ -182,32 +182,32 @@ theorem chk_spec {M B A : ℕ} (hB : B ≡ 3 ^ 2 ^ 44 [MOD M]) (hA : A ≡ 3 ^ (
+         have := (Nat.modEq_zero_iff_dvd.2 hdvd).symm.trans (h1.add h2)
+         simpa [tOf_zero, ← ht, ← hcdef] using (Nat.modEq_zero_iff_dvd.1 this.symm)
+       · -- the later rungs
+-        have hU' : U * A % M ≡ 3 ^ (2 ^ 44 * (iS + 111616)) [MOD M] := by
++        have hU' : U * A % M ≡ 3 ^ (2 ^ 44 * (iS + 6478)) [MOD M] := by
+           refine (Nat.mod_modEq _ M).trans ?_
+           rw [Nat.mul_add, pow_add]
+           exact hU.mul hA
+-        have hM' : ∀ j < n, cand (iS + 111616 + 111616 * j) (tOf (h >>> 11) j) ∣ M := by
++        have hM' : ∀ j < n, cand (iS + 6478 + 6478 * j) (tOf (h >>> 11) j) ∣ M := by
+           intro j hj
+           have := hM (j + 1) (by omega)
+           rw [show h >>> 11 = h >>> (11 * 1) by rfl, tOf_shift, add_comm 1 j]
+-          rwa [show iS + 111616 + 111616 * j = iS + 111616 * (j + 1) by ring]
+-        have := ih (iS + 111616) (U * A % M) (h >>> 11) hU' hM' hc j (by omega)
++          rwa [show iS + 6478 + 6478 * j = iS + 6478 * (j + 1) by ring]
++        have := ih (iS + 6478) (U * A % M) (h >>> 11) hU' hM' hc j (by omega)
+         rw [show h >>> 11 = h >>> (11 * 1) by rfl, tOf_shift, add_comm 1 j] at this
+-        rwa [show iS + 111616 + 111616 * j = iS + 111616 * (j + 1) by ring] at this
++        rwa [show iS + 6478 + 6478 * j = iS + 6478 * (j + 1) by ring] at this
+ 
+ theorem blkWith_spec {P Q W C}
+-    (hP : ∀ n iS h acc, ∀ j < n, cand (iS + 111616 * j) (tOf h j) ∣ P n iS h acc)
++    (hP : ∀ n iS h acc, ∀ j < n, cand (iS + 6478 * j) (tOf h j) ∣ P n iS h acc)
+     (hQ : ∀ m f x, Q m f x ≡ x ^ 2 ^ f [MOD m])
+     (hW : ∀ m f b e r, e < 2 ^ f → W m f b e r ≡ r * b ^ e [MOD m])
+-    (hC : ∀ {M B A : ℕ}, B ≡ 3 ^ 2 ^ 44 [MOD M] → A ≡ 3 ^ (2 ^ 44 * 111616) [MOD M] →
++    (hC : ∀ {M B A : ℕ}, B ≡ 3 ^ 2 ^ 44 [MOD M] → A ≡ 3 ^ (2 ^ 44 * 6478) [MOD M] →
+       ∀ n iS U h, U ≡ 3 ^ (2 ^ 44 * iS) [MOD M] →
+-      (∀ j < n, cand (iS + 111616 * j) (tOf h j) ∣ M) → C M B A n iS U h = true →
+-      ∀ j < n, cand (iS + 111616 * j) (tOf h j) ∣
+-        3 ^ (2 ^ 44 * (iS + 111616 * j)) + 3 ^ (2 ^ 44 * tOf h j))
+-    {i0 h : ℕ} (hi : i0 < 2 ^ 28) (hb : blkWith P Q W C i0 h = true) :
++      (∀ j < n, cand (iS + 6478 * j) (tOf h j) ∣ M) → C M B A n iS U h = true →
++      ∀ j < n, cand (iS + 6478 * j) (tOf h j) ∣
++        3 ^ (2 ^ 44 * (iS + 6478 * j)) + 3 ^ (2 ^ 44 * tOf h j))
++    {i0 h : ℕ} (hi : i0 < 2 ^ 33) (hb : blkWith P Q W C i0 h = true) :
+     ∀ j < 32, Cert (i0 + j) (tOf h j) := by
+   simp only [blkWith] at hb
+-  set iS := i0 * 111616 with hiS
++  set iS := i0 * 6478 with hiS
+   set M := P 32 iS h 1 with hMdef
+   cases h3 : Nat.beq (M % 3) 0 with
+   | true => rw [h3] at hb; exact absurd hb (by simp)
+@@ -218,27 +218,27 @@ theorem blkWith_spec {P Q W C}
+       rw [hd] at h3
+       exact absurd h3 (by decide)
+     have hB : Q M 44 3 ≡ 3 ^ 2 ^ 44 [MOD M] := hQ M 44 3
+-    have hA : W M 17 (Q M 44 3) 111616 1 ≡ 3 ^ (2 ^ 44 * 111616) [MOD M] := by
++    have hA : W M 17 (Q M 44 3) 6478 1 ≡ 3 ^ (2 ^ 44 * 6478) [MOD M] := by
+       refine (hW M 17 _ _ 1 (by norm_num)).trans ?_
+       rw [one_mul, pow_mul]
+       exact hB.pow _
+-    have hU : W M 28 (W M 17 (Q M 44 3) 111616 1) i0 1 ≡ 3 ^ (2 ^ 44 * iS) [MOD M] := by
+-      refine (hW M 28 _ _ 1 hi).trans ?_
+-      rw [one_mul, hiS, show 2 ^ 44 * (i0 * 111616) = 2 ^ 44 * 111616 * i0 by ring, pow_mul]
++    have hU : W M 33 (W M 17 (Q M 44 3) 6478 1) i0 1 ≡ 3 ^ (2 ^ 44 * iS) [MOD M] := by
++      refine (hW M 33 _ _ 1 hi).trans ?_
++      rw [one_mul, hiS, show 2 ^ 44 * (i0 * 6478) = 2 ^ 44 * 6478 * i0 by ring, pow_mul]
+       exact hA.pow _
+     have hdvd := hP 32 iS h 1
+-    have hb' : C M (Q M 44 3) (W M 17 (Q M 44 3) 111616 1) 32 iS
+-        (W M 28 (W M 17 (Q M 44 3) 111616 1) i0 1) h = true := hb
++    have hb' : C M (Q M 44 3) (W M 17 (Q M 44 3) 6478 1) 32 iS
++        (W M 33 (W M 17 (Q M 44 3) 6478 1) i0 1) h = true := hb
+     intro j hj
+-    have e : iS + 111616 * j = 111616 * (i0 + j) := by rw [hiS]; ring
++    have e : iS + 6478 * j = 6478 * (i0 + j) := by rw [hiS]; ring
+     have hcM := hdvd j hj
+     rw [e] at hcM
+     refine ⟨fun h3c => hM3 (h3c.trans hcM), ?_⟩
+-    have := hC (M := M) (B := Q M 44 3) (A := W M 17 (Q M 44 3) 111616 1) hB hA 32 iS
+-      (W M 28 (W M 17 (Q M 44 3) 111616 1) i0 1) h hU hdvd hb' j hj
++    have := hC (M := M) (B := Q M 44 3) (A := W M 17 (Q M 44 3) 6478 1) hB hA 32 iS
++      (W M 33 (W M 17 (Q M 44 3) 6478 1) i0 1) h hU hdvd hb' j hj
+     rwa [e] at this
+ 
+-theorem blk_spec {i0 h : ℕ} (hi : i0 < 2 ^ 28) (hb : blk i0 h = true) :
++theorem blk_spec {i0 h : ℕ} (hi : i0 < 2 ^ 33) (hb : blk i0 h = true) :
+     ∀ j < 32, Cert (i0 + j) (tOf h j) :=
+   blkWith_spec (fun n iS h acc => (prodC_dvd n iS h acc).2) sqPow_modEq powM_modEq
+     (fun hB hA => chk_spec hB hA) hi hb
+@@ -258,8 +258,8 @@ theorem runWith_succ (b : ℕ → ℕ → Bool) (n i0 h : ℕ) : runWith b (n +
+     Bool.rec false (runWith b n (i0 + 32) (h >>> 352)) (b i0 (h &&& mask352)) := rfl
+ 
+ theorem runWith_spec {b : ℕ → ℕ → Bool}
+-    (hb : ∀ {i0 h}, i0 < 2 ^ 28 → b i0 h = true → ∀ j < 32, Cert (i0 + j) (tOf h j)) :
+-    ∀ n i0 h, i0 + 32 * n ≤ 2 ^ 28 → runWith b n i0 h = true →
++    (hb : ∀ {i0 h}, i0 < 2 ^ 33 → b i0 h = true → ∀ j < 32, Cert (i0 + j) (tOf h j)) :
++    ∀ n i0 h, i0 + 32 * n ≤ 2 ^ 33 → runWith b n i0 h = true →
+     ∀ j < 32 * n, Cert (i0 + j) (tOf h j) := by
+   intro n
+   induction n with
+@@ -279,20 +279,20 @@ theorem runWith_spec {b : ℕ → ℕ → Bool}
+           show 32 + (j - 32) = j by omega, show i0 + 32 + (j - 32) = i0 + j by omega] at this
+         exact this
+ 
+-theorem run_spec : ∀ n i0 h, i0 + 32 * n ≤ 2 ^ 28 → run n i0 h = true →
++theorem run_spec : ∀ n i0 h, i0 + 32 * n ≤ 2 ^ 33 → run n i0 h = true →
+     ∀ j < 32 * n, Cert (i0 + j) (tOf h j) :=
+   runWith_spec blk_spec
+ 
+ /-- **Every window of `[a, a + 4096n)` contains a prime.** -/
+-theorem prime_of_runsOK {a n : ℕ} (h : RunsOK a n) (ha : 1 ≤ a) (hn : a + 4096 * n ≤ 2 ^ 28)
+-    (hS : 111616 * (a + 4096 * n) ≤ 2 ^ 45) {i : ℕ} (hi1 : a ≤ i) (hi2 : i < a + 4096 * n) :
+-    ∃ p, p.Prime ∧ (111616 * i - 2047) * 2 ^ 45 + 1 ≤ p ∧ p ≤ 111616 * i * 2 ^ 45 + 1 := by
++theorem prime_of_runsOK {a n : ℕ} (h : RunsOK a n) (ha : 1 ≤ a) (hn : a + 4096 * n ≤ 2 ^ 33)
++    (hS : 6478 * (a + 4096 * n) ≤ 2 ^ 45) {i : ℕ} (hi1 : a ≤ i) (hi2 : i < a + 4096 * n) :
++    ∃ p, p.Prime ∧ (6478 * i - 2047) * 2 ^ 45 + 1 ≤ p ∧ p ≤ 6478 * i * 2 ^ 45 + 1 := by
+   obtain ⟨hh, hr⟩ := h ((i - a) / 4096) (by omega)
+   have hc := run_spec 128 _ hh (by omega) hr ((i - a) % 4096) (by omega)
+   have hi : a + 4096 * ((i - a) / 4096) + (i - a) % 4096 = i := by omega
+   rw [hi] at hc
+   have ht := tOf_lt hh ((i - a) % 4096)
+-  have hiS : 111616 * i < 2 ^ 45 := lt_of_lt_of_le (Nat.mul_lt_mul_of_pos_left hi2 (by norm_num)) hS
++  have hiS : 6478 * i < 2 ^ 45 := lt_of_lt_of_le (Nat.mul_lt_mul_of_pos_left hi2 (by norm_num)) hS
+   refine ⟨_, prime_of_cert (by omega) hiS ht hc, ?_, ?_⟩
+   · rw [cand_eq]
+     exact Nat.add_le_add_right (Nat.mul_le_mul_right _ (by omega)) 1
+diff --git a/TernaryGoldbach/Statement.lean b/TernaryGoldbach/Statement.lean
+index b69c674..32da2c2 100644
+--- a/TernaryGoldbach/Statement.lean
++++ b/TernaryGoldbach/Statement.lean
+@@ -59,9 +59,9 @@ def PlattGRH : Prop :=
+     (Even q → q ≤ 400000 → ∀ ρ : ℂ, χ.LFunction ρ = 0 → 0 < ρ.re → ρ.re < 1 →
+       |ρ.im| ≤ max (1e8 / q : ℝ) (200 + 7.5e7 / q) → ρ.re = 1 / 2)
+ 
+-/-- [OeSHP] Oliveira e Silva, Herzog, Pardi, Math. Comp. 83 (2014): every even `4 ≤ n ≤ 4·10¹⁸` is
+-a sum of two primes. -/
+-def BinaryGoldbachInput : Prop := BinaryGoldbachUpTo (4 * 10 ^ 18)
++/-- [OeSHP] Oliveira e Silva, Herzog, Pardi, Math. Comp. 83 (2014): every even `4 ≤ n ≤ 3·10¹⁷` is
++a sum of two primes (the range their search double-checked, [OeSHP, Table 1 and §1.3]). -/
++def BinaryGoldbachInput : Prop := BinaryGoldbachUpTo (3 * 10 ^ 17)
+ 
+ /-- O. Ramaré, Acta Arith. 157 (2013), Cor. 1.4, as cited in [H, (2.21)]:
+ `|∑_{n ≤ x} μ(n)/n| ≤ 0.03/log x` for `x ≥ 11815`. -/
+diff --git a/formalization.yaml b/formalization.yaml
+index 82a4d33..24dc8b4 100644
+--- a/formalization.yaml
++++ b/formalization.yaml
+@@ -36,7 +36,7 @@ sources:
+     type: "article"
+     location: "Math. Comp. 83 (2014), Table 1 and §1.3"
+     relationship: "background"
+-    note: "Assumed (up to 4·10¹⁸) as the hypothesis `TernaryGoldbach.BinaryGoldbachInput`."
++    note: "Assumed (up to 3·10¹⁷, the double-checked range) as the hypothesis `TernaryGoldbach.BinaryGoldbachInput`."
+   - title: "From explicit estimates for primes to explicit estimates for the Moebius function"
+     authors: ["O. Ramaré"]
+     id: "doi:10.4064/aa157-4-4"
+@@ -64,8 +64,8 @@ status:
+     The complete proof of the ternary Goldbach conjecture following [H], relative to three
+     published numerical results passed as hypotheses. For odd n ≥ 10²⁷ (circle method), two
+     hypotheses are used: Platt's GRH verification (which also gives RH up to 10⁸) and Ramaré's
+-    Möbius bound. The small cases 5 < n < 10²⁷ use binary Goldbach up to 4·10¹⁸ and a prime ladder
+-    of 2.5·10⁸ Proth primes up to 10²⁷, which the Lean kernel checks.
++    Möbius bound. The small cases 5 < n < 10²⁷ use binary Goldbach up to 3·10¹⁷ and a prime ladder
++    of 4.4·10⁹ Proth primes up to 10²⁷, which the Lean kernel checks.
+   sorry_count: 0
+   sorry_in_definitions: 0
+   axioms:
+@@ -81,7 +81,7 @@ status:
+       literature_dependencies:
+         - statement: "`PlattGRH`: GRH for primitive χ mod q to height 10⁸/q (odd q ≤ 3·10⁵) or max(10⁸/q, 200 + 7.5·10⁷/q) (even q ≤ 4·10⁵)"
+           source: "Platt, arXiv:1305.3087, Thm 7.1"
+-        - statement: "`BinaryGoldbachInput`: every even 4 ≤ n ≤ 4·10¹⁸ is a sum of two primes"
++        - statement: "`BinaryGoldbachInput`: every even 4 ≤ n ≤ 3·10¹⁷ is a sum of two primes"
+           source: "Oliveira e Silva–Herzog–Pardi, Math. Comp. 83 (2014)"
+         - statement: "`RamareMoebius`: |∑_{n≤x} μ(n)/n| ≤ 0.03/log x for x ≥ 11815"
+           source: "Ramaré, Acta Arith. 157 (2013), Cor. 1.4"
+diff --git a/scripts/gen_ladder.py b/scripts/gen_ladder.py
+index 680ff98..130e301 100644
+--- a/scripts/gen_ladder.py
++++ b/scripts/gen_ladder.py
+@@ -11,12 +11,12 @@ Usage: python3 scripts/gen_ladder.py
+ 
+ from pathlib import Path
+ 
+-S = 111616
++S = 6478
+ F = 2 ** 45
+ IMAX = (10 ** 27 - 5) // (S * F)  # the largest rung needed for n <= 10^27
+ CHUNK = 4096
+ NCHUNKS = -(-IMAX // CHUNK)
+-NFILES = 128
++NFILES = 2205  # about 486 chunks (2·10⁶ rungs) a file, as in the 128-file ladder
+ 
+ ROOT = Path(__file__).resolve().parent.parent
+ DATA = ROOT / "TernaryGoldbach" / "Ladder" / "Data"
+@@ -35,8 +35,10 @@ def tree(leaves):
+ 
+ 
+ def main():
+-    assert IMAX == 254638308
+-    assert 1 + CHUNK * NCHUNKS <= 2 ** 28 and S * (1 + CHUNK * NCHUNKS) <= F
++    assert IMAX == 4387420412
++    # consecutive rungs are less than (S + 2047)·F apart; binary Goldbach is needed up to 3·10¹⁷
++    assert (S + 2047) * F + 3 <= 3 * 10 ** 17
++    assert 1 + CHUNK * NCHUNKS <= 2 ** 33 and S * (1 + CHUNK * NCHUNKS) <= F
+     DATA.mkdir(parents=True, exist_ok=True)
+     base, extra = divmod(NCHUNKS, NFILES)
+     files = []
+@@ -48,7 +50,7 @@ def main():
+     assert c == NCHUNKS
+     parts = []
+     for k, chunks in enumerate(files):
+-        name = f"L{k:03d}"
++        name = f"L{k:04d}"
+         a0 = 1 + CHUNK * chunks[0]
+         lines = [
+             "import TernaryGoldbach.Ladder.Check",
+@@ -74,7 +76,7 @@ def main():
+                   f"end TernaryGoldbach.Ladder.{name}", ""]
+         (DATA / f"{name}.lean").write_text("\n".join(lines))
+         parts.append((a0, len(chunks), f"{name}.all"))
+-    imports = "\n".join(f"import TernaryGoldbach.Ladder.Data.L{k:03d}" for k in range(NFILES))
++    imports = "\n".join(f"import TernaryGoldbach.Ladder.Data.L{k:04d}" for k in range(NFILES))
+     a, n, term = tree(parts)
+     text = f"""{imports}
+ 
+diff --git a/scripts/ladder-3e17-run/sampler.sh b/scripts/ladder-3e17-run/sampler.sh
+new file mode 100755
+index 0000000..19a8301
+--- /dev/null
++++ b/scripts/ladder-3e17-run/sampler.sh
+@@ -0,0 +1,14 @@
++#!/bin/bash
++# every 60 s: time (PT), MemAvailable and free MB, load, data files done, lean processes, their RSS sum
++L=~/ladder-3e17-logs
++O=~/ladder-3e17/.lake/build/lib/lean/TernaryGoldbach/Ladder/Data
++[ -s $L/mem.tsv ] || echo -e "time_pt\tavail_mb\tfree_mb\tload1\tload5\tdone\tlean_procs\tlean_rss_mb" > $L/mem.tsv
++while true; do
++  a=$(awk '/MemAvailable/{print int($2/1024)}' /proc/meminfo); f=$(awk '/MemFree/{print int($2/1024)}' /proc/meminfo)
++  read l1 l5 _ < /proc/loadavg
++  d=$(ls $O 2>/dev/null | grep -c '^L[0-9]\{4\}\.olean$')
++  r=$(ps -C lean -o rss= | awk '{s+=$1;n++} END{printf "%d\t%d", n, s/1024}')
++  echo -e "$(TZ=America/Los_Angeles date '+%F %T')\t$a\t$f\t$l1\t$l5\t$d\t$r" >> $L/mem.tsv
++  [ -e $L/BUILD_DONE ] && break
++  sleep 60
++done
+diff --git a/scripts/ladder-3e17-run/sched.py b/scripts/ladder-3e17-run/sched.py
+new file mode 100755
+index 0000000..380c98a
+--- /dev/null
++++ b/scripts/ladder-3e17-run/sched.py
+@@ -0,0 +1,164 @@
++#!/usr/bin/env python3
++"""Memory-aware scheduler for the 2205 ladder data files of ~/ladder-3e17.
++
++Lake has no job-count option, so this runs one `nice -n 19 lake build <module>` per data file, at most
++MAXJOBS at a time (default 8, override in ~/ladder-3e17-logs/maxjobs), and starts a new one only when
++MemAvailable minus the growth still expected from the running jobs leaves RESERVE free: 10 GB while
++any process from ~/reams-replay runs, 3 GB after. A file whose build fails is retried later (an OOM
++kill lowers MAXJOBS by one). Files whose .olean exists are skipped, so rerunning resumes. After all
++files: the full `lake build TernaryGoldbach LadderHints Challenge Solution`.
++"""
++import os, subprocess, time, datetime, pathlib, sys
++
++HOME = pathlib.Path.home()
++REPO = HOME / "ladder-3e17"
++LOGS = HOME / "ladder-3e17-logs"
++OLEAN = REPO / ".lake/build/lib/lean/TernaryGoldbach/Ladder/Data"
++NFILES = 2205
++PEAK_MB = int(os.environ.get("PEAK_MB", "2600"))  # per-file peak RSS budget (pilot + margin)
++GB = 1024
++ENV = dict(os.environ, LEAN_NUM_THREADS="8")
++
++def now():
++    return datetime.datetime.now().astimezone().strftime("%Y-%m-%d %H:%M:%S %Z")
++
++def log(msg):
++    with open(LOGS / "sched.log", "a") as f:
++        f.write(f"{now()} {msg}\n")
++
++def avail_mb():
++    for line in open("/proc/meminfo"):
++        if line.startswith("MemAvailable:"):
++            return int(line.split()[1]) // 1024
++    return 0
++
++def replay_busy():
++    """A lake, lean or comparator process whose working directory is ~/reams-replay."""
++    target = str(HOME / "reams-replay")
++    for d in os.listdir("/proc"):
++        if not d.isdigit():
++            continue
++        try:
++            cwd = os.readlink(f"/proc/{d}/cwd")
++            comm = open(f"/proc/{d}/comm").read().strip()
++        except OSError:
++            continue
++        if (cwd == target or cwd.startswith(target + "/")) and comm in ("lake", "lean", "leanexport", "comparator"):
++            return True
++    return False
++
++def rss_mb(pid):
++    tot = 0
++    try:
++        kids = subprocess.run(["ps", "--ppid", str(pid), "-o", "pid="], capture_output=True, text=True).stdout.split()
++        for p in [str(pid)] + kids:
++            for k in subprocess.run(["ps", "--ppid", p, "-o", "pid="], capture_output=True, text=True).stdout.split() + [p]:
++                try:
++                    for line in open(f"/proc/{k}/status"):
++                        if line.startswith("VmRSS:"):
++                            tot += int(line.split()[1]) // 1024
++                except OSError:
++                    pass
++    except Exception:
++        pass
++    return tot
++
++def maxjobs(default):
++    try:
++        return int((LOGS / "maxjobs").read_text().strip())
++    except Exception:
++        return default
++
++def done(k):
++    return (OLEAN / f"L{k:04d}.olean").exists()
++
++def inflight():
++    """Ladder lake builds already running (e.g. left by a previous scheduler): {k: lake pid}."""
++    out = {}
++    for d in os.listdir("/proc"):
++        if not d.isdigit():
++            continue
++        try:
++            if open(f"/proc/{d}/comm").read().strip() != "lake":
++                continue
++            args = open(f"/proc/{d}/cmdline").read().split(chr(0))
++        except OSError:
++            continue
++        for a in args:
++            if a.startswith("TernaryGoldbach.Ladder.Data.L"):
++                out[int(a[-4:])] = int(d)
++    return out
++
++def oom_seen(since):
++    out = subprocess.run(["dmesg"], capture_output=True, text=True).stdout
++    return "Out of memory" in out or "oom-kill" in out
++
++def main():
++    LOGS.mkdir(exist_ok=True)
++    (LOGS / "files").mkdir(exist_ok=True)
++    jobcap = maxjobs(8)
++    todo = [k for k in range(NFILES) if not done(k)]
++    log(f"start: {NFILES - len(todo)} done, {len(todo)} to build, cap {jobcap}")
++    running = {}  # k -> (Popen, start)
++    adopted = inflight()  # k -> lake pid, builds still running from before this scheduler started
++    todo = [k for k in todo if k not in adopted]
++    if adopted:
++        log(f"adopted {len(adopted)} in-flight builds: {sorted(adopted)}")
++    fails = {}
++    oom0 = oom_seen(0)
++    while todo or running or adopted:
++        for k, pid in list(adopted.items()):
++            if os.path.exists(f"/proc/{pid}"):
++                continue
++            del adopted[k]
++            if done(k):
++                log(f"L{k:04d} ok (adopted)")
++            else:
++                log(f"L{k:04d} adopted build ended without .olean; requeued")
++                todo.append(k)
++        for k, (p, t0) in list(running.items()):
++            rc = p.poll()
++            if rc is None:
++                continue
++            del running[k]
++            dt = time.time() - t0
++            if rc == 0 and done(k):
++                log(f"L{k:04d} ok {dt:.0f}s")
++            else:
++                fails[k] = fails.get(k, 0) + 1
++                log(f"L{k:04d} FAILED rc={rc} after {dt:.0f}s (attempt {fails[k]})")
++                if not oom0 and oom_seen(0):
++                    jobcap = max(1, jobcap - 1)
++                    (LOGS / "maxjobs").write_text(f"{jobcap}\n")
++                    log(f"OOM seen in dmesg: cap lowered to {jobcap}")
++                    oom0 = True
++                if fails[k] < 3:
++                    todo.append(k)
++        cap = maxjobs(jobcap)  # live; raising the file now raises the cap too
++        reserve = 10 * GB if replay_busy() else 3 * GB
++        growth = sum(max(0, PEAK_MB - rss_mb(p.pid)) for p, _ in running.values())
++        growth += sum(max(0, PEAK_MB - rss_mb(pid)) for pid in adopted.values())
++        if todo and len(running) + len(adopted) < cap and avail_mb() - growth >= reserve + PEAK_MB:
++            k = todo.pop(0)
++            lf = open(LOGS / "files" / f"L{k:04d}.log", "w")
++            p = subprocess.Popen(["nice", "-n", "19", "/usr/bin/time", "-v", "-o", str(LOGS / "files" / f"L{k:04d}.time"),
++                                  "lake", "build", f"TernaryGoldbach.Ladder.Data.L{k:04d}"],
++                                 cwd=REPO, env=ENV, stdout=lf, stderr=subprocess.STDOUT)
++            running[k] = (p, time.time())
++            time.sleep(3)  # let lake start before the next memory reading
++            continue
++        time.sleep(10)
++    bad = [k for k in range(NFILES) if not done(k)]
++    log(f"data files finished; missing: {bad[:20]}{'...' if len(bad) > 20 else ''}")
++    if bad:
++        sys.exit(1)
++    log("full build start")
++    with open(LOGS / "build.log", "w") as lf:
++        rc = subprocess.run(["nice", "-n", "19", "/usr/bin/time", "-v", "-o", str(LOGS / "build.time"),
++                             "lake", "build", "TernaryGoldbach", "LadderHints", "Challenge", "Solution"],
++                            cwd=REPO, env=ENV, stdout=lf, stderr=subprocess.STDOUT).returncode
++    log(f"full build exit={rc}")
++    (LOGS / "BUILD_DONE").write_text(f"{rc} {now()}\n")
++
++if __name__ == "__main__":
++    main()

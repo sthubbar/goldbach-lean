@@ -1,0 +1,8 @@
+import TernaryGoldbach
+import Solution
+#check @TernaryGoldbach.ternary_goldbach_of_hypotheses
+#check @TernaryGoldbach.ternary_goldbach_large_of_hypotheses
+#print TernaryGoldbach.BinaryGoldbachInput
+#print axioms TernaryGoldbach.ternary_goldbach_of_hypotheses
+#print axioms TernaryGoldbach.ternary_goldbach_large_of_hypotheses
+#print axioms TernaryGoldbach.Ladder.ladder_prime

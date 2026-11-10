@@ -1,0 +1,63 @@
+  Function.comp
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [hO, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hx]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: TernaryGoldbach/MajorArcs/MajorTotal.lean:597:15: This simp argument is unused:
+  Function.comp
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [hO, hP, ← sub_mul, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hx]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: TernaryGoldbach/MajorArcs/MajorTotal.lean:605:17: This simp argument is unused:
+  Function.comp
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [hP, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hx]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: TernaryGoldbach/MajorArcs/MajorTotal.lean:832:8: `intervalIntegral.integral_finset_sum` has been deprecated: Use `intervalIntegral.integral_finsetSum` instead
+
+Hint: Replace the deprecated name:
+  intervalIntegral.integral_finset_̵s̵S̲um
+warning: TernaryGoldbach/MajorArcs/MajorTotal.lean:883:8: `intervalIntegral.integral_finset_sum` has been deprecated: Use `intervalIntegral.integral_finsetSum` instead
+
+Hint: Replace the deprecated name:
+  intervalIntegral.integral_finset_̵s̵S̲um
+✔ [11545/11557] Built TernaryGoldbach.MinorArcs.MinorTotal (38s)
+✔ [11546/11557] Built TernaryGoldbach.MinorArcs.NumericsCore (28s)
+✔ [11547/11557] Built TernaryGoldbach.MinorArcs.NumericsCells (40s)
+✔ [11548/11557] Built TernaryGoldbach.MinorArcs.NumericsAsymp (126s)
+✔ [11549/11557] Built TernaryGoldbach.MinorArcs.NumericsFinal (5.6s)
+✔ [11550/11557] Built TernaryGoldbach.Helfgott.Inputs (7.0s)
+✔ [11551/11557] Built TernaryGoldbach.Helfgott.SmallCases (10s)
+✔ [11552/11557] Built TernaryGoldbach.Helfgott.Main (10s)
+✔ [11553/11557] Built TernaryGoldbach.MainTheorems (9.4s)
+✔ [11554/11557] Built Solution (9.4s)
+✔ [11556/11557] Built TernaryGoldbach (9.6s)
+Build completed successfully (11557 jobs).
+	Command being timed: "lake build TernaryGoldbach LadderHints Challenge Solution"
+	User time (seconds): 13745.69
+	System time (seconds): 760.43
+	Percent of CPU this job got: 315%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:16:38
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 17931704
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 37632
+	Minor (reclaiming a frame) page faults: 54030702
+	Voluntary context switches: 2334877
+	Involuntary context switches: 589564
+	Swaps: 0
+	File system inputs: 26663400
+	File system outputs: 3641352
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

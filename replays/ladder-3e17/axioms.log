@@ -1,0 +1,10 @@
+TernaryGoldbach.ternary_goldbach_of_hypotheses : TernaryGoldbach.PlattGRH →
+  TernaryGoldbach.BinaryGoldbachInput → TernaryGoldbach.RamareMoebius → TernaryGoldbach.Statement
+TernaryGoldbach.ternary_goldbach_large_of_hypotheses : TernaryGoldbach.PlattGRH →
+  TernaryGoldbach.RamareMoebius → TernaryGoldbach.TernaryGoldbachFrom (10 ^ 27)
+def TernaryGoldbach.BinaryGoldbachInput : Prop :=
+TernaryGoldbach.BinaryGoldbachUpTo (3 * 10 ^ 17)
+'TernaryGoldbach.ternary_goldbach_of_hypotheses' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TernaryGoldbach.ternary_goldbach_large_of_hypotheses' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TernaryGoldbach.Ladder.ladder_prime' depends on axioms: [propext, Classical.choice, Quot.sound]
+12.47 s 15201872 KB
