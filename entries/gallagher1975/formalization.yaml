@@ -1,0 +1,193 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Primes and powers of 2: Gallagher's mean square theorem and the asymptotic count of two primes and k powers of 2"
+  description: >-
+    A Lean 4 proof, with no unproved steps, of the two main theorems of P. X. Gallagher, Primes
+    and powers of 2, Invent. Math. 29, 1975, for the base g = 2. Let r'_k of n count the
+    representations n = p + 2^v1 + ... + 2^vk with p prime and 1 <= vi <= L, the integer part
+    of log_2 N, and let r''_k of N count the representations N = p1 + p2 + 2^v1 + ... + 2^vk.
+    Theorem 1, display 3 on page 125: for every k >= 1 and N >= N_k, the sum over odd n <= N of
+    the square of r'_k of n minus 2 L^k / log N is at most C times log^2 2k / k times
+    N L^{2k-2}, with an absolute constant C. Theorem 2, display 4 on page 125: for every k >= 2
+    and every even N >= N_k, r''_k of N differs from 2 N L^k / log^2 N by at most K times
+    log^2 k / k times 2 N L^k / log^2 N, with an absolute constant K. Binary Goldbach is open
+    and is not claimed. AI agents wrote the Lean code, Claude by Anthropic and
+    Codex by OpenAI, as listed in PORTING.md, and it is offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11P55", "11N36", "11M26"]
+
+sources:
+  - title: "Primes and powers of 2"
+    authors:
+      - "P. X. Gallagher"
+    id: "doi:10.1007/BF01390190"
+    type: "article"
+    location: "Inventiones Mathematicae 29, 1975, pages 125-142"
+    relationship: "formalizes"
+    note: >-
+      Formalizes Theorem 1, display 3, and Theorem 2, display 4, both on page 125, for the base
+      g = 2, following the paper's route: the major arcs of Section 1 with the zero density
+      estimate near 1 and the exceptional character, the minor arcs through Lemma 11, Lemma 2 on
+      the large values of the exponential sum over powers of 2, Lemma 12, the bound of display 6
+      on page 139, and the counting identity of page 140 for Theorem 2. The author has not
+      been contacted about this formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "The exceptional set in Goldbach's problem"
+    authors:
+      - "H. L. Montgomery"
+      - "R. C. Vaughan"
+    id: "Acta Arithmetica 27, 1975, pages 353-370"
+    type: "article"
+    location: "Acta Arithmetica 27, 1975, pages 353-370"
+    relationship: "adapts"
+    note: >-
+      Gallagher's reference 10. The three estimates that Gallagher cites from it, the Gauss sum
+      bound behind display 5 and the two singular series estimates of display 11, the latter
+      from equations 6.13 and 6.14 on page 363, are proved here as inputs in
+      LeanLab/Linnik/Decomp507a.lean, not assumed. The authors have not been contacted.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "Hilbert's inequality"
+    authors:
+      - "H. L. Montgomery"
+      - "R. C. Vaughan"
+    id: "Journal of the London Mathematical Society 8, 1974, pages 73-82"
+    type: "article"
+    location: "Journal of the London Mathematical Society 8, 1974, pages 73-82"
+    relationship: "adapts"
+    note: >-
+      Theorem 1, display 1.2, the Hilbert inequality with the cosecant kernel, is proved here as
+      an input to the large sieve estimates in LeanLab/Linnik/HilbertCosecant.lean, not
+      assumed. The authors have not been contacted.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "A large sieve density estimate near sigma = 1"
+    authors:
+      - "P. X. Gallagher"
+    id: "Inventiones Mathematicae 11, 1970, pages 329-339"
+    type: "article"
+    location: "Inventiones Mathematicae 11, 1970, pages 329-339"
+    relationship: "background"
+    note: >-
+      Source of the zero density estimate near 1 that the major arc treatment uses; its
+      statement is proved here, not assumed.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "PrimeNumberTheoremAnd"
+    authors:
+      - "Arend Mellendijk"
+      - "the PrimeNumberTheoremAnd project contributors"
+    id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    type: "formalization"
+    location: "commit c39a751132c88b6e8080b74c74023fd95b3d8be0"
+    relationship: "other"
+    note: >-
+      Sixteen files under LeanLab/PNTPort/StrongPNT, the zero-free region for zeta and the prime
+      number theorem with classical error term, and five files under LeanLab/PNTSieve, the
+      Selberg sieve and the Brun-Titchmarsh inequality by Arend Mellendijk, are ported from this
+      Apache-2.0 project with small fixes for Mathlib v4.35.0-rc3, listed in PORTING.md; each
+      file carries a notice.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+  - title: "zeta-23-lean"
+    authors:
+      - "Anthropic PBC"
+    id: "https://github.com/anthropics/zeta-23-lean"
+    type: "formalization"
+    location: "commit 16a5ce41304fcdaea4e0be7c132e1c361dc26da5, zeta23/Zeta23/MV"
+    relationship: "other"
+    note: >-
+      The matrix proof skeleton of LeanLab/Linnik/HilbertCosecant.lean is adapted from the files
+      Quadratic, EigenIdentity, Eigen and Duality of this Apache-2.0 project; the file keeps its
+      copyright and license notice.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "https://github.com/sthubbar/goldbach-lean/tree/main/entries/romanov1934"
+    relationship: "registered entry of this repository on the integers p + 2^k, which Gallagher's theorems refine"
+    note: "Romanov's theorem with Erdős' complement; its second moment method gives Lemma 12 here, in LeanLab/Romanov/GallagherBridge.lean."
+
+status:
+  scope: >-
+    Formalized, with no hypothesis, for the base g = 2: Gallagher's Theorem 1, display 3,
+    theorem1_of_leaves, and Theorem 2, display 4, theorem2_of_leaves. No compared theorem goes
+    beyond the paper. Not formalized: the theorems for a general base g, explicit values of the
+    constants and of N_k, and binary Goldbach, which remains open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic", "Codex, OpenAI"]
+      framework: "Claude Cowork"
+      tool_setup: >-
+        Autonomous agents wrote the Lean files, ran lake build, read the paper and wrote the
+        statements from it; PORTING.md lists which agent wrote which file where the lab notes
+        say so. Codex task507 proved the three leaves cited from Montgomery and Vaughan 1975,
+        and other Codex tasks proved further leaves. A packaging agent ported the files to Lean
+        4 v4.35.0-rc3, Mathlib v4.35.0-rc3, and ran the Lean kernel and the Comparator. No
+        native_decide.
+      cost:
+        wall_time: "agent runs over 2026-10-16 to 2026-11-05, and packaging on 2026-11-14"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published results related to
+        Goldbach's problem and the inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish. Claude wrote the statements
+    and the decomposition of Gallagher's proof; Codex and other lab prover agents proved leaves,
+    as listed in PORTING.md. No file here contains a placeholder proof outside the Challenge
+    file. No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    Only the base g = 2 is treated. The implied constants of << and O are explicit existential
+    constants independent of k, as in the paper, and N >= N_k is an explicit threshold depending on k.
+    r'_k of n counts pairs of a prime p and an exponent tuple in [1, L]^k, with L the integer
+    part of log_2 N, and the sum in Theorem 1 runs over the odd n <= N, as the definition of r'_k for odd n on
+    page 125, the remark on page 126 and the dashed sums of page 139 fix. r''_k of N counts ordered triples of two primes and an exponent tuple. Theorem 2 is stated for k >= 2,
+    as in the paper.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "Claude Opus 5.5, Anthropic, an AI statement auditor, not a human"
+  notes: >-
+    An AI statement audit by the packaging agent checked the Challenge against the statements
+    of page 125 as the lab files transcribe them with page references: the definitions of r'_k
+    and r''_k, the range 1 to L of the exponents, the main terms 2 L^k / log N and
+    2 N L^k / log^2 N, that the constants C and K are absolute and uniform in k, the parity
+    conditions, and that neither theorem holds trivially, since the trivial bounds lack the
+    factor log^2 2k / k. A second, independent AI audit, also Claude Opus 5.5 and not a human,
+    then reread pages 125, 126 and 138 to 140 of the paper scan and found both statements
+    faithful for g = 2. Lean kernel and Comparator
+    checks pass. Not reviewed by a human expert or by the author.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Gallagher 1975, Theorem 1, display 3, page 125, g = 2"
+      lean: "LeanLab.Linnik.Decomp1532c.theorem1_of_leaves"
+      module: "ChallengeGallagher1975"
+      status: "proved"
+    - source: "Gallagher 1975, Theorem 2, display 4, page 125, g = 2"
+      lean: "LeanLab.Linnik.Decomp1532c.theorem2_of_leaves"
+      module: "ChallengeGallagher1975"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; Arend Mellendijk and the PrimeNumberTheoremAnd contributors; P. X. Gallagher, H. L. Montgomery and R. C. Vaughan for the papers."

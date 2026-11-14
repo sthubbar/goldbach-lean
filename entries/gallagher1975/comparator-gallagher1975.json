@@ -1,0 +1,20 @@
+{
+  "challenge_module": "ChallengeGallagher1975",
+  "solution_module": "SolutionGallagher1975",
+  "theorem_names": [
+    "LeanLab.Linnik.Decomp1532c.theorem1_of_leaves",
+    "LeanLab.Linnik.Decomp1532c.theorem2_of_leaves"
+  ],
+  "definition_names": [
+    "LeanLab.LPZ2007.tuples",
+    "LeanLab.LPZ2007.pow2sum",
+    "LeanLab.Linnik.Gallagher1975.rk",
+    "LeanLab.Linnik.Gallagher1975.Theorem1",
+    "LeanLab.Linnik.Gallagher1975Thm2.rpp"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}
