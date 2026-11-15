@@ -1,0 +1,151 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Proth's criterion and the prime ladder reduction for ternary Goldbach up to 8.875 · 10^30"
+  description: >-
+    Lean 4 proofs, with no unproved steps, of two results from H. A. Helfgott and D. J. Platt,
+    Numerical verification of the ternary Goldbach conjecture up to 8.875 · 10^30,
+    Experimental Mathematics 22, 2013, arXiv:1305.3062. First, Proth's criterion of Section 2,
+    Theorem 2.3 in existential form; the converse printed after it, for every such a, is proved as converse but not compared: a Proth number N = k 2^n + 1 with
+    0 < k < 2^n is prime if and only if some integer a has Jacobi symbol -1 over N and
+    a raised to the power N - 1 over 2 is -1 mod N. Second, Theorem 4.1, every odd number from 7 to
+    T = 8875694145621773516800000000000 is a sum of three primes, derived from the two
+    computations the paper rests on, which are explicit hypotheses and are not proved here:
+    binary Goldbach for every even number from 4 to 4 · 10^18, the verification of Oliveira e
+    Silva, Herzog and Pardi, and for each of the 492700 ranges of width 2^54 · 10^9 of Section 4
+    a ladder of odd primes with gaps at most 4 · 10^18 - 2 that starts within 2 · 10^18 above
+    the left end point and ends less than 2 · 10^18 below the right end point, the paper's own
+    computation. The entry does not verify any ladder or any binary Goldbach case, so it does
+    not prove ternary Goldbach up to T; it proves that the paper's computations imply it.
+    Ternary Goldbach is Helfgott's theorem and binary Goldbach is open; neither is claimed. AI
+    agents wrote the Lean code, Claude by Anthropic, as listed in PORTING.md, and it is offered
+    for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11Y11", "11Y16"]
+
+sources:
+  - title: "Numerical verification of the ternary Goldbach conjecture up to 8.875 · 10^30"
+    authors:
+      - "H. A. Helfgott"
+      - "D. J. Platt"
+    id: "arXiv:1305.3062"
+    type: "article"
+    location: "Experimental Mathematics 22, 2013; arXiv:1305.3062v2, Sections 2 to 4"
+    relationship: "formalizes"
+    note: >-
+      Formalizes Definition 2.1, Theorem 2.3 in existential form, with the printed converse proved but not compared, and Theorem 4.1
+      as an implication from the binary Goldbach verification to 4 · 10^18 and the range ladders
+      of Section 4, both taken as hypotheses. The authors have not been contacted about this
+      formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "https://github.com/leanprover-community/mathlib4/tree/v4.35.0-rc3"
+    relationship: "library used; Mathlib v4.35.0-rc3 has no Proth theorem"
+    note: >-
+      A search of Mathlib v4.35.0-rc3 for Proth finds nothing. Mathlib has Euler's criterion,
+      legendreSym.eq_pow, and the Lucas primality test, lucas_primality; the proof of
+      proth_iff uses Euler's criterion and the existence of a quadratic nonresidue in a finite
+      field.
+  - id: "https://github.com/calr3/ternary-goldbach"
+    relationship: "independent Lean formalization of ternary Goldbach with a kernel checked Proth prime ladder"
+    note: >-
+      Charlie Reams's project proves ternary Goldbach from named analytic hypotheses and a
+      binary Goldbach input, with the small cases from a Proth prime ladder checked by the
+      kernel. This entry does not check any ladder; it proves the reduction of the paper's
+      Theorem 4.1 to its range ladders.
+  - id: "https://github.com/sthubbar/goldbach-lean/tree/main/entries/helfgott62"
+    relationship: "registered entry of this repository on Helfgott's proof of ternary Goldbach"
+    note: "Lemma 6.1 and Proposition 6.2 of Helfgott's ternary Goldbach paper."
+
+status:
+  scope: >-
+    Formalized with no hypothesis: Proth's criterion, proth_iff, both directions of Theorem 2.3
+    in existential form. Formalized with the paper's two computations as explicit
+    hypotheses: Theorem 4.1, theorem4_1_of_ranges. Not formalized: the computations
+    themselves, that is the 492700 range ladders and binary Goldbach up to 4 · 10^18, the
+    choice of the witness a and the timings of Sections 4 and 5, and ternary Goldbach above T.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic"]
+      framework: "Claude Cowork"
+      tool_setup: >-
+        Autonomous agents wrote the Lean files, ran lake build, read the paper on arXiv and
+        wrote the statements from it; a separate AI verify run rebuilt the reduction and checked
+        it against the paper. A packaging agent ported the files to Lean 4 v4.35.0-rc3, Mathlib
+        v4.35.0-rc3, rewrote four steps of the proof of Proth's theorem for that version, and
+        ran the Lean kernel and the Comparator. No native_decide.
+      cost:
+        wall_time: "agent runs over 2026-10-16 to 2026-10-22, and packaging on 2026-11-15"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published results related to
+        Goldbach's problem and the inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish. Claude wrote the statements
+    and the proofs, as listed in PORTING.md. No file here contains a placeholder proof outside
+    the Challenge file. No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    The paper writes a Proth number as k 2^n + 1 with n > 0; the Lean statement writes n as
+    m + 1, which is the same set of numbers, and takes a an integer and the congruence in
+    ZMod N with the exponent N - 1 over 2 in natural number division, exact since N is odd.
+    Theorem 4.1 is stated as TernaryGoldbachUpTo T: every odd n with 7 <= n <= T is a
+    sum of three primes, not necessarily distinct, exactly as printed. The range ladders are
+    the lab's reading of Section 4: the paper says each ladder starts within 2 · 10^18 of the
+    left end point, ends within 2 · 10^18 of the right end point, and has no gap exceeding
+    4 · 10^18. The Lean hypothesis RangeOK asks every gap to be at most 4 · 10^18 - 2, which
+    excludes a gap of exactly 4 · 10^18 and so is slightly stronger than the printed sentence;
+    the strict inequalities of Section 3 give it when Δ is at most 4 · 10^18, a value the paper
+    does not print, and the reduction needs it; it asks the end strictly within 2 · 10^18 of the right end point;
+    and it does not ask the rungs to be Proth numbers, to lie in the range or to start above
+    the left end point. The binary input is EvenGoldbachUpTo 4 · 10^18, the bound the paper
+    cites. The two hypotheses are satisfiable in principle but are not checked here.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "AI packaging agent: an instance of Claude Opus 5.5, claude-opus-5-5, Anthropic; not a human reviewer"
+  notes: >-
+    Status is self-assessed: every check was done by AI agents, so it is not an independent
+    review and not a human expert review. In the lab, AI runs read arXiv 1305.3062v2 and
+    checked Theorem 2.3, the converse proved outside the comparison, and Theorem 4.1, the value of T and the range width and
+    count against the text; a separate AI verify run rebuilt theorem4_1_of_ranges and checked
+    it against the paper. The packaging agent read Definition 2.1, Theorem 2.3, Theorem 4.1 and
+    the range description of Section 4 again on arXiv, built the entry, ran the Lean kernel and
+    the Comparator, and checked that the axioms of both compared theorems are propext,
+    Classical.choice and Quot.sound. No human expert and neither author has reviewed the entry.
+    A second, separate AI agent, Claude Opus 5.5 by Anthropic, not a human, audited the Proth
+    statement and the hypotheses of Theorem 4.1 against arXiv 1305.3062; its wording fixes on
+    the converse and the gap bound are applied.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Helfgott and Platt 2013, Section 2, Theorem 2.3, existential form"
+      lean: "LeanLab.HelfgottPlatt.U1455.proth_iff"
+      module: "ChallengeHelfgottPlatt2013"
+      status: "proved"
+    - source: "Helfgott and Platt 2013, Theorem 4.1, from binary Goldbach to 4 · 10^18 and the range ladders of Section 4 as hypotheses"
+      lean: "LeanLab.HelfgottPlatt.U6816.theorem4_1_of_ranges"
+      module: "ChallengeHelfgottPlatt2013"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; H. A. Helfgott and D. J. Platt for the paper."

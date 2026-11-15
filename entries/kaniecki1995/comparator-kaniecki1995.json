@@ -1,0 +1,23 @@
+{
+  "challenge_module": "ChallengeKaniecki1995",
+  "solution_module": "SolutionKaniecki1995",
+  "theorem_names": [
+    "LeanLab.Kaniecki1995.not_lemma7_printed",
+    "LeanLab.KanieckiGap.lemma7_printed_false_at_6",
+    "LeanLab.KanieckiGap.lemma7_closed",
+    "LeanLab.KanieckiGap.RealIntervals127.lemma7_closed_real"
+  ],
+  "definition_names": [
+    "LeanLab.Kaniecki1995.nextPrime",
+    "LeanLab.Kaniecki1995.lam",
+    "LeanLab.Kaniecki1995.Lemma7Printed",
+    "LeanLab.KanieckiGap.nextPrime",
+    "LeanLab.KanieckiGap.gapAt",
+    "LeanLab.KanieckiGap.lam"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

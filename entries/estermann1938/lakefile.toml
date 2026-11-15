@@ -1,0 +1,19 @@
+name = "GoldbachLeanEstermann1938"
+version = "0.1.0"
+defaultTargets = ["ChallengeEstermann1938", "SolutionEstermann1938"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.35.0-rc3"
+
+[[lean_lib]]
+name = "LeanLab"
+
+[[lean_lib]]
+name = "ChallengeEstermann1938"
+roots = ["ChallengeEstermann1938"]
+
+[[lean_lib]]
+name = "SolutionEstermann1938"
+roots = ["SolutionEstermann1938"]

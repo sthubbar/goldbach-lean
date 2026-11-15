@@ -1,0 +1,17 @@
+{
+  "challenge_module": "ChallengeEstermann1938",
+  "solution_module": "SolutionEstermann1938",
+  "theorem_names": [
+    "LeanLab.Estermann1938.main"
+  ],
+  "definition_names": [
+    "LeanLab.IsGoldbachSum",
+    "LeanLab.Estermann1938.Q",
+    "LeanLab.Estermann1938.theorem_stmt"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

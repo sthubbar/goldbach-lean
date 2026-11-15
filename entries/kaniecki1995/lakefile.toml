@@ -1,0 +1,19 @@
+name = "GoldbachLeanKaniecki1995"
+version = "0.1.0"
+defaultTargets = ["ChallengeKaniecki1995", "SolutionKaniecki1995"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.35.0-rc3"
+
+[[lean_lib]]
+name = "LeanLab"
+
+[[lean_lib]]
+name = "ChallengeKaniecki1995"
+roots = ["ChallengeKaniecki1995"]
+
+[[lean_lib]]
+name = "SolutionKaniecki1995"
+roots = ["SolutionKaniecki1995"]

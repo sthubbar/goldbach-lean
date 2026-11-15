@@ -5,7 +5,9 @@
     "LeanLab.GoldbachShort78.goldbach_short_1075",
     "LeanLab.GoldbachShort78.windowCount_of_backward",
     "LeanLab.GoldbachShort78.goldbach_of_counts",
-    "LeanLab.GoldbachShort78.exponent_1075"
+    "LeanLab.GoldbachShort78.exponent_1075",
+    "LeanLab.GoldbachShort78.goldbach_short_600",
+    "LeanLab.GoldbachShort78.exponent_600"
   ],
   "definition_names": [
     "LeanLab.IsGoldbachSum",
@@ -16,7 +18,9 @@
     "LeanLab.GoldbachShort78.primeInterval",
     "LeanLab.GoldbachShort78.powerBadSet",
     "LeanLab.GoldbachShort78.LiPrintedExceptionalCount",
-    "LeanLab.GoldbachShort78.LiRow052"
+    "LeanLab.GoldbachShort78.LiRow052",
+    "LeanLab.GoldbachShort78.backwardBadSet",
+    "LeanLab.GoldbachShort78.LiIIIExceptionalCount"
   ],
   "permitted_axioms": [
     "propext",

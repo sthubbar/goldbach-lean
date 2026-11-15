@@ -24,8 +24,18 @@ weaker form that follows from the two theorems as printed.
 Also compared: `windowCount_of_backward` and `goldbach_of_counts`, the two steps of the argument,
 both proved with no cited input, and `exponent_1075`, the exponent arithmetic.
 
+Added in the second version, `LeanLab.GoldbachShort78.goldbach_short_600`: for every `ε > 0` and all
+large natural `x` there is an even sum of two primes in `[x, x + 3 x^{13/600+ε}]`. It takes `LiRow052`
+and one more cited result as explicit hypotheses, never as axioms:
+* `LiIIIExceptionalCount`, R. Li, Primes in almost all short intervals III, Theorem 1.1, page 2,
+  a preprint on the author's web page and not on arXiv: for almost all `n` the interval
+  `[n − n^{1/24+ε}, n]` contains primes.
+
+Li prints the exponent `13/600` as Theorem 8.1 of that paper, with no `ε` and no factor `3`, so this
+is a check of a printed result, not a new one. `exponent_600` is its exponent arithmetic.
+
 Binary Goldbach is open and is not claimed. AI agents wrote the Lean code, Claude, Anthropic, Codex,
-OpenAI, and Gemini, Google. Lean names keep the namespaces of the lab where the proofs were written;
+OpenAI, Gemini, Google, and DeepSeek. Lean names keep the namespaces of the lab where the proofs were written;
 every definition below is restated under its exact name and in the same `open` context as in the
 solution files.
 -/
@@ -140,6 +150,43 @@ is an even sum of two primes in this interval. The two cited results `LiRow052` 
 theorem goldbach_short_1075 (hRow : LiRow052) (hLi : LiPrintedExceptionalCount) {ε : ℝ} (hε : 0 < ε) :
     ∃ X : ℝ, ∀ x : ℕ, X ≤ x →
       ∃ n : ℕ, IsGoldbachNumber n ∧ x ≤ n ∧ (n : ℝ) ≤ x + 3 * (x : ℝ) ^ (26 / 1075 + ε : ℝ) := by
+  sorry
+
+end LeanLab.GoldbachShort78
+
+/-! ### The exponent `13/600`, `LeanLab/GoldbachShort78/Short600.lean` -/
+
+namespace LeanLab.GoldbachShort78
+
+open Real
+
+/-- The integers `z ∈ [Y, 2Y]` whose closed backward interval `[z − z^a, z]` has no prime. -/
+noncomputable def backwardBadSet (a : ℝ) (Y : ℕ) : Finset ℕ := by
+  classical
+  exact (Finset.Icc Y (2 * Y)).filter fun z =>
+    ∀ p : ℕ, (z : ℝ) - (z : ℝ) ^ a ≤ p → p ≤ z → ¬ p.Prime
+
+/-- Cited input, R. Li, Primes in almost all short intervals III, Theorem 1.1, page 2, in exceptional
+count form: for every `η > 0` and all large `Y`, at most `C Y / log³ Y` of the integers `z ∈ [Y, 2Y]`
+have no prime in `[z − z^{1/24 + η}, z]`. The theorem allows every large power of the logarithm, and
+the power three follows. It is printed for sufficiently small positive `ε`, and a longer interval can
+only have fewer exceptions, so it extends to every `η > 0`. -/
+def LiIIIExceptionalCount : Prop :=
+  ∀ η : ℝ, 0 < η → ∃ C y₀ : ℝ, 0 < C ∧ ∀ Y : ℕ, y₀ ≤ Y →
+    ((backwardBadSet (1 / 24 + η) Y).card : ℝ) ≤ C * Y / Real.log Y ^ 3
+
+/-- The exponent arithmetic: `13/25 · 1/24 = 13/600`, below the `13/550` that R. Li prints from the
+exponent `1/22`, which is below `26/1075`. -/
+theorem exponent_600 :
+    (13 : ℝ) / 25 * (1 / 24) = 13 / 600 ∧ (13 : ℝ) / 600 < 13 / 550 ∧ (13 : ℝ) / 550 < 26 / 1075 := by
+  sorry
+
+/-- Goldbach numbers in `[x, x + 3 x^{13/600+ε}]`: for every `ε > 0` and all large natural `x` there
+is an even sum of two primes in this interval. The two cited results `LiRow052` and
+`LiIIIExceptionalCount` are explicit hypotheses. -/
+theorem goldbach_short_600 (hRow : LiRow052) (hLi : LiIIIExceptionalCount) {ε : ℝ} (hε : 0 < ε) :
+    ∃ X : ℝ, ∀ x : ℕ, X ≤ x →
+      ∃ n : ℕ, IsGoldbachNumber n ∧ x ≤ n ∧ (n : ℝ) ≤ x + 3 * (x : ℝ) ^ (13 / 600 + ε : ℝ) := by
   sorry
 
 end LeanLab.GoldbachShort78

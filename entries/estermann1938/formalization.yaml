@@ -1,0 +1,149 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "On Goldbach's problem: proof that almost all even positive integers are sums of two primes"
+  description: >-
+    A Lean 4 proof, with no unproved steps, of the main result of T. Estermann, On Goldbach's
+    problem: proof that almost all even positive integers are sums of two primes, Proc. London
+    Math. Soc. series 2, volume 44, 1938, pages 307-314. Let Q of n be the number of even
+    positive integers less than n that are not sums of two primes. The Introduction on page 307
+    states that, as n tends to infinity, Q of n is O of n log^-a n for every positive a; this is
+    the compared theorem, LeanLab.Estermann1938.main. The proof is not Estermann's circle method
+    text: it bounds Q of n by E of n plus 1, where E of X counts the even 4 <= m <= X that are
+    not sums of two primes, and uses the bound E of X << X log^-A X for every A, proved by
+    Heath-Brown's 1985 route from the Siegel-Walfisz theorem. That bound is already a compared
+    theorem of the registered entry heathbrown1985 of this repository,
+    LeanLab.PNTPort.PsiChi.goldbach_logPowerSaving, whose Challenge states the same E of X bound;
+    this entry adds Estermann's own count Q of n and his big O form, and the Lean closure is the
+    same as that entry's plus one file. Binary Goldbach is open and is not claimed. AI agents,
+    Claude by Anthropic, wrote the lab's Lean code; the ported zeta function code is by the
+    PrimeNumberTheoremAnd contributors, as listed in PORTING.md. It is offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11P55", "11N13"]
+
+sources:
+  - title: "On Goldbach's problem: proof that almost all even positive integers are sums of two primes"
+    authors:
+      - "T. Estermann"
+    id: "doi:10.1112/plms/s2-44.4.307"
+    type: "article"
+    location: "Proceedings of the London Mathematical Society series 2, volume 44, 1938, pages 307-314"
+    relationship: "formalizes"
+    note: >-
+      Formalizes the main result stated in the Introduction on page 307, read from the scan of
+      the paper; page 314 ends the proof with Q of n <= A15 n log^{4 - eta/3} n for every
+      eta > 4, the same statement. The proof here follows Heath-Brown 1985, not the paper's
+      circle method argument. The author has not been contacted.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "The ternary Goldbach problem"
+    authors:
+      - "D. R. Heath-Brown"
+    id: "doi:10.4171/RMI/2"
+    type: "article"
+    location: "Revista Matematica Iberoamericana 1, 1985, pages 45-59"
+    relationship: "adapts"
+    note: >-
+      The route of the proof: the Siegel-Walfisz theorem, Theorem 1 and Corollary 1, which give
+      the bound on E of X used here. Formalized in the registered entry heathbrown1985 of this
+      repository. The author has not been contacted about this entry.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "PrimeNumberTheoremAnd"
+    authors:
+      - "the PrimeNumberTheoremAnd project contributors"
+    id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    type: "formalization"
+    location: "commit c39a751132c88b6e8080b74c74023fd95b3d8be0"
+    relationship: "other"
+    note: >-
+      Sixteen files under LeanLab/PNTPort/StrongPNT, the zero-free region for zeta and the prime
+      number theorem with classical error term, and the narrow ports LeanLab/PNTPort/Perron/Sinc
+      and Cauchy with one lemma in Perron/Cutoff, are ported from this Apache-2.0 project with
+      small fixes for Mathlib v4.35.0-rc3, listed in PORTING.md.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "https://github.com/sthubbar/goldbach-lean/tree/main/entries/heathbrown1985"
+    relationship: "registered entry of this repository whose Challenge states the same E of X bound"
+    note: >-
+      Its compared theorem LeanLab.PNTPort.PsiChi.goldbach_logPowerSaving, E of X << X log^-A X
+      for every A, is the bound this entry rests on; Estermann's Q of n differs from E of n by at
+      most 1. The two entries overlap; this one adds Estermann's statement in his own notation.
+  - id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    relationship: "source of the ported StrongPNT and Perron files"
+
+status:
+  scope: >-
+    Formalized, with no hypothesis: Estermann's main result, for every real a > 0, Q of n is
+    O of n log^-a n as n tends to infinity, with natural logarithms, theorem main. No compared
+    theorem goes beyond the paper. Not formalized: Estermann's own circle method proof, an
+    effective constant, and binary Goldbach, which remains open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic"]
+      framework: "Claude Cowork, Claude Agent SDK"
+      tool_setup: >-
+        Autonomous agents wrote every lab Lean file, ran lake build, read the paper, and ran
+        separate AI subagents as statement auditors; Lean 4 v4.35.0-rc3, Mathlib v4.35.0-rc3.
+      cost:
+        wall_time: "agent runs over 2026-10-16 to 2026-10-20 for the closure and 2026-10-19 for this file, many hours in total"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published Goldbach-related
+        papers and the analytic inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish; AI agents wrote the lab's own
+    Lean code and the statements, and ported the PrimeNumberTheoremAnd files, whose code is by
+    the PrimeNumberTheoremAnd contributors. Cited literature results that the lab states without
+    proof elsewhere were removed from this repository copy. No human expert has reviewed the
+    mathematics.
+
+fidelity:
+  divergences: >-
+    Q of n counts the m in range n with 0 < m, m even and m not a sum of two primes; the primes
+    may be 2, as the paper says two primes, not two odd primes. Less than n is strict, as
+    printed. Logarithms are natural; another base changes only the constant. The big O is
+    Mathlib's IsBigO at the filter atTop on the naturals, with a constant depending on a, which
+    is the paper's reading. At n = 0 and n = 1 the comparison function n log^-a n is 0, which
+    does not matter for an eventual bound.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "Claude Opus 5.5, Anthropic, an AI statement auditor, not a human"
+  notes: >-
+    Statements checked against the scan of page 307 by the AI agents that wrote and packaged
+    them, not human: the definition of Q, the strict range less than n, the primes allowed to be
+    2, the quantifier over a and the big O form. A test theorem in Main.lean, Q_ten, shows
+    Q of 10 = 1, so the count is not empty. Lean kernel and Comparator checks pass. Not reviewed
+    by a human expert.
+    A second, separate AI agent, Claude Opus 5.5 by Anthropic, not a human, audited the
+    Challenge definitions, the quantifier order and vacuity against the statement as quoted;
+    it could not open the paywalled paper itself.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Estermann 1938, Introduction, page 307, the main result"
+      lean: "LeanLab.Estermann1938.main"
+      module: "ChallengeEstermann1938"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; the PrimeNumberTheoremAnd contributors; D. R. Heath-Brown for the route of the proof."

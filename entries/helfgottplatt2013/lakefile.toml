@@ -1,0 +1,19 @@
+name = "GoldbachLeanHelfgottPlatt2013"
+version = "0.1.0"
+defaultTargets = ["ChallengeHelfgottPlatt2013", "SolutionHelfgottPlatt2013"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.35.0-rc3"
+
+[[lean_lib]]
+name = "LeanLab"
+
+[[lean_lib]]
+name = "ChallengeHelfgottPlatt2013"
+roots = ["ChallengeHelfgottPlatt2013"]
+
+[[lean_lib]]
+name = "SolutionHelfgottPlatt2013"
+roots = ["SolutionHelfgottPlatt2013"]

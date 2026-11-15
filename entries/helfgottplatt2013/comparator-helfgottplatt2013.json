@@ -1,0 +1,23 @@
+{
+  "challenge_module": "ChallengeHelfgottPlatt2013",
+  "solution_module": "SolutionHelfgottPlatt2013",
+  "theorem_names": [
+    "LeanLab.HelfgottPlatt.U1455.proth_iff",
+    "LeanLab.HelfgottPlatt.U6816.theorem4_1_of_ranges"
+  ],
+  "definition_names": [
+    "LeanLab.IsGoldbachSum",
+    "LeanLab.IsTernarySum",
+    "LeanLab.EvenGoldbachUpTo",
+    "LeanLab.TernaryGoldbachUpTo",
+    "LeanLab.HelfgottPlatt.Proth.T",
+    "LeanLab.HelfgottPlatt.U6816.Step2",
+    "LeanLab.HelfgottPlatt.U6816.W",
+    "LeanLab.HelfgottPlatt.U6816.RangeOK"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

@@ -19,9 +19,18 @@ project:
     place of 1/21.5+ε, so 26/1075 is not claimed as the best exponent. Both cited papers are used here
     in their arXiv preprint form. Proved with no cited input: the passage from a count of primes in the
     intervals below n to a count in the windows from x - 2Y to x - Y, and the combinatorial step
-    from the two counts to a Goldbach number. Binary Goldbach is open and is not claimed. AI agents
-    wrote the Lean code, Claude, Codex and Gemini, as listed in PORTING.md, and it is offered for
-    human audit.
+    from the two counts to a Goldbach number. Added in the second version: the same argument at the
+    exponent 13/600, a Goldbach number in the interval from x to x + 3 x^(13/600+ε) for every ε > 0
+    and all large natural x, goldbach_short_600. It is conditional on LiRow052 and on one more cited
+    result, also an explicit hypothesis and never an axiom: LiIIIExceptionalCount, R. Li, Primes in
+    almost all short intervals III, Theorem 1.1, primes in the intervals from n - n^(1/24+ε) to n for
+    almost all n. Li prints the exponent 13/600 himself, as Theorem 8.1 of that paper, with no ε and
+    no factor 3, so the Lean checks a printed result, conditional on the named inputs, and it is not
+    a new result. That paper is an undated preprint on the author's web page, not on arXiv, and has
+    not been peer reviewed as far as the packaging agent found. The one new step, proved with no cited
+    input, turns a count of exceptions for the backward intervals into the forward count the argument
+    uses. Binary Goldbach is open and is not claimed. AI agents wrote the Lean code, Claude, Codex,
+    Gemini and DeepSeek, as listed in PORTING.md, and it is offered for human audit.
   authors:
     - "Steve Hubbard"
   license: "Apache-2.0"
@@ -62,6 +71,22 @@ sources:
       this formalization.
     license: "unknown"
     author_endorsement: "not-contacted"
+  - title: "Primes in almost all short intervals III"
+    authors:
+      - "Runbo Li"
+    id: "https://runbolicarey.com/assets/downloads/Primes_in_almost_all_short_intervals_III.pdf"
+    type: "preprint"
+    location: "Theorem 1.1, page 2, and Theorem 8.1, page 11"
+    relationship: "adapts"
+    note: >-
+      An undated preprint on the author's web page, not on arXiv; the copy read on 2026-11-15 has
+      SHA-256 ede761895882a146c0e1c1b209e88a1c5b25514e5109a76e44b1571896c84a99. Theorem 1.1 is a
+      cited input, taken as the explicit hypothesis LiIIIExceptionalCount; it is not proved here.
+      Theorem 8.1 prints the exponent 13/600, with no ε and no factor 3, by combining Theorem 1.1
+      with arXiv 2308.04458, and goldbach_short_600 proves the slightly weaker form. The author has
+      not been contacted about this formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
   - title: "The difference between consecutive primes, II"
     authors:
       - "R. C. Baker"
@@ -87,9 +112,10 @@ related_formalizations:
 status:
   scope: >-
     Formalized: goldbach_short_1075, with LiRow052 and LiPrintedExceptionalCount as explicit
-    hypotheses; and with no cited input windowCount_of_backward, goldbach_of_counts and the exponent
-    arithmetic exponent_1075. Not formalized: Li's two cited theorems, and Li's forms of the result
-    with no ε.
+    hypotheses; goldbach_short_600, with LiRow052 and LiIIIExceptionalCount as explicit hypotheses;
+    and with no cited input windowCount_of_backward, goldbach_of_counts and the exponent arithmetic
+    exponent_1075 and exponent_600. Not formalized: Li's three cited theorems, and Li's forms of the
+    results with no ε.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: []
@@ -97,14 +123,14 @@ status:
 automation:
   methods:
     - method: "agent"
-      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic", "Codex, OpenAI", "Gemini, Google"]
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic", "Codex, OpenAI", "Gemini, Google", "DeepSeek"]
       framework: "Claude Cowork"
       tool_setup: >-
         Autonomous agents wrote the Lean files, ran lake build and read the papers; PORTING.md lists
         which agent wrote each file. A packaging agent trimmed the files, ported them to Lean 4
         v4.35.0-rc3, Mathlib v4.35.0-rc3, and ran the Lean kernel and the Comparator.
       cost:
-        wall_time: "agent runs over 2026-10-16 to 2026-11-02, and packaging on 2026-11-03"
+        wall_time: "agent runs over 2026-10-16 to 2026-11-05, and packaging on 2026-11-03 and 2026-11-15"
         spend_usd: "subscription-based"
         hardware: "API-only, cloud sandbox and a desktop workstation"
       prompting_notes: >-
@@ -134,8 +160,18 @@ fidelity:
     outside O(X (log X)^(-B)) values, the interval from n to n + n^(1/21.5+ε) holds at least the
     expected order of primes. The hypothesis uses B = 3 and only that the interval has a prime, and
     it is stated for every η > 0, since Li's sufficiently small ε extends to all larger exponents
-    by monotonicity; so it is implied by the printed theorem. Binary Goldbach is open. The Lean code
-    was written by AI.
+    by monotonicity; so it is implied by the printed theorem. Second version, goldbach_short_600:
+    Theorem 8.1 of R. Li, Primes in almost all short intervals III, prints intervals of length
+    x^(13/600), with no ε and no constant factor; the entry has the factor 3 and ε > 0, so it is
+    slightly weaker, for the same reasons as above. LiIIIExceptionalCount: Theorem 1.1 of that paper
+    says that for integers n in [X, 2X], outside O(X (log X)^(-B)) values, the closed interval from
+    n - n^(1/24+ε) to n holds at least the expected order of primes. The hypothesis counts the
+    integers z in [Y, 2Y] with no prime p, z - z^(1/24+η) ≤ p ≤ z, uses B = 3 and only that the
+    interval has a prime, and is stated for every η > 0 by the same monotonicity, so it is implied
+    by the printed theorem. LiRow052 is the same hypothesis as in goldbach_short_1075. Theorem 8.1
+    gives no proof beyond combining Theorem 1.1 with arXiv 2308.04458; the Lean proof follows that of
+    goldbach_short_1075, with one new step from the backward exceptions to the forward count. Binary
+    Goldbach is open. The Lean code was written by AI.
 
 review:
   status: "self-assessed"
@@ -145,11 +181,17 @@ review:
     Status is self-assessed: every check was done by AI agents of the families that wrote the Lean
     code, so it is not an independent review and not a human expert review. The packaging agent
     read Theorems 1.1 and 7.1 of arXiv 2407.05651 v6 and Theorems 2 and 7 of arXiv 2308.04458 in
-    text copies, built the entry, and ran the Lean kernel and the Comparator with only propext,
-    Quot.sound and Classical.choice permitted. Both hypotheses are consequences of Li's printed
-    theorems, so the main theorem is not vacuous if those stand; both papers are preprints, and the
-    change in LB(0.520) between versions is a reason to read them with care. No human expert and
+    text copies, and for the second version Theorems 1.1 and 8.1 of Primes in almost all short
+    intervals III, built the entry, and ran the Lean kernel and the Comparator with only propext,
+    Quot.sound and Classical.choice permitted. Each of the three hypotheses is a consequence of Li's printed
+    theorems, so neither main theorem is vacuous if those stand; all three papers are preprints, and the
+    change in LB(0.520) between versions is a reason to read them with care. The paper behind
+    LiIIIExceptionalCount is a web preprint that is not on arXiv and not peer reviewed as far as
+    the packaging agent found. No human expert and
     not the papers' author has reviewed the entry.
+    A second, separate AI agent, Claude Opus 5.5 by Anthropic, not a human, audited the new
+    hypotheses against Li III Theorems 1.1 and 8.1 and found them no stronger than printed and
+    non vacuous.
 
 alignment:
   namespace: "LeanLab"
@@ -169,6 +211,15 @@ alignment:
       status: "proved"
     - source: "The exponent arithmetic: 0.52 / 21.5 = 26/1075, lower than 21/860 by 1/4300"
       lean: "LeanLab.GoldbachShort78.exponent_1075"
+      module: "ChallengeGoldbachShort1075"
+      status: "proved"
+    - source: "R. Li, Primes in almost all short intervals III, Theorem 8.1: Goldbach numbers in intervals of length x^(13/600)"
+      lean: "LeanLab.GoldbachShort78.goldbach_short_600"
+      module: "ChallengeGoldbachShort1075"
+      status: "adapted"
+      note: "Added in the second version. With ε > 0 and a factor 3, conditional on LiRow052 and LiIIIExceptionalCount, explicit hypotheses."
+    - source: "The exponent arithmetic: 13/25 times 1/24 = 13/600, below 13/550 and 26/1075"
+      lean: "LeanLab.GoldbachShort78.exponent_600"
       module: "ChallengeGoldbachShort1075"
       status: "proved"
 
