@@ -1,0 +1,166 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "The ternary Goldbach problem with primes from arithmetic progressions: Tolev's Bombieri-Vinogradov type mean value theorem"
+  description: >-
+    A Lean 4 proof, with no unproved steps, of the main Theorem of D. I. Tolev, The ternary
+    Goldbach problem with primes from arithmetic progressions, arXiv 0902.2669, 2009, display 5
+    on page 2. Let l3 be a fixed positive integer and lambda of k real numbers with absolute value
+    at most 1. For every A > 0 there is B = B of A > 0 such that, for sufficiently large odd N and L = log N, the sum
+    over k1, k2 up to sqrt N L^-B of the maximum over l1, l2 coprime to k1, k2 of the absolute
+    value of the sum over k3 up to N^1/3 L^-B with k3 coprime to l3 of lambda of k3 times
+    Delta_k,l of N is at most a constant times N^2 L^-A. Here Delta is the weighted count R of
+    representations N = p1 + p2 + p3 with pi congruent to li mod ki, less the main term
+    N^2 S / 2 phi of k1 phi of k2 phi of k3, with the singular series S written out by the
+    formula printed in Halupczok 2008. Binary Goldbach is open and is not claimed. AI agents
+    wrote the Lean code, Codex by OpenAI, Claude by Anthropic and a lab prover agent, as listed
+    in PORTING.md; the proof reuses code ported from PrimeNumberTheoremAnd, written by its
+    contributors, and is offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11P55", "11N13"]
+
+sources:
+  - title: "The ternary Goldbach problem with primes from arithmetic progressions"
+    authors:
+      - "D. I. Tolev"
+    id: "arXiv:0902.2669"
+    type: "preprint"
+    location: "arXiv 0902.2669, 2009, the Theorem on page 2, display 5"
+    relationship: "formalizes"
+    note: >-
+      Formalizes the Theorem, display 5 on page 2, following the paper's circle method route:
+      the major arcs through display 9 on page 4, the minor arcs through display 12, its L2 half
+      and its supremum half, and the conclusion after display 20 on page 7. The author has not
+      been contacted about this formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "On the ternary Goldbach problem with primes in independent arithmetic progressions"
+    authors:
+      - "K. Halupczok"
+    id: "Acta Mathematica Hungarica 120, 2008, pages 315-349"
+    type: "article"
+    location: "Acta Mathematica Hungarica 120, no. 4, 2008, pages 315-349"
+    relationship: "adapts"
+    note: >-
+      Tolev takes the singular series from this paper and does not print it. The Challenge
+      defines it by Halupczok's printed formula, the local sums of page 7 and the series of page
+      11, as halupczokSeries. The major arc estimates of pages 8 to 19 are adapted and proved
+      here, not assumed. The author has not been contacted.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "Arithmetic progressions of prime-almost-prime twins"
+    authors:
+      - "D. I. Tolev"
+    id: "doi:10.4064/aa-88-1-67-98"
+    type: "article"
+    location: "Acta Arithmetica 88, 1999, pages 67-98"
+    relationship: "adapts"
+    note: >-
+      Tolev 2009 refers to this paper for the major arc treatment and for the Type I and Type II
+      estimates behind the supremum half of display 12; they are adapted and proved here, not
+      assumed.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "PrimeNumberTheoremAnd"
+    authors:
+      - "the PrimeNumberTheoremAnd project contributors"
+    id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    type: "formalization"
+    location: "commit c39a751132c88b6e8080b74c74023fd95b3d8be0"
+    relationship: "other"
+    note: >-
+      Sixteen files under LeanLab/PNTPort/StrongPNT, the zero-free region for zeta and the prime
+      number theorem with classical error term, are ported from this Apache-2.0 project with
+      small fixes for Mathlib v4.35.0-rc3, listed in PORTING.md; each file carries a notice.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "https://github.com/sthubbar/goldbach-lean/tree/main/entries/bombierivinogradov1965"
+    relationship: "registered entry of this repository whose Bombieri-Vinogradov theorem the major arc treatment here uses"
+    note: "The quantitative form used here is in LeanLab/Tolev2009/QuantitativeBV346.lean, built on LeanLab/PNTPort/BV."
+  - id: "https://github.com/sthubbar/goldbach-lean/tree/main/entries/heathbrown1985"
+    relationship: "registered entry of this repository whose Vaughan identity and Siegel-Walfisz files are reused here"
+    note: "Heath-Brown 1985 includes three primes in progressions for moduli up to a power of log N; Tolev's Theorem averages over much larger moduli."
+
+status:
+  scope: >-
+    Formalized, with no hypothesis: Tolev's Theorem, display 5, with Halupczok's printed
+    singular series, as published_assembly, and the same statement by a second assembly route of
+    the lab, published_assembly_finished. No compared theorem goes beyond the paper. Not
+    formalized: the remark on page 2 that the range of k3 extends to N^4/9 L^-B for a
+    well-factorable lambda, explicit values of B, of the constant and of the threshold, and binary
+    Goldbach, which remains open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic", "Codex, OpenAI", "leanstral, Mistral"]
+      framework: "Claude Cowork"
+      tool_setup: >-
+        Autonomous agents wrote the Lean files, ran lake build, read the paper and wrote the
+        statements from it; PORTING.md lists which agent wrote which file where the lab notes
+        say so. Codex tasks wrote most of the Tolev 2009 proof, Claude wrote the statement files
+        and the final assembly, and a lab prover agent on Mistral's leanstral model wrote one
+        file. A packaging agent ported the files to Lean 4 v4.35.0-rc3, Mathlib v4.35.0-rc3, and
+        ran the Lean kernel and the Comparator. No native_decide.
+      cost:
+        wall_time: "agent runs over 2026-10-16 to 2026-11-15, and packaging on 2026-11-15"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published results related to
+        Goldbach's problem and the inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish. Claude wrote the statements
+    and the final assembly; Codex wrote most of the proof and a lab prover agent one file, as
+    listed in PORTING.md. The ported StrongPNT files were written by the PrimeNumberTheoremAnd
+    contributors. No file here contains a placeholder proof outside the Challenge file. No human
+    expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    The implied constant of << is an explicit existential constant C with a threshold N0, both
+    depending on A and l3 and uniform in lambda; B depends on A only, as in the paper. The
+    maximum over l1 and l2 runs over the reduced residues 0 to k - 1, which is the same as the
+    paper's maximum since R and the series depend on li only modulo ki. The moduli run over
+    1 to the integer part of each bound. The singular series is the real part of the Lean sum of
+    Halupczok's terms over q >= 1; the lab proves the series absolutely summable for odd N,
+    positive moduli and reduced residues, the only data in the sum, so no junk value enters.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "Claude Opus 5.5, Anthropic, an AI statement auditor, not a human"
+  notes: >-
+    An AI statement check by the packaging agent compared the Challenge with the Theorem of page
+    2 of the arXiv source: the ranges of k1, k2 and k3, the coprimality of k3 with l3, the
+    position of the maximum over l1 and l2 outside the k3 sum, real lambda bounded by 1, B
+    depending on A only, odd N and the main term with the three totients. Lean kernel and
+    Comparator checks pass. Not reviewed by a human expert or by the author.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Tolev 2009, the Theorem, display 5, page 2, with Halupczok 2008's singular series"
+      lean: "LeanLab.Tolev2009.Decomp83.published_assembly"
+      module: "ChallengeTolev2009"
+      status: "proved"
+    - source: "Tolev 2009, the Theorem, display 5, page 2, a second proof in the lab"
+      lean: "LeanLab.Tolev2009.FinishAssembly1112.published_assembly_finished"
+      module: "ChallengeTolev2009"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; the PrimeNumberTheoremAnd contributors; D. I. Tolev and K. Halupczok for the papers."

@@ -1,0 +1,27 @@
+{
+  "challenge_module": "ChallengeTolev2009",
+  "solution_module": "SolutionTolev2009",
+  "theorem_names": [
+    "LeanLab.Tolev2009.Decomp83.published_assembly",
+    "LeanLab.Tolev2009.FinishAssembly1112.published_assembly_finished"
+  ],
+  "definition_names": [
+    "LeanLab.Tolev2009.R",
+    "LeanLab.Tolev2009.SSeries",
+    "LeanLab.Tolev2009.M",
+    "LeanLab.Tolev2009.Δ",
+    "LeanLab.Tolev2009.residues",
+    "LeanLab.Tolev2009.inner",
+    "LeanLab.Tolev2009.Estar",
+    "LeanLab.Tolev2009.TheTheorem",
+    "LeanLab.Tolev2009.Faithful.ee",
+    "LeanLab.Tolev2009.SeriesIdentification.coeffPaper",
+    "LeanLab.Tolev2009.SeriesIdentification.halupczokTerm",
+    "LeanLab.Tolev2009.SeriesIdentification.halupczokSeries"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}
