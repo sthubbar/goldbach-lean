@@ -1,0 +1,156 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "The exceptional set in Goldbach's problem: the weighted density and optimisation steps"
+  description: >-
+    A Lean 4 proof, with no unproved steps, of the elementary core of the method of J. Pintz, A
+    new explicit formula in the additive theory of primes with applications II. The exceptional
+    set in Goldbach's problem, arXiv 1804.09084v2, 2018, whose Theorem 1 is E of X below X to the
+    power 0.72. Pintz turns zero density theorems for Dirichlet L-functions into explicit
+    bounds through two new steps, which this entry proves. Theorem K, display 4.41, solves the
+    extremal problem of displays 4.37 to 4.39: among decreasing configurations d_1 at least d_2
+    and so on, with caps d_j at most e_j and a density budget, a maximiser of the sum of
+    e to the B d_j minus e to the C d_j saturates every coordinate before its last active one.
+    The proof is the exchange argument of displays 8.10 to 8.16, done here with the cost in the
+    integral form of display 8.11, and a second theorem adds for an abstract concave cost that
+    the budget is used up exactly and the last active coordinate solves the residual equation
+    4.42. Theorem J, display 4.36, bounds the weighted excess of zeros by 1 minus xi over 2
+    Delta; it is proved here from the analytic estimate 7.20, which is a hypothesis. Two
+    Section 9 statements are also compared: the basic inequality 9.4 in the form used in 9.22,
+    and Case 8, where e to the minus 7 lambda plus 2.87 times 10.4 times lambda to the 11/7 is
+    below 1 for 0 below lambda at most 0.04. The zero density theorems, the estimate 7.20, the
+    existence of a maximiser and Theorem 1 are not proved and not claimed. AI agents wrote the
+    Lean code, Claude by Anthropic, Codex by OpenAI and Gemini by Google, as listed in
+    PORTING.md, and it is offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11M26", "11N35"]
+
+sources:
+  - title: "A new explicit formula in the additive theory of primes with applications II. The exceptional set in Goldbach's problem"
+    authors:
+      - "J. Pintz"
+    id: "arXiv:1804.09084v2"
+    type: "preprint"
+    location: "arXiv 1804.09084v2, 2018, Section 4 Theorems J and K, Section 8 proofs, Section 9 displays 9.4 and 9.33 to 9.37"
+    relationship: "formalizes"
+    note: >-
+      Formalizes the proofs of Theorem K, display 4.41 with displays 8.10 to 8.16, and of
+      Theorem J, display 4.36 with displays 8.1 to 8.4 from 7.20, together with the basic
+      inequality 9.4 and Case 8 of Section 9. The analytic estimate 7.20 is a hypothesis. The
+      author has not been contacted about this formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "https://github.com/leanprover-community/mathlib4/tree/v4.35.0-rc3"
+    relationship: "library used"
+    note: "Mathlib v4.35.0-rc3 has no zero density theorem for Dirichlet L-functions and no form of Theorems J or K."
+
+status:
+  scope: >-
+    Formalized: Theorem K, the saturation part 4.41, in the paper's coordinates with the
+    integral cost of 8.11, theoremK_ordered_integral; the same argument for an abstract
+    concave cost with budget tightness and the residual equation 4.42, saturation_and_residual;
+    Theorem J from 7.20 as a hypothesis, excess_bound_of_720. Proved in the repository but not compared: the basic inequality 9.4,
+    basic_ineq, and Case 8 of Section 9, case8. Not formalized: Theorems C to I, Lemmas 1 to 7, the
+    estimate 7.20, the existence and uniqueness parts of Theorem K, Theorem L, the printed
+    tables and Cases 1 to 7 of Section 9 beyond their numerical checks, and Theorem 1.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic", "Codex, OpenAI", "Gemini, Google"]
+      framework: "Claude Cowork"
+      tool_setup: >-
+        Autonomous agents wrote the Lean files and ran lake build in the lab, reading the paper
+        from arXiv. Codex task117 proved Theorems J and K and their leaves on 2026-10-26; Claude
+        wrote the Section 9 files on 2026-10-18; Gemini drafted the statement file on 2026-10-22
+        and Claude reviewed it. A packaging agent extracted the files with complete proofs, ported them to
+        Lean 4 v4.35.0-rc3 and Mathlib v4.35.0-rc3 in module syntax, and ran the Lean kernel and
+        the Comparator. No native_decide and no decide on large numbers.
+      cost:
+        wall_time: "agent runs over 2026-10-18 to 2026-10-26, and packaging on 2026-11-16"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published results related to
+        Goldbach's problem and the inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish. Codex proved the Section 8
+    arguments, Claude wrote the Section 9 files and Gemini drafted the statements, as listed in
+    PORTING.md. No file here contains a placeholder proof outside the Challenge file. No human
+    expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    Role in the paper and interest: Theorems J and K are what let Pintz bound weighted sums over
+    zeros directly instead of by partial summation, and Section 9 applies Theorem K in Cases 1
+    to 5 with Theorem J in display 9.9; anyone checking or improving the explicit exponent 0.72,
+    or reusing the method for other explicit exceptional set bounds, depends on these two
+    statements. They are elementary once the zero density input is given; the analytic depth of
+    the paper is not here. Theorem K is stated for a maximiser that is assumed to exist, with r
+    the index of its last positive coordinate, which is how the proof on page 35 defines r; the
+    paper's r from display 4.40 is not identified with it, and the residual equation 4.42 is
+    proved only in the abstract form. It needs T below B,
+    which is the standing assumption 4.35, though display 8.10 allows b equal to 1. The cost is any continuous nonnegative weight
+    integrated against y to the v over v from 0 to 1, which covers 8.11 by Laplace117. The
+    budget form, the sum of costs at most a bound, is the constraint 4.37 shifted by J times
+    F of d_0. Theorem J is proved with error term zero under xi plus epsilon at most Delta
+    squared, where epsilon is the epsilon 1 of 7.20 and Theorem H assumes this with its own epsilon, and yields the bound 1 minus xi over 2 Delta, slightly
+    stronger than the printed 8.4; 7.20 is a hypothesis, with the sizes of the character classes
+    summing to the number of zeros. The repository also proves, outside the compared selection, the basic inequality in the form A squared plus m times 2A plus B
+    that 9.22 applies, a consequence of the printed 9.4. and Case 8, which uses e to the minus 7 lambda,
+    which bounds the printed e to the minus 50 over 7 lambda in 9.36. Each hypothesis set is
+    satisfiable: Instances117 builds nonempty instances of Theorems J and K.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "AI packaging agent: an instance of Claude Opus 5.5, claude-opus-5-5, Anthropic; not a human reviewer"
+    - "Claude Opus 5.5, Anthropic, a separate AI statement auditor, not a human"
+  notes: >-
+    Status is self-assessed: every check was done by AI agents, so it is not an independent
+    review and not a human expert review. In the lab, a Codex run re-read pages 17 to 19 and 30
+    to 35 of the paper against the statements, and Claude runs checked the Section 9 numbers. The
+    packaging agent read Sections 4, 8 and 9 of arXiv 1804.09084v2 against the compared
+    statements, built the entry, ran the Lean kernel and the Comparator, and checked that the
+    axioms of every compared theorem are propext, Classical.choice and Quot.sound. No human
+    expert and no author has reviewed the entry.
+
+alignment:
+  namespace: "LeanLab.Pintz2018"
+  statements:
+    - source: "Pintz 2018, Theorem K, display 4.41, proof displays 8.10 to 8.16"
+      lean: "LeanLab.Pintz2018.Greedy117.theoremK_ordered_integral"
+      module: "ChallengePintz2018"
+      status: "proved"
+    - source: "Pintz 2018, Theorem K, displays 4.41 and 4.42, abstract cost"
+      lean: "LeanLab.Pintz2018.Residual117.saturation_and_residual"
+      module: "ChallengePintz2018"
+      status: "proved"
+    - source: "Pintz 2018, Theorem J, display 4.36 from 7.20 by displays 8.1 to 8.4, 7.20 as a hypothesis"
+      lean: "LeanLab.Pintz2018.Density117.excess_bound_of_720"
+      module: "ChallengePintz2018"
+      status: "proved"
+    - source: "Pintz 2018, Section 9, basic inequality 9.4 as applied in 9.22"
+      lean: "LeanLab.Pintz2018.basic_ineq"
+      module: "SolutionPintz2018"
+      status: "proved"
+    - source: "Pintz 2018, Section 9, Case 8, displays 9.33 to 9.37"
+      lean: "LeanLab.Pintz2018.case8"
+      module: "SolutionPintz2018"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; J. Pintz for the paper."

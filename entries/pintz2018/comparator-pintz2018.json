@@ -1,0 +1,17 @@
+{
+  "challenge_module": "ChallengePintz2018",
+  "solution_module": "SolutionPintz2018",
+  "theorem_names": [
+    "LeanLab.Pintz2018.Greedy117.theoremK_ordered_integral",
+    "LeanLab.Pintz2018.Residual117.saturation_and_residual",
+    "LeanLab.Pintz2018.Density117.excess_bound_of_720"
+  ],
+  "definition_names": [
+    "LeanLab.Pintz2018.TheoremK_OptimalChoice"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

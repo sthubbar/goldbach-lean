@@ -1,0 +1,19 @@
+name = "GoldbachLeanPintz2018"
+version = "0.1.0"
+defaultTargets = ["ChallengePintz2018", "SolutionPintz2018"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.35.0-rc3"
+
+[[lean_lib]]
+name = "LeanLab"
+
+[[lean_lib]]
+name = "ChallengePintz2018"
+roots = ["ChallengePintz2018"]
+
+[[lean_lib]]
+name = "SolutionPintz2018"
+roots = ["SolutionPintz2018"]
