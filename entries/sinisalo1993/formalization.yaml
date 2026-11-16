@@ -1,0 +1,163 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Checking the Goldbach conjecture up to 4 · 10^11"
+  description: >-
+    A Lean 4 proof, with no unproved steps, of a ternary range derived from the Section 4 remark
+    of M. K. Sinisalo, Checking the Goldbach conjecture up to 4 · 10^11, Mathematics of
+    Computation 61, 1993, combined with the Young and Potler gap bound; the paper prints no such
+    range: every odd number N with 7 <= N <= 73029999999000, that is
+    7.263 · 10^13 + 4 · 10^11 - 1000, is a sum of three primes, not necessarily distinct.
+    It is derived from two computations printed in other work or in the paper itself, which are
+    explicit hypotheses and are not proved here: binary Goldbach for every even number from 4 to
+    4 · 10^11, the computation of Sinisalo's paper, which covers even numbers below 4 · 10^11,
+    so the hypothesis adds the single even number 4 · 10^11 itself, and the maximal prime gap bound of
+    J. Young and A. Potler, First occurrence prime gaps, Mathematics of Computation 52, 1989:
+    every prime p up to 7.263 · 10^13 is followed by a prime at most 778 later, stated as in
+    L. Kaniecki, Acta Arithmetica 72, 1995, page 371. The argument takes the largest prime p
+    below min of N - 4 and 7.263 · 10^13 and writes N - p, an even number from 4 to 4 · 10^11,
+    as a sum of two primes. The entry checks no Goldbach case and no prime gap, so it does not
+    prove ternary Goldbach on this range; it proves that the two computations imply it. Section 4
+    prints no numerical ternary range; the upper end 73029999999000 is derived here. Ternary Goldbach is Helfgott's theorem and
+    binary Goldbach is open; neither is claimed. AI agents wrote the Lean code, Claude by
+    Anthropic, as listed in PORTING.md, and it is offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11Y11", "11N05"]
+
+sources:
+  - title: "Checking the Goldbach conjecture up to 4 · 10^11"
+    authors:
+      - "M. K. Sinisalo"
+    id: "doi:10.1090/S0025-5718-1993-1185250-6"
+    type: "article"
+    location: "Mathematics of Computation 61, no. 204, 1993, 931 to 934, Section 4"
+    relationship: "formalizes"
+    note: >-
+      Formalizes the Section 4 remark that a verified even range and a prime in a short interval
+      below N make the odd number N a sum of three primes, combined with the Young and Potler
+      gap bound, and the resulting ternary range. The even check to 4 · 10^11, the paper's own
+      computation, is taken as a hypothesis. The author has not been contacted about this
+      formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "First occurrence prime gaps"
+    authors:
+      - "J. Young"
+      - "A. Potler"
+    type: "article"
+    location: "Mathematics of Computation 52, no. 185, 1989, 221 to 224"
+    relationship: "other"
+    note: >-
+      Cited input: the computation that no gap between consecutive primes up to 7.263 · 10^13
+      exceeds 778. It is the hypothesis YoungPotler and is not proved here.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "On Šnirelman's constant under the Riemann hypothesis"
+    authors:
+      - "L. Kaniecki"
+    type: "article"
+    location: "Acta Arithmetica 72, 1995, 361 to 374, page 371"
+    relationship: "other"
+    note: >-
+      Source of the gap function λ and of the form in which the Young and Potler bound is
+      stated, λ of 7.263 · 10^13 at most 778.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "https://github.com/sthubbar/goldbach-lean/tree/main/entries/helfgottplatt2013"
+    relationship: "entry of this repository using the same reduction"
+    note: >-
+      Theorem 4.1 of Helfgott and Platt 2013 rests on the same step as this entry: an odd N with
+      an odd prime p at most N - 4 and within the verified even range of N is a sum of three
+      primes. There the primes come from Proth ladders and the even range is 4 · 10^18; here
+      they come from the Young and Potler gap bound and the even range is 4 · 10^11. The range
+      here lies far inside the range there.
+  - id: "https://github.com/sthubbar/goldbach-lean/tree/main/entries/kaniecki1995"
+    relationship: "registered entry of this repository with the same gap function"
+    note: >-
+      Defines LeanLab.Kaniecki1995.nextPrime and LeanLab.Kaniecki1995.lam with the same text
+      as this entry; this entry adds the cited Prop YoungPotler.
+  - id: "https://github.com/leanprover-community/mathlib4/tree/v4.35.0-rc3"
+    relationship: "library used"
+    note: "Mathlib v4.35.0-rc3 has no Goldbach range or maximal prime gap computation."
+
+status:
+  scope: >-
+    Formalized with two cited computations as explicit hypotheses: ternary Goldbach for odd N
+    from 7 to 73029999999000, ternary_upto_YP_S. Not formalized: the even Goldbach check to
+    4 · 10^11, the Young and Potler gap computation, the tables of Sections 2 and 3 and the
+    sieve of the paper.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic"]
+      framework: "Claude Cowork"
+      tool_setup: >-
+        Autonomous agents wrote the Lean files and ran lake build in the lab; the paper was read
+        in a browser from the AMS scan. A packaging agent extracted the files needed by the
+        compared theorem, ported them to Lean 4 v4.35.0-rc3 and Mathlib v4.35.0-rc3 in module
+        syntax, and ran the Lean kernel and the Comparator. No native_decide and no decide on
+        large numbers.
+      cost:
+        wall_time: "agent runs over 2026-10-16 to 2026-10-21, and packaging on 2026-11-16"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published results related to
+        Goldbach's problem and the inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish. Claude wrote the statements
+    and the proofs, as listed in PORTING.md. No file here contains a placeholder proof outside
+    the Challenge file. No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    The paper's computation, binary Goldbach for even numbers up to 4 · 10^11, is the hypothesis
+    EvenGoldbachUpTo of 4 · 10^11, every even n with 4 <= n <= 4 · 10^11 is a sum of two
+    primes. The Young and Potler bound is the hypothesis YoungPotler, λ of 7.263 · 10^13 at
+    most 778, where λ of x is the largest nextPrime p - p over primes p <= x for x > 7, as
+    Kaniecki defines it; this is the statement that every prime up to 7.263 · 10^13 has its
+    next prime at most 778 later. The conclusion IsTernarySum N allows repeated primes. The upper
+    end 73029999999000 = 7.263 · 10^13 + 4 · 10^11 - 1000 is the one this argument gives and is
+    slightly below the most the argument allows; Sinisalo prints no numerical range in Section 4,
+    so this upper end is the entry's own derivation. Both hypotheses are true by the cited computations and later independent
+    checks, so the statement is not vacuous; a value N = 7 meets all premises on N.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "AI packaging agent: an instance of Claude Opus 5.5, claude-opus-5-5, Anthropic; not a human reviewer"
+    - "Claude Opus 5.5, Anthropic, a separate AI statement auditor, not a human"
+  notes: >-
+    Status is self-assessed: every check was done by AI agents, so it is not an independent
+    review and not a human expert review. In the lab, an AI run read the paper from the AMS
+    scan and checked Sections 2 and 3 and the Section 4 remark; a later AI audit printed the
+    axioms of every theorem of the lab folder. The packaging agent built the entry, ran the
+    Lean kernel and the Comparator, and checked that the axioms of the compared theorem are
+    propext, Classical.choice and Quot.sound. It could not open the paper, as the AMS site
+    refused automated access, so the printed Section 4 range was not checked again. No human
+    expert and no author has reviewed the entry.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Sinisalo 1993, Section 4, ternary range from the even check to 4 · 10^11 and the Young and Potler gap bound as hypotheses"
+      lean: "LeanLab.Sinisalo1993.Ternary.ternary_upto_YP_S"
+      module: "ChallengeSinisalo1993"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; M. K. Sinisalo for the paper; J. Young and A. Potler for the gap computation."

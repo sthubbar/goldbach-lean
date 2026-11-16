@@ -1,0 +1,19 @@
+name = "GoldbachLeanSinisalo1993"
+version = "0.1.0"
+defaultTargets = ["ChallengeSinisalo1993", "SolutionSinisalo1993"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.35.0-rc3"
+
+[[lean_lib]]
+name = "LeanLab"
+
+[[lean_lib]]
+name = "ChallengeSinisalo1993"
+roots = ["ChallengeSinisalo1993"]
+
+[[lean_lib]]
+name = "SolutionSinisalo1993"
+roots = ["SolutionSinisalo1993"]

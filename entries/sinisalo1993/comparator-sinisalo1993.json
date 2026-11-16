@@ -1,0 +1,20 @@
+{
+  "challenge_module": "ChallengeSinisalo1993",
+  "solution_module": "SolutionSinisalo1993",
+  "theorem_names": [
+    "LeanLab.Sinisalo1993.Ternary.ternary_upto_YP_S"
+  ],
+  "definition_names": [
+    "LeanLab.IsGoldbachSum",
+    "LeanLab.IsTernarySum",
+    "LeanLab.EvenGoldbachUpTo",
+    "LeanLab.Kaniecki1995.nextPrime",
+    "LeanLab.Kaniecki1995.lam",
+    "LeanLab.Kaniecki1995.YoungPotler"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}
