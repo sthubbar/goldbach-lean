@@ -18,8 +18,14 @@ project:
     the zero count of Trudgian 2014 at this point, whose constant Hasanalizade, Shen and Wong
     report to be in error; the corrected count is used instead. The bounds of Schoenfeld 1976
     for psi - theta, which the paper also cites, are not an input here: the needed estimate is
-    proved. Dudek's Lemma 4 and the explicit formula for psi_1 are proved as well. An AI agent,
-    Claude, wrote the Lean code, with the ported PrimeNumberTheoremAnd files credited to their
+    proved. Dudek's Lemma 4 and the explicit formula for psi_1 are proved as well. Version 2 adds
+    a derived result that is not a statement of the paper: dudek_interval_one, that for every
+    real x with 2 <= x < 3999999999999999761 there is a prime p with x - sqrt x log x < p <= x,
+    which is the interval of Theorem 3 with epsilon = 0, on a finite range and without the
+    Riemann hypothesis. It takes one cited input as an explicit hypothesis, never as an axiom:
+    MaxGap1476, the maximal prime gap computation of Oliveira e Silva, Herzog and Pardi, Math.
+    Comp. 83, 2014, that consecutive primes p < q with q <= 4 * 10^18 satisfy q - p <= 1476.
+    An AI agent, Claude, wrote the Lean code, with the ported PrimeNumberTheoremAnd files credited to their
     authors in PORTING.md; the statements were checked against the paper by AI agents and are
     offered for human audit.
   authors:
@@ -62,6 +68,23 @@ sources:
       have not been contacted about this formalization.
     license: "unknown"
     author_endorsement: "not-contacted"
+  - title: "Empirical verification of the even Goldbach conjecture and computation of prime gaps up to 4 * 10^18"
+    authors:
+      - "Tomás Oliveira e Silva"
+      - "Siegfried Herzog"
+      - "Silvio Pardi"
+    id: "doi:10.1090/S0025-5718-2013-02787-1"
+    type: "article"
+    location: "Math. Comp. 83, 2014, pages 2033 to 2060: the table of maximal prime gaps up to 4 * 10^18, largest gap 1476 after the prime 1425172824437699411"
+    relationship: "cited input, taken as an explicit hypothesis"
+    note: >-
+      Cited input of dudek_interval_one only. The maximal gap result, that no gap between
+      consecutive primes up to 4 * 10^18 exceeds 1476, is taken as the explicit hypothesis
+      MaxGap1476, stated only for consecutive primes p < q with q <= 4 * 10^18, which is no
+      more than the paper's computation covers. It is a large computer search and is not
+      proved here. The authors have not been contacted about this formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
   - title: "PrimeNumberTheoremAnd"
     authors:
       - "the PrimeNumberTheoremAnd project contributors"
@@ -87,7 +110,11 @@ status:
     along the way: Dudek's Lemma 4, the explicit formula for psi_1 with its error bound, the
     bound for the zero sum on page 5, the prime power window that replaces Schoenfeld's
     psi - theta bounds, and a kernel checked scan of prime gaps up to 67000 for the small range
-    of Theorem 2. Not formalized: the zero count of Hasanalizade, Shen and Wong.
+    of Theorem 2. Version 2 adds the derived result dudek_interval_one, a prime in
+    x - sqrt x log x < p <= x for 2 <= x < 3999999999999999761, given MaxGap1476, proved with
+    kernel checked prime gap scans below 67001, the gap bound above, and a Lucas certificate of
+    the prime 3999999999999999761. Not formalized: the zero count of Hasanalizade, Shen and
+    Wong, and the maximal prime gap computation of Oliveira e Silva, Herzog and Pardi.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: []
@@ -102,7 +129,7 @@ automation:
         wrote the statements from them; small kernel checks use decide +kernel, no
         native_decide; Lean 4 v4.35.0-rc3, Mathlib v4.35.0-rc3.
       cost:
-        wall_time: "agent runs over 2026-10-16 to 2026-11-01, many hours in total"
+        wall_time: "agent runs over 2026-10-16 to 2026-11-16, many hours in total"
         spend_usd: "subscription-based"
         hardware: "API-only, cloud sandbox and a desktop workstation"
       prompting_notes: >-
@@ -135,7 +162,15 @@ fidelity:
     only for T at least 70, with N(T) counted with multiplicity as usual. Theorem 2 uses the half open interval
     x - (4/pi) sqrt(x) log x < p at most x for every real x at least 2. Theorem 3 says that for
     every epsilon > 0 there is X with a prime in x - (1 + epsilon) sqrt(x) log x < p at most x
-    for all real x at least X. The Lean code was written by AI.
+    for all real x at least X. The derived result dudek_interval_one is not a statement of
+    the paper: its conclusion is PrimeInC 1 x, a natural prime p with x - sqrt x log x < p and
+    p <= x, for every real x with 2 <= x < 3999999999999999761, and its only hypothesis is
+    MaxGap1476, that for consecutive primes p < q with q <= 4 * 10^18, so no prime strictly
+    between them, q - p <= 1476. Oliveira e Silva, Herzog and Pardi computed the gaps
+    between all primes below 4 * 10^18, so the hypothesis asks no more than that computation; their
+    site reports the results double checked up to 4 * 10^17. The
+    statement is not vacuous: the hypothesis is the published computation, and PrimeInC 1 2
+    holds by the prime 2. The Lean code was written by AI.
 
 review:
   status: "self-assessed"
@@ -148,7 +183,10 @@ review:
     the axioms of the compared theorems are propext, Quot.sound and Classical.choice. HSWN70 gZ
     follows from Hasanalizade-Shen-Wong Corollary 1.2 for T at least e, with the 7/8 moved into
     the error, and two-sided counts equal 2 N(T), so the hypothesis holds for the actual zeros
-    and the theorems are not vacuous. No human expert and not the paper's author has reviewed
+    and the theorems are not vacuous. For version 2 the packaging agent checked that
+    MaxGap1476 states no more than the maximal gap table of Oliveira e Silva, Herzog and Pardi
+    2014 and that dudek_interval_one is described as a derived result, not as a theorem of the
+    paper. No human expert and not the paper's author has reviewed
     the entry.
 
 alignment:
@@ -166,5 +204,9 @@ alignment:
       lean: "LeanLab.Dudek2014.AbstractC3.theorem3_of_RH_hsw"
       module: "ChallengeDudek2014"
       status: "proved"
+    - source: "Derived result, not in the paper: given the maximal prime gap 1476 of Oliveira e Silva, Herzog and Pardi 2014, a prime in x - sqrt x log x < p <= x for 2 <= x < 3999999999999999761"
+      lean: "LeanLab.Dudek2014.IntervalOne.dudek_interval_one"
+      module: "ChallengeDudek2014"
+      status: "proved"
 
-acknowledgements: "Mathlib and the Lean FRO; the PrimeNumberTheoremAnd project; A. W. Dudek; E. Hasanalizade, Q. Shen and P.-J. Wong."
+acknowledgements: "Mathlib and the Lean FRO; the PrimeNumberTheoremAnd project; A. W. Dudek; E. Hasanalizade, Q. Shen and P.-J. Wong; T. Oliveira e Silva, S. Herzog and S. Pardi."

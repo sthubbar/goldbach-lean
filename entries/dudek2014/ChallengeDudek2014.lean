@@ -16,12 +16,21 @@ Hypothesis, Mathlib's `RiemannHypothesis`, which is the paper's own hypothesis.
 * Theorem 3, `LeanLab.Dudek2014.AbstractC3.theorem3_of_RH_hsw`: for every `ε > 0` there is a prime
   in `(x - (1 + ε) √x log x, x]` for all large `x`.
 
-Each theorem also takes one cited input as an explicit hypothesis, never as an axiom:
+Each of these three theorems also takes one cited input as an explicit hypothesis, never as an axiom:
 `Dudek2014.SigmaH.HSWN70 gZ`, the zero count of Hasanalizade, Shen and Wong, arXiv 2107.06506,
 Corollary 1.2, for `T ≥ 70`, stated for `gZ`, the ordinates of the nontrivial zeros of ζ counted
 with multiplicity. The paper cites the zero count of Trudgian 2014 instead, whose constant
 Hasanalizade, Shen and Wong report to be in error. Schoenfeld's bounds for `ψ - θ`, which the
 paper also cites, are proved in the solution, as are Dudek's Lemma 4 and the explicit formula.
+
+A fourth compared theorem is a derived result of the entry, not a statement of the paper:
+
+* `LeanLab.Dudek2014.IntervalOne.dudek_interval_one`: for every real `x` with
+  `2 ≤ x < 3999999999999999761` there is a prime in `(x - √x log x, x]`, Theorem 3's interval
+  with `ε = 0`, without the Riemann hypothesis. It takes one cited input as an explicit
+  hypothesis, never as an axiom: `MaxGap1476`, the maximal prime gap computation of
+  Oliveira e Silva, Herzog and Pardi, Math. Comp. 83, 2014, that consecutive primes up to
+  `4 · 10^18` differ by at most 1476.
 
 AI wrote the Lean code, Claude, Anthropic. Lean names keep the namespaces of the lab where the
 proofs were written; every definition below is restated under its exact name and in the same
@@ -161,3 +170,39 @@ theorem theorem3_of_RH_hsw (hRH : RiemannHypothesis) (hN : HSWN70 gZ) :
   sorry
 
 end LeanLab.Dudek2014.AbstractC3
+
+/-! ### A derived finite range result, `LeanLab/Dudek2014/MaxGap.lean` and
+`LeanLab/Dudek2014/IntervalOne.lean` -/
+
+namespace LeanLab.Dudek2014
+open Real
+
+/-- The maximal prime gap of Oliveira e Silva, Herzog and Pardi 2014: if `p < q` are
+consecutive primes with `q ≤ 4 · 10^18`, then `q - p ≤ 1476`. A cited computation, taken as a
+hypothesis wherever it is used. -/
+def MaxGap1476 : Prop :=
+  ∀ p q : ℕ, p.Prime → q.Prime → p < q → q ≤ 4 * 10 ^ 18 →
+    (∀ r, p < r → r < q → ¬ r.Prime) → q - p ≤ 1476
+
+end LeanLab.Dudek2014
+
+namespace LeanLab.Dudek2014.IntervalOne
+
+open LeanLab.Dudek2014
+
+open Real
+
+/-- A prime in `(x - c √x log x, x]`. The paper's Theorem 3 interval is `c = 1 + ε`. -/
+def PrimeInC (c x : ℝ) : Prop :=
+  ∃ p : ℕ, p.Prime ∧ x - c * √x * Real.log x < p ∧ (p : ℝ) ≤ x
+
+/-- A derived result, not a statement of the paper. Given the maximal prime gap bound
+`MaxGap1476` of Oliveira e Silva, Herzog and Pardi 2014, for every real `x` with
+`2 ≤ x < 3999999999999999761` there is a prime `p` with `x - √x log x < p ≤ x`. This is
+Dudek's Theorem 3 interval with `ε = 0`, on a finite range and without the Riemann
+hypothesis. -/
+theorem dudek_interval_one (hG : MaxGap1476) :
+    ∀ x : ℝ, 2 ≤ x → x < 3999999999999999761 → PrimeInC 1 x := by
+  sorry
+
+end LeanLab.Dudek2014.IntervalOne
