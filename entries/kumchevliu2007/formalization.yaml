@@ -1,0 +1,123 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "A remark on the conjecture of Kumchev and Liu on sums of a prime and the square of a prime"
+  description: >-
+    A Lean 4 proof, with no unproved steps, that the conjecture printed on page 1 of
+    A. V. Kumchev and J. Y. Liu, Sums of primes and squares of primes in short intervals,
+    arXiv 0801.0130 v1, 2007, is false as printed. The paper sets H2 to be the even n with n
+    not congruent to 1 mod 3 and says that every sufficiently large n in H2 is conjectured to be
+    the sum of a prime and the square of another prime. Squares are not excluded, and they fail:
+    if m^2 = p + q^2 with p and q prime then p = m - q times m + q, so m - q = 1, q = m - 1 and
+    p = 2m - 1. For m = 30t + 6 with t >= 1 the number m^2 lies in H2, but m - 1 = 5 times
+    6t + 1 is composite. The entry proves that each such m^2 lies in H2, that none is a prime
+    plus the square of a prime, and that the printed conjecture is false even when the two
+    primes may be equal, hence also when another prime is read as a different prime. Squares
+    are the standard known exception, excluded in Conjecture H of Hardy and Littlewood, so this is
+    an omission in an informal sentence of the introduction, not an error in the paper's results;
+    the repaired form excluding squares is open and is not formalized here. The theorems of the paper, which concern almost
+    all n in H2 in short intervals, are not affected and are not part of this entry. The
+    observation is elementary. No compared theorem uses any cited input. Binary Goldbach is
+    open and is not claimed. Claude by Anthropic, an AI agent, wrote the Lean code, as listed
+    in PORTING.md, and it is offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11N05"]
+
+sources:
+  - title: "Sums of primes and squares of primes in short intervals"
+    authors:
+      - "A. V. Kumchev"
+      - "J. Y. Liu"
+    id: "arXiv:0801.0130"
+    type: "article"
+    location: "arXiv 0801.0130 v1, 30 December 2007, page 1, the conjecture before display 1"
+    relationship: "formalizes"
+    note: >-
+      Formalizes the definition of H2 and the conjecture stated on page 1, and proves the
+      printed conjecture false by the family of squares of 30t + 6. The authors have not been
+      contacted about this formalization or the remark.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+
+status:
+  scope: >-
+    Formalized, with no hypothesis: the squares of 30t + 6 lie in H2, inH2_family; for t >= 1
+    they are not a prime plus the square of a prime, not_form_family; the printed conjecture is
+    false, conjecture_printed_false. The first two are derived results of the entry that give
+    the counterexample. Not formalized: the repaired conjecture with squares excluded, which is
+    open; Theorems 1, 2 and 3 and Corollary 1 of the paper; and binary Goldbach, which remains
+    open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic"]
+      framework: "Claude Cowork"
+      tool_setup: >-
+        Autonomous agents read the paper, wrote the statements from it and wrote the Lean
+        proof in lab unit U-1612 on 2026-11-03, and ran lake build. A packaging agent ported the
+        file to Lean 4 v4.35.0-rc3, Mathlib v4.35.0-rc3, compared the printed sentence with
+        page 1 of arXiv 0801.0130 v1, and ran the Lean kernel and the Comparator. No
+        native_decide and no decide.
+      cost:
+        wall_time: "agent runs on 2026-10-17 and 2026-11-03, and packaging on 2026-11-16"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published results related to
+        Goldbach's problem and the inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish. Claude wrote the
+    statements, the counterexample and the proof. No file here contains a placeholder proof
+    outside the Challenge file. No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    The paper says a prime and the square of another prime. IsPrimePlusPrimeSq allows the two
+    primes to be equal, as the counting function R2 and the exceptional set E2 of the paper
+    do. This only weakens the formal conjecture, so its refutation also refutes the reading with
+    distinct primes. Sufficiently large is read as: there is N0 such that every n >= N0 in H2
+    has the form. H2 is the set of n in the natural numbers with n mod 3 not 1 and 2 dividing
+    n, as printed. No constant or range of the paper is changed.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "Claude Opus 5.5, Anthropic, the packaging agent, not a human"
+    - "Claude Opus 5.5, Anthropic, a separate AI statement auditor, not a human"
+  notes: >-
+    The packaging agent, Claude Opus 5.5 by Anthropic, not a human, compared the definitions of
+    H2 and of a prime plus a prime square and the printed conjecture with page 1 of the arXiv
+    text of 0801.0130 v1, and the Challenge with the lab statements. This is a self check by the
+    agent that packaged the entry, not an independent audit. Lean kernel and Comparator checks
+    pass. Not reviewed by a human expert or by the authors.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Kumchev and Liu 2007, the conjecture on page 1 as printed is false"
+      lean: "LeanLab.KumchevLiu2007.Novelty1612.conjecture_printed_false"
+      module: "ChallengeKumchevLiu2007"
+      status: "proved"
+    - source: "Kumchev and Liu 2007, page 1, the squares of 30t + 6 lie in H2, derived result of the entry"
+      lean: "LeanLab.KumchevLiu2007.Novelty1612.inH2_family"
+      module: "ChallengeKumchevLiu2007"
+      status: "proved"
+    - source: "Kumchev and Liu 2007, page 1, the squares of 30t + 6 with t >= 1 are not a prime plus a prime square, derived result of the entry"
+      lean: "LeanLab.KumchevLiu2007.Novelty1612.not_form_family"
+      module: "ChallengeKumchevLiu2007"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; A. V. Kumchev and J. Y. Liu for the paper."

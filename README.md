@@ -48,6 +48,7 @@ Each entry is its own Lake project, the `project_path` of its Palomar submission
 | `entries/estermann1938` | `ChallengeEstermann1938.lean` | `comparator-estermann1938.json` | Estermann 1938, On Goldbach's problem: proof that almost all even positive integers are sums of two primes, the main result: the number Q of n of even positive integers less than n that are not sums of two primes is O of n log^-a n for every a > 0; it rests on the E of X bound of the heathbrown1985 entry |
 | `entries/kaniecki1995` | `ChallengeKaniecki1995.lean` | `comparator-kaniecki1995.json` | Kaniecki 1995, Lemma 7 on sums of two odd primes in short intervals: the printed open interval form fails at x = 6, and the form with the right end included holds for every x > 4 |
 | `entries/helfgottplatt2013` | `ChallengeHelfgottPlatt2013.lean` | `comparator-helfgottplatt2013.json` | Helfgott and Platt 2013, Proth's criterion of Theorem 2.3, and Theorem 4.1 on ternary Goldbach up to 8.875 · 10^30 from binary Goldbach to 4 · 10^18 and the paper's range ladders, both taken as hypotheses |
+| `entries/kumchevliu2007` | `ChallengeKumchevLiu2007.lean` | `comparator-kumchevliu2007.json` | Kumchev and Liu 2007, Sums of primes and squares of primes in short intervals: the conjecture on page 1 that every large even n not 1 mod 3 is a prime plus the square of a prime fails at the squares of 30t + 6, since squares are not excluded |
 
 Note on `entries/bordignonstarichkova2024grh`, PALOMAR-2026-10-28-000016 version 2: see its `NOTE-sieve-input.md` on the level of the sieve input.
 

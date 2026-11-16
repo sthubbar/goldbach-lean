@@ -1,0 +1,19 @@
+{
+  "challenge_module": "ChallengeKumchevLiu2007",
+  "solution_module": "SolutionKumchevLiu2007",
+  "theorem_names": [
+    "LeanLab.KumchevLiu2007.Novelty1612.conjecture_printed_false",
+    "LeanLab.KumchevLiu2007.Novelty1612.not_form_family",
+    "LeanLab.KumchevLiu2007.Novelty1612.inH2_family"
+  ],
+  "definition_names": [
+    "LeanLab.KumchevLiu2007.IsPrimePlusPrimeSq",
+    "LeanLab.KumchevLiu2007.InH2",
+    "LeanLab.KumchevLiu2007.Novelty1612.conjecture_printed"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}
