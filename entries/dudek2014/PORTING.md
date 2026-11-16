@@ -88,3 +88,12 @@ in `KadiriLumley2014/Corollary.lean`, a few seconds; two harmonic number bounds 
 `Helfgott2013/GammaFine.lean`; and small checks in `ChenExplicit/GammaBounds.lean` and
 `Common/Goldbach.lean`. The `ChirreHagen2025/` files are short lemmas closed by
 `norm_num` and `linarith`.
+* Independent kernels, version 2b: the proofs of `p777448979`, `p13994081623` and `pBig` in
+  `KadiriLumley2014/Corollary.lean` are rewritten so no kernel unfolds a large `decide`. Each
+  is now a Lucas certificate through the new lemmas `prattZ` and `zmod_ne_one` in
+  `Verifications/PrattCertificates.lean`, with every modular power proved by
+  `reduce_mod_char`, whose fast exponentiation emits small explicit squaring steps, and every
+  small prime and factor product proved by `norm_num`. The old trial division of 777448979
+  exhausted the fuel of the con-ron kernel. No statement and no definition changed; `pm`,
+  `pm_cast`, `pratt` and `pB` are kept as they were. The gap scan and harmonic `decide +kernel`
+  checks are left, since con-ron accepts them.

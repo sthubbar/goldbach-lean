@@ -68,4 +68,31 @@ theorem pratt (p a : ℕ) (L : List (ℕ × ℕ)) (hp : p < 2 ^ 64)
 
 theorem pB {n : ℕ} (h : primeB n = true) : n.Prime := primeB_sound h
 
+/-- Lucas' test with a listed factorization of `p - 1`, with the two power conditions stated in
+`ZMod p`. Each power is then proved by `reduce_mod_char`, whose fast modular exponentiation
+emits small explicit squaring steps, so no kernel has to run a large decision procedure. -/
+theorem prattZ (p a : ℕ) (L : List (ℕ × ℕ))
+    (hprod : (L.map fun x => x.1 ^ x.2).prod = p - 1) (hprimes : ∀ x ∈ L, x.1.Prime)
+    (hpow : (a : ZMod p) ^ (p - 1) = 1)
+    (hnot : ∀ x ∈ L, (a : ZMod p) ^ ((p - 1) / x.1) ≠ 1) : p.Prime := by
+  apply lucas_primality p (a : ZMod p) hpow
+  intro q hq hqd
+  rw [← hprod] at hqd
+  obtain ⟨y, hy, hyd⟩ := (Nat.prime_iff.mp hq).dvd_prod_iff.mp hqd
+  obtain ⟨x, hx, rfl⟩ := List.mem_map.mp hy
+  have hqx : q = x.1 :=
+    (Nat.prime_dvd_prime_iff_eq hq (hprimes x hx)).mp (hq.dvd_of_dvd_pow hyd)
+  subst hqx
+  exact hnot x hx
+
+/-- A residue computed to be `c` with `c % p ≠ 1` is not `1` in `ZMod p`. -/
+theorem zmod_ne_one {p c : ℕ} (hp : 1 < p) (hc : c % p ≠ 1) {x : ZMod p}
+    (hx : x = (c : ZMod p)) : x ≠ 1 := by
+  subst hx
+  intro h
+  apply hc
+  have h1 : ((c : ℕ) : ZMod p) = ((1 : ℕ) : ZMod p) := by simpa using h
+  rw [ZMod.natCast_eq_natCast_iff'] at h1
+  rwa [Nat.mod_eq_of_lt hp] at h1
+
 end LeanLab.Verifications.Pratt
