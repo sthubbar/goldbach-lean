@@ -17,7 +17,8 @@ project:
     the budget is used up exactly and the last active coordinate solves the residual equation
     4.42. Theorem J, display 4.36, bounds the weighted excess of zeros by 1 minus xi over 2
     Delta; it is proved here from the analytic estimate 7.20, which is a hypothesis. Two
-    Section 9 statements are also compared: the basic inequality 9.4 in the form used in 9.22,
+    Section 9 statements are proved in the repository but are outside this submission's
+    selected Comparator check: the basic inequality 9.4 in the form used in 9.22,
     and Case 8, where e to the minus 7 lambda plus 2.87 times 10.4 times lambda to the 11/7 is
     below 1 for 0 below lambda at most 0.04. The zero density theorems, the estimate 7.20, the
     existence of a maximiser and Theorem 1 are not proved and not claimed. AI agents wrote the
