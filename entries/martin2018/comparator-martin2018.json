@@ -1,0 +1,18 @@
+{
+  "challenge_module": "ChallengeMartin2018",
+  "solution_module": "SolutionMartin2018",
+  "theorem_names": [
+    "LeanLab.Martin2018.conj1_2_iv_printed_false",
+    "LeanLab.Martin2018.conj1_2_iv_exceptions",
+    "LeanLab.Martin2018.eighteen_is_sum"
+  ],
+  "definition_names": [
+    "LeanLab.Martin2018.GoldbachAP",
+    "LeanLab.Martin2018.Conj1_2_iv_printed"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

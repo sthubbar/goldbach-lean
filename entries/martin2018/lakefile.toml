@@ -1,0 +1,19 @@
+name = "GoldbachLeanMartin2018"
+version = "0.1.0"
+defaultTargets = ["ChallengeMartin2018", "SolutionMartin2018"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.35.0-rc3"
+
+[[lean_lib]]
+name = "LeanLab"
+
+[[lean_lib]]
+name = "ChallengeMartin2018"
+roots = ["ChallengeMartin2018"]
+
+[[lean_lib]]
+name = "SolutionMartin2018"
+roots = ["SolutionMartin2018"]
