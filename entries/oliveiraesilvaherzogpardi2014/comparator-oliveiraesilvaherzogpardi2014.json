@@ -1,0 +1,17 @@
+{
+  "challenge_module": "ChallengeOliveiraESilvaHerzogPardi2014",
+  "solution_module": "SolutionOliveiraESilvaHerzogPardi2014",
+  "theorem_names": [
+    "LeanLab.OeSHP2014.table4_least",
+    "LeanLab.OeSHP2014.table4_complete"
+  ],
+  "definition_names": [
+    "LeanLab.OeSHP2014.minGB",
+    "LeanLab.OeSHP2014.table4"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}
