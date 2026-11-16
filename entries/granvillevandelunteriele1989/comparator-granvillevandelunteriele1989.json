@@ -1,0 +1,15 @@
+{
+  "challenge_module": "ChallengeGranvilleVanDeLuneTeRiele1989",
+  "solution_module": "SolutionGranvilleVanDeLuneTeRiele1989",
+  "theorem_names": [
+    "LeanLab.GvLtR1989.gvltr_ratio_upTo2"
+  ],
+  "definition_names": [
+    "LeanLab.GvLtR1989.minGB"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

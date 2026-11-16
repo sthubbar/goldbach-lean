@@ -1,0 +1,122 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Granville, van de Lune and te Riele's bound for the least prime in a Goldbach partition"
+  description: >-
+    A Lean 4 proof, with no unproved steps and no hypothesis, of the numerical bound of Section 5
+    of A. Granville, J. van de Lune and H. J. J. te Riele, Checking the Goldbach conjecture on a
+    vector computer, in Number Theory and Applications, R. A. Mollin ed., Kluwer 1989, pages 423
+    to 433, on a range much smaller than the paper's. For an even number n, p of n is the least
+    prime p such that n - p is prime. The paper derives from its Table 3 that p of n divided by
+    log² n log log n is below 1.603 for every even n up to 2 · 10^10, the bound of its
+    verification. The entry proves, for every even n with 6 <= n <= 323740000, that p of n
+    exists, that n - p of n is prime and that p of n < 1.603 log² n log log n. The range
+    stops at 323740000, about 1.6 percent of the paper's 2 · 10^10, and the paper's full range
+    is not claimed. The proof is a finite check: the even numbers are cut into 339 windows,
+    each settled by one equality of natural numbers that encodes a sieve of Eratosthenes over
+    the odd numbers of the window as bit vectors and is evaluated by the kernel, and certified
+    decimal lower bounds for log n and log log n on 177 blocks then give the constant 1.603.
+    Binary Goldbach is open and is not claimed. AI agents wrote the Lean code, Claude by
+    Anthropic, as listed in PORTING.md, and it is offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11Y16", "11Y11"]
+
+sources:
+  - title: "Checking the Goldbach conjecture on a vector computer"
+    authors:
+      - "A. Granville"
+      - "J. van de Lune"
+      - "H. J. J. te Riele"
+    id: "https://ir.cwi.nl/pub/1570"
+    type: "article"
+    location: "Number Theory and Applications, R. A. Mollin ed., Kluwer Academic Publishers 1989, pages 423 to 433; Section 1 for the definition of p of n and Section 5 for the bound 1.603, derived from Table 3"
+    relationship: "formalizes"
+    note: >-
+      Formalizes the bound p of n < 1.603 log² n log log n of Section 5 on the even numbers
+      from 6 to 323740000 only; the paper states it for even n up to 2 · 10^10. The authors have
+      not been contacted about this formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+
+status:
+  scope: >-
+    Formalized, with no hypothesis: for every even n with 6 <= n <= 323740000, minGB n and
+    n - minGB n are prime and minGB n < 1.603 log² n log log n, gvltr_ratio_upTo2. Not
+    formalized: the same bound for even n from 323740002 to 2 · 10^10, which is the larger part
+    of the paper's range; the verification of the Goldbach conjecture to 2 · 10^10; the
+    tables of the paper; the results conditional on the prime k-tuplets conjecture; and binary
+    Goldbach, which remains open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic"]
+      framework: "Claude Cowork"
+      tool_setup: >-
+        Autonomous agents read the paper, wrote the statement from it, computed p of n for every
+        even n up to 323740000 with Python, cut the range into 177 blocks with the number of
+        small primes needed in each and decimal lower bounds for the logarithms, and wrote and
+        built the Lean proof in lab units U-0380 and U-0381 on 2026-10-17 and 2026-10-18. A
+        packaging agent ported it to Lean 4 v4.35.0-rc3, Mathlib v4.35.0-rc3, wrote a new window
+        checker over odd numbers that the con-ron kernel can replay, with its soundness proofs,
+        kept the lab's blocks and logarithm bounds, strengthened the statement to include that
+        p of n exists, compared the statement with Sections 1 and 5 of the CWI scan of the
+        paper, and ran the Lean kernel, NanoDa, con-ron and the Comparator. The window checks
+        use decide +kernel on equalities of natural numbers; no native_decide.
+      cost:
+        wall_time: "agent runs on 2026-10-17 and 2026-10-18, and packaging on 2026-11-16"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published results related to
+        Goldbach's problem and the inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish. Claude wrote the statement,
+    the checker, the computations and the proofs. No file here contains a placeholder proof
+    outside the Challenge file. No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    The range is smaller than the paper's: even n from 6 to 323740000 in place of even n up to
+    2 · 10^10. The paper defines p of n through Goldbach partitions n = p + q with odd primes
+    p <= q. minGB n is the least prime p with n - p prime, and 0 when there is none; for even
+    n >= 6 the prime 2 never qualifies, since n - 2 is even and at least 4, and the least such p
+    is at most n - p, so minGB n is the paper's p of n, and the theorem also proves that the
+    partition exists, so the junk value 0 is never used. The paper's statement has no lower end;
+    n = 4 has no partition into odd primes and is excluded, and the range starts at 6. log is
+    the natural logarithm. The constant 1.603 is the paper's.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "Claude Opus 5.5, Anthropic, the packaging agent, not a human"
+    - "Claude Opus 5.5, Anthropic, a separate AI statement auditor, not a human"
+  notes: >-
+    The packaging agent, Claude Opus 5.5 by Anthropic, not a human, compared the definition of
+    p of n with Section 1 and the bound with Section 5 of the CWI scan of the paper, and
+    checked that the Challenge states the range 6 to 323740000 and not the paper's range. This
+    is a self check by the agent that packaged the entry, not an independent audit. Lean
+    kernel, NanoDa and Comparator checks pass. Not reviewed by a human expert or by the
+    authors.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Granville, van de Lune and te Riele 1989, Section 5, p of n < 1.603 log² n log log n, on even n from 6 to 323740000 only, a smaller range than the paper's 2 · 10^10"
+      lean: "LeanLab.GvLtR1989.gvltr_ratio_upTo2"
+      module: "ChallengeGranvilleVanDeLuneTeRiele1989"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; A. Granville, J. van de Lune and H. J. J. te Riele for the paper."
