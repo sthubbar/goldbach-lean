@@ -1,0 +1,172 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Sums of primes and squares of primes in short intervals: Theorem 1 from Proposition 1"
+  description: >-
+    A Lean 4 proof of Theorem 1 of A. V. Kumchev and J. Y. Liu, Sums of primes and squares of
+    primes in short intervals, arXiv 0801.0130, display 9 on page 2, derived from the assumed
+    hypothesis Eq33Hyp: the mean square bound of display 33 of the paper's Proposition 1, page 8,
+    for the primes and the sifted function of display 34 with the weights f1 and f2 of page 15,
+    the input the paper obtains on page 15 by verifying the hypotheses of Proposition 1 for these
+    functions. For n in H2,
+    the even n not congruent to 1 mod 3, R2 of n counts the representations n = p1 + p2^2 with p1
+    prime in the window from X - Y to X and p2 prime between half the square root of Y and the
+    square root of Y, where Y is X to the 7/12 + eps/2. The theorem says that for every A > 0
+    there is B > 0 such that, for every delta > 0 and eps > 0, R2 of n is the main term r2 of n
+    times the singular series truncated at log X to the B, up to a relative error K times log X
+    to the -1 + delta, for all but at most C H / log X to the A of the n in H2 with X < n <= X + H.
+    It is proved on the range X to the 7/18 + eps <= H <= X to the 1 - eps that the proof on
+    page 16 writes after display 55, and on the printed range X to the 7/18 + eps <= H <= X when
+    eps is at most 5/18. The Lean proves itself the steps from display 33 to Theorem 1: the
+    Chebyshev step from display 33 to display 53, the lower bound for the singular series from
+    displays 48 and 49 with Lemma 3.8, the residual estimate of Proposition 2 on pages 16 and 17,
+    and the circle method assembly of displays 53 to 55. Neither Proposition 1 nor the paper's
+    verification of its hypotheses on page 15 is proved here.
+    Binary Goldbach and the conjecture that every large n in H2 that is not a square is a prime
+    plus the square of a prime remain open and are not claimed. AI agents wrote the Lean code, as
+    listed in PORTING.md; the proof reuses code ported from PrimeNumberTheoremAnd, written by its
+    contributors, and is offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11P55", "11N36"]
+
+sources:
+  - title: "Sums of primes and squares of primes in short intervals"
+    authors:
+      - "A. V. Kumchev"
+      - "J. Y. Liu"
+    id: "arXiv:0801.0130"
+    type: "article"
+    location: "arXiv 0801.0130 v1, 30 December 2007, Theorem 1 on page 2, display 9; Proposition 1 on page 8, display 33; Section 4, pages 13 to 17"
+    relationship: "formalizes"
+    note: >-
+      Formalizes Theorem 1, display 9, on the range written on page 16, following the paper's
+      route through Proposition 1, display 33, the reduction to display 53, the singular series
+      bounds of displays 48 and 49, Proposition 2 and display 55. Proposition 1 is the explicit
+      hypothesis Eq33Hyp and is not proved. The authors have not been contacted about this
+      formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "PrimeNumberTheoremAnd"
+    authors:
+      - "the PrimeNumberTheoremAnd project contributors"
+    id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    type: "formalization"
+    location: "commit c39a751132c88b6e8080b74c74023fd95b3d8be0"
+    relationship: "other"
+    note: >-
+      Sixteen files under LeanLab/PNTPort/StrongPNT, the zero-free region for zeta and the prime
+      number theorem with classical error term, and the narrow ports under LeanLab/PNTPort/Perron
+      come from this Apache-2.0 project, written by its contributors, with small fixes for Mathlib
+      v4.35.0-rc3 listed in PORTING.md; each file carries a notice. They feed the
+      Siegel-Walfisz and Bombieri-Vinogradov theorems used by the residual estimate.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "https://github.com/sthubbar/goldbach-lean/tree/main/entries/bombierivinogradov1965"
+    relationship: "registered entry of this repository whose Bombieri-Vinogradov theorem the residual estimate here uses"
+    note: "The maximal form used here is in LeanLab/PNTPort/BVMax, built on LeanLab/PNTPort/BV."
+  - id: "https://github.com/sthubbar/goldbach-lean/tree/main/entries/kumchevliu2007"
+    relationship: "earlier withdrawn entry of this repository on the same paper, a different statement"
+    note: "That entry concerned the conjecture printed on page 1 of the paper; it shares no compared theorem with this one."
+
+status:
+  scope: >-
+    Formalized with one hypothesis, display 33 of the paper's Proposition 1 for the primes and the
+    sifted function of display 34, as Eq33Hyp: Theorem 1,
+    display 9, on the range X to the 7/18 + eps <= H <= X to the 1 - eps, thm1_written_of_eq33;
+    the printed range H <= X for eps at most 5/18 from that form, thm1_full_of_written_small_eps;
+    and the nonemptiness of the written range, written_range_nonempty. Not formalized: the proof
+    of Proposition 1, the range H > X to the 1 - eps for eps > 5/18, which the paper does not
+    write, explicit values of B, C, K and X0, Theorems 2 and 3 and Corollary 1 of the paper, and
+    binary Goldbach, which remains open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic"]
+      framework: "Claude Cowork"
+      tool_setup: >-
+        Autonomous agents of the Lean Lab read the paper, wrote the statements from it,
+        decomposed the proof into leaf lemmas and proved them, and ran lake build; the lab build
+        receipt 20261118T0802Z-4078 records the axioms of each theorem. A packaging agent ported
+        the files to Lean 4 v4.35.0-rc3, Mathlib v4.35.0-rc3, removed the declarations that rest
+        on unproved leaves, and ran the Lean kernel and the Comparator. No native_decide.
+      cost:
+        wall_time: "agent runs over 2026-10-17 to 2026-11-18, and packaging on 2026-11-18"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published results related to
+        Goldbach's problem and the inputs they cite, recording every cited input until proved.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish. Claude wrote the statement
+    files and the decomposition; the lab files of the proof say only that AI wrote the Lean code,
+    see PORTING.md. The ported StrongPNT and Perron files were written by the
+    PrimeNumberTheoremAnd contributors. No file here contains a placeholder proof outside the
+    Challenge file. No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    The one hypothesis is Eq33Hyp, the paper's Proposition 1, display 33 on page 8, with the
+    weights of page 15, taken as an explicit hypothesis and never as an axiom: for every A > 0
+    there is B0 > 0 such that for all B >= B0 and eps > 0 there are C > 0 and X0 >= 2 with the
+    sum over X < n <= X + H of err53 of n squared at most C H Y / log X to the A, for X >= X0 and
+    X to the 7/18 + eps <= H <= X to the 1 - eps. Here err53 of n is the absolute value of the
+    sifted count R of displays 12 and 34, with sifting level Y^1/4 P^-2 and P = log X to the B,
+    less the truncated singular series times the singular integral of display 27. So Eq33Hyp is
+    not the general Proposition 1 but its conclusion for these two functions, which also assumes
+    the paper's verification on page 15 of hypotheses A1.2, A2.2 and A2.3, a short interval
+    Siegel-Walfisz bound and Lemma 3.4. Lemma 3.4 needs H at most Y; for H above Y the sum in
+    Eq33Hyp has no nonzero terms with n at least X + Y, so that part of its range follows from
+    the case H = Y. The
+    parameter Y, which the paper fixes inside the proof, is X to the 7/12 + eps/2. The windows
+    are half open, X - Y <=
+    p1 < X and the square root of Y over 2 <= p2 < the square root of Y, and p1 and p2 may be
+    equal. The implied constants are explicit existential constants C, K and a threshold X0
+    depending on A, delta and eps; B depends on A only, as in the paper. The truncated singular
+    series sums A2 of n, q over 1 <= q <= the integer part of log X to the B. The main range is
+    H <= X to the 1 - eps, the range written on page 16 after display 55, not the printed H <= X;
+    the printed range is recovered only for eps at most 5/18.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "Claude Opus 5.5, Anthropic, the packaging agent, not a human"
+  notes: >-
+    The packaging agent compared the Challenge with the lab statements of Theorem 1 and of
+    display 33 and checked that every definition the compared theorems reach is restated under
+    its own name with the same open lines and local instances. A separate auditing agent, also
+    Claude, then read the arXiv text of Theorem 1, Proposition 1 and pages 13 to 17 and compared
+    every Challenge definition and compared theorem with it. Lean kernel and Comparator checks pass. Not reviewed by a human expert or by
+    the authors.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Kumchev and Liu 2007, Theorem 1, display 9, page 2, on the range of page 16, from Proposition 1, display 33"
+      lean: "LeanLab.KumchevLiu2007.Task129W.thm1_written_of_eq33"
+      module: "ChallengeKumchevLiu2007Thm1"
+      status: "proved"
+    - source: "Kumchev and Liu 2007, Theorem 1, display 9, on the printed range H <= X for eps at most 5/18, from the form above"
+      lean: "LeanLab.KumchevLiu2007.Task129W.thm1_full_of_written_small_eps"
+      module: "ChallengeKumchevLiu2007Thm1"
+      status: "proved"
+    - source: "Kumchev and Liu 2007, page 16, the written range is not empty, derived result of the entry"
+      lean: "LeanLab.KumchevLiu2007.Task129W.written_range_nonempty"
+      module: "ChallengeKumchevLiu2007Thm1"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; the PrimeNumberTheoremAnd contributors; A. V. Kumchev and J. Y. Liu for the paper."

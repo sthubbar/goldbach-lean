@@ -1,0 +1,19 @@
+name = "GoldbachLeanKumchevLiu2007Thm1"
+version = "0.1.0"
+defaultTargets = ["ChallengeKumchevLiu2007Thm1", "SolutionKumchevLiu2007Thm1"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.35.0-rc3"
+
+[[lean_lib]]
+name = "LeanLab"
+
+[[lean_lib]]
+name = "ChallengeKumchevLiu2007Thm1"
+roots = ["ChallengeKumchevLiu2007Thm1"]
+
+[[lean_lib]]
+name = "SolutionKumchevLiu2007Thm1"
+roots = ["SolutionKumchevLiu2007Thm1"]

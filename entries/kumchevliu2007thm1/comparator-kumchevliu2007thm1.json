@@ -1,0 +1,33 @@
+{
+  "challenge_module": "ChallengeKumchevLiu2007Thm1",
+  "solution_module": "SolutionKumchevLiu2007Thm1",
+  "theorem_names": [
+    "LeanLab.KumchevLiu2007.Task129W.thm1_written_of_eq33",
+    "LeanLab.KumchevLiu2007.Task129W.thm1_full_of_written_small_eps",
+    "LeanLab.KumchevLiu2007.Task129W.written_range_nonempty"
+  ],
+  "definition_names": [
+    "LeanLab.KumchevLiu2007.InH2",
+    "LeanLab.KumchevLiu2007.cntIoc",
+    "LeanLab.KumchevLiu2007.U1534.ee",
+    "LeanLab.KumchevLiu2007.U1534.gaussS",
+    "LeanLab.KumchevLiu2007.U1534.A2",
+    "LeanLab.KumchevLiu2007.Task129.windowY",
+    "LeanLab.KumchevLiu2007.Task129.windowPairs",
+    "LeanLab.KumchevLiu2007.Task129.primeCount",
+    "LeanLab.KumchevLiu2007.Task129.integerMain",
+    "LeanLab.KumchevLiu2007.Task129.series2",
+    "LeanLab.KumchevLiu2007.Task129.main2",
+    "LeanLab.KumchevLiu2007.Task129.roughCount",
+    "LeanLab.KumchevLiu2007.Task129.f2Weight",
+    "LeanLab.KumchevLiu2007.Task129.singInt",
+    "LeanLab.KumchevLiu2007.Task129.err53",
+    "LeanLab.KumchevLiu2007.Task129W.kumchev_liu_thm1_written",
+    "LeanLab.KumchevLiu2007.Task129W.Eq33Hyp"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}
