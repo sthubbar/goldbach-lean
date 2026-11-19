@@ -1,0 +1,19 @@
+name = "GoldbachLeanBrudernPerelli1998Thm2"
+version = "0.1.0"
+defaultTargets = ["ChallengeBrudernPerelli1998Thm2", "SolutionBrudernPerelli1998Thm2"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.35.0-rc3"
+
+[[lean_lib]]
+name = "LeanLab"
+
+[[lean_lib]]
+name = "ChallengeBrudernPerelli1998Thm2"
+roots = ["ChallengeBrudernPerelli1998Thm2"]
+
+[[lean_lib]]
+name = "SolutionBrudernPerelli1998Thm2"
+roots = ["SolutionBrudernPerelli1998Thm2"]

@@ -1,0 +1,20 @@
+{
+  "challenge_module": "ChallengeBrudernPerelli1998Thm2",
+  "solution_module": "SolutionBrudernPerelli1998Thm2",
+  "theorem_names": [
+    "LeanLab.ExceptionalSet.U1539.theorem2_of_named_dq5"
+  ],
+  "definition_names": [
+    "LeanLab.ExceptionalSet.BrudernPerelli1998.F",
+    "LeanLab.ExceptionalSet.U1539.eC",
+    "LeanLab.ExceptionalSet.U1539.expSumF",
+    "LeanLab.ExceptionalSet.U1539.KClass",
+    "LeanLab.ExceptionalSet.U1539.Theorem2",
+    "LeanLab.ExceptionalSet.U1539.Lemma10DQ5"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}
