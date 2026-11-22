@@ -1,0 +1,174 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "The ternary Goldbach-Vinogradov theorem with almost equal Piatetski-Shapiro primes"
+  description: >-
+    A Lean 4 proof of Theorem 1 of Yanbo Song, The ternary Goldbach-Vinogradov theorem with
+    almost equal Piatetski-Shapiro primes, arXiv 2012.06322 v1, 2020, with any positive margin
+    in the window, by the deduction of Section 4 on page 9. Theorem 1 says that for
+    44/45 < gamma < 1 every large enough odd n is p1 + p2 + p3 with each pi a prime of the form
+    floor of m to the power 1/gamma and |pi - n/3| <= y, for every y > n to the power
+    52 - 45 gamma over 8. The margin results rest on one cited input, the paper's Lemma 3,
+    which is Theorem 3 of C. D. Pan and C. B. Pan, Goldbach Conjecture, Science Press, Beijing,
+    1988, taken at the exponent 7/8 as the explicit hypothesis Lemma3 7/8 and never as an axiom.
+    From it the entry proves Theorem 1 for every window y > n to the power 52 - 45 gamma over 8
+    plus delta with delta > 0, and the page 9 asymptotic formula for R of n on the same windows;
+    the paper's Lemmas 4 and 5 are proved. The exact window result also takes the transfer step
+    of page 9 at the exact threshold, LogTransferDQ, as a second hypothesis. An independent
+    check of the lab could not prove that transfer step at the exact threshold, since Lemma 4
+    holds with a loss of n to the epsilon only, so Theorem 1 at the exact window remains open
+    here and the headline result is the margin version. Binary Goldbach is open and is not
+    claimed; ternary Goldbach is a theorem of Helfgott 2013. AI agents wrote the Lean code, as
+    listed in PORTING.md, and it is offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11P05"]
+
+sources:
+  - title: "The ternary Goldbach-Vinogradov theorem with almost equal Piatetski-Shapiro primes"
+    authors:
+      - "Yanbo Song"
+    id: "arXiv:2012.06322v1"
+    type: "preprint"
+    location: "arXiv 2012.06322 v1, 2020: Theorem 1 on page 2; Lemmas 3 to 5 in Section 3; the deduction of Section 4 on page 9"
+    relationship: "formalizes"
+    note: >-
+      Formalizes Theorem 1 with a positive window margin delta and the asymptotic formula for
+      R of n of Section 4, page 9, following the paper's proof through Lemmas 1, 2, 4 and 5 of
+      Section 3. Lemma 3, which the paper takes from Pan and Pan 1988, is the explicit hypothesis
+      Lemma3 7/8 and is not proved. Theorem 1 at the exact window is proved only with the transfer
+      step of page 9 as a further hypothesis, see the fidelity block. The author has not been
+      contacted about this formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "Goldbach Conjecture"
+    authors:
+      - "C. D. Pan"
+      - "C. B. Pan"
+    id: "Science Press, Beijing, 1988"
+    type: "book"
+    location: "Theorem 3, as cited in Lemma 3 of Song 2020"
+    relationship: "background"
+    note: >-
+      Cited input of the paper. Its Theorem 3, in the form of Lemma 3 of Song 2020 at the exponent
+      7/8, is the explicit hypothesis Lemma3 7/8 of every compared theorem and is not formalized
+      here.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "Prove2Me submission ExponentialSums.vdC_second_derivative, the Kusmin-Landau inequality and van der Corput's second derivative test"
+    authors:
+      - "Jason Hickey"
+    id: "https://beta.prove2.me"
+    type: "formalization"
+    location: "Prove2Me id 1038fb61-45dc-46e6-9a1c-862d2aa8430c"
+    relationship: "other"
+    note: >-
+      LeanLab/BakerHarmanPintz1997/PortedVanDerCorput.lean is ported from this Apache-2.0
+      submission, written by Jason Hickey with Claude, with its declarations moved into a
+      separate namespace and fixes for newer Lean; the file keeps its copyright and license
+      notice. It gives the van der Corput estimate used in the proof of Lemma 4.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+
+status:
+  scope: >-
+    Formalized with one hypothesis, Lemma 3 of the paper, which is Pan and Pan 1988 Theorem 3, as
+    Lemma3 7/8: Theorem 1 for every window y > n to the power 52 - 45 gamma over 8 plus delta with
+    delta > 0, songWindow_margin_of_lemma3, and the page 9 asymptotic formula on the same windows,
+    asymptotic_margin_of_lemma3. Formalized with two hypotheses, Lemma3 7/8 and the transfer step
+    LogTransferDQ: Theorem 1 at the exact window, songTheorem1_of_lemma3_logTransfer. Not
+    formalized: the proof of Pan and Pan's theorem, the transfer step at the exact threshold, and
+    binary Goldbach, which remains open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5, claude-opus-5-5, Anthropic"]
+      framework: "Claude Cowork"
+      tool_setup: >-
+        Autonomous agents of the Lean Lab read the paper, wrote the statements from it,
+        decomposed the proofs of Lemma 4 and of Section 4 into leaf lemmas, proved them and ran
+        lake build. A packaging agent ported the files to Lean 4 v4.35.0-rc3 and Mathlib
+        v4.35.0-rc3, removed the declarations that rest on unproved leaves, and ran the Lean
+        kernel and the Comparator. No native_decide.
+      cost:
+        wall_time: "agent runs over 2026-10-17 to 2026-11-22, and packaging on 2026-11-22"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published results related to
+        Goldbach's problem and the inputs they cite, recording every cited input until proved.
+    - method: "agent"
+      models: ["GPT-6 Codex, OpenAI"]
+      framework: "Codex"
+      tool_setup: >-
+        Codex prover agents of the Lean Lab wrote Characteristic139, Decomp139, Decomp139b and
+        Consequences139 in lab task 139, the mean square and singular series sections of
+        State1562, Repair591Margin and Repair591FourierMajorant in lab task 591, and the port of
+        PortedVanDerCorput in lab task 219, as the file headers say.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish. Claude wrote the statement
+    files and the final assemblies; Codex by OpenAI and other lab prover agents wrote many leaf
+    proofs, see PORTING.md. No file here contains a placeholder proof outside the Challenge file.
+    No human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    The cited input is Lemma3 7/8, Lemma 3 of the paper, Pan and Pan 1988 Theorem 3, taken as an
+    explicit hypothesis and never as an axiom: there are C and N0 such that for every odd n >= N0
+    and every y with n to the power 7/8 <= y <= n/3, the integral over 0 to 1 of g of alpha cubed
+    times e of -n alpha differs from S3 of n times 3 y squared over log cubed n by at most
+    C y squared over log to the fourth n, where g sums e of alpha p over primes with
+    |p - n/3| < y and S3 is the singular series of the paper. The paper states Lemma 3 with no
+    range of y; the window exponent of Theorem 1 exceeds 7/8 on the whole range of gamma, so the
+    hypothesis is no stronger than the lemma. The margin results add delta > 0 to the window
+    exponent, and the window form also asks songExponent gamma + delta < 1. The exact window
+    result also assumes LogTransferDQ: for y > n to the power 52 - 45 gamma over 8 and y <= n/3
+    some D bounds |f of alpha - g of alpha| for every alpha with 2 D times the sum of the mean
+    squares of f and g at most C y squared over log to the fourth n. The paper reaches this from
+    Lemmas 4 and 5, but Lemma 4 carries a factor n to the epsilon, and at the exact threshold the
+    product leaves n to the epsilon, not a logarithmic saving; an independent check of the lab
+    could not prove the step, so the exact window remains open and the margin version is the
+    headline. R of n is the weighted integral of Section 4, with weights 1/gamma times p to the
+    power 1 - gamma; the windows of f, g and R use |p - n/3| < y as the paper's definitions do,
+    while Theorem 1 uses <= y. Implied constants are explicit existentials chosen before n and y,
+    and large enough is a threshold N0 chosen after gamma and before n and y.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "Claude Opus 5.5, Anthropic, the packaging agent, not a human"
+  notes: >-
+    The packaging agent compared the Challenge with the lab statements of Theorem 1, Lemma 3, the
+    asymptotic formula and the transfer step, and checked that every definition the compared
+    theorems reach is restated under its own name with the same open lines and local instances.
+    Lean kernel and Comparator checks pass. Not reviewed by a human expert or by the author.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Song 2020, Theorem 1 with a positive window margin, Section 4, page 9, from Lemma 3, Pan and Pan 1988 Theorem 3"
+      lean: "LeanLab.Song2020.Palomar1122Song.songWindow_margin_of_lemma3"
+      module: "ChallengeSong2020"
+      status: "proved"
+    - source: "Song 2020, the asymptotic formula for R of n with a positive window margin, Section 4, page 9, from Lemma 3"
+      lean: "LeanLab.Song2020.Palomar1122Song.asymptotic_margin_of_lemma3"
+      module: "ChallengeSong2020"
+      status: "proved"
+    - source: "Song 2020, Theorem 1 at the exact window, from Lemma 3 and the transfer step of page 9 as hypotheses"
+      lean: "LeanLab.Song2020.Palomar1122Song.songTheorem1_of_lemma3_logTransfer"
+      module: "ChallengeSong2020"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; Yanbo Song for the paper; C. D. Pan and C. B. Pan for the theorem it cites; Jason Hickey for the van der Corput code."

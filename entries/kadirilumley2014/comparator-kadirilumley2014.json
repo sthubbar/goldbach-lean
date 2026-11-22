@@ -1,0 +1,36 @@
+{
+  "challenge_module": "ChallengeKadiriLumley2014",
+  "solution_module": "SolutionKadiriLumley2014",
+  "theorem_names": [
+    "LeanLab.KadiriLumley2014.PalomarEntry57.corollary57_of_inputs",
+    "LeanLab.KadiriLumley2014.PalomarKL45.kl45_of_inputs",
+    "LeanLab.KadiriLumley2014.PalomarEntry.row_of_inputs"
+  ],
+  "definition_names": [
+    "LeanLab.IsGoldbachSum",
+    "LeanLab.IsTernarySum",
+    "LeanLab.EvenGoldbachUpTo",
+    "LeanLab.RamareSaouter2003.Thm4Parts.MVBrunTitchmarsh",
+    "LeanLab.KadiriLumley2014.KLRow",
+    "LeanLab.KadiriLumley2014.Task64.evenBase",
+    "LeanLab.KadiriLumley2014.Task64.tableTwo",
+    "LeanLab.KadiriLumley2014.Task64.PrintedRow.threshold",
+    "LeanLab.KadiriLumley2014.Task64.CostaEstimate",
+    "LeanLab.KadiriLumley2014.Task64.weight",
+    "LeanLab.KadiriLumley2014.Task64.tailMass",
+    "LeanLab.KadiriLumley2014.Task64.PrintedRow.deltaQ",
+    "LeanLab.KadiriLumley2014.Task64.PrintedRow.aQ",
+    "LeanLab.KadiriLumley2014.Task64.PrintedRow.uQ",
+    "LeanLab.KadiriLumley2014.Task92.weightTransform",
+    "LeanLab.KadiriLumley2014.Task92.smoothingG",
+    "LeanLab.KadiriLumley2014.Task92.tailCoefficient",
+    "LeanLab.KadiriLumley2014.Task92.zeroSummand",
+    "LeanLab.KadiriLumley2014.Task92.zeroError",
+    "LeanLab.KadiriLumley2014.Task92.rowEndpointX"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

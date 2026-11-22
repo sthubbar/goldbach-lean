@@ -1,0 +1,19 @@
+name = "GoldbachLeanSong2020"
+version = "0.1.0"
+defaultTargets = ["ChallengeSong2020", "SolutionSong2020"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.35.0-rc3"
+
+[[lean_lib]]
+name = "LeanLab"
+
+[[lean_lib]]
+name = "ChallengeSong2020"
+roots = ["ChallengeSong2020"]
+
+[[lean_lib]]
+name = "SolutionSong2020"
+roots = ["SolutionSong2020"]

@@ -1,0 +1,33 @@
+{
+  "challenge_module": "ChallengeSong2020",
+  "solution_module": "SolutionSong2020",
+  "theorem_names": [
+    "LeanLab.Song2020.Palomar1122Song.songWindow_margin_of_lemma3",
+    "LeanLab.Song2020.Palomar1122Song.asymptotic_margin_of_lemma3",
+    "LeanLab.Song2020.Palomar1122Song.songTheorem1_of_lemma3_logTransfer"
+  ],
+  "definition_names": [
+    "LeanLab.Song2020.IsPSPrime",
+    "LeanLab.Song2020.IsAlmostEqualPSTernary",
+    "LeanLab.Song2020.SongWindow",
+    "LeanLab.Song2020.songExponent",
+    "LeanLab.Song2020.SongTheorem1",
+    "LeanLab.Song2020.State1562.eC",
+    "LeanLab.Song2020.State1562.windowPrimes",
+    "LeanLab.Song2020.State1562.psWeight",
+    "LeanLab.Song2020.State1562.fS",
+    "LeanLab.Song2020.State1562.gS",
+    "LeanLab.Song2020.State1562.singFactor",
+    "LeanLab.Song2020.State1562.singular3",
+    "LeanLab.Song2020.State1562.mainTerm",
+    "LeanLab.Song2020.State1562.RS",
+    "LeanLab.Song2020.State1562.gCube",
+    "LeanLab.Song2020.State1562.Lemma3",
+    "LeanLab.Song2020.Flag1734.LogTransferDQ"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}
