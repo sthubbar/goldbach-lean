@@ -1,0 +1,18 @@
+{
+  "challenge_module": "ChallengeLinnik1951",
+  "solution_module": "SolutionLinnik1951",
+  "theorem_names": [
+    "LeanLab.Linnik1951.linnik1951_decomposed_final_b1122"
+  ],
+  "definition_names": [
+    "LeanLab.DERZ1997.GRH",
+    "LeanLab.Linnik.LinnikExact",
+    "LeanLab.Linnik.LinnikAtMost",
+    "LeanLab.Linnik.AllLargeEven"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

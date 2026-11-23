@@ -1,0 +1,19 @@
+name = "GoldbachLeanLinnik1951"
+version = "0.1.0"
+defaultTargets = ["ChallengeLinnik1951", "SolutionLinnik1951"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.35.0-rc3"
+
+[[lean_lib]]
+name = "LeanLab"
+
+[[lean_lib]]
+name = "ChallengeLinnik1951"
+roots = ["ChallengeLinnik1951"]
+
+[[lean_lib]]
+name = "SolutionLinnik1951"
+roots = ["SolutionLinnik1951"]
