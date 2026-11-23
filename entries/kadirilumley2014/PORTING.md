@@ -1,13 +1,15 @@
 # Provenance of the LeanLab files
 
 `LeanLab/` is the part of Steve Hubbard's Lean Lab that the Kadiri and Lumley 2014 entry needs:
-87 modules, the import closure of `LeanLab.KadiriLumley2014.PalomarEntry57` and
-`LeanLab.KadiriLumley2014.PalomarKL45`, taken from the lab's Lean v4.35.0 tree on 2026-11-22.
+88 modules, the import closure of `LeanLab.KadiriLumley2014.PalomarEntry57`,
+`LeanLab.KadiriLumley2014.PalomarKL45` and `LeanLab.KadiriLumley2014.PalomarSummable`, taken from the lab's Lean v4.35.0 tree on 2026-11-22.
 They prove three conditional theorems about H. Kadiri and A. Lumley, Short effective intervals
 containing primes, Integers 14, 2014, A61, arXiv 1407.7902: one row of Table 2 of Theorem 1.1,
 `row_of_inputs`; row 45 of Table 2 in a natural number form, `kl45_of_inputs`; and the ternary
 Goldbach range of Corollary 1.2 with row 57 of Table 2 in place of row 60,
-`corollary57_of_inputs`. Ternary Goldbach is known unconditionally by Helfgott's work, so the
+`corollary57_of_inputs`. Two more compared theorems, `zeroError_hasSum` and
+`row_zeroError_hasSum`, are unconditional and prove that the zero series in display 2.64
+converges. Ternary Goldbach is known unconditionally by Helfgott's work, so the
 interest of the corollary here is the method. Binary Goldbach remains open; nothing here
 claims it. AI agents wrote all the Lean code, as listed below.
 
@@ -120,7 +122,22 @@ Costa Pereira bound `CostaEstimate` itself, input 2, membership of the row in Ta
 display 2.64 at that row. Everything else is proved: the smoothing argument of section 2, the
 explicit formula for ψ with the sum over zeros, the bounds on the trivial zero terms, the
 weight integrals of section 3.1, the rounding of the printed table, and the ladder of the proof
-of Corollary 1.2 with a Lucas certificate for the top partition. `#print axioms` on each
+of Corollary 1.2 with a Lucas certificate for the top partition.
+
+## Summability of the zero series, in response to review
+
+Palomar's review asked that the weighted zero series be shown summable at the row parameters
+and connected to `zeroError`, or that summability be assumed in each numerical input. Each
+display 2.64 input uses `zeroError`, a `tsum` over the nontrivial zeros of ζ, and a `tsum` of a
+series that is not summable is 0 in Lean, so without summability such an input could omit the
+zero contribution. Summability is proved, so no input needs to assume it. The new file
+`LeanLab/KadiriLumley2014/PalomarSummable.lean`, written by Claude for this entry, proves
+`zeroError_hasSum`: for `m > 0`, `δ > 0`, `u > 0` and `X > 0` the series of `zeroSummand m δ u X`
+has sum `zeroError m δ u X`. It rests on `absolute_zero_summable` in `Kernel259`, which comes
+from the zero counting bound behind the convergent explicit formula for ψ. It also proves
+`row_zeroError_hasSum`, the same at every row of `tableTwo` at `rowEndpointX r`, the very
+point and parameters at which each display 2.64 input is stated. Both are compared theorems,
+restated in the Challenge. `#print axioms` on each
 compared theorem gives exactly `propext`, `Classical.choice` and `Quot.sound`.
 
 ## Kernel computations

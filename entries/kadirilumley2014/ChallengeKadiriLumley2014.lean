@@ -27,6 +27,11 @@ axiom:
   `a` and `X0`. The paper checks this display numerically; here it is a
   hypothesis at each row.
 
+The weighted zero series inside `zeroError` is proved summable, with `zeroError` its sum, for
+every positive `m`, `δ`, `u` and `X` and so at every Table 2 row where display 2.64 is asked, in
+`zeroError_hasSum` and `row_zeroError_hasSum`. Hence the zero contribution in each display 2.64
+hypothesis is the true sum and cannot vanish by default.
+
 `corollary57_of_inputs` is Corollary 1.2 with Table 2 row 57 in place of row 60, so its range
 `1886389443 · 4 · 10^18` is about 4 percent below the printed range. Ternary Goldbach itself is
 known unconditionally by Helfgott's work; binary Goldbach is open. AI wrote this Lean code.
@@ -287,3 +292,23 @@ theorem kl45_of_inputs
   sorry
 
 end LeanLab.KadiriLumley2014.PalomarKL45
+
+namespace LeanLab.KadiriLumley2014.PalomarSummable
+open Real
+open LeanLab.KadiriLumley2014.Task64 LeanLab.KadiriLumley2014.Task92
+
+/-- For positive degree `m` and positive `δ`, `u`, `X`, the weighted zero series of equation
+2.19 is summable and `zeroError m δ u X` is its sum. -/
+theorem zeroError_hasSum {m : ℕ} (hm : 0 < m) {δ u X : ℝ}
+    (hδ : 0 < δ) (hu : 0 < u) (hX : 0 < X) :
+    HasSum (zeroSummand m δ u X) (zeroError m δ u X) := by
+  sorry
+
+/-- At every row of Table 2, the weighted zero series of equation 2.19 at the row's normalized
+`X`, the point where display 2.64 is asked, is summable and `zeroError` there is its sum. -/
+theorem row_zeroError_hasSum {r : PrintedRow} (hr : r ∈ tableTwo) :
+    HasSum (zeroSummand r.m r.deltaQ r.uQ (rowEndpointX r))
+      (zeroError r.m r.deltaQ r.uQ (rowEndpointX r)) := by
+  sorry
+
+end LeanLab.KadiriLumley2014.PalomarSummable

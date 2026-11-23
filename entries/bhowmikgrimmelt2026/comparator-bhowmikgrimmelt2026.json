@@ -1,0 +1,19 @@
+{
+  "challenge_module": "ChallengeBhowmikGrimmelt2026",
+  "solution_module": "SolutionBhowmikGrimmelt2026",
+  "theorem_names": [
+    "LeanLab.BhowmikGrimmelt2026.theorem31_ported1122"
+  ],
+  "definition_names": [
+    "LeanLab.IsGoldbachSum",
+    "LeanLab.ExceptionalSet.E",
+    "LeanLab.ExceptionalSet.PowerBound",
+    "LeanLab.BhowmikGrimmelt2026.ZeroBound",
+    "LeanLab.BhowmikGrimmelt2026.Theorem31"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

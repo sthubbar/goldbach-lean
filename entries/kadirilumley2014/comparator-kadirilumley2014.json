@@ -4,7 +4,9 @@
   "theorem_names": [
     "LeanLab.KadiriLumley2014.PalomarEntry57.corollary57_of_inputs",
     "LeanLab.KadiriLumley2014.PalomarKL45.kl45_of_inputs",
-    "LeanLab.KadiriLumley2014.PalomarEntry.row_of_inputs"
+    "LeanLab.KadiriLumley2014.PalomarEntry.row_of_inputs",
+    "LeanLab.KadiriLumley2014.PalomarSummable.zeroError_hasSum",
+    "LeanLab.KadiriLumley2014.PalomarSummable.row_zeroError_hasSum"
   ],
   "definition_names": [
     "LeanLab.IsGoldbachSum",

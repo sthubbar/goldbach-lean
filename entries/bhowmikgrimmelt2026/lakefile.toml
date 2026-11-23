@@ -1,0 +1,19 @@
+name = "GoldbachLeanBhowmikGrimmelt2026"
+version = "0.1.0"
+defaultTargets = ["ChallengeBhowmikGrimmelt2026", "SolutionBhowmikGrimmelt2026"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.35.0-rc3"
+
+[[lean_lib]]
+name = "LeanLab"
+
+[[lean_lib]]
+name = "ChallengeBhowmikGrimmelt2026"
+roots = ["ChallengeBhowmikGrimmelt2026"]
+
+[[lean_lib]]
+name = "SolutionBhowmikGrimmelt2026"
+roots = ["SolutionBhowmikGrimmelt2026"]

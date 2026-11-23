@@ -1,0 +1,232 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "The exceptional set of the Goldbach problem"
+  description: >-
+    A Lean 4 proof, with no unproved steps, of Theorem 3.1 of G. Bhowmik and L. Grimmelt, The
+    exceptional set of the Goldbach problem, arXiv 2607.27282 v2, 2026, page 9, a result the
+    paper attributes to Hardy and Littlewood. Let E of X be the number of even integers up to X
+    that are not a sum of two primes. The theorem is conditional on two hypotheses, Theta < 3/4
+    and the zero bound at Theta: every zero of every Dirichlet L-function, for every modulus and
+    every character, primitive or not, has real part at most Theta, stated for the zeros in the
+    open strip 0 < Re s < 1 of Mathlib's DirichletCharacter.LFunction. Under them, for every
+    epsilon > 0 there is a constant C with E of X at most C times X to the power
+    2 Theta - 1/2 + epsilon for every X >= 1. The zero bound is unproved for every Theta below 1
+    and false for every Theta below 1/2, since the Riemann zeta function has zeros on the
+    critical line; the generalized Riemann hypothesis gives it at Theta = 1/2, and then the bound
+    X to the power 1/2 + epsilon. No cited input enters: the explicit formula for psi of x and
+    chi with a primitive character, Davenport chapter 19, the Gallagher type mean square
+    estimates of the major and minor arcs and the zero expansion are all proved in the entry.
+    Binary Goldbach is open and is not claimed. Claude and Codex agents wrote the Lean code, with ported
+    PrimeNumberTheoremAnd files and two other ported files credited to their authors in
+    PORTING.md; it is offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11M26", "11P55"]
+
+sources:
+  - title: "The exceptional set of the Goldbach problem"
+    authors:
+      - "Gautami Bhowmik"
+      - "Lasse Grimmelt"
+    id: "arXiv:2607.27282"
+    type: "article"
+    location: "arXiv 2607.27282 v2, 2026, Section 3, Theorem 3.1 on page 9, with the mean square 3.8 on page 13"
+    relationship: "formalizes"
+    note: >-
+      Formalizes Theorem 3.1, which the survey states without a full proof and attributes to
+      Hardy and Littlewood. The Lean proof follows the circle method outline of Section 3 and
+      Section 4 of the paper, with the major arc expansion over the zeros of Dirichlet
+      L-functions and a Gallagher type mean square on the minor arcs. The other results of the
+      paper are not compared here. The authors have not been contacted about this formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "Multiplicative Number Theory, second edition"
+    authors:
+      - "H. Davenport"
+    id: "isbn:0-387-90533-4"
+    type: "book"
+    location: "Chapters 16, 17 and 19, pages 101 to 118"
+    relationship: "adapts"
+    note: >-
+      The truncated explicit formula for psi of x and chi with a primitive character, the
+      contour shift at a good height and the regrouping of the constant b of chi with the low
+      zeros follow chapter 19 and are proved in LeanLab/PNTPort/ExplicitPsi1, which is lab code
+      despite the folder name.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "PrimeNumberTheoremAnd"
+    authors:
+      - "the PrimeNumberTheoremAnd project contributors"
+    id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    type: "formalization"
+    location: "commit c39a751132c88b6e8080b74c74023fd95b3d8be0, files under LeanLab/PNTPort/StrongPNT/ and LeanLab/PNTPort/Perron/Sinc.lean and Cauchy.lean"
+    relationship: "other"
+    note: >-
+      The files under LeanLab/PNTPort/StrongPNT, Mellin and residue calculus on rectangles,
+      bounds for zeta, the conjugation symmetry of zeta and the strong prime number theorem,
+      and the narrow ports LeanLab/PNTPort/Perron/Sinc.lean and Cauchy.lean, are ported from
+      this Apache-2.0 project, written by its contributors; each file carries a notice. They
+      are the files of the Gallagher 1975 and Estermann 1938 entries of this repository, with
+      the same changes.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+  - title: "formal-math, zeta23 RvM ReZeroCount"
+    authors:
+      - "Anthropic, PBC"
+    id: "https://github.com/anthropics/formal-math"
+    type: "formalization"
+    location: "commit e1a4e6508154ea59f030480661590a9fe3018011, zeta23/Zeta23/RvM/ReZeroCount.lean, ported as LeanLab/Ported/Zeta23/RvM/ReZeroCount.lean"
+    relationship: "other"
+    note: >-
+      A narrow port that keeps one lemma, finite_zeros_closedBall, the finiteness of the zeros
+      of a nonzero analytic function in a closed ball. Copyright 2026 Anthropic, PBC, Apache-2.0;
+      the file carries its notice.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+  - title: "Prove2Me submission ExponentialSums.vdC_second_derivative"
+    authors:
+      - "Jason Hickey"
+    id: "https://beta.prove2.me"
+    type: "formalization"
+    location: "Prove2Me id 1038fb61-45dc-46e6-9a1c-862d2aa8430c, ported as LeanLab/BakerHarmanPintz1997/PortedVanDerCorput.lean"
+    relationship: "other"
+    note: >-
+      The Kusmin-Landau inequality and van der Corput's second derivative test, Copyright 2026
+      Jason Hickey, authors Jason Hickey with Claude, Apache-2.0, ported with a separate
+      namespace; the file carries its notice. It is the file of the Song 2020 entry of this
+      repository.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "https://github.com/sthubbar/goldbach-lean/tree/main/entries/hardylittlewood1923"
+    relationship: "same lab library, the zero hypothesis of Hardy and Littlewood for sums of r >= 3 primes"
+    note: >-
+      The Hardy-Littlewood 1923 entry of this repository proves Theorem A of Partitio Numerorum
+      III on the paper's Hypothesis R at level Theta, the same kind of zero-free half plane
+      hypothesis for all Dirichlet L-functions, for sums of r >= 3 primes and only for
+      47/64 <= Theta < 3/4. It has no statement about the binary exceptional set E of X.
+  - id: "PALOMAR-2026-10-21-000005"
+    relationship: "same lab library, unconditional bound for the exceptional set"
+    note: >-
+      The Heath-Brown 1985 entry of this repository proves, with no hypothesis, that E of X is
+      O of X divided by any power of log X, the theorem of van der Corput, Chudakov and
+      Estermann, Theorem 4.3 of the survey.
+  - id: "PALOMAR-2026-11-16-000013"
+    relationship: "same lab library, almost all even numbers are sums of two primes"
+    note: >-
+      The Estermann 1938 entry of this repository proves that the exceptional set has density
+      zero, without a zero hypothesis.
+  - id: "PALOMAR-2026-11-16-000024"
+    relationship: "same lab library, the elementary steps of Pintz's bound for the exceptional set"
+    note: >-
+      The Pintz 2018 entry of this repository proves the weighted density and optimisation steps
+      of Pintz's method for E of X below X to the power 0.72; the zero density inputs and the
+      bound itself are not proved there.
+  - id: "PALOMAR-2026-11-19-000032"
+    relationship: "same lab library, Goldbach numbers in sparse sequences"
+    note: >-
+      The Brüdern and Perelli 1998 entry of this repository proves their Theorem 2 on
+      exponential sums, from Karacuba's estimate taken as a hypothesis; it does not bound E of X.
+  - id: "PALOMAR-2026-11-15-000007"
+    relationship: "independent work, consequences of a zero-free half plane for all Dirichlet L-functions"
+    note: >-
+      Primes in arithmetic progressions with power-saving error from zero-free half-planes of
+      Dirichlet L-functions, by Richard Morley-Smith, proves the bound for psi of x, q and a
+      from a zero-free half plane Re s > Theta. Independent work; no code from it is used here.
+      A search of the web and of the Palomar registry listing on 2026-11-22 found no earlier
+      Lean formalization of a conditional bound for the binary Goldbach exceptional set.
+
+status:
+  scope: >-
+    Formalized: Theorem 3.1 of the paper, theorem31_ported1122, from Theta < 3/4, the zero bound
+    ZeroBound Theta and epsilon > 0, with no other hypothesis. Proved along the way: the
+    explicit formula for psi of x and chi with a primitive nonprincipal character, Davenport
+    chapter 19, the expansion of the major arcs over the zeros, the mean square of the minor
+    arcs, and the count of the paper's exceptional set as E of X. Not formalized: the zero
+    bound itself for any Theta below 1, the other theorems of the survey, explicit constants,
+    and binary Goldbach, which remains open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5, claude-opus-5-5, Anthropic"]
+      framework: "Claude Cowork"
+      tool_setup: >-
+        Autonomous agents of the Lean Lab read the paper, wrote the statements from it,
+        decomposed the proof of Theorem 3.1 into leaf lemmas, proved them, ported the explicit
+        formula of Davenport chapter 19 for primitive characters, and ran lake build. A
+        packaging agent ported the files to Lean 4 v4.35.0-rc3 and Mathlib v4.35.0-rc3, removed
+        the declarations that rest on unproved lab statements, and ran the Lean kernel and the
+        Comparator. Small kernel checks use decide +kernel; no native_decide.
+      cost:
+        wall_time: "agent runs over 2026-10-16 to 2026-11-22, and packaging on 2026-11-22"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published results related to
+        Goldbach's problem and the inputs they cite, recording every cited input until proved.
+    - method: "agent"
+      models: ["Codex, OpenAI"]
+      framework: "Codex"
+      tool_setup: >-
+        Codex prover agents of the Lean Lab wrote files and proof bodies in lab tasks, as their
+        headers and PORTING.md say, among them the files under LeanLab/KadiriLumley2014, a
+        section of LeanLab/DERZ1997/Decomp1529a.lean, Zinoviev1997/TotientTail.lean, the port
+        of PortedVanDerCorput.lean and an edit to LeanLab/BhowmikGrimmelt2026/Statements.lean
+        that states Lemma 7.2 of the paper. None of this work is specific to Theorem 3.1.
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish. Claude and Codex wrote the
+    Lean code, see PORTING.md; the ported files are credited to their authors there and in the
+    repository NOTICE. No file here contains a placeholder proof outside the Challenge file. No
+    human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    The compared theorem has exactly three hypotheses: Theta < 3/4; ZeroBound Theta, that for
+    every modulus q >= 1, every Dirichlet character chi mod q, primitive or not, principal or
+    not, and every s with L of s and chi equal to 0 and 0 < Re s < 1, Re s <= Theta; and
+    epsilon > 0. The paper asks that every zero of every Dirichlet L-function have real part at
+    most Theta. Zeros are taken in the open strip: the trivial zeros have real part at most 0,
+    and the strip avoids the value that Mathlib's L-function of a principal character takes at
+    s = 1. For an imprimitive character the extra Euler factors vanish only on Re s = 0, so the
+    hypothesis is the paper's. The hypothesis is unproved for every Theta < 1 and false for
+    Theta < 1/2, so the content is for 1/2 <= Theta < 3/4; GRH gives Theta = 1/2. The
+    conclusion PowerBound of 2 Theta - 1/2 + epsilon gives a constant C, depending on Theta and
+    epsilon, with E of X <= C X to the power 2 Theta - 1/2 + epsilon for every natural X >= 1.
+    E of X counts even n with 4 <= n <= X that are not a sum of two primes; the paper counts even
+    N with 2 < N <= X, and card_calE proves the two counts equal. No cited result is taken as a
+    hypothesis or an axiom. The Lean code was written by AI. Binary Goldbach is open.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "Claude Opus 5.5, Anthropic, the packaging agent, not a human"
+  notes: >-
+    The packaging agent compared the Challenge with the lab statement of Theorem 3.1 and with
+    the statement on page 9 of arXiv 2607.27282 v2, and checked that every definition the
+    compared theorem reaches is restated under its own name with the same open lines and local
+    instances. Lean kernel and Comparator checks pass, and the axioms of the compared theorem are
+    propext, Classical.choice and Quot.sound. Not reviewed by a human expert or by the authors.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Bhowmik and Grimmelt 2026, Theorem 3.1, page 9, from Theta < 3/4 and the zero bound at Theta for all Dirichlet L-functions"
+      lean: "LeanLab.BhowmikGrimmelt2026.theorem31_ported1122"
+      module: "ChallengeBhowmikGrimmelt2026"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; the PrimeNumberTheoremAnd project; Anthropic's formal-math project; Jason Hickey; G. Bhowmik and L. Grimmelt for the paper; G. H. Hardy and J. E. Littlewood; H. Davenport."
