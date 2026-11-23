@@ -1,0 +1,224 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "On the sum of two primes and k powers of two"
+  description: >-
+    A Lean 4 proof of the main results of A. Languasco, J. Pintz and A. Zaccagnini, On the sum
+    of two primes and k powers of two, Bull. London Math. Soc. 39, 2007, pages 771 to 780,
+    conditional on three results of the literature that the paper cites. For k >= 1 the entry
+    proves that all but O of X^{3/5} times log X to the power 10 even N <= X are sums of two
+    primes and k powers of two; the paper's main theorem, the asymptotic formula for the
+    weighted number of such representations outside an exceptional set of the same size, on the
+    even N in J of X = [2X/3, X], with the main term coefficient 2 c0 C of k and N, where c0 is
+    the twin prime constant; and Corollary 4.2 of the paper on the major arcs. The three cited
+    inputs are explicit hypotheses, never axioms: the explicit formula of Lemma 4.1 of the
+    paper, which it quotes from J. Pintz, ELAZ 2004, Theorem 10; the zero density theorem of
+    M. Jutila 1977, Theorem 1, display 1.8, as printed; and the zero free region of H. Iwaniec
+    1974, Theorem 2, page 97, as printed, read for nonreal characters. The real zero bound for
+    real characters, which the paper cites from Pintz 1976 and Goldfeld and Schinzel 1975, is
+    proved here from Siegel's theorem. The coefficient 2 c0 C of k and N is the one that the
+    paper's own display 2 gives; the printed theorem states C of k and N in [1, 2] and omits the
+    factor 2 c0, and the entry does not claim the range [1, 2]. Binary Goldbach, the case k = 0,
+    is open and is not claimed. AI agents wrote the Lean code, Claude by Anthropic with a few
+    leaves from other lab provers listed in PORTING.md, and it is offered for human audit.
+  authors:
+    - "Steve Hubbard"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Steve Hubbard"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11P32", "11P55", "11M26", "11N05"]
+
+sources:
+  - title: "On the sum of two primes and k powers of two"
+    authors:
+      - "A. Languasco"
+      - "J. Pintz"
+      - "A. Zaccagnini"
+    id: "doi:10.1112/blms/bdm062"
+    type: "article"
+    location: "Bulletin of the London Mathematical Society 39, 2007, pages 771 to 780: the Theorem, Lemma 4.1 and Corollary 4.2 on pages 774 and 775, the major and minor arcs and the singular series average on pages 775 to 779, and the abstract for the count of prime representations"
+    relationship: "adapts"
+    note: >-
+      Follows the paper's circle method proof. The main theorem is proved on the even N in J of
+      X = [2X/3, X] with coefficient 2 c0 C of k and N, and the consequence for prime
+      representations that the abstract states on all even N <= X by the dyadic covering of
+      [1, X] that the paper's remark after the Theorem describes. Lemma 4.1, the
+      density theorem of Jutila and the zero free region of Iwaniec, which the paper cites, are
+      hypotheses; the real zero bound it cites is proved. The authors have not been contacted.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "Recent results on the Goldbach conjecture"
+    authors:
+      - "J. Pintz"
+    id: "MR2310184"
+    type: "inproceedings"
+    location: "Elementare und Analytische Zahlentheorie, Proceedings of the ELAZ conference 2004, Franz Steiner Verlag, Stuttgart 2006, pages 220 to 254, Theorem 10"
+    relationship: "background"
+    note: >-
+      Cited input. Theorem 10 is the explicit formula for the binary major arc integral that the
+      paper quotes as Lemma 4.1; the entry takes Lemma 4.1 as printed in the paper as the
+      hypothesis Lemma41Statement481. The lab had no copy of this proceedings volume and compared
+      the hypothesis with the paper's quotation and with the author's later open restatements.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "On Linnik's constant"
+    authors:
+      - "M. Jutila"
+    id: "doi:10.7146/math.scand.a-11701"
+    type: "article"
+    location: "Mathematica Scandinavica 41, 1977, page 46, Theorem 1, display 1.8"
+    relationship: "background"
+    note: >-
+      Cited input. Display 1.8, the bound for the number of zeros of L functions of primitive
+      characters to moduli up to Q in the rectangle with real part at least alpha, is the
+      hypothesis JutilaTheorem18_481, with the zeros counted with multiplicity.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "On zeros of Dirichlet's L series"
+    authors:
+      - "H. Iwaniec"
+    id: "doi:10.1007/BF01405163"
+    type: "article"
+    location: "Inventiones Mathematicae 23, 1974, pages 97 to 104, page 97, Theorem 2"
+    relationship: "background"
+    note: >-
+      Cited input. Theorem 2 as printed on page 97, with l = log of q times |t| + 3, read for
+      nonreal characters, is the hypothesis IwaniecTheorem2_1123. The paper quotes it on page 775
+      with |t| + 2; the entry uses the source's |t| + 3.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "PrimeNumberTheoremAnd"
+    authors:
+      - "Arend Mellendijk"
+      - "the PrimeNumberTheoremAnd project contributors"
+    id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    type: "formalization"
+    location: "commit c39a751132c88b6e8080b74c74023fd95b3d8be0"
+    relationship: "other"
+    note: >-
+      Sixteen files under LeanLab/PNTPort/StrongPNT, the zero-free region for zeta, Mellin and
+      residue calculus and the prime number theorem with classical error term, and four files
+      under LeanLab/PNTSieve, the Selberg sieve and its bounds by Arend Mellendijk, are ported
+      from this Apache-2.0 project with small fixes for Mathlib v4.35.0-rc3, listed in
+      PORTING.md; each file carries a notice.
+    license: "Apache-2.0"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "https://github.com/sthubbar/goldbach-lean/tree/main/entries/linnik1951"
+    relationship: "other"
+    note: "Registered entry of this repository: Linnik 1951 in its qualitative form, two primes and a bounded number of powers of two, conditional on GRH."
+  - id: "https://github.com/sthubbar/goldbach-lean/tree/main/entries/gallagher1975"
+    relationship: "other"
+    note: "Registered entry of this repository: Gallagher 1975 Theorems 1 and 2 for base 2, two primes and a bounded number of powers of two without GRH."
+
+status:
+  scope: >-
+    Formalized, with the three cited inputs Lemma41Statement481, JutilaTheorem18_481 and
+    IwaniecTheorem2_1123 as hypotheses: global_primes_of_three_inputs, for k >= 1 all but
+    O of X^{3/5} log^10 X even N <= X are p1 + p2 + 2^v1 + ... + 2^vk with 1 <= vi <= log2 X;
+    repaired_mainJ131_of_three_inputs, the main theorem with coefficient 2 c0 C of k and N on
+    the even N in J of X; and cor42_of_three_inputs, Corollary 4.2 on J of X. Not formalized:
+    the three cited inputs themselves, the main theorem on all even N <= X, the bounds
+    1 <= C of k and N <= 2 of the printed statement, explicit constants, and binary Goldbach,
+    which remains open.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5 (claude-opus-5-5), Anthropic"]
+      framework: "Claude Cowork"
+      tool_setup: >-
+        Autonomous agents of the Lean Lab read the paper and the cited sources on page images,
+        wrote the statements, decomposed the proof into leaf lemmas and proved them, and ran lake
+        build and axiom checks. A packaging agent ported the files to Lean 4 v4.35.0-rc3 and
+        Mathlib v4.35.0-rc3, removed the declarations that rest on unproved leaves, and ran the
+        Lean kernel and the Comparator. No native_decide.
+      cost:
+        wall_time: "agent runs over 2026-10-18 to 2026-11-22, and packaging on 2026-11-23"
+        spend_usd: "subscription-based"
+        hardware: "API-only, cloud sandbox and a desktop workstation"
+      prompting_notes: >-
+        The agents ran under a standing research brief to formalize published results related to
+        Goldbach's problem and the inputs they cite, recording every cited input until proved.
+    - method: "agent"
+      models: ["DeepSeek V4.1 Flash, DeepSeek"]
+      framework: "Open Math OS prover pipeline of the Lean Lab"
+      tool_setup: >-
+        Proved some leaf lemmas: the absence of zeros of the Riemann zeta function on the real
+        interval from 0 to 1 used by the real zero bound, and two leaves of the major arc file
+        DecompJ218, as PORTING.md lists.
+    - method: "agent"
+      models: ["Gemini, Google"]
+      framework: "Jules"
+      tool_setup: "Made the first decomposition of the major arc asymptotic in DecompJ218, lab tasks 218 and 257."
+  spend_usd: "subscription-based"
+  notes: >-
+    Steve Hubbard directed the project and decided what to publish. Claude wrote the statements,
+    the decomposition and most proofs; a few leaves come from other lab provers, see PORTING.md.
+    No file here contains a placeholder proof outside the Challenge file. No human expert has
+    reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    Three cited inputs are hypotheses. Lemma41Statement481 is the real part of Lemma 4.1 of the
+    paper, quoted there from Pintz, ELAZ 2004, Theorem 10, which the lab could not obtain; the
+    lab compared it with the paper's quotation and found it at most as strong as the printed
+    lemma, but the only open version of Pintz's formula with a full proof, arXiv 1804.05561,
+    carries extra factors in its error terms and does not imply it. JutilaTheorem18_481 is
+    Jutila 1977, Theorem 1, display 1.8, with an arbitrary finite family of primitive character
+    zeros counted with analytic multiplicity; the printed page does not say whether zeros are
+    counted with multiplicity, and the paper on page 775 takes the zeros of Lemma 4.1, whose
+    number this bound controls, with multiplicity.
+    IwaniecTheorem2_1123 is Iwaniec 1974, Theorem 2, page 97, with q >= 3, d the product of the
+    primes dividing q and l = log of q times |t| + 3, restricted to characters with a nonreal
+    value, where it says L of s and chi has no zero with Re s > 1 - theta. The paper quotes the
+    region on page 775 with |t| + 2 in place of |t| + 3; the entry uses the source. The lab
+    reduces it to the paper's form with log of twice the odd radical in place of log d, which
+    only shrinks the region. The real zero bound of Pintz 1976 and Goldfeld and Schinzel 1975 is
+    proved, not assumed. The main theorem is stated on the even N in J of X = [2X/3, X] with
+    coefficient 2 c0 C of k and N, c0 the twin prime constant: the printed theorem states it on
+    all even N <= X with a constant C of k and N in [1, 2], but the paper's display 2 gives the
+    singular series of the binary problem with the factor 2 c0, and the lab found the true
+    coefficient 2 c0 C of k and N above 2 for a positive proportion of N. The representations
+    are counted with the von Mangoldt weights Lambda of m1 times Lambda of m2 over m1, m2 <= X
+    and exponents 1 <= vi <= log2 X, as in the paper. The consequence for prime representations,
+    which the paper states in its abstract and not as a numbered corollary, is proved on all
+    even N <= X. Constants and thresholds are existential, not explicit.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "Claude Opus 5.5, Anthropic, the packaging agent, not a human"
+  notes: >-
+    The packaging agent checked that every definition the compared theorems reach, 38 of them, is
+    restated in the Challenge under its own name with the same open lines and local instances,
+    and the Comparator confirmed it. In the lab, AI reviewers compared the hypotheses with
+    page images of Jutila 1977 page 46 and Iwaniec 1974 page 97 and with the paper's quotation of
+    Pintz's Theorem 10. Lean kernel and Comparator checks pass. Not reviewed by a human expert or
+    by the authors.
+
+alignment:
+  namespace: "LeanLab"
+  statements:
+    - source: "Languasco, Pintz and Zaccagnini 2007, the consequence of the Theorem for sums of two primes and k powers of two, from three cited inputs"
+      lean: "LeanLab.LPZ2007.global_primes_of_three_inputs"
+      module: "ChallengeLanguascoPintzZaccagnini2007"
+      status: "proved"
+    - source: "Languasco, Pintz and Zaccagnini 2007, the Theorem on J of X with coefficient 2 c0 C of k and N, from three cited inputs"
+      lean: "LeanLab.LPZ2007.repaired_mainJ131_of_three_inputs"
+      module: "ChallengeLanguascoPintzZaccagnini2007"
+      status: "proved"
+    - source: "Languasco, Pintz and Zaccagnini 2007, Corollary 4.2 on J of X, from three cited inputs"
+      lean: "LeanLab.LPZ2007.cor42_of_three_inputs"
+      module: "ChallengeLanguascoPintzZaccagnini2007"
+      status: "proved"
+
+acknowledgements: "Mathlib and the Lean FRO; Arend Mellendijk and the PrimeNumberTheoremAnd contributors; A. Languasco, J. Pintz and A. Zaccagnini for the paper, and M. Jutila and H. Iwaniec for the cited theorems."
